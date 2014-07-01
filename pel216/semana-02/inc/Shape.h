@@ -22,7 +22,7 @@ namespace pel216 {
 		 *
 		 * @return o <code>double</code> que representa o angulo em radianos
 		 */
-		static double toRadians(float angle) {
+		inline double toRadians(float angle) {
 			return ((pel216::week2::pi /180) * angle);
 		};
 
@@ -46,7 +46,7 @@ namespace pel216 {
 		 *
 		 * @return o <code>double</code> que representa a co-tangente do angulo
 		 */
-		static double cotUsingDegrees(float angle) {
+		inline double cotUsingDegrees(float angle) {
 			return cot(toRadians(angle));
 		};
 
