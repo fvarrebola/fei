@@ -42,7 +42,7 @@
 #endif
 
 // definicao utilizada para determinar se as funcoes de runtime com sufixo '_s' estao disponiveis
-#ifndef __STDC_WANT_SECURE_LIB
+#if !__STDC_WANT_SECURE_LIB__
     #define vsprintf_s(buffer, buffer_size, stringbuffer, ...) \
         (vsprintf(buffer, stringbuffer, __VA_ARGS__))
 
