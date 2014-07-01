@@ -41,12 +41,16 @@
     #define MAX_PATH                            256
 #endif
 
-#if defined(__unix__)
+// definicao utilizada para determinar se as funcoes de runtime com sufixo '_s' estao disponiveis
+#ifndef __STDC_WANT_SECURE_LIB
     #define vsprintf_s(buffer, buffer_size, stringbuffer, ...) \
         (vsprintf(buffer, stringbuffer, __VA_ARGS__))
+
     #define sprintf_s(buffer, buffer_size, stringbuffer, ...) \
         (sprintf(buffer, stringbuffer, __VA_ARGS__))
-    #define localtime_s(tm, timer)              (*tm = *localtime(timer))
+
+    #define localtime_s(tm, timer) \
+		(*tm = *localtime(timer))
 #endif
 
 namespace pel216 {
