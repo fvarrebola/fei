@@ -45,7 +45,7 @@ namespace pel216 {
 				}
 
 				if (!isAllowedType || sideLength <= 0.0f) {
-					throw new pel216::week2::IllegalParameterException();
+					throw new pel216::commons::IllegalParameterException();
 				}
 
 				this->faces = faces;

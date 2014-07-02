@@ -21,8 +21,21 @@
 	#define NULL 0
 #endif
 
-#define PVOID									void*
+#ifndef PVOID
+	#define PVOID								void*
+#endif
 
+#ifndef DWORD
+	#define DWORD								unsigned long
+#endif
+
+#ifndef ZERO
+	#define ZERO								0
+#endif
+
+#ifndef ONE
+	#define ONE									1
+#endif
 
 // definicoes de macros
 #define ALLOC_MEM(size)							(size > 0 ? malloc(size) : 0)

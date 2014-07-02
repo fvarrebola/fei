@@ -3,11 +3,10 @@
 #ifndef _COLLECTION_H_
 #define _COLLECTION_H_
 
+#include <inc/Utils.h>
 #include <inc/Logger.h>
 #include <inc/Element.h>
 
-#define ZERO								0
-#define ONE									1
 #define	MAX_SIZE							256
 
 namespace pel216 {
@@ -35,7 +34,7 @@ namespace pel216 {
 			Element *collection[MAX_SIZE]; // a colecao de elementos
 
 			/**
-			 * Adiciona um elemento à colecao.
+			 * Adiciona um elemento na colecao.
 			 *
 			 * @param element
 			 *				o <code>Element</code> que representa o elemento
@@ -98,7 +97,7 @@ namespace pel216 {
 			Element *getFirstElement();
 
 			/**
-			 * Obtem o último elemento da colecao.
+			 * Obtem o ultimo elemento da colecao.
 			 *
 			 * @return o <code>Element</code> que representa o elemento
 			 */

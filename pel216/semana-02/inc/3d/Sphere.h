@@ -33,7 +33,7 @@ namespace pel216 {
 			Sphere(double diameter) {
 
 				if (diameter <= 0.0f) {
-					throw new pel216::week2::IllegalParameterException();
+					throw new pel216::commons::IllegalParameterException();
 				}
 
 				this->diameter = diameter;
@@ -61,14 +61,14 @@ namespace pel216 {
 			 * o <code>double</code> que representa o altura
 			 */
 			double getHeight() const {
-				throw new UnsupportedOperationException();
+				throw new pel216::commons::UnsupportedOperationException();
 			};
 
 			/**
 			 * @see pel216::week2::ThreeDShape::getFaceArea()
 			 */
 			double getFaceArea() const {
-				throw new UnsupportedOperationException();
+				throw new pel216::commons::UnsupportedOperationException();
 			};
 
 			/**

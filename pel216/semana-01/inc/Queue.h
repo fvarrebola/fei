@@ -53,7 +53,7 @@ namespace pel216 {
 			 * @param element
 			 *				o <code>Element</code> que representa o elemento
 			 *
-			 * @return o <code>true</code> caso a insersao tenha sido bem sucedida; do contrario <code>false</code>
+			 * @return o <code>true</code> caso a insercao tenha sido bem sucedida; do contrario <code>false</code>
 			 */
 			bool push(IN Element *element);
 			

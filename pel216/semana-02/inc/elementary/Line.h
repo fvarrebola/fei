@@ -44,14 +44,14 @@ namespace pel216 {
 
 				if (pel216::commons::Utils::isInvalidHandle(a) ||
 						pel216::commons::Utils::isInvalidHandle(b)) {
-					throw new pel216::week2::IllegalParameterException();
+					throw new pel216::commons::IllegalParameterException();
 				}
 
 				float dividend = (float)(a->getY() - b->getY());
 				float divisor = (float)(a->getX() - b->getX());
 
 				if (divisor == 0) {
-					throw new pel216::week2::IllegalParameterException();
+					throw new pel216::commons::IllegalParameterException();
 				}
 
 				this->gradient = dividend / divisor;
@@ -97,7 +97,7 @@ namespace pel216 {
 			bool belongs(Point *point) {
 
 				if (pel216::commons::Utils::isInvalidHandle(point)) {
-					throw new pel216::week2::IllegalParameterException();
+					throw new pel216::commons::IllegalParameterException();
 				}
 
 				return ((float)point->getY() == (this->gradient * (float) point->getX()) + this->yIntersect);

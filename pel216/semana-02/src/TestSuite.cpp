@@ -98,7 +98,7 @@ PRIVATE void pel216::week2::TestSuite::testLineClass() {
 	try {
 		pel216::week2::Line *line3 = new Line(NULL, p5_20);
 		assert(pel216::commons::Utils::isInvalidHandle(line3));
-	} catch (pel216::week2::IllegalParameterException *ex) {
+	} catch (pel216::commons::IllegalParameterException *ex) {
 		hasException1 = true;
 	}
 	assert(hasException1);
@@ -109,7 +109,7 @@ PRIVATE void pel216::week2::TestSuite::testLineClass() {
 	bool hasException2 = false;
 	try {
 		assert(line4->belongs(NULL));
-	} catch (pel216::week2::IllegalParameterException *ex) {
+	} catch (pel216::commons::IllegalParameterException *ex) {
 		hasException2 = true;
 	}
 	assert(hasException2);

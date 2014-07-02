@@ -36,7 +36,7 @@ namespace pel216 {
 			Cylinder(double diameter, double height) {
 
 				if (diameter <= 0.0f || height <= 0.0f) {
-					throw new pel216::week2::IllegalParameterException();
+					throw new pel216::commons::IllegalParameterException();
 				}
 
 				this->diameter = diameter;
@@ -72,7 +72,7 @@ namespace pel216 {
 			 * @see pel216::week2::ThreeDShape::getFaceArea()
 			 */
 			double getFaceArea() const {
-				throw new UnsupportedOperationException();
+				throw new pel216::commons::UnsupportedOperationException();
 			};
 
 			/**
