@@ -93,7 +93,7 @@ PROTECTED bool pel216::week1::Stack::remove() {
  * @param element
  *				o <code>Element</code> que representa o elemento
  *
- * @return o <code>true</code> caso a insersao tenha sido bem sucedida; do contrario <code>false</code>
+ * @return o <code>true</code> caso a insercao tenha sido bem sucedida; do contrario <code>false</code>
  */
 PUBLIC bool pel216::week1::Stack::push(IN Element *element) {
 	return this->add(element);

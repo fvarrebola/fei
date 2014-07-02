@@ -59,7 +59,7 @@ PUBLIC pel216::week1::Element *pel216::week1::Collection::getFirstElement() {
 
 
 /**
- * Obtem o último elemento da colecao.
+ * Obtem o ultimo elemento da colecao.
  *
  * @return o <code>Element</code> que representa o elemento
  */
