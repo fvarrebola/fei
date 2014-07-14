@@ -3,6 +3,10 @@
 #ifndef _MENU_H_
 #define _MENU_H_
 
+#include <string>
+#include <vector>
+#include <algorithm>
+
 #include <inc/Utils.h>
 #include <inc/Logger.h>
 
@@ -59,7 +63,7 @@ namespace pel216 {
 
 			    return pCommand;
 
-			}
+			};
 
 		}; // class Menu
 

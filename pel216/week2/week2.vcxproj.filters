@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\2d">
+      <UniqueIdentifier>{0b1afc2d-5a1c-4287-83d8-6b531d581563}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\3d">
+      <UniqueIdentifier>{ff673a61-b46b-4c26-9232-b6188d8a2f0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\elementary">
+      <UniqueIdentifier>{b370b68f-558a-47a1-b12b-26efe3d1175d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="inc\Shape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\TestSuite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\2d\Circle.h">
+      <Filter>Header Files\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\2d\Decagon.h">
+      <Filter>Header Files\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\2d\Hexagon.h">
+      <Filter>Header Files\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\2d\Nonagon.h">
+      <Filter>Header Files\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\2d\Octagon.h">
+      <Filter>Header Files\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\2d\Pentagon.h">
+      <Filter>Header Files\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\2d\Polygon.h">
+      <Filter>Header Files\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\2d\Quadrilateral.h">
+      <Filter>Header Files\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\2d\Septagon.h">
+      <Filter>Header Files\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\2d\Triangle.h">
+      <Filter>Header Files\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\2d\TwoDShape.h">
+      <Filter>Header Files\2d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\3d\Cone.h">
+      <Filter>Header Files\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\3d\Cube.h">
+      <Filter>Header Files\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\3d\Cylinder.h">
+      <Filter>Header Files\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\3d\Dodecaedron.h">
+      <Filter>Header Files\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\3d\Icosaedron.h">
+      <Filter>Header Files\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\3d\Octaedron.h">
+      <Filter>Header Files\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\3d\Polyhedral.h">
+      <Filter>Header Files\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\3d\Pyramid.h">
+      <Filter>Header Files\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\3d\Sphere.h">
+      <Filter>Header Files\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\3d\Tetraedron.h">
+      <Filter>Header Files\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\3d\ThreeDShape.h">
+      <Filter>Header Files\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\elementary\Line.h">
+      <Filter>Header Files\elementary</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\elementary\LineSegment.h">
+      <Filter>Header Files\elementary</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\elementary\Point.h">
+      <Filter>Header Files\elementary</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Shape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TestSuite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

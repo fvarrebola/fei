@@ -1,0 +1,96 @@
+#pragma once
+
+#ifndef _STACK_H_
+#define _STACK_H_
+
+#include <inc/Node.h>
+
+namespace pel216 {
+
+	namespace week3 {
+
+		class Stack : LinkedList {
+
+		private:
+
+		protected:
+			/**
+			 * @see pel216::week3::LinkedList::add()
+			 */
+			bool add(IN Node *node);
+
+			/**
+			 * @see pel216::week3::LinkedList::remove()
+			 */
+			bool remove();
+
+		public:
+			/**
+			 * Construtor.
+			 */
+			Stack();
+
+			/**
+			 * Destrutor.
+			 */
+			virtual ~Stack();
+
+			/**
+			 * Insere um no no topo da pilha.
+			 *
+			 * @param node
+			 *				o <code>Node</code> que representa o elemento
+			 *
+			 * @return o <code>true</code> caso a insercao tenha sido bem sucedida; do contrario <code>false</code>
+			 */
+			bool push(IN Node *node) {
+
+				bool added = false;
+
+				if (pel216::commons::Utils::isInvalidHandle(node)) {
+					return added;
+				}
+
+				if (!isEmpty() && pel216::commons::Utils::isInvalidHandle(getFirstElement())) {
+					return added;
+				}
+
+				if (this->size < MAX_SIZE) {
+					this->size++;
+					for (int idx = this->size; idx != ZERO; idx--) {
+						this->collection[idx] = this->collection[idx - 1];
+					}
+					this->collection[ZERO] = element->clone();
+					added = true;
+				}
+
+				return added;
+
+
+			};
+
+			/**
+			 * Remove o no do topo da pilha.
+			 *
+			 * @return o <code>Node</code> que representa o no
+			 */
+			Node *pop() {
+
+			};
+
+			/**
+			 * Obtem o no do topo da pilha sem remove-lo.
+			 *
+			 * @return o <code>Node</code> que representa o no
+			 */
+			Node *peek() {
+
+			};
+
+		}; // class Stack
+
+	} // namespace week3
+
+} // namespace pel216
+
+#endif
