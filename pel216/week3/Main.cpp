@@ -138,7 +138,7 @@ void solve8PuzzleWithDFS() {
 		debug = true;
 	}
 
-	EightPuzzleBFSSearchEngine e = EightPuzzleBFSSearchEngine(maxDepth, debug);
+	EightPuzzleDFSSearchEngine e = EightPuzzleDFSSearchEngine(maxDepth, debug);
 	EightPuzzleSolver solver(&e, &s, &g);
 	
 	try {
