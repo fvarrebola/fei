@@ -25,17 +25,11 @@
     <Filter Include="Header Files\tests">
       <UniqueIdentifier>{c502393d-344e-4cbc-92ac-621074eac8de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\lists">
+      <UniqueIdentifier>{fa11699f-9800-4db4-9dea-5ec00d5521d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="inc\LinkedList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\NodeElement.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="inc\puzzles\Solver.h">
       <Filter>Header Files\puzzles</Filter>
     </ClInclude>
@@ -65,6 +59,12 @@
     </ClInclude>
     <ClInclude Include="inc\tests\TestSuite.h">
       <Filter>Header Files\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\lists\LinkedList.h">
+      <Filter>Header Files\lists</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\lists\Node.h">
+      <Filter>Header Files\lists</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

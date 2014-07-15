@@ -4,96 +4,109 @@
 #define __NODE_H__
 
 #include <inc/Utils.h>
+#include <inc/ex/IllegalParameterException.h>
 
 namespace pel216 {
 
 	namespace week3 {
 
 		/**
-		 * Classe que representa um n√≥.
+		 * Representa um nÛ de uma lista ligada.
 		 *
 		 * @author arrebola
 		 */
-		template<class T>
+		template <class T>
 		class Node {
 
 		private:
 			Node<T> *previous;
 			Node<T> *next;
-			T data;
+			T *data;
 
 		public:
+			/**
+			 * Construtor padr„o.
+			 */
+			Node() {
+			};
+
 			/**
 			 * Construtor.
 			 *
 			 * @param data
-			 * 				o <code>T</code> que representa o dado
-			 * @param Node<T>
-			 * 				o <code>Node<T></code> que representa o n√≥ anterior
-			 * @param Node<T>
-			 * 				o <code>Node<T></code> que representa o n√≥ seguinte
+			 * 				o <code><T></code> que representa o dado do nÛ
+			 * @param previous
+			 * 				o <code>Node *</code> que representa o no anterior
+			 * @param next
+			 * 				o <code>Node *</code> que representa o no posterior
 			 */
-			Node(T data, Node<T> *previous = NULL, Node<T> *next = NULL) {
-			    this->data = data;
+			Node(T* data, Node<T> *previous = NULL, Node<T> *next = NULL) {
+				this->data = data;
 				this->previous = previous;
 				this->next = next;
 			};
 
 			/**
-			 * ObtÈm o n√≥ anterior ligado ao n√≥ atual.
+			 * Destrutor.
+			 */
+			virtual ~Node() {
+			};
+
+			/**
+			 * Retorna o dado armazenado no nÛ.
 			 *
-			 * @return o <code>Node<T>*</code> que representa o n√≥ anterior
+			 * @return o <code>T*</code> que representa o dado armazenado no nÛ
+			 */
+			T *getData() {
+				return this->data;
+			};
+
+			/**
+			 * Configura o dado armazenado no nÛ.
+			 *
+			 * @param data
+			 *				o <code>T*</code> que representa o dado armazenado no nÛ
+			 */
+			void setData(T *data) {
+				this->data = data;
+			};
+
+			/**
+			 * Retorna o nÛ anterior.
+			 *
+			 * @return o <code>Node<T>*</code> que representa o nÛ anterior
 			 */
 			Node<T> *getPrevious() {
 				return this->previous;
 			};
 
 			/**
-			 * Configura o n√≥ anterior ligado ao n√≥ atual.
+			 * Configura o nÛ anterior.
 			 *
 			 * @param previous
-			 * 					o <code>Node<T>*</code> que representa o n√≥ anterior
+			 *				o <code>Node<T>*</code> que representa o nÛ anterior
 			 */
 			void setPrevious(Node<T> *previous) {
 				this->previous = previous;
 			};
-
+			
 			/**
-			 * ObtÈm o n√≥ posterior ligado ao n√≥ atual.
+			 * Retorna o nÛ posterior.
 			 *
-			 * @return o <code>Node<T>*</code> que representa o n√≥ posterior
+			 * @return o <code>Node<T>*</code> que representa o nÛ posterior
 			 */
 			Node<T> *getNext() {
 				return this->next;
 			};
 
 			/**
-			 * Configura o n√≥ posterior ligado ao n√≥ atual.
+			 * Configura o nÛ posterior.
 			 *
 			 * @param next
-			 * 					o <code>Node<T>*</code> que representa o n√≥ posterior
+			 *				o <code>Node<T>*</code> que representa o nÛ posterior
 			 */
 			void setNext(Node<T> *next) {
 				this->next = next;
-			};
-
-			/**
-			 * ObtÈm o dado armazenado no n√≥.
-			 *
-			 * @return o <code>T</code> que representa o dado
-			 */
-			T getData() {
-				return this->data;
-			};
-
-			/**
-			 * Configura o dado armazenado no n√≥.
-			 *
-			 * @param data
-			 * 				o <code>T</code> que representa o dado
-			 */
-			void setData(T data) {
-				this->data = data;
 			};
 
 		}; /* class Node */

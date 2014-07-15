@@ -152,9 +152,10 @@ namespace pel216 {
 						dumpList();
 					}
 
-					EightPuzzleNode *node = list->front();
+					//EightPuzzleNode *node = list->front();
+					//list->pop_front();
+					EightPuzzleNode *node = list->pop_front();
 					EightPuzzleState *state = node->getState();
-					list->pop_front();
 					
 					if (this->debug) {
 						Logger::log("\n");

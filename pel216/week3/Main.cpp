@@ -115,7 +115,7 @@ void solve8PuzzleWithBFS() {
 	try {
 		solver.solve();
 	} catch (pel216::week3::SolutionNotFoundException *ex) {
-		Logger::log("Nenhuma solucao foi encontrada\n");
+		Logger::log("%s\n", ex->what());
 	}
 
 }
@@ -144,7 +144,7 @@ void solve8PuzzleWithDFS() {
 	try {
 		solver.solve();
 	} catch (pel216::week3::SolutionNotFoundException *ex) {
-		Logger::log("Nenhuma solucao foi encontrada\n");
+		Logger::log("%s\n", ex->what());
 	}
 
 }

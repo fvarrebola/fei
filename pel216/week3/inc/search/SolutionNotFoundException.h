@@ -13,7 +13,7 @@ namespace pel216 {
 		 * Exceção que indica a ausência de uma solução.
 		 */
 		class SolutionNotFoundException : public std::exception {
-
+		public:
 			/**
 			 * Mensagem da excecao.
 			 */

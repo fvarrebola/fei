@@ -7,6 +7,7 @@
 #include <inc/tests/TestSuite.h>
 
 #include <inc/lists/Node.h>
+#include <inc/lists/LinkedList.h>
 #include <inc/puzzles/State.h>
 #include <inc/puzzles/8tiles/EightPuzzleState.h>
 #include <inc/puzzles/8tiles/EightPuzzleSolver.h>
@@ -21,66 +22,7 @@
 using namespace pel216::commons;
 using namespace pel216::week3;
 
-PRIVATE void pel216::week3::TestSuite::testNodeClassUsingIntType() {
-
-	Logger::log("Testando classe pel216::week3::Node (com T = int)...\n");
-
-	Logger::log("Testando classe pel216::week3::Node::[get|set][Data|Previous|Next]...\n");
-
-	Node<int> *previous = new Node<int>(-1);
-	Node<int> *node = new Node<int>(1);
-	Node<int> *next = new Node<int>(2);
-
-	assert(node->getData() == 1);
-	assert(node->getPrevious() == NULL);
-	assert(node->getNext() == NULL);
-
-	assert(previous->getData() == -1);
-	assert(next->getData() == 2);
-
-	node->setPrevious(previous);
-	node->setNext(next);
-	assert(node->getPrevious() == previous);
-	assert(node->getNext() == next);
-
-	delete node;
-	delete next;
-	delete previous;
-
-
-}
-
-
-
-PRIVATE void pel216::week3::TestSuite::testNodeClassUsingIntArray() {
-
-	Logger::log("Testando classe pel216::week3::Node (com T = int[])...\n");
-
-	Logger::log("Testando classe pel216::week3::Node::[get|set][Data|Previous|Next]...\n");
-
-	int v0[] = {2, 3, 5, 7, 11, 13};
-	int v1[] = {23, 27, 29, 31, 37};
-	int v2[] = {2, 4, 8, 16, 32};
-
-	Node<int*> *previous = new Node<int*>(v0);
-	Node<int*> *next = new Node<int*>(v1);
-	Node<int*> *node = new Node<int*>(v2, previous, next);
-	assert(node->getData() == v2);
-	assert(node->getPrevious() == previous);
-	assert(node->getNext() == next);
-	assert(previous->getData() == v0);
-	assert(next->getData() == v1);
-	node->setPrevious(next);
-	node->setNext(previous);
-	assert(node->getPrevious() == next);
-	assert(node->getNext() == previous);
-	delete node;
-	delete next;
-	delete previous;
-
-}
-
-
+#define _USE_STD_LIST_ 1
 
 PRIVATE void pel216::week3::TestSuite::testNodeClassUsingStateClassAsData() {
 
@@ -108,13 +50,60 @@ PRIVATE void pel216::week3::TestSuite::testNodeClassUsingStateClassAsData() {
 
 }
 
+PRIVATE void pel216::week3::TestSuite::testLinkedList() {
 
+	LinkedList<EightPuzzleNode> *list = new LinkedList<EightPuzzleNode>();
 
-PRIVATE void pel216::week3::TestSuite::testStateClass() {
+	EightPuzzleState s0(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 2, 3, 4, 5, 6, 7, 8, 0));
+	EightPuzzleState s1(initVector(EIGHT_PUZZLE_STATE_LENGTH, 0, 2, 3, 4, 5, 0, 7, 8, 1));
+	EightPuzzleState s2(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 0, 3, 4, 5, 6, 7, 8, 2));
+	EightPuzzleState s3(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 2, 0, 4, 5, 6, 7, 8, 3));
+	EightPuzzleState s4(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 2, 3, 0, 5, 6, 7, 8, 4));
+	EightPuzzleState s5(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 2, 3, 4, 0, 6, 7, 8, 5));
 
-	Logger::log("Testando classe pel216::week3::State...\n");
+	list->push_back(new EightPuzzleNode(&s0));
+	list->push_back(new EightPuzzleNode(&s1));
+	list->push_back(new EightPuzzleNode(&s2));
 
+	list->push_front(new EightPuzzleNode(&s3));
+	list->push_front(new EightPuzzleNode(&s4));
+	list->push_front(new EightPuzzleNode(&s5));
+	assert(!list->isEmpty() && (list->size() == 6));
+
+	EightPuzzleNode *b = list->pop_back();
+	assert(pel216::commons::Utils::isValidHandle(b));
+	assert(list->size() == 5);
+	assert(b->getState()->getData()[8] == 2);
+
+	EightPuzzleNode *f = list->pop_front();
+	assert(pel216::commons::Utils::isValidHandle(f));
+	assert(list->size() == 4);
+	assert(f->getState()->getData()[8] == 5);
+
+	b = list->pop_back();
+	assert(pel216::commons::Utils::isValidHandle(b));
+	assert(list->size() == 3);
+	assert(b->getState()->getData()[8] == 1);
+
+	b = list->pop_back();
+	assert(pel216::commons::Utils::isValidHandle(b));
+	assert(list->size() == 2);
+	assert(b->getState()->getData()[8] == 0);
+
+	f = list->pop_front();
+	assert(pel216::commons::Utils::isValidHandle(f));
+	assert(list->size() == 1);
+	assert(f->getState()->getData()[8] == 4);
+
+	f = list->pop_front();
+	assert(pel216::commons::Utils::isValidHandle(f));
+	assert(list->isEmpty() && (list->size() == 0));
+	assert(f->getState()->getData()[8] == 3);
+
+	f = list->pop_front();
+	assert(pel216::commons::Utils::isInvalidHandle(f));
 }
+
 
 PRIVATE void pel216::week3::TestSuite::test8PuzzleStateClass() {
 
@@ -157,7 +146,12 @@ PRIVATE void pel216::week3::TestSuite::test8PuzzleSearchEngine(
 	Logger::log("\n");
 	Logger::log("Testando busca com  pel216::week3::EightPuzzleDFSSearchEngine...\n");
 	EightPuzzleSolver solver(e, s, g);
-	solver.solve();
+
+	try {
+		solver.solve();
+	} catch (pel216::week3::SolutionNotFoundException *ex) {
+		assert(pel216::commons::Utils::isValidHandle(ex));
+	}
 
 	if (hasSolution) {
 
@@ -190,28 +184,33 @@ PRIVATE void pel216::week3::TestSuite::test8PuzzleSearchEngine(
 PRIVATE void pel216::week3::TestSuite::test8PuzzleSolverClass() {
 
 	Logger::log("Testando classe pel216::week3::EightPuzzleSolver...\n");
-
-	EightPuzzleBFSSearchEngine bfs1(5);
-	EightPuzzleDFSSearchEngine dfs1(5, true);
-
+	
 	// teste #1
+	EightPuzzleBFSSearchEngine bfs1(-1);
+	EightPuzzleDFSSearchEngine dfs1(-1);
 	EightPuzzleState g1(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 2, 3, 4, 5, 6, 7, 8, 0));
 	pel216::week3::TestSuite::test8PuzzleSearchEngine(&g1, &g1, &bfs1);
 	pel216::week3::TestSuite::test8PuzzleSearchEngine(&g1, &g1, &dfs1);
 
 	// teste #2
+	EightPuzzleBFSSearchEngine bfs2(-1);
+	EightPuzzleDFSSearchEngine dfs2(-1);
 	EightPuzzleState s1(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 2, 3, 4, 5, 0, 7, 8, 6));
-	pel216::week3::TestSuite::test8PuzzleSearchEngine(&s1, &g1, &bfs1);
-	pel216::week3::TestSuite::test8PuzzleSearchEngine(&s1, &g1, &dfs1);
+	pel216::week3::TestSuite::test8PuzzleSearchEngine(&s1, &g1, &bfs2);
+	pel216::week3::TestSuite::test8PuzzleSearchEngine(&s1, &g1, &dfs2);
 
 	// teste #3
+	EightPuzzleBFSSearchEngine bfs3(5);
+	EightPuzzleDFSSearchEngine dfs3(5);
 	EightPuzzleState s2(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 2, 3, 4, 0, 6, 7, 5, 8));
-	pel216::week3::TestSuite::test8PuzzleSearchEngine(&s2, &g1, &bfs1);
-	pel216::week3::TestSuite::test8PuzzleSearchEngine(&s2, &g1, &dfs1);
+	pel216::week3::TestSuite::test8PuzzleSearchEngine(&s2, &g1, &bfs3);
+	pel216::week3::TestSuite::test8PuzzleSearchEngine(&s2, &g1, &dfs3);
 
-	// teste #3
+	// teste #4
+	EightPuzzleBFSSearchEngine bfs4(10);
+	EightPuzzleDFSSearchEngine dfs4(10);
 	EightPuzzleState s3(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 0, 3, 4, 8, 6, 7, 5, 2));
-	pel216::week3::TestSuite::test8PuzzleSearchEngine(&s3, &g1, &dfs1, false);
+	pel216::week3::TestSuite::test8PuzzleSearchEngine(&s3, &g1, &dfs4, false);
 
 }
 
@@ -226,13 +225,11 @@ PUBLIC void pel216::week3::TestSuite::run() {
 	Logger::log("%s\n", STARS);
 	Logger::log("\n");
 
-	pel216::week3::TestSuite::testNodeClassUsingIntType();
-	pel216::week3::TestSuite::testNodeClassUsingIntArray();
 	pel216::week3::TestSuite::testNodeClassUsingStateClassAsData();
+	pel216::week3::TestSuite::testLinkedList();
 	pel216::week3::TestSuite::test8PuzzleStateClass();
 	pel216::week3::TestSuite::test8PuzzleSolverClass();
 
-	Logger::log("\n");
 	Logger::log("%s\n", STARS);
 	Logger::log("Todos os testes foram executados com sucesso\n");
 	Logger::log("%s\n", STARS);

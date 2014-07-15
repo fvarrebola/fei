@@ -9,6 +9,8 @@
 #include <map>
 
 #include <inc/Utils.h>
+
+#include <inc/lists/LinkedList.h>
 #include <inc/puzzles/State.h>
 #include <inc/search/SolutionNotFoundException.h>
 
@@ -26,7 +28,9 @@ namespace pel216 {
 		class SearchEngine {
 
 		protected:
-			std::list<T*> *list; 				/* a estrutura de dados utilizada pelo mecanismo */
+			/* a estrutura de dados utilizada pelo mecanismo */
+			//std::list<T*> *list; 
+			LinkedList<T> *list; 				
 
 			T *startingNode;					/* o nó de partida */
 			T *goalNode;						/* o nó alvo */
@@ -72,7 +76,7 @@ namespace pel216 {
 			 * Imprime o conteúdo da estrutura de dados utilizada pelo mecanismo de busca.
 			 */
 			void dumpList() {
-
+				/*
 				if (pel216::commons::Utils::isInvalidHandle(this->list)) {
 					return;
 				}
@@ -85,7 +89,7 @@ namespace pel216 {
 					Logger::log("\t#%d %s\n", idx++, (*it)->toString().c_str());
 				}
 				Logger::log("----------------------------------------\n");
-
+				*/
 			};
 
 		public:
@@ -93,9 +97,10 @@ namespace pel216 {
 			 * Construtor padrão.
 			 */
 			SearchEngine() {
-				this->list = new std::list<T*>();
-				this->solutionPath = new std::vector<T*>;
-				this->knownNodes = new std::map<std::string,T*>;
+				//this->list = new std::list<T*>();
+				this->list = new LinkedList<T>();
+				this->solutionPath = new std::vector<T*>();
+				this->knownNodes = new std::map<std::string,T*>();
 				this->hasSolution = false;
 			};
 

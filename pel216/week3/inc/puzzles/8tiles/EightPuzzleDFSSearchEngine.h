@@ -150,9 +150,10 @@ namespace pel216 {
 					}
 
 					// remove o elemento 
-					EightPuzzleNode *node = list->back();
+					//EightPuzzleNode *node = list->back();
+					// list->pop_back();
+					EightPuzzleNode *node = list->pop_back();
 					EightPuzzleState *state = node->getState();
-					list->pop_back();
 
 					if (this->debug) {
 						Logger::log("\n");

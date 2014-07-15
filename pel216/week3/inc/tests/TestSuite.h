@@ -26,10 +26,9 @@ namespace pel216 {
 			static void testNodeClassUsingIntType();
 			static void testNodeClassUsingIntArray();
 			static void testNodeClassUsingStateClassAsData();
-			/**
-			 * Testa a classe @link{EightPuzzleSolver} com os mecanismos de busca BFS e DFS.
-			 */
-			static void testStateClass();
+
+			static void testLinkedList();
+
 			/**
 			 * Testa a classe @link{EightPuzzleState}.
 			 */
