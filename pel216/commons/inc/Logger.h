@@ -7,6 +7,7 @@
 #include <cstdarg>
 #include <ctime>
 #include <iostream>
+#include <fstream>
 
 #include <inc/Utils.h>
 
@@ -14,6 +15,7 @@ namespace pel216 {
 
 	namespace commons {
 
+		#define OUTPUT_FILE				"log.txt"
 		#define SIMPLE_FORMAT			"[%02i:%02i:%02i] %s"
 		#define COMPLETE_FORMAT			"[%02i:%02i:%02i] (%s:%i) %s"
 
@@ -23,16 +25,14 @@ namespace pel216 {
 		 * @author arrebola
 		 */
 		class Logger {
-
-		public:
-
+		private:
 			/**
-			 * Registra uma mensagem no console.
+			 * Registra uma mensagem.
 			 *
 			 * @param pszFormat
 			 *				o <code>char *</code> que representa a mensagem
 			 */
-			static void log(IN const char *pszFormat, ...) {
+			static void _log(IN bool useConsole, IN bool useFile, IN const char *pszFormat, IN va_list varArgs) {
 
 				if (pszFormat == NULL) {
 					return;
@@ -44,11 +44,7 @@ namespace pel216 {
 				const int iLogMsgLen = MAX_PATH * 5;
 				char pszLogMsg[iLogMsgLen] = {0x00};
 
-				va_list varArgs;
-				va_start(varArgs, pszFormat);
-
 				if (vsprintf_s(pszVarArgMsg, iVarArgMsgLen, pszFormat, varArgs) < 0) {
-					va_end(varArgs);
 					return;
 				}
 
@@ -59,15 +55,54 @@ namespace pel216 {
 				localtime_s(&tm, &timer);
 
 				if (sprintf_s(pszLogMsg, iLogMsgLen, SIMPLE_FORMAT, tm.tm_hour, tm.tm_min, tm.tm_sec, pszVarArgMsg) > 0) {
-					std::cout << pszLogMsg;
+					
+					if (useConsole) {
+						std::cout << pszLogMsg;
+					}
+
+					if (useFile) {
+						std::ofstream out(OUTPUT_FILE, std::ios::out | std::ios::app);
+						out << pszLogMsg;
+						out.flush();
+						out.close();
+					}
+
 				}
 
 				ZERO_MEM(pszVarArgMsg, iVarArgMsgLen);
 				ZERO_MEM(pszLogMsg, iLogMsgLen);
 
-				va_end(varArgs);
+			};
 
-			}
+
+		public:
+			/**
+			 * Registra uma mensagem no console.
+			 *
+			 * @param pszFormat
+			 *				o <code>char *</code> que representa a mensagem
+			 */
+			static void log(IN const char *pszFormat, ...) {
+				va_list varArgs;
+				va_start(varArgs, pszFormat);
+				_log(true, false, pszFormat, varArgs);
+				va_end(varArgs);
+			};
+
+			/**
+			 * Registra uma mensagem em arquivo.
+			 *
+			 * @param pszFormat
+			 *				o <code>char *</code> que representa a mensagem
+			 */
+			static void logToFile(IN const char *pszFormat, ...) {
+				va_list varArgs;
+				va_start(varArgs, pszFormat);
+				_log(false, true, pszFormat, varArgs);
+				va_end(varArgs);
+			};
+
+
 
 		}; // class Logger
 
