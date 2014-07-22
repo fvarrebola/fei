@@ -21,23 +21,7 @@ namespace pel216 {
 		private:
 			size_t listSize;
 			Node<T> *begin;
-
-			/**
-			 * Obtem o ultimo nó da lista.
-			 *
-			 * @return o @link{Node} que representa o nó
-			 */
-			Node<T> *getLastNode() {
-
-				Node<T> *node = this->begin;
-				while (pel216::commons::Utils::isValidHandle(node) && 
-						pel216::commons::Utils::isValidHandle(node->getNext())) {
-					node = node->getNext();
-				}
-
-				return node;
-
-			};
+			Node<T> *end;
 
 		public:
 			/**
@@ -72,6 +56,24 @@ namespace pel216 {
 			};
 
 			/**
+			 * Obtém um nó do começo da lista.
+			 *
+			 * @return o <code>Node<T>*</code> que representa o dado do nó
+			 */
+			Node<T> *front() {
+				return this->begin;
+			};
+
+			/**
+			 * Obtém o nó do fim da lista.
+			 *
+			 * @return o <code>Node<T>*</code> que representa o dado do nó
+			 */
+			Node<T> *back() {
+				return this->end;
+			};
+
+			/**
 			 * Adiciona um nó ao fim da lista.
 			 *
 			 * @param data
@@ -87,18 +89,19 @@ namespace pel216 {
 					previous = node;
 					this->begin = node;
 				} else {
-					previous = getLastNode();
+					previous = this->end;
 					previous->setNext(node);
 				}
 				node->setPrevious(previous);
 				node->setNext(NULL);
 
+				this->end = node;
 				this->listSize++;
 
 			};
 
 			/**
-			 * Adiciona um nó ao fim da lista.
+			 * Adiciona um nó ao começo da lista.
 			 *
 			 * @param data
 			 *				o <code>T*</code> que representa o dado do nó
@@ -130,7 +133,7 @@ namespace pel216 {
 					return data;
 				}
 
-				Node<T> *node = getLastNode();
+				Node<T> *node = this->end;
 				if (pel216::commons::Utils::isValidHandle(node)) {
 					data = node->getData();
 					Node<T> *previous = node->getPrevious();
@@ -138,6 +141,7 @@ namespace pel216 {
 						previous->setNext(NULL);
 					}
 					delete node;
+					this->end = previous;
 					this->listSize--;
 				}
 
