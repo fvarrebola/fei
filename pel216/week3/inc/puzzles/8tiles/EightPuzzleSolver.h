@@ -73,9 +73,6 @@ namespace pel216 {
 				this->searchEngine->search();
 
 				if (!this->searchEngine->hasFoundSolution()) {
-					Logger::log("\n");
-					Logger::log("!!!SOLUCAO NAO ENCONTRADA!!!\n");
-					Logger::log("\n");
 					throw new SolutionNotFoundException();
 				}
 
