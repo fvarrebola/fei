@@ -29,7 +29,6 @@ namespace pel216 {
 
 		protected:
 			/* a estrutura de dados utilizada pelo mecanismo */
-			//std::list<T*> *list; 
 			LinkedList<T> *list; 				
 
 			T *startingNode;					/* o nó de partida */
@@ -39,8 +38,9 @@ namespace pel216 {
 			std::map<std::string,T*> *knownNodes;
 			
 			// informações sobre a solução
-			size_t maxDepth;					/* a profundidade máxima permitida */
 			bool hasSolution;					/* se há solução */
+			size_t maxAllowedDepth;				/* a profundidade máxima permitida */
+			size_t maxKnownDepth;				/* a maior profundidade atingida */
 			std::vector<T*> *solutionPath;		/* o caminho até a solução */
 			size_t solutionDepth;				/* a profundidade até a solução */
 			
@@ -53,13 +53,13 @@ namespace pel216 {
 			/**
 			 * Configura o mecanismo de busca.
 			 *
-			 * @param maxDepth
+			 * @param maxAllowedDepth
 			 *				o <code>size_t</code> que representa a profundidade máxima permitida
 			 * @param debug
 			 *				determina se as mensagens de <i>debug</i> devem ser exibidas
 			 */
-			virtual void setup(size_t maxDepth, bool debug) {
-				this->maxDepth = maxDepth;
+			virtual void setup(size_t maxAllowedDepth, bool debug) {
+				this->maxAllowedDepth = maxAllowedDepth;
 				this->debug = debug;
 			};
 
@@ -75,21 +75,27 @@ namespace pel216 {
 			/**
 			 * Imprime o conteúdo da estrutura de dados utilizada pelo mecanismo de busca.
 			 */
-			void dumpList() {
-				/*
+			void dumpListToFile() {
+				
 				if (pel216::commons::Utils::isInvalidHandle(this->list)) {
 					return;
 				}
 
-				Logger::log("----------------------------------------\n"); 
-				Logger::log("Imprimindo lista\n"); 
-				Logger::log("----------------------------------------\n"); 
+				Logger::logToFile("----------------------------------------\n"); 
+				Logger::logToFile("Imprimindo lista\n"); 
+				Logger::logToFile("----------------------------------------\n"); 
 				size_t idx = 0;
-				for (std::list<T*>::iterator it = this->list->begin(); it != this->list->end(); ++it) {
-					Logger::log("\t#%d %s\n", idx++, (*it)->toString().c_str());
+				
+				Node<T> *node = this->list->front(); 
+				while (pel216::commons::Utils::isValidHandle(node)) {
+					T *data = node->getData();
+					if (pel216::commons::Utils::isValidHandle(data)) {
+						Logger::logToFile("\t#%d %s\n", idx++, (data)->toString().c_str());
+					}
+					node = node->getNext();
 				}
-				Logger::log("----------------------------------------\n");
-				*/
+				Logger::logToFile("----------------------------------------\n");
+				
 			};
 
 		public:
@@ -97,7 +103,6 @@ namespace pel216 {
 			 * Construtor padrão.
 			 */
 			SearchEngine() {
-				//this->list = new std::list<T*>();
 				this->list = new LinkedList<T>();
 				this->solutionPath = new std::vector<T*>();
 				this->knownNodes = new std::map<std::string,T*>();
