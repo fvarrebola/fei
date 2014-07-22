@@ -18,7 +18,7 @@ namespace pel216 {
 			 * Mensagem da excecao.
 			 */
 			virtual const char* what() const throw() {
-			    return "Solucao nao suportada";
+			    return "Solucao nao encontrada";
 			}
 
 		}; /* class SolutionNotFoundException */
