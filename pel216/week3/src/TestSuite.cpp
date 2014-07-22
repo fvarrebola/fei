@@ -4,7 +4,7 @@
 
 #include <inc/Utils.h>
 #include <inc/Logger.h>
-#include <inc/tests/TestSuite.h>
+#include <inc/tests/TestSuiteWeek3.h>
 
 #include <inc/lists/Node.h>
 #include <inc/lists/LinkedList.h>
@@ -21,8 +21,6 @@
 
 using namespace pel216::commons;
 using namespace pel216::week3;
-
-#define _USE_STD_LIST_ 1
 
 PRIVATE void pel216::week3::TestSuite::testNodeClassUsingStateClassAsData() {
 

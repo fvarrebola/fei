@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef __TESTSUITE_H__
-#define __TESTSUITE_H__
+#ifndef __TESTSUITE_WEEK3_H__
+#define __TESTSUITE_WEEK3_H__
 
 #include <assert.h>
 
@@ -67,10 +67,10 @@ namespace pel216 {
 			 */
 			static void run(); 
 
-		}; /* class TestSuite */
+		}; /* class TestSuiteWeek3 */
 
 	} /* namespace week3 */
 
 } /* namespace pel216 */
 
-#endif /* __TESTSUITE_H__ */
+#endif /* __TESTSUITE_WEEK3_H__ */

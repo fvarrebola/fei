@@ -8,7 +8,7 @@
 #include <inc/puzzles/8tiles/EightPuzzleBFSSearchEngine.h>
 #include <inc/puzzles/8tiles/EightPuzzleDFSSearchEngine.h>
 
-#include <inc/tests/TestSuite.h>
+#include <inc/tests/TestSuiteWeek3.h>
 
 #define INITIAL_STATE_OPT___INPUT_MSG			"Informe o estado inicial (separado por virgula)"
 #define GOAL_STATE_OPT__INPUT_MSG				"Informe o estado final (separado por virgula)"
