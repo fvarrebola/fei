@@ -3,6 +3,8 @@
 #ifndef __EIGHTPUZZLENODE_H__
 #define __EIGHTPUZZLENODE_H__
 
+#include <vector>
+
 #include <inc/Utils.h>
 #include <inc/puzzles/8tiles/EightPuzzleState.h>
 #include <inc/ex/IllegalParameterException.h>
@@ -43,7 +45,7 @@ namespace pel216 {
 				this->parent = parent;
 				this->depth = depth;
 				this->heuristic = heuristic;
-
+			
 			};
 
 			/**
@@ -73,9 +75,9 @@ namespace pel216 {
 			/**
 			 * Retorna a profundidade do nó em relação a raiz.
 			 *
-			 * @return o <code>double</code> que representa a heurística associada ao nó
+			 * @return o <code>size_t</code> que representa a profundidade do nó
 			 */
-			int getDepth() {
+			size_t getDepth() {
 				return this->depth;
 			};
 			

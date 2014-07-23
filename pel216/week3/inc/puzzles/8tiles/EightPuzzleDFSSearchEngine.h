@@ -72,31 +72,26 @@ namespace pel216 {
 				this->expandedNodesCount++;
 
 				// avalia cada um dos novos estados
-				std::vector<std::vector<int> > expandedDataVector = state->getExpandedData();
-				size_t len = expandedDataVector.size();
+				std::vector<EightPuzzleState*> children = state->getChildren();
+				size_t len = children.size();
 				for (size_t idx = 0; idx < len; idx++) {
 
-					// um estado é criado a partir da expansão
-					EightPuzzleState *successorState = 
-						new EightPuzzleState(expandedDataVector[idx]);
+					EightPuzzleState *child = children.at(idx);
+					EightPuzzleNode *childNode = new EightPuzzleNode(child, state, node->getDepth() + 1);
 
-					// um nó é criado
-					EightPuzzleNode *successorNode = 
-						new EightPuzzleNode(successorState, state, node->getDepth() + 1);
-
-					// se o nós já foi visitado deve ser descartado
-					bool discard = isKnownNode(successorNode);
+					// se o nó já foi visitado deve ser descartado
+					bool discard = isKnownNode(childNode);
 
 					if (this->debug) {
-						Logger::log(">> #%d: %s (%s)\n", (idx + 1),  successorState->toString().c_str(), (discard ? "D" : "M"));
+						Logger::log(">> #%d: %s (%s)\n", (idx + 1),  child->toString().c_str(), (discard ? "D" : "M"));
 					}
 
 					if (discard) {
 						continue;
 					}
-
-					addKnownNode(successorNode);
-					this->list->push_back(successorNode);
+					
+					addKnownNode(childNode);
+					this->list->push_back(childNode);
 
 				}
 
@@ -106,58 +101,44 @@ namespace pel216 {
 			/**
 			 * Construtor padrão.
 			 *
-			 * @param maxDepth
+			 * @param maxAllowedDepth
 			 *				o <code>size_t</code> que representa a profundidade máxima permitida
 			 * @param debug
 			 *				determina se as mensagens de <i>debug</i> devem ser exibidas
 			 */
-			EightPuzzleDFSSearchEngine(size_t maxDepth = -1, bool debug = false) : SearchEngine() {
-				setup(maxDepth, debug);
+			EightPuzzleDFSSearchEngine(size_t maxAllowedDepth = -1, bool debug = false) : SearchEngine("Depth First Search") {
+				setup(maxAllowedDepth, debug);
 			};
 
 			/**
-			 * @see pel216::week3::SearchEngine::search()
+			 * @see pel216::week3::SearchEngine::doSearch()
 			 */
-			virtual void search() {
+			virtual void doSearch() {
 
 				this->solutionDepth = 0;
 				this->expandedNodesCount = 0;
 				
-				Logger::log("*****************************************\n");
-				Logger::log("*                                       *\n");
-				Logger::log("* DFS                                   *\n");
-				Logger::log("*                                       *\n");
-				Logger::log("*****************************************\n"); 
-
 				EightPuzzleNode *startingNode = getStartingNode();
 				EightPuzzleState *initialState = startingNode->getState();
 				EightPuzzleNode *goalNode = getGoalNode();
 				EightPuzzleState *goalState = goalNode->getState();
 
-				Logger::log("> Inicio:    %s\n", initialState->toString().c_str());
-				Logger::log("> Objetivo:  %s\n", goalState->toString().c_str());
-				Logger::log("> Prof. max: %d\n", this->maxDepth);
-				Logger::log("> Debug:     %s\n", (this->debug? "S" : "N"));
-
 				list->push_back(startingNode);
 				addKnownNode(startingNode);
 
-				size_t iteractions = 1;
-				while (list->size() != 0) { /* enquanto houver estados a serem analisados */
+				size_t iteractions = 0;
+				size_t maxDepth = 0;
+				while (list->size() != 0) { 
 
-					if (this->debug) {
-						dumpList();
-					}
+					iteractions++;
 
-					// remove o elemento 
-					//EightPuzzleNode *node = list->back();
-					// list->pop_back();
 					EightPuzzleNode *node = list->pop_back();
 					EightPuzzleState *state = node->getState();
 
 					if (this->debug) {
-						Logger::log("\n");
-						Logger::log("#%04d Visitando no %s...\n", iteractions++, state->toString().c_str());
+						log();
+						Logger::logToFile("\n");
+						Logger::logToFile("#%06d Visitando no %s...\n", iteractions, (state)->toString().c_str());
 					}
 
 					// verifica se o alvo foi atingido
@@ -166,8 +147,10 @@ namespace pel216 {
 						this->solutionDepth = node->getDepth();
 
 						Logger::log("\n");
-						Logger::log("!!! SOLUCAO ENCONTRADA !!! (em profundidade %d apos expandir %d nos)\n", 
-							this->solutionDepth, this->expandedNodesCount);
+						Logger::log(
+								"!!! SOLUCAO ENCONTRADA !!! (em profundidade %d apos expandir %d nos)\n", 
+								this->solutionDepth, 
+								this->expandedNodesCount);
 						Logger::log("\n");
 
 						do { /* constrói o caminho da solução */
@@ -185,7 +168,7 @@ namespace pel216 {
 					}
 
 					// descarta o nó com profundidade máxima
-					if (node->getDepth() == this->maxDepth) {
+					if (node->getDepth() == this->maxAllowedDepth) {
 						if (this->debug) {
 							Logger::log("  >> No descartado (profundidade maxima atingida)\n");
 						}

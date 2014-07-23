@@ -69,6 +69,8 @@ namespace pel216 {
 		class EightPuzzleState : public State< std::vector<int> > {
 
 		private:
+			std::vector<EightPuzzleState*> children;
+
 			/**
 			 * Inicializa as variáveis estáticas dessa classe.
 			 */
@@ -192,8 +194,6 @@ namespace pel216 {
 			 */
 			virtual void expand() {
 
-				std::vector<std::vector<int> > expandedData;
-
 				size_t blankFoundAt = this->indexOf(0);
 
 				int idx = 0;
@@ -201,14 +201,21 @@ namespace pel216 {
 
 					// determina se o movimento é permitido
 					if (NAVIGATION_MAP[DIRECTIONS[idx]][blankFoundAt] == 1) {
-						expandedData.push_back(newState(blankFoundAt, DIRECTIONS[idx]));
+						this->children.push_back(new EightPuzzleState(newState(blankFoundAt, DIRECTIONS[idx])));
 					}
 					idx++;
 
 				}
 
-				this->setExpandedData(expandedData);
+			};
 
+			/**
+			 * Obtém os estados filhos.
+			 *
+			 * @return o <code>std:vector</code> de @link{EightPuzzleState} que representa o vetor de estados filhos
+			 */
+			std::vector<EightPuzzleState*> getChildren() {
+				return this->children;
 			};
 
 			/**

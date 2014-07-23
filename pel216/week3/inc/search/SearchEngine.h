@@ -26,10 +26,29 @@ namespace pel216 {
 		 */
 		template <class T>
 		class SearchEngine {
+		private:
+			std::string name;
+
+			/**
+			 * Imprime o cabeçalho do mecanismo de buscas.
+			 */
+			void printHeader() {
+
+				Logger::log("*****************************************\n");
+				Logger::log("*                                       *\n");
+				Logger::log("* %s\n", this->name.c_str());
+				Logger::log("*                                       *\n");
+				Logger::log("*****************************************\n"); 
+
+				Logger::log("> Inicio:    %s\n", getStartingNode()->getState()->toString().c_str());
+				Logger::log("> Objetivo:  %s\n", getGoalNode()->getState()->toString().c_str());
+				Logger::log("> Prof. max: %d\n", this->maxAllowedDepth);
+				Logger::log("> Debug:     %s\n", (this->debug? "S" : "N"));
+
+			};
 
 		protected:
-			/* a estrutura de dados utilizada pelo mecanismo */
-			LinkedList<T> *list; 				
+			LinkedList<T> *list; 				/* a estrutura de dados utilizada pelo mecanismo */
 
 			T *startingNode;					/* o nó de partida */
 			T *goalNode;						/* o nó alvo */
@@ -37,18 +56,41 @@ namespace pel216 {
 			// os nós conhecidos
 			std::map<std::string,T*> *knownNodes;
 			
-			// informações sobre a solução
 			bool hasSolution;					/* se há solução */
 			size_t maxAllowedDepth;				/* a profundidade máxima permitida */
 			size_t maxKnownDepth;				/* a maior profundidade atingida */
 			std::vector<T*> *solutionPath;		/* o caminho até a solução */
 			size_t solutionDepth;				/* a profundidade até a solução */
 			
-			// a quantidade de nós expandidos
-			size_t expandedNodesCount; 
+			size_t expandedNodesCount;			/* a quantidade de nós expandidos */
 
-			// indica se as mensagens de rastreio da execução devem ser exibidas
-			bool debug;
+			bool debug;							/* indica se as mensagens de rastreio da execução devem ser exibidas */
+
+			/**
+			 * Registra o conteúdo da estrutura de dados utilizada pelo mecanismo de busca.
+			 */
+			void log() {
+
+				if (pel216::commons::Utils::isInvalidHandle(this->list)) {
+					return;
+				}
+
+				Logger::logToFile("----------------------------------------\n"); 
+				Logger::logToFile("Imprimindo estrutura de dados \n"); 
+				Logger::logToFile("----------------------------------------\n"); 
+				
+				size_t idx = 0;
+				Node<T> *node = this->list->front(); 
+				while (pel216::commons::Utils::isValidHandle(node)) {
+					T *data = node->getData();
+					if (pel216::commons::Utils::isValidHandle(data)) {
+						Logger::logToFile("\t#%d %s\n", idx++, (data)->toString().c_str());
+					}
+					node = node->getNext();
+				}
+				Logger::logToFile("----------------------------------------\n");
+				
+			};
 
 			/**
 			 * Configura o mecanismo de busca.
@@ -73,36 +115,20 @@ namespace pel216 {
 			};
 		
 			/**
-			 * Imprime o conteúdo da estrutura de dados utilizada pelo mecanismo de busca.
+			 * Realiza a busca.
 			 */
-			void dumpListToFile() {
-				
-				if (pel216::commons::Utils::isInvalidHandle(this->list)) {
-					return;
-				}
-
-				Logger::logToFile("----------------------------------------\n"); 
-				Logger::logToFile("Imprimindo lista\n"); 
-				Logger::logToFile("----------------------------------------\n"); 
-				size_t idx = 0;
-				
-				Node<T> *node = this->list->front(); 
-				while (pel216::commons::Utils::isValidHandle(node)) {
-					T *data = node->getData();
-					if (pel216::commons::Utils::isValidHandle(data)) {
-						Logger::logToFile("\t#%d %s\n", idx++, (data)->toString().c_str());
-					}
-					node = node->getNext();
-				}
-				Logger::logToFile("----------------------------------------\n");
-				
+			virtual void doSearch() {
 			};
 
 		public:
 			/**
-			 * Construtor padrão.
+			 * Construtor.
+			 *
+			 * @param name
+			 *				o <code>std::string</code> que representa o algoritmo utilizado
 			 */
-			SearchEngine() {
+			SearchEngine(std::string name) {
+				this->name = name;
 				this->list = new LinkedList<T>();
 				this->solutionPath = new std::vector<T*>();
 				this->knownNodes = new std::map<std::string,T*>();
@@ -213,8 +239,13 @@ namespace pel216 {
 			
 			/**
 			 * Realiza a busca.
+			 *
+			 * @see #printHeader()
+			 * @see #doSearch()
 			 */
-			virtual void search() {
+			void search() {
+				this->printHeader();
+				this->doSearch();
 			};
 
 		}; /* class SearchEngine */

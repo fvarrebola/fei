@@ -22,7 +22,6 @@ namespace pel216 {
 
 		private:
 			T data;
-			std::vector<T> expandedData;
 
 		public:
 			/**
@@ -56,31 +55,6 @@ namespace pel216 {
 			 */
 			void setData(T data) {
 				this->data = data;
-			};
-
-			/**
-			 * Expande o estado atual para todos os estados possíveis.
-			 */
-			virtual void expandData() {
-			};
-
-			/**
-			 * Obtém todos os estados que podem ser obtidos a partir do estado atual.
-			 *
-			 * @return o <code>std::vector<T></code> que representa os estados possíveis
-			 */
-			std::vector<T> getExpandedData() {
-				return this->expandedData;
-			};
-
-			/**
-			 * Configure os estados que podem ser obtidos a partir do estado atual.
-			 *
-			 * @param expandedData
-			 * 				o <code>std::vector<T></code> que representa os estados possíveis
-			 */
-			void setExpandedData(std::vector<T> expandedData) {
-				this->expandedData = expandedData;
 			};
 
 			/**

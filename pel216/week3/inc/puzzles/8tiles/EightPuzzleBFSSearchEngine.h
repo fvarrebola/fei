@@ -72,31 +72,26 @@ namespace pel216 {
 				this->expandedNodesCount++;
 
 				// avalia cada um dos novos estados
-				std::vector<std::vector<int> > expandedDataVector = state->getExpandedData();
-				size_t len = expandedDataVector.size();
+				std::vector<EightPuzzleState*> children = state->getChildren();
+				size_t len = children.size();
 				for (size_t idx = 0; idx < len; idx++) {
 
-					// um estado é criado a partir da expansão
-					EightPuzzleState *successorState = 
-						new EightPuzzleState(expandedDataVector[idx]);
-
-					// um nó é criado
-					EightPuzzleNode *successorNode = 
-						new EightPuzzleNode(successorState, state, node->getDepth() + 1);
+					EightPuzzleState *child = children.at(idx);
+					EightPuzzleNode *childNode = new EightPuzzleNode(child, state, node->getDepth() + 1);
 
 					// determina se o estado já foi visitado
-					bool discard = isKnownNode(successorNode);
+					bool discard = isKnownNode(childNode);
 
 					if (this->debug) {
-						Logger::log("> Estado #%d: %s (%s)\n", (idx + 1),  successorState->toString().c_str(), (discard ? "D" : "M"));
+						Logger::logToFile("> Estado #%d: %s (%s)\n", (idx + 1),  child->toString().c_str(), (discard ? "D" : "M"));
 					}
 
 					if (discard) {
 						continue;
 					}
 
-					addKnownNode(successorNode);
-					this->list->push_back(successorNode);
+					addKnownNode(childNode);
+					this->list->push_back(childNode);
 
 				}
 
@@ -106,61 +101,48 @@ namespace pel216 {
 			/**
 			 * Construtor padrão.
 			 *
-			 * @param maxDepth
+			 * @param maxAllowedDepth
 			 *				o <code>size_t</code> que representa a profundidade máxima permitida
 			 * @param debug
 			 *				determina se as mensagens de <i>debug</i> devem ser exibidas
 			 */
-			EightPuzzleBFSSearchEngine(size_t maxDepth = -1, bool debug = false) : SearchEngine() {
-				setup(maxDepth, debug);
+			EightPuzzleBFSSearchEngine(size_t maxAllowedDepth = -1, bool debug = false) : SearchEngine("Breadth First Search") {
+				setup(maxAllowedDepth,  debug);
 			};
 
 
 			/**
-			 * @see pel216::week3::SearchEngine::search()
+			 * @see pel216::week3::SearchEngine::doSearch()
 			 */
-			virtual void search() {
+			virtual void doSearch() {
 
 				this->solutionDepth = 0;
 				this->expandedNodesCount = 0;
-
-				Logger::log("*****************************************\n");
-				Logger::log("*                                       *\n");
-				Logger::log("* BFS                                   *\n");
-				Logger::log("*                                       *\n");
-				Logger::log("*****************************************\n"); 
-
 
 				EightPuzzleNode *startingNode = getStartingNode();
 				EightPuzzleState *initialState = startingNode->getState();
 				EightPuzzleNode *goalNode = getGoalNode();
 				EightPuzzleState *goalState = goalNode->getState();
 
-				Logger::log("> Inicio:    %s\n", initialState->toString().c_str());
-				Logger::log("> Objetivo:  %s\n", goalState->toString().c_str());
-				Logger::log("> Prof. max: %d\n", this->maxDepth);
-				Logger::log("> Debug:     %s\n", (this->debug? "S" : "N"));
-
 				// inicia a lista com o primeiro nó
 				list->push_back(startingNode);
 				addKnownNode(startingNode);
 
-				size_t iteractions = 1;
+				size_t iteractions = 0;
 				while (list->size() != 0) { /* enquanto houver estados a serem analisados */
 
-					if (this->debug) {
-						dumpList();
-					}
+					iteractions++;
 
-					//EightPuzzleNode *node = list->front();
-					//list->pop_front();
 					EightPuzzleNode *node = list->pop_front();
 					EightPuzzleState *state = node->getState();
 					
 					if (this->debug) {
-						Logger::log("\n");
-						Logger::log("#%d Visitando no %s...\n", iteractions++, state->toString().c_str());
+						log();
+						Logger::logToFile("\n");
+						Logger::logToFile("#%06d Visitando no %s...\n", iteractions, (state)->toString().c_str());
 					}
+
+
 					// verifica se o alvo foi atingido
 					if (state->equals(goalState)) { 
 
@@ -186,8 +168,8 @@ namespace pel216 {
 					}
 
 					// determina a profundidade máxima foi atingida
-					if (node->getDepth() == this->maxDepth) {
-						Logger::log("A profundidade %d foi atingida e nenhuma solucao foi encontrada\n", this->maxDepth); 
+					if (node->getDepth() == this->maxAllowedDepth) {
+						Logger::log("A profundidade %d foi atingida e nenhuma solucao foi encontrada\n", this->maxAllowedDepth); 
 						break;
 					}
 
@@ -197,10 +179,9 @@ namespace pel216 {
 
 			};
 
-
 		}; /* class EightPuzzleBFSSearchEngine */
 
-	} /* namespace week3 */
+	} /* namespace week4 */
 
 } /* namespace pel216 */
 
