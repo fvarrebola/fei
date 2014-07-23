@@ -13,7 +13,7 @@ namespace pel216 {
 		 * Excecao que representa um parametro ilegal.
 		 */
 		class IllegalParameterException : public std::exception {
-
+		public:
 			/**
 			 * Mensagem da excecao.
 			 */
