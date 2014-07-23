@@ -106,6 +106,39 @@ namespace pel216 {
 			};
 
 			/**
+			 * Adiciona um nó ao mapa de nós conhecidos.
+			 *
+			 * @param node
+			 * 				o @link{EightPuzzleNode} que representa o nó
+			 */
+			void addKnownNode(T *node) {
+				knownNodes->insert(std::pair<std::string,T*>((node)->getState()->hashCode(), node));
+			};
+
+			/**
+			 * Determina se um nó já é conhecido.
+			 *
+			 * @param node
+			 * 				o @link{EightPuzzleNode} que representa o nó
+			 *
+			 * @return <code>true</code> caso o nó seja conhecido; do contrário <code>false</code>
+			 */
+			bool isKnownNode(T *node) {
+				return (knownNodes->find((node)->getState()->hashCode()) != knownNodes->end());
+			};
+
+			/**
+			 * Adiciona um estado à lista de movimentos.
+			 *
+			 * @param node
+			 * 				o @link{EightPuzzleNode} que representa o nó
+			 */
+			void addPath(T *node) {
+				solutionPath->insert(solutionPath->begin(), node);
+			};
+
+
+			/**
 			 * Expande um nó.
 			 *
 			 * @param node

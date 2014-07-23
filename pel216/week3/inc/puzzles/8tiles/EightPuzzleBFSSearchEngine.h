@@ -30,38 +30,6 @@ namespace pel216 {
 
 		private:
 			/**
-			 * Adiciona um nó ao mapa de nós conhecidos.
-			 *
-			 * @param node
-			 * 				o @link{EightPuzzleNode} que representa o nó
-			 */
-			void addKnownNode(EightPuzzleNode *node) {
-				knownNodes->insert(std::pair<std::string,EightPuzzleNode*>(node->getState()->hashCode(), node));
-			};
-
-			/**
-			 * Determina se um nó já é conhecido.
-			 *
-			 * @param node
-			 * 				o @link{EightPuzzleNode} que representa o nó
-			 *
-			 * @return <code>true</code> caso o nó seja conhecido; do contrário <code>false</code>
-			 */
-			bool isKnownNode(EightPuzzleNode *node) {
-				return (knownNodes->find(node->getState()->hashCode()) != knownNodes->end());
-			};
-
-			/**
-			 * Adiciona um estado à lista de movimentos.
-			 *
-			 * @param node
-			 * 				o @link{EightPuzzleNode} que representa o nó
-			 */
-			void addPath(EightPuzzleNode *node) {
-				solutionPath->insert(solutionPath->begin(), node);
-			};
-
-			/**
 			 * @see pel216::week3::SearchEngine::expandNode()
 			 */
 			void expandNode(EightPuzzleNode *node) {
@@ -132,12 +100,15 @@ namespace pel216 {
 				while (list->size() != 0) { /* enquanto houver estados a serem analisados */
 
 					iteractions++;
+					
+					if (this->debug) {
+						log();
+					}
 
 					EightPuzzleNode *node = list->pop_front();
 					EightPuzzleState *state = node->getState();
 					
 					if (this->debug) {
-						log();
 						Logger::logToFile("\n");
 						Logger::logToFile("#%06d Visitando no %s...\n", iteractions, (state)->toString().c_str());
 					}
@@ -169,7 +140,7 @@ namespace pel216 {
 
 					// determina a profundidade máxima foi atingida
 					if (node->getDepth() == this->maxAllowedDepth) {
-						Logger::log("A profundidade %d foi atingida e nenhuma solucao foi encontrada\n", this->maxAllowedDepth); 
+						Logger::logToFile("A profundidade %d foi atingida e nenhuma solucao foi encontrada\n", this->maxAllowedDepth); 
 						break;
 					}
 

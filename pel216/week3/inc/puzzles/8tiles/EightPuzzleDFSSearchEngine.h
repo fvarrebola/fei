@@ -30,38 +30,6 @@ namespace pel216 {
 
 		private:
 			/**
-			 * Adiciona um nó ao mapa de nós conhecidos.
-			 *
-			 * @param node
-			 * 				o @link{EightPuzzleNode} que representa o nó
-			 */
-			void addKnownNode(EightPuzzleNode *node) {
-				knownNodes->insert(std::pair<std::string,EightPuzzleNode*>(node->getState()->hashCode(), node));
-			};
-
-			/**
-			 * Determina se um nó já é conhecido.
-			 *
-			 * @param node
-			 * 				o @link{EightPuzzleNode} que representa o nó
-			 *
-			 * @return <code>true</code> caso o nó seja conhecido; do contrário <code>false</code>
-			 */
-			bool isKnownNode(EightPuzzleNode *node) {
-				return (knownNodes->find(node->getState()->hashCode()) != knownNodes->end());
-			};
-
-			/**
-			 * Adiciona um estado à lista de movimentos.
-			 *
-			 * @param node
-			 * 				o @link{EightPuzzleNode} que representa o nó
-			 */
-			void addPath(EightPuzzleNode *node) {
-				solutionPath->insert(solutionPath->begin(), node);
-			};
-
-			/**
 			 * @see pel216::week3::SearchEngine::expandNode()
 			 */
 			void expandNode(EightPuzzleNode *node) {
@@ -83,7 +51,7 @@ namespace pel216 {
 					bool discard = isKnownNode(childNode);
 
 					if (this->debug) {
-						Logger::log(">> #%d: %s (%s)\n", (idx + 1),  child->toString().c_str(), (discard ? "D" : "M"));
+						Logger::logToFile(">> #%d: %s (%s)\n", (idx + 1),  child->toString().c_str(), (discard ? "D" : "M"));
 					}
 
 					if (discard) {
@@ -132,12 +100,14 @@ namespace pel216 {
 
 					iteractions++;
 
+					if (this->debug) {
+						log();
+					}
+
 					EightPuzzleNode *node = list->pop_back();
 					EightPuzzleState *state = node->getState();
 
 					if (this->debug) {
-						log();
-						Logger::logToFile("\n");
 						Logger::logToFile("#%06d Visitando no %s...\n", iteractions, (state)->toString().c_str());
 					}
 
@@ -170,7 +140,7 @@ namespace pel216 {
 					// descarta o nó com profundidade máxima
 					if (node->getDepth() == this->maxAllowedDepth) {
 						if (this->debug) {
-							Logger::log("  >> No descartado (profundidade maxima atingida)\n");
+							Logger::logToFile("  >> No descartado (profundidade maxima atingida)\n");
 						}
 						continue;
 					}
