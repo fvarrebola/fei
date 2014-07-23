@@ -44,8 +44,8 @@
     <IntDir>.\debug\x86\intermediate\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>.\release\x86</OutDir>
-    <IntDir>.\release\x86\intermediate</IntDir>
+    <OutDir>.\release\x86\</OutDir>
+    <IntDir>.\release\x86\intermediate\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
