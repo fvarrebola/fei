@@ -57,14 +57,14 @@
     <ClInclude Include="inc\puzzles\8tiles\EightPuzzleNode.h">
       <Filter>Header Files\puzzles\8tiles</Filter>
     </ClInclude>
-    <ClInclude Include="inc\tests\TestSuite.h">
-      <Filter>Header Files\tests</Filter>
-    </ClInclude>
     <ClInclude Include="inc\lists\LinkedList.h">
       <Filter>Header Files\lists</Filter>
     </ClInclude>
     <ClInclude Include="inc\lists\Node.h">
       <Filter>Header Files\lists</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\tests\TestSuiteWeek3.h">
+      <Filter>Header Files\tests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

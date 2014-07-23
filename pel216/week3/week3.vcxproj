@@ -83,7 +83,7 @@
     <ClInclude Include="inc\puzzles\State.h" />
     <ClInclude Include="inc\search\SearchEngine.h" />
     <ClInclude Include="inc\search\SolutionNotFoundException.h" />
-    <ClInclude Include="inc\tests\TestSuite.h" />
+    <ClInclude Include="inc\tests\TestSuiteWeek3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
