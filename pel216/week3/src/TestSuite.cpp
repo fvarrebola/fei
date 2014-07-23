@@ -22,31 +22,6 @@
 using namespace pel216::commons;
 using namespace pel216::week3;
 
-PRIVATE void pel216::week3::TestSuite::testNodeClassUsingStateClassAsData() {
-
-	Logger::log("Testando classe pel216::week3::Node (com T = State)...\n");
-
-	Logger::log("Testando classe pel216::week3::Node::[get|set][Data|Previous|Next]...\n");
-
-
-	//int v0[] = {2, 3, 5, 7, 11, 13};
-	//int v1[] = {23, 27, 29, 31, 37};
-	//int v2[] = {2, 4, 8, 16, 32};
-
-//	Node< State<int*> > *previous = new Node< State<int*> >(v0);
-//	Node< State<int*> > *next = new Node< State<int*> >(v1);
-//	Node< State<int*> > *node = new Node< State<int*> >(v2, previous, next);
-//	State<int *> state = node->getData();
-//	int *stateData = state.getData();
-//	assert(stateData != NULL);
-//	assert(node->getPrevious() == previous);
-//	assert(node->getNext() == next);
-//
-//	delete node;
-//	delete next;
-//	delete previous;
-
-}
 
 PRIVATE void pel216::week3::TestSuite::testLinkedList() {
 
@@ -223,7 +198,6 @@ PUBLIC void pel216::week3::TestSuite::run() {
 	Logger::log("%s\n", STARS);
 	Logger::log("\n");
 
-	pel216::week3::TestSuite::testNodeClassUsingStateClassAsData();
 	pel216::week3::TestSuite::testLinkedList();
 	pel216::week3::TestSuite::test8PuzzleStateClass();
 	pel216::week3::TestSuite::test8PuzzleSolverClass();

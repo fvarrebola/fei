@@ -23,10 +23,6 @@ namespace pel216 {
 		class TestSuite {
 
 		private:
-			static void testNodeClassUsingIntType();
-			static void testNodeClassUsingIntArray();
-			static void testNodeClassUsingStateClassAsData();
-
 			static void testLinkedList();
 
 			/**
