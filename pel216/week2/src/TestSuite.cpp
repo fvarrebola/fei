@@ -99,6 +99,7 @@ PRIVATE void pel216::week2::TestSuite::testLineClass() {
 		pel216::week2::Line *line3 = new Line(NULL, p5_20);
 		assert(pel216::commons::Utils::isInvalidHandle(line3));
 	} catch (pel216::commons::IllegalParameterException *ex) {
+		assert(pel216::commons::Utils::isValidHandle(ex));
 		hasException1 = true;
 	}
 	assert(hasException1);
@@ -110,6 +111,7 @@ PRIVATE void pel216::week2::TestSuite::testLineClass() {
 	try {
 		assert(line4->belongs(NULL));
 	} catch (pel216::commons::IllegalParameterException *ex) {
+		assert(pel216::commons::Utils::isValidHandle(ex));
 		hasException2 = true;
 	}
 	assert(hasException2);
@@ -202,7 +204,7 @@ PRIVATE void pel216::week2::TestSuite::testPolyhedrals() {
 
 	Logger::log("Testando poliedros...\n");
 
-	double sideLen = 2.0f;
+	float sideLen = 2.0f;
 
 	Logger::log("Testando classe pel216::week2::Tetraedron...\n");
 	pel216::week2::Polyhedral *tetraedron = new Tetraedron(sideLen);

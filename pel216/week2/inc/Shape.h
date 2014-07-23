@@ -12,7 +12,7 @@ namespace pel216 {
 
 	namespace week2 {
 
-		static const double pi = 3.141592654f;
+		static const float pi = 3.141592654f;
 
 		/**
 		 * Transforma um angulo de graus para radianos.
@@ -22,7 +22,7 @@ namespace pel216 {
 		 *
 		 * @return o <code>double</code> que representa o angulo em radianos
 		 */
-		inline double toRadians(float angle) {
+		inline float toRadians(float angle) {
 			return ((pel216::week2::pi /180) * angle);
 		};
 
@@ -32,9 +32,9 @@ namespace pel216 {
 		 * @param angle
 		 * 				o <code>float</code> o angulo em randianos
 		 *
-		 * @return o <code>double</code> que representa a co-tangente do angulo
+		 * @return o <code>float</code> que representa a co-tangente do angulo
 		 */
-		static double cot(float angle) {
+		static float cot(float angle) {
 			return (std::cos(angle) / std::sin(angle));
 		};
 
@@ -46,7 +46,7 @@ namespace pel216 {
 		 *
 		 * @return o <code>double</code> que representa a co-tangente do angulo
 		 */
-		inline double cotUsingDegrees(float angle) {
+		inline float cotUsingDegrees(float angle) {
 			return cot(toRadians(angle));
 		};
 
