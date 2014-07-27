@@ -18,7 +18,7 @@ namespace pel216 {
 		template <class T>
 		class LinkedList {
 		
-		private:
+		protected:
 			size_t listSize;
 			Node<T> *begin;
 			Node<T> *end;
@@ -29,6 +29,8 @@ namespace pel216 {
 			 */
 			LinkedList() {
 				this->listSize = 0;
+				this->begin = NULL;
+				this->end = NULL;
 			};
 
 			/**
@@ -74,6 +76,52 @@ namespace pel216 {
 			};
 
 			/**
+			 * Insere um nó após um determinado nó.
+			 *
+			 * @param node
+			 *				o @link{Node<T>} que representa o nó
+			 * @param data
+			 *				o <code>T*</code> que representa o dado do nó
+			 */
+			void insertAfter(IN Node<T> *node, IN T *data) {
+
+				Node<T> *newNode = new Node<T>(data);
+
+				Node<T> *nextNode = node->getNext();
+				if (pel216::commons::Utils::isValidHandle(nextNode)) {
+					nextNode->setPrevious(newNode);
+				}
+				newNode->setNext(nextNode);
+				newNode->setPrevious(node);
+				node->setNext(newNode);
+
+				this->listSize++;
+
+			};
+
+			/**
+			 * Insere um nó antes de um determinado nó.
+			 *
+			 * @param node
+			 *				o @link{Node<T>} que representa o nó
+			 * @param data
+			 *				o <code>T*</code> que representa o dado do nó
+			 */
+			void insertBefore(IN Node<T> *node, IN T *data) {
+
+				Node<T> *newNode = new Node<T>(data);
+
+				Node<T> *previousNode = node->getPrevious();
+				previousNode->setNext(newNode);
+				newNode->setPrevious(previousNode);
+				newNode->setNext(node);
+				node->setPrevious(newNode);
+
+				this->listSize++;
+
+			};
+
+			/**
 			 * Adiciona um nó ao fim da lista.
 			 *
 			 * @param data
@@ -113,7 +161,9 @@ namespace pel216 {
 				node->setNext(this->begin);
 				node->setData(data);
 
-				this->begin->setPrevious(node);
+				if (pel216::commons::Utils::isValidHandle(this->begin)) {
+					this->begin->setPrevious(node);
+				}
 				this->begin = node;
 
 				this->listSize++;
@@ -176,6 +226,33 @@ namespace pel216 {
 				return data;
 
 			};
+
+			/**
+			 * Registra o conteúdo da estrutura de dados utilizada pelo mecanismo de busca.
+			 */
+			virtual void dumpToFile() {
+
+				if (isEmpty()) {
+					return;
+				}
+
+				Logger::logToFile("----------------------------------------\n"); 
+				Logger::logToFile("Imprimindo estrutura de dados \n"); 
+				Logger::logToFile("----------------------------------------\n"); 
+				
+				size_t idx = 0;
+				Node<T> *node = front(); 
+				while (pel216::commons::Utils::isValidHandle(node)) {
+					T *data = node->getData();
+					if (pel216::commons::Utils::isValidHandle(data)) {
+						Logger::logToFile("\t#%d %s\n", idx++, (data)->toString().c_str());
+					}
+					node = node->getNext();
+				}
+				Logger::logToFile("----------------------------------------\n");
+				
+			};
+
 
 		}; /* class LinkedList */
 
