@@ -99,8 +99,9 @@ namespace pel216 {
 
 				std::stringstream stream;
 
-				stream << "[state: " << (pel216::commons::Utils::isValidHandle(this->state) ? this->state->toString().c_str() : UNKNOWN);
-				stream << ", depth: " << this->depth << "]";
+				stream << "[state: " << (this->state == NULL ? UNKNOWN : this->state->toString().c_str());
+				stream << ", depth: " << this->depth;
+				stream << ", heuristic: " << this->heuristic << "]";
 
 				return stream.str();
 
