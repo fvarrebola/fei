@@ -24,8 +24,8 @@ using namespace pel216::week3;
 
 // enum de comandos
 enum Commands {
-    SLOVE_8_PUZZLE_WITH_BFS			= 0,
-    SLOVE_8_PUZZLE_WITH_DFS			= 1,
+    SOLVE_8_PUZZLE_WITH_BFS			= 0,
+    SOLVE_8_PUZZLE_WITH_DFS			= 1,
     RUN_TESTS                      	= 2,
     EXIT                           	= 99
 };
@@ -33,12 +33,12 @@ enum Commands {
 /* menu principal */
 MENU_OPTION MAIN_MENU[] = {
 	{
-		SLOVE_8_PUZZLE_WITH_BFS,
+		SOLVE_8_PUZZLE_WITH_BFS,
 		"Resolver o jogo dos 8 com BFS",
 		solve8PuzzleWithBFS
 	},
 	{
-		SLOVE_8_PUZZLE_WITH_DFS,
+		SOLVE_8_PUZZLE_WITH_DFS,
 		"Resolver o jogo dos 8 com DFS",
 		solve8PuzzleWithDFS
 	},
