@@ -34,12 +34,12 @@ namespace pel216 {
 			 */
 			void printHeader() {
 
+				Logger::log("\n");
 				Logger::log("*****************************************\n");
 				Logger::log("*                                       *\n");
 				Logger::log("* %s\n", this->name.c_str());
 				Logger::log("*                                       *\n");
 				Logger::log("*****************************************\n"); 
-
 				Logger::log("> Inicio:    %s\n", getStartingNode()->getState()->toString().c_str());
 				Logger::log("> Objetivo:  %s\n", getGoalNode()->getState()->toString().c_str());
 				Logger::log("> Prof. max: %d\n", this->maxAllowedDepth);
@@ -48,8 +48,6 @@ namespace pel216 {
 			};
 
 		protected:
-			LinkedList<T> *list; 				/* a estrutura de dados utilizada pelo mecanismo */
-
 			T *startingNode;					/* o nó de partida */
 			T *goalNode;						/* o nó alvo */
 
@@ -65,32 +63,6 @@ namespace pel216 {
 			size_t expandedNodesCount;			/* a quantidade de nós expandidos */
 
 			bool debug;							/* indica se as mensagens de rastreio da execução devem ser exibidas */
-
-			/**
-			 * Registra o conteúdo da estrutura de dados utilizada pelo mecanismo de busca.
-			 */
-			void log() {
-
-				if (pel216::commons::Utils::isInvalidHandle(this->list)) {
-					return;
-				}
-
-				Logger::logToFile("----------------------------------------\n"); 
-				Logger::logToFile("Imprimindo estrutura de dados \n"); 
-				Logger::logToFile("----------------------------------------\n"); 
-				
-				size_t idx = 0;
-				Node<T> *node = this->list->front(); 
-				while (pel216::commons::Utils::isValidHandle(node)) {
-					T *data = node->getData();
-					if (pel216::commons::Utils::isValidHandle(data)) {
-						Logger::logToFile("\t#%d %s\n", idx++, (data)->toString().c_str());
-					}
-					node = node->getNext();
-				}
-				Logger::logToFile("----------------------------------------\n");
-				
-			};
 
 			/**
 			 * Configura o mecanismo de busca.
@@ -162,7 +134,6 @@ namespace pel216 {
 			 */
 			SearchEngine(std::string name) {
 				this->name = name;
-				this->list = new LinkedList<T>();
 				this->solutionPath = new std::vector<T*>();
 				this->knownNodes = new std::map<std::string,T*>();
 				this->hasSolution = false;
@@ -172,7 +143,6 @@ namespace pel216 {
 			 * Destrutor.
 			 */
 			virtual ~SearchEngine() {
-				delete this->list;
 				delete this->solutionPath;
 				delete this->knownNodes;
 			};

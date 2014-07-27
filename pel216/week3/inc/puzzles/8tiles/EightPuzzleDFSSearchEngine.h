@@ -29,6 +29,10 @@ namespace pel216 {
 		class EightPuzzleDFSSearchEngine : public SearchEngine<EightPuzzleNode> {
 
 		private:
+			// a estrutura de dados utilizada pelo mecanismo
+			LinkedList<EightPuzzleNode> *list; 		
+			
+		protected:
 			/**
 			 * @see pel216::week3::SearchEngine::expandNode()
 			 */
@@ -67,7 +71,7 @@ namespace pel216 {
 
 		public:
 			/**
-			 * Construtor padrão.
+			 * Construtor.
 			 *
 			 * @param maxAllowedDepth
 			 *				o <code>size_t</code> que representa a profundidade máxima permitida
@@ -76,6 +80,14 @@ namespace pel216 {
 			 */
 			EightPuzzleDFSSearchEngine(size_t maxAllowedDepth = -1, bool debug = false) : SearchEngine("Depth First Search") {
 				setup(maxAllowedDepth, debug);
+				this->list = new LinkedList<EightPuzzleNode>();
+			};
+
+			/**
+			 * Destrutor.
+			 */
+			~EightPuzzleDFSSearchEngine() {
+				delete this->list;
 			};
 
 			/**
@@ -101,7 +113,7 @@ namespace pel216 {
 					iteractions++;
 
 					if (this->debug) {
-						log();
+						this->list->dumpToFile();
 					}
 
 					EightPuzzleNode *node = list->pop_back();
