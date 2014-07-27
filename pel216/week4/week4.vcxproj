@@ -78,6 +78,7 @@
     <ClInclude Include="inc\puzzles\8tiles\EightPuzzleAStarSearchEngine.h" />
     <ClInclude Include="inc\puzzles\8tiles\EightPuzzleBestFirstSearchEngine.h" />
     <ClInclude Include="inc\puzzles\8tiles\EightPuzzleHillClimbingSearchEngine.h" />
+    <ClInclude Include="inc\queue\PriorityQueue.h" />
     <ClInclude Include="inc\tests\TestSuiteWeek4.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

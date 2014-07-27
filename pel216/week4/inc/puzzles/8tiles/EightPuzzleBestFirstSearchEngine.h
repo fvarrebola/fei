@@ -11,6 +11,8 @@
 #include <inc/Utils.h>
 #include <inc/Logger.h>
 
+#include <inc/queue/PriorityQueue.h>
+
 #include <inc/search/SearchEngine.h>
 #include <inc/puzzles/8tiles/EightPuzzleState.h>
 #include <inc/puzzles/8tiles/EightPuzzleNode.h>
@@ -30,17 +32,43 @@ namespace pel216 {
 		class EightPuzzleBestFirstSearchEngine : public SearchEngine<EightPuzzleNode> {
 
 		private:
+			PriorityQueue *queue;
+			EightPuzzleState *goalState;
+
+		protected:
 			/**
 			 * @see pel216::week3::SearchEngine::expandNode()
 			 */
-			void expandNode(EightPuzzleNode *node) {
+			virtual void expandNode(EightPuzzleNode *node) {
 
 				EightPuzzleState *state = node->getState();
 
 				state->expand();
 				this->expandedNodesCount++;
 
-				// avalia cada um dos novos estados
+				std::vector<EightPuzzleState*> children = state->getChildren();
+				size_t len = children.size();
+				for (size_t idx = 0; idx < len; idx++) {
+
+					EightPuzzleState *child = children.at(idx);
+					EightPuzzleNode *childNode = new EightPuzzleNode(
+						child, state, node->getDepth() + 1, child->getMisplacedBlocksCount(this->goalState));
+
+					// determina se o estado já foi visitado
+					bool discard = isKnownNode(childNode);
+
+					if (this->debug) {
+						Logger::logToFile("> Estado #%d: %s (%s)\n", (idx + 1),  child->toString().c_str(), (discard ? "D" : "M"));
+					}
+
+					if (discard) {
+						continue;
+					}
+
+					addKnownNode(childNode);
+					this->queue->push_asc(childNode);
+
+				}
 
 			};
 
@@ -55,6 +83,7 @@ namespace pel216 {
 			 */
 			EightPuzzleBestFirstSearchEngine(size_t maxDepth = -1, bool debug = false) : SearchEngine("Best First Search") {
 				setup(maxDepth, debug);
+				this->queue = new PriorityQueue();
 			};
 
 			/**
@@ -68,21 +97,27 @@ namespace pel216 {
 				EightPuzzleNode *startingNode = getStartingNode();
 				EightPuzzleState *initialState = startingNode->getState();
 				EightPuzzleNode *goalNode = getGoalNode();
-				EightPuzzleState *goalState = goalNode->getState();
+				this->goalState = goalNode->getState();
 
 				// inicia a lista com o primeiro nó
-				list->push_back(startingNode);
+				this->queue->push_asc(startingNode);
 				addKnownNode(startingNode);
 
-				size_t iteractions = 1;
-				while (list->size() != 0) { 
+				size_t iteractions = 0;
+				while (!this->queue->isEmpty()) { 
 
-					EightPuzzleNode *node = list->pop_front();
+					iteractions++;
+
+					if (this->debug) {
+						this->queue->dumpToFile();
+					}
+
+					EightPuzzleNode *node = this->queue->pop();
 					EightPuzzleState *state = node->getState();
 					
 					if (this->debug) {
-						Logger::log("\n");
-						Logger::log("#%d Visitando no %s...\n", iteractions++, state->toString().c_str());
+						Logger::logToFile("\n");
+						Logger::logToFile("#%d Visitando no %s...\n", iteractions, state->toString().c_str());
 					}
 					// verifica se o alvo foi atingido
 					if (state->equals(goalState)) { 

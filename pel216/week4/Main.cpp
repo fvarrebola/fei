@@ -17,8 +17,8 @@
 #define MAX_DEPTH_OPT___INPUT_MSG_2				"Informe a profundidade maxima permitida"
 #define DEBUG_OPT___INPUT_MSG					"Imprimir mensagens?"
 
-void solve8PuzzleWithHillClimbing();
 void solve8PuzzleWithBestFirstSearch();
+void solve8PuzzleWithHillClimbing();
 void solve8PuzzleWithAStar();
 
 using namespace pel216::commons;
@@ -27,9 +27,9 @@ using namespace pel216::week4;
 
 // enum de comandos
 enum Commands {
-    SLOVE_8_PUZZLE_WITH_HILL		= 0,
-    SLOVE_8_PUZZLE_WITH_BEST		= 1,
-    SLOVE_8_PUZZLE_WITH_A_START		= 2,
+    SOLVE_8_PUZZLE_WITH_BEST		= 0,
+	SOLVE_8_PUZZLE_WITH_HILL		= 1,
+    SOLVE_8_PUZZLE_WITH_A_START		= 2,
     RUN_TESTS                      	= 3,
     EXIT                           	= 99
 };
@@ -37,17 +37,17 @@ enum Commands {
 /* menu principal */
 MENU_OPTION MAIN_MENU[] = {
 	{
-		SLOVE_8_PUZZLE_WITH_HILL,
-		"Resolver o jogo dos 8 com Hill Climbing",
-		solve8PuzzleWithHillClimbing
-	},
-	{
-		SLOVE_8_PUZZLE_WITH_BEST,
+		SOLVE_8_PUZZLE_WITH_BEST,
 		"Resolver o jogo dos 8 com Best First Search",
 		solve8PuzzleWithBestFirstSearch
 	},
 	{
-		SLOVE_8_PUZZLE_WITH_A_START,
+		SOLVE_8_PUZZLE_WITH_HILL,
+		"Resolver o jogo dos 8 com Hill Climbing",
+		solve8PuzzleWithHillClimbing
+	},
+	{
+		SOLVE_8_PUZZLE_WITH_A_START,
 		"Resolver o jogo dos 8 com A*",
 		solve8PuzzleWithAStar
 	},
@@ -72,7 +72,7 @@ MENU_OPTION MAIN_MENU[] = {
 void printHeader() {
     Logger::log("%s\n", STARS);
     Logger::log("* PEL216\n");
-    Logger::log("* Semana 4 - Buscas Hill Climbing, Best First Search e A*\n");
+    Logger::log("* Semana 4 - Buscas Best First Search, Hill Climbing e A Star\n");
     Logger::log("%s\n", STARS);
 }
 
@@ -100,8 +100,40 @@ EightPuzzleState buildStateFromUserInput(std::string inputMsg) {
 
 
 
+
 /**
- * Resolve o jogo das 8 peças usando o Hill Climbing.
+ * Tenta resolver o jogo das 8 peças usando o Best First Search.
+ */
+void solve8PuzzleWithBestFirstSearch() {
+
+	EightPuzzleState s = buildStateFromUserInput(INITIAL_STATE_OPT___INPUT_MSG);
+	EightPuzzleState g = buildStateFromUserInput(GOAL_STATE_OPT__INPUT_MSG);
+
+	size_t maxDepth = -1;
+	if (UserParams::getBoolParam(MAX_DEPTH_OPT___INPUT_MSG_1)) {
+		maxDepth = UserParams::getIntParam(MAX_DEPTH_OPT___INPUT_MSG_2);
+	}
+
+	bool debug = false;
+	if (UserParams::getBoolParam(DEBUG_OPT___INPUT_MSG)) {
+		debug = true;
+	}
+
+	EightPuzzleBestFirstSearchEngine e = EightPuzzleBestFirstSearchEngine(maxDepth, debug);
+	EightPuzzleSolver solver(&e, &s, &g);
+	
+	try {
+		solver.solve();
+	} catch (pel216::week3::SolutionNotFoundException *ex) {
+		Logger::log("%s\n", ex->what());
+	}
+
+}
+
+
+
+/**
+ * Tenta resolver o jogo das 8 peças usando o Hill Climbing.
  */
 void solve8PuzzleWithHillClimbing() {
 
@@ -132,33 +164,7 @@ void solve8PuzzleWithHillClimbing() {
 
 
 /**
- * Resolve o jogo das 8 peças usando o Best First Search.
- */
-void solve8PuzzleWithBestFirstSearch() {
-
-	EightPuzzleState s = buildStateFromUserInput(INITIAL_STATE_OPT___INPUT_MSG);
-	EightPuzzleState g = buildStateFromUserInput(GOAL_STATE_OPT__INPUT_MSG);
-
-	bool debug = false;
-	if (UserParams::getBoolParam(DEBUG_OPT___INPUT_MSG)) {
-		debug = true;
-	}
-
-	EightPuzzleBestFirstSearchEngine e = EightPuzzleBestFirstSearchEngine();
-	EightPuzzleSolver solver(&e, &s, &g);
-	
-	try {
-		solver.solve();
-	} catch (pel216::week3::SolutionNotFoundException *ex) {
-		Logger::log("%s\n", ex->what());
-	}
-
-}
-
-
-
-/**
- * Resolve o jogo das 8 peças usando o Best First Search.
+ * Tenta resolver o jogo das 8 peças usando o A Star.
  */
 void solve8PuzzleWithAStar() {
 

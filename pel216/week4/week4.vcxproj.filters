@@ -22,7 +22,10 @@
     <Filter Include="Header Files\inc\puzzles\8tiles">
       <UniqueIdentifier>{25d14f1d-3cc7-479c-a9f7-bec68626ba70}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\tests">
+    <Filter Include="Header Files\inc\queue">
+      <UniqueIdentifier>{373196b8-4d68-4820-b1b1-4233ca4202d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\inc\tests">
       <UniqueIdentifier>{ec9aedfd-b2b9-491c-b5f5-4f102e8ac7c0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -36,7 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\tests\TestSuiteWeek4.h">
-      <Filter>Header Files\tests</Filter>
+      <Filter>Header Files\inc\tests</Filter>
     </ClInclude>
     <ClInclude Include="inc\puzzles\8tiles\EightPuzzleAStarSearchEngine.h">
       <Filter>Header Files\inc\puzzles\8tiles</Filter>
@@ -46,6 +49,9 @@
     </ClInclude>
     <ClInclude Include="inc\puzzles\8tiles\EightPuzzleHillClimbingSearchEngine.h">
       <Filter>Header Files\inc\puzzles\8tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\queue\PriorityQueue.h">
+      <Filter>Header Files\inc\queue</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -30,17 +30,46 @@ namespace pel216 {
 		class EightPuzzleHillClimbingSearchEngine : public SearchEngine<EightPuzzleNode> {
 
 		private:
+			PriorityQueue *queue;
+			EightPuzzleState *goalState;
+
+		protected:
 			/**
 			 * @see pel216::week3::SearchEngine::expandNode()
 			 */
-			void expandNode(EightPuzzleNode *node) {
+			virtual void expandNode(EightPuzzleNode *node) {
 
 				EightPuzzleState *state = node->getState();
 
 				state->expand();
 				this->expandedNodesCount++;
 
-				// avalia cada um dos novos estados
+				std::vector<EightPuzzleState*> children = state->getChildren();
+				size_t len = children.size();
+				for (size_t idx = 0; idx < len; idx++) {
+
+					EightPuzzleState *child = children.at(idx);
+
+					double heuristic = child->getMisplacedBlocksCount(this->goalState);
+
+					EightPuzzleNode *childNode = new EightPuzzleNode(child, state, node->getDepth() + 1, heuristic);
+
+					// determina se a heurística é melhor que a heurítisca do nó pai 
+					bool discard = isKnownNode(childNode) || (heuristic > node->getHeuristic());
+
+					if (this->debug) {
+						Logger::logToFile("> Estado #%d: %s (%s)\n", (idx + 1),  child->toString().c_str(), (discard ? "D" : "M"));
+					}
+
+					if (discard) {
+						continue;
+					}
+
+					addKnownNode(childNode);
+					this->queue->push_asc(childNode);
+
+				}
+
 			};
 
 		public:
@@ -52,36 +81,47 @@ namespace pel216 {
 			 * @param debug
 			 *				determina se as mensagens de <i>debug</i> devem ser exibidas
 			 */
-			EightPuzzleHillClimbingSearchEngine(size_t maxDepth = -1, bool debug = false) : SearchEngine("Hill Climbing") {
+			EightPuzzleHillClimbingSearchEngine(size_t maxDepth = -1, bool debug = false) : SearchEngine("Hill Climbing Search") {
 				setup(maxDepth, debug);
+				this->queue = new PriorityQueue();
 			};
 
 			/**
 			 * @see pel216::week3::SearchEngine::search()
 			 */
-			virtual void search() {
+			virtual void doSearch() {
 
 				this->solutionDepth = 0;
 				this->expandedNodesCount = 0;
-				
+
 				EightPuzzleNode *startingNode = getStartingNode();
 				EightPuzzleState *initialState = startingNode->getState();
 				EightPuzzleNode *goalNode = getGoalNode();
-				EightPuzzleState *goalState = goalNode->getState();
+				this->goalState = goalNode->getState();
 
-				list->push_back(startingNode);
+				// inicia a lista com o primeiro nó
+				this->queue->push_asc(startingNode);
 				addKnownNode(startingNode);
 
-				size_t iteractions = 1;
-				while (list->size() != 0) { /* enquanto houver estados a serem analisados */
+				double curHeuristic = 0.0f;
+				double maxHeuristic = initialState->getMisplacedBlocksCount(this->goalState);
+				
+				size_t iteractions = 0;
+				while (!this->queue->isEmpty() && curHeuristic <= maxHeuristic) { 
 
-					EightPuzzleNode *node = list->pop_back();
-					EightPuzzleState *state = node->getState();
+					iteractions++;
 
 					if (this->debug) {
-						log();
+						this->queue->dumpToFile();
+					}
+
+					EightPuzzleNode *node = this->queue->pop();
+					EightPuzzleState *state = node->getState();
+					curHeuristic = node->getHeuristic();
+					
+					if (this->debug) {
 						Logger::logToFile("\n");
-						Logger::logToFile("#%06d Visitando no %s...\n", iteractions, (state)->toString().c_str());
+						Logger::logToFile("#%d Visitando no %s...\n", iteractions, state->toString().c_str());
 					}
 
 					// verifica se o alvo foi atingido
@@ -108,12 +148,10 @@ namespace pel216 {
 
 					}
 
-					// descarta o nó com profundidade máxima
+					// determina a profundidade máxima foi atingida
 					if (node->getDepth() == this->maxAllowedDepth) {
-						if (this->debug) {
-							Logger::log("  >> No descartado (profundidade maxima atingida)\n");
-						}
-						continue;
+						Logger::log("A profundidade %d foi atingida e nenhuma solucao foi encontrada\n", this->maxAllowedDepth); 
+						break;
 					}
 
 					expandNode(node);

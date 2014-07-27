@@ -30,6 +30,10 @@ namespace pel216 {
 		class EightPuzzleAStarSearchEngine : public SearchEngine<EightPuzzleNode> {
 
 		private:
+			PriorityQueue *queue;
+			EightPuzzleState *goalState;
+
+		protected:
 			/**
 			 * @see pel216::week3::SearchEngine::expandNode()
 			 */
@@ -40,13 +44,37 @@ namespace pel216 {
 				state->expand();
 				this->expandedNodesCount++;
 
-				// avalia cada um dos novos estados
+				size_t childrenDepth = node->getDepth() + 1;
+
+				std::vector<EightPuzzleState*> children = state->getChildren();
+				size_t len = children.size();
+				for (size_t idx = 0; idx < len; idx++) {
+
+					EightPuzzleState *child = children.at(idx);
+					EightPuzzleNode *childNode = new EightPuzzleNode(
+						child, state, childrenDepth, child->getMisplacedBlocksCount(this->goalState) + childrenDepth);
+
+					// determina se o estado já foi visitado
+					bool discard = isKnownNode(childNode);
+
+					if (this->debug) {
+						Logger::logToFile("> Estado #%d: %s (%s)\n", (idx + 1),  child->toString().c_str(), (discard ? "D" : "M"));
+					}
+
+					if (discard) {
+						continue;
+					}
+
+					addKnownNode(childNode);
+					this->queue->push_asc(childNode);
+
+				}
 
 			};
 
 		public:
 			/**
-			 * Construtor padrão.
+			 * Construtor.
 			 *
 			 * @param maxDepth
 			 *				o <code>size_t</code> que representa a profundidade máxima permitida
@@ -55,6 +83,7 @@ namespace pel216 {
 			 */
 			EightPuzzleAStarSearchEngine(size_t maxDepth = -1, bool debug = false) : SearchEngine("A Star") {
 				setup(maxDepth, debug);
+				this->queue = new PriorityQueue();
 			};
 
 			/**
@@ -64,27 +93,32 @@ namespace pel216 {
 
 				this->solutionDepth = 0;
 				this->expandedNodesCount = 0;
-				
+
 				EightPuzzleNode *startingNode = getStartingNode();
 				EightPuzzleState *initialState = startingNode->getState();
 				EightPuzzleNode *goalNode = getGoalNode();
-				EightPuzzleState *goalState = goalNode->getState();
+				this->goalState = goalNode->getState();
 
-				list->push_back(startingNode);
+				// inicia a lista com o primeiro nó
+				this->queue->push_asc(startingNode);
 				addKnownNode(startingNode);
 
-				size_t iteractions = 1;
-				while (list->size() != 0) {
+				size_t iteractions = 0;
+				while (!this->queue->isEmpty()) { 
 
-					EightPuzzleNode *node = list->pop_back();
-					EightPuzzleState *state = node->getState();
+					iteractions++;
 
 					if (this->debug) {
-						log();
-						Logger::logToFile("\n");
-						Logger::logToFile("#%06d Visitando no %s...\n", iteractions, (state)->toString().c_str());
+						this->queue->dumpToFile();
 					}
 
+					EightPuzzleNode *node = this->queue->pop();
+					EightPuzzleState *state = node->getState();
+					
+					if (this->debug) {
+						Logger::logToFile("\n");
+						Logger::logToFile("#%d Visitando no %s...\n", iteractions, state->toString().c_str());
+					}
 					// verifica se o alvo foi atingido
 					if (state->equals(goalState)) { 
 
@@ -109,12 +143,10 @@ namespace pel216 {
 
 					}
 
-					// descarta o nó com profundidade máxima
+					// determina a profundidade máxima foi atingida
 					if (node->getDepth() == this->maxAllowedDepth) {
-						if (this->debug) {
-							Logger::log("  >> No descartado (profundidade maxima atingida)\n");
-						}
-						continue;
+						Logger::log("A profundidade %d foi atingida e nenhuma solucao foi encontrada\n", this->maxAllowedDepth); 
+						break;
 					}
 
 					expandNode(node);
@@ -122,6 +154,7 @@ namespace pel216 {
 				}
 
 			};
+
 
 		}; /* class EightPuzzleAStarSearchEngine */
 
