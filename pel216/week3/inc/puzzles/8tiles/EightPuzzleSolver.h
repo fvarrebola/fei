@@ -53,8 +53,7 @@ namespace pel216 {
 				this->goalState = goalState;
 
 				this->searchEngine = searchEngine;
-				this->searchEngine->setStartingNode(
-					new EightPuzzleNode(initialState, NULL, 0, initialState->getMisplacedBlocksCount(goalState)));
+				this->searchEngine->setStartingNode(new EightPuzzleNode(initialState));
 				this->searchEngine->setGoalNode(new EightPuzzleNode(goalState));
 
 			};
