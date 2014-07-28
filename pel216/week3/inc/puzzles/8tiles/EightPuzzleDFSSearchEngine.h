@@ -52,17 +52,8 @@ namespace pel216 {
 					EightPuzzleNode *childNode = new EightPuzzleNode(child, state, node->getDepth() + 1);
 
 					// se o nó já foi visitado deve ser descartado
-					bool discard = isKnownNode(childNode);
-
-					if (this->debug) {
-						Logger::logToFile(">> #%d: %s (%s)\n", (idx + 1),  child->toString().c_str(), (discard ? "D" : "M"));
-					}
-
-					if (discard) {
-						continue;
-					}
 					
-					addKnownNode(childNode);
+
 					this->list->push_back(childNode);
 
 				}
@@ -104,7 +95,7 @@ namespace pel216 {
 				EightPuzzleState *goalState = goalNode->getState();
 
 				list->push_back(startingNode);
-				addKnownNode(startingNode);
+				//addKnownNode(startingNode);
 
 				size_t iteractions = 0;
 				size_t maxDepth = 0;
@@ -119,9 +110,19 @@ namespace pel216 {
 					EightPuzzleNode *node = list->pop_back();
 					EightPuzzleState *state = node->getState();
 
+					bool discard = isKnownNode(node);
+
 					if (this->debug) {
-						Logger::logToFile("#%06d Visitando no %s...\n", iteractions, (state)->toString().c_str());
+						Logger::logToFile("\n");
+						Logger::logToFile("#%06d %s no %s...\n", 
+							iteractions, (discard ? "Descartando" : "Visitando"), (state)->toString().c_str());
 					}
+
+					if (discard) {
+						continue;
+					}
+
+					addKnownNode(node);
 
 					// verifica se o alvo foi atingido
 					if (state->equals(goalState)) { 
