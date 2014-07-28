@@ -25,7 +25,7 @@ namespace pel216 {
 	namespace week4 {
 
 		/**
-		 * Classe que representa a busca da melhor opção (<i>best-first-search</i>).
+		 * Classe que representa a busca da melhor opção (<i>best-first-search</i>) utilizando a heurística de blocos fora do lugar.
 		 *
 		 * @author arrebola
 		 */
@@ -94,12 +94,13 @@ namespace pel216 {
 				this->solutionDepth = 0;
 				this->expandedNodesCount = 0;
 
-				EightPuzzleNode *startingNode = getStartingNode();
-				EightPuzzleState *initialState = startingNode->getState();
 				EightPuzzleNode *goalNode = getGoalNode();
 				this->goalState = goalNode->getState();
+				
+				EightPuzzleState *initialState = startingNode->getState();
+				EightPuzzleNode *startingNode = new EightPuzzleNode(
+					initialState, NULL, 0, initialState->getMisplacedBlocksCount(this->goalState));
 
-				// inicia a lista com o primeiro nó
 				this->queue->push_asc(startingNode);
 				addKnownNode(startingNode);
 
@@ -119,7 +120,7 @@ namespace pel216 {
 						Logger::logToFile("\n");
 						Logger::logToFile("#%d Visitando no %s...\n", iteractions, state->toString().c_str());
 					}
-					// verifica se o alvo foi atingido
+
 					if (state->equals(goalState)) { 
 
 						this->solutionDepth = node->getDepth();

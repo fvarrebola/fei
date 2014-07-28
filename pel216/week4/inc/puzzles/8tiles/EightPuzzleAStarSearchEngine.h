@@ -94,10 +94,12 @@ namespace pel216 {
 				this->solutionDepth = 0;
 				this->expandedNodesCount = 0;
 
-				EightPuzzleNode *startingNode = getStartingNode();
-				EightPuzzleState *initialState = startingNode->getState();
 				EightPuzzleNode *goalNode = getGoalNode();
 				this->goalState = goalNode->getState();
+				
+				EightPuzzleState *initialState = startingNode->getState();
+				EightPuzzleNode *startingNode = new EightPuzzleNode(
+					initialState, NULL, 0, initialState->getMisplacedBlocksCount(this->goalState));
 
 				// inicia a lista com o primeiro nó
 				this->queue->push_asc(startingNode);
