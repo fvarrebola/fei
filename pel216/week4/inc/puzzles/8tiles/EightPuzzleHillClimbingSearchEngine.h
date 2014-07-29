@@ -54,7 +54,7 @@ namespace pel216 {
 
 					EightPuzzleNode *childNode = new EightPuzzleNode(child, state, node->getDepth() + 1, heuristic);
 
-					// determina se a heurística é melhor que a heurítisca do nó pai 
+					// determina se a heurística é melhor que a heurística do nó pai 
 					bool discard = isKnownNode(childNode) || (heuristic > node->getHeuristic());
 
 					if (this->debug) {
@@ -108,7 +108,7 @@ namespace pel216 {
 				addKnownNode(startingNode);
 
 				size_t iteractions = 0;
-				double curHeuristic = 0.0f;
+				size_t curHeuristic = 0;
 				while (!this->queue->isEmpty() && curHeuristic <= maxHeuristic) { 
 
 					iteractions++;

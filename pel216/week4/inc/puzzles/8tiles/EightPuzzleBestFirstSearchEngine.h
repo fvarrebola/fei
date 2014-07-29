@@ -49,26 +49,10 @@ namespace pel216 {
 				std::vector<EightPuzzleState*> children = state->getChildren();
 				size_t len = children.size();
 				for (size_t idx = 0; idx < len; idx++) {
-
 					EightPuzzleState *child = children.at(idx);
-
 					size_t h = child->h(this->goalState, this->heuristicType);
 					EightPuzzleNode *childNode = new EightPuzzleNode(child, state, node->getDepth() + 1, h);
-
-					// determina se o estado já foi visitado
-					bool discard = isKnownNode(childNode);
-
-					if (this->debug) {
-						Logger::logToFile("> Estado #%d: %s (%s)\n", (idx + 1),  child->toString().c_str(), (discard ? "D" : "M"));
-					}
-
-					if (discard) {
-						continue;
-					}
-
-					addKnownNode(childNode);
 					this->queue->push_asc(childNode);
-
 				}
 
 			};
@@ -106,7 +90,6 @@ namespace pel216 {
 					initialState, NULL, 0, initialState->h(this->goalState, this->heuristicType));
 
 				this->queue->push_asc(startingNode);
-				addKnownNode(startingNode);
 
 				size_t iteractions = 0;
 				while (!this->queue->isEmpty()) { 
@@ -120,10 +103,19 @@ namespace pel216 {
 					EightPuzzleNode *node = this->queue->pop();
 					EightPuzzleState *state = node->getState();
 					
+					bool discard = isKnownNode(node);
+
 					if (this->debug) {
 						Logger::logToFile("\n");
-						Logger::logToFile("#%d Visitando no %s...\n", iteractions, state->toString().c_str());
+						Logger::logToFile("#%06d %s no %s...\n", 
+							iteractions, (discard ? "Descartando" : "Visitando"), (state)->toString().c_str());
 					}
+
+					if (discard) {
+						continue;
+					}
+
+					addKnownNode(node);
 
 					if (state->equals(goalState)) { 
 
