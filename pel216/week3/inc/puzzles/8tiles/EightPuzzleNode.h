@@ -23,8 +23,8 @@ namespace pel216 {
 		private:
 			EightPuzzleState *state; /* representa o estado em si */
 			EightPuzzleState *parent; /* representa o estado pai */
-			int depth; /* representa a profundidade do nó */
-			double heuristic; /* representa o 'custo' do nó */
+			size_t depth; /* representa a profundidade do nó */
+			size_t heuristic; /* representa o 'custo' do nó */
 
 		public:
 			/**
@@ -37,9 +37,9 @@ namespace pel216 {
 			 * @param depth
 			 *				o <code>double</code> que representa a heurística associada ao nó
 			 * @param heuristic 
-			 *				o <code>double</code> que representa a heurística associada ao nó
+			 *				o <code>size_t</code> que representa a heurística associada ao nó
 			 */
-			EightPuzzleNode(EightPuzzleState *state, EightPuzzleState *parent = NULL, int depth = 0, double heuristic = 0.0f) {
+			EightPuzzleNode(EightPuzzleState *state, EightPuzzleState *parent = NULL, size_t depth = 0, size_t heuristic = 0) {
 
 				this->state = state;
 				this->parent = parent;
@@ -84,9 +84,9 @@ namespace pel216 {
 			/**
 			 * Retorna a heurística associada ao nó.
 			 *
-			 * @return o <code>double</code> que representa a heurística associada ao nó
+			 * @return o <code>size_t</code> que representa a heurística associada ao nó
 			 */
-			double getHeuristic() {
+			size_t getHeuristic() {
 				return this->heuristic;
 			};
 

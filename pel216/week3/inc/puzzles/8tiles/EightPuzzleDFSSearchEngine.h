@@ -43,19 +43,12 @@ namespace pel216 {
 				state->expand();
 				this->expandedNodesCount++;
 
-				// avalia cada um dos novos estados
 				std::vector<EightPuzzleState*> children = state->getChildren();
 				size_t len = children.size();
 				for (size_t idx = 0; idx < len; idx++) {
-
 					EightPuzzleState *child = children.at(idx);
 					EightPuzzleNode *childNode = new EightPuzzleNode(child, state, node->getDepth() + 1);
-
-					// se o nó já foi visitado deve ser descartado
-					
-
 					this->list->push_back(childNode);
-
 				}
 
 			};
@@ -95,7 +88,6 @@ namespace pel216 {
 				EightPuzzleState *goalState = goalNode->getState();
 
 				list->push_back(startingNode);
-				//addKnownNode(startingNode);
 
 				size_t iteractions = 0;
 				size_t maxDepth = 0;

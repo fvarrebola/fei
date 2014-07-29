@@ -16,7 +16,7 @@ namespace pel216 {
 
 	namespace week3 {
 
-		// quantidade de opçÃµes para o quebra cabeças
+		// quantidade de opções para o quebra cabeças
 		static const size_t EIGHT_PUZZLE_STATE_LENGTH = 9;
 
 		static const char *RIGHT 	= "right";
@@ -26,10 +26,13 @@ namespace pel216 {
 
 		static const char *DIRECTIONS[] = {RIGHT, LEFT, UP, DOWN, NULL};
 		static std::map<const char *, std::vector<int> > NAVIGATION_MAP;
-		#define NAVMAP_MAP_PAIR(a,b)			(std::pair<const char*, std::vector<int> >(a, b))
-
 		static std::map<const char *, int> MOVES;
-		#define MOVES_MAP_PAIR(a,b)			(std::pair<const char*, int>(a, b))
+		
+		#define NAVMAP_MAP_PAIR(a,b)(std::pair<const char*, std::vector<int> >(a, b))
+		#define MOVES_MAP_PAIR(a,b)	(std::pair<const char*, int>(a, b))
+
+		static const int H_MISPLACED_BLOCKS		= 0;
+		static const int H_MANHATTAN_DISTANCE	= 1;
 
 		/**
 		 * Preenche um vetor com um conjunto de valores <code>int</code>.
@@ -59,7 +62,6 @@ namespace pel216 {
 			return vector;
 
 		};
-
 
 		/**
 		 * Classe que representa um estado do jogo de 8 peças (8 puzzle).
@@ -154,6 +156,54 @@ namespace pel216 {
 
 			};
 
+			/**
+			 * Retorna a quantidade de blocos fora de posição comparando o estado atual com o estado informado.
+			 *
+			 * @param goal
+			 * 					o <code>EightPuzzleState*</code> que representa o alvo
+			 *
+			 * @return o <code>size_t</code> que representa a quantidade de blocos fora de posição
+			 */
+			size_t getMisplacedBlocksCount(EightPuzzleState *goal) {
+
+				size_t misplacedBlocksCount = 0;
+				
+				register std::vector<int> goalData = goal->getData();
+				for (size_t idx = 0; idx < EIGHT_PUZZLE_STATE_LENGTH; idx++) {
+					if (this->getData()[idx] != goalData[idx]) {
+						misplacedBlocksCount++;
+					}
+				}
+
+				return misplacedBlocksCount;
+
+			};
+
+			/**
+			 * Obtém a distância <i>Manhattan</i> de todos os blocos de um estado.
+			 *
+			 * @param goal
+			 * 					o <code>EightPuzzleState*</code> que representa o alvo
+			 *
+			 * @return o <code>size_t</code> que representa a distância Manhattan de todos os blocos
+			 */
+			size_t getManhattanDistance(EightPuzzleState *goal) {
+
+				size_t manhattanDistance = 0;
+
+				register std::vector<int> goalData = goal->getData();
+				for (size_t idx = 0; idx < EIGHT_PUZZLE_STATE_LENGTH; idx++) {
+					register int tile = this->getData()[idx];
+					if (tile != goalData[idx]) {
+						size_t indexOf = goal->indexOf(tile);
+						manhattanDistance += std::abs((int)((idx / 3) - (indexOf / 3))) + std::abs((int)((idx % 3) - (indexOf % 3)));
+					}
+				}
+
+				return manhattanDistance;
+
+			};
+
 		public:
 			/**
 			 * Construtor padrão.
@@ -234,26 +284,34 @@ namespace pel216 {
 			};
 
 			/**
-			 * Retorna a quantidade de blocos fora de posição comparando o estado atual com o estado informado.
-			 *
-			 * @param state
-			 * 					o <code>EightPuzzleState*</code> que representa o estado
+			 * Obtém a heurística do nó em relação a um estado informado.
+			 * 
+			 * @param goal
+			 * 				o <code>EightPuzzleState*</code> que representa o alvo
+			 * @param heuristicType
+			 *				o <codfe>int</code> que representa o tipo da heurística	
 			 *
 			 * @return o <code>size_t</code> que representa a quantidade de blocos fora de posição
 			 */
-			size_t getMisplacedBlocksCount(EightPuzzleState *state) {
+			size_t h(IN EightPuzzleState *goal, IN int heuristicType = H_MISPLACED_BLOCKS) {
 
-				size_t misplacedBlocksCount = 0;
-				for (size_t idx = 0; idx < EIGHT_PUZZLE_STATE_LENGTH; idx++) {
-					if (this->getData()[idx] != state->getData()[idx]) {
-						misplacedBlocksCount++;
-					}
+				if (pel216::commons::Utils::isInvalidHandle(goal)) {
+					throw new pel216::commons::IllegalParameterException();
 				}
 
-				return misplacedBlocksCount;
+				size_t heuristic = 0;
+				switch (heuristicType) {
+					case H_MANHATTAN_DISTANCE:
+						heuristic = getManhattanDistance(goal);
+						break;
+					default:
+						heuristic = getMisplacedBlocksCount(goal);
+						break;
+				}
+
+				return heuristic;
 
 			};
-
 
 			/**
 			 * Determina se o estado atual é igual ao informado.

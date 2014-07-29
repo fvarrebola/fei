@@ -49,25 +49,10 @@ namespace pel216 {
 				std::vector<EightPuzzleState*> children = state->getChildren();
 				size_t len = children.size();
 				for (size_t idx = 0; idx < len; idx++) {
-
 					EightPuzzleState *child = children.at(idx);
-					EightPuzzleNode *childNode = new EightPuzzleNode(
-						child, state, childrenDepth, child->getMisplacedBlocksCount(this->goalState) + childrenDepth);
-
-					// determina se o estado já foi visitado
-					bool discard = isKnownNode(childNode);
-
-					if (this->debug) {
-						Logger::logToFile("> Estado #%d: %s (%s)\n", (idx + 1),  child->toString().c_str(), (discard ? "D" : "M"));
-					}
-
-					if (discard) {
-						continue;
-					}
-
-					addKnownNode(childNode);
+					size_t h = child->h(this->goalState, this->heuristicType) + childrenDepth;
+					EightPuzzleNode *childNode = new EightPuzzleNode(child, state, childrenDepth, h);
 					this->queue->push_asc(childNode);
-
 				}
 
 			};
@@ -80,9 +65,12 @@ namespace pel216 {
 			 *				o <code>size_t</code> que representa a profundidade máxima permitida
 			 * @param debug
 			 *				determina se as mensagens de <i>debug</i> devem ser exibidas
+			 * @param heuristicType
+			 *				o <code>int</code> que representa o tipo da heurística	
 			 */
-			EightPuzzleAStarSearchEngine(size_t maxDepth = -1, bool debug = false) : SearchEngine("A Star") {
-				setup(maxDepth, debug);
+			EightPuzzleAStarSearchEngine(IN size_t maxDepth = -1, IN bool debug = false, IN int heuristicType = H_MANHATTAN_DISTANCE) : 
+					SearchEngine("A Star") {
+				setup(maxDepth, debug, heuristicType);
 				this->queue = new PriorityQueue();
 			};
 
@@ -99,11 +87,9 @@ namespace pel216 {
 				
 				EightPuzzleState *initialState = startingNode->getState();
 				EightPuzzleNode *startingNode = new EightPuzzleNode(
-					initialState, NULL, 0, initialState->getMisplacedBlocksCount(this->goalState));
+					initialState, NULL, 0, initialState->h(this->goalState, this->heuristicType));
 
-				// inicia a lista com o primeiro nó
 				this->queue->push_asc(startingNode);
-				addKnownNode(startingNode);
 
 				size_t iteractions = 0;
 				while (!this->queue->isEmpty()) { 
@@ -117,10 +103,20 @@ namespace pel216 {
 					EightPuzzleNode *node = this->queue->pop();
 					EightPuzzleState *state = node->getState();
 					
+					bool discard = isKnownNode(node);
+
 					if (this->debug) {
 						Logger::logToFile("\n");
-						Logger::logToFile("#%d Visitando no %s...\n", iteractions, state->toString().c_str());
+						Logger::logToFile("#%06d %s no %s...\n", 
+							iteractions, (discard ? "Descartando" : "Visitando"), (state)->toString().c_str());
 					}
+
+					if (discard) {
+						continue;
+					}
+
+					addKnownNode(node);
+
 					// verifica se o alvo foi atingido
 					if (state->equals(goalState)) { 
 

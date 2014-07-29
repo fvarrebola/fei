@@ -50,7 +50,7 @@ namespace pel216 {
 
 					EightPuzzleState *child = children.at(idx);
 
-					double heuristic = child->getMisplacedBlocksCount(this->goalState);
+					size_t heuristic = child->h(this->goalState, this->heuristicType);
 
 					EightPuzzleNode *childNode = new EightPuzzleNode(child, state, node->getDepth() + 1, heuristic);
 
@@ -80,9 +80,12 @@ namespace pel216 {
 			 *				o <code>size_t</code> que representa a profundidade máxima permitida
 			 * @param debug
 			 *				determina se as mensagens de <i>debug</i> devem ser exibidas
+			 * @param heuristicType
+			 *				o <code>int</code> que representa o tipo da heurística	
 			 */
-			EightPuzzleHillClimbingSearchEngine(size_t maxDepth = -1, bool debug = false) : SearchEngine("Hill Climbing Search") {
-				setup(maxDepth, debug);
+			EightPuzzleHillClimbingSearchEngine(IN size_t maxDepth = -1, IN bool debug = false, IN int heuristicType = H_MISPLACED_BLOCKS) : 
+					SearchEngine("Hill Climbing Search") {
+				setup(maxDepth, debug, heuristicType);
 				this->queue = new PriorityQueue();
 			};
 
@@ -98,7 +101,7 @@ namespace pel216 {
 				this->goalState = goalNode->getState();
 				
 				EightPuzzleState *initialState = startingNode->getState();
-				double maxHeuristic = initialState->getMisplacedBlocksCount(this->goalState);
+				size_t maxHeuristic = initialState->h(this->goalState, this->heuristicType);
 				EightPuzzleNode *startingNode = new EightPuzzleNode(initialState, NULL, 0, maxHeuristic);
 
 				this->queue->push_asc(startingNode);

@@ -16,6 +16,7 @@
 #define MAX_DEPTH_OPT___INPUT_MSG_1				"Informar profundidade maxima?"
 #define MAX_DEPTH_OPT___INPUT_MSG_2				"Informe a profundidade maxima permitida"
 #define DEBUG_OPT___INPUT_MSG					"Imprimir mensagens?"
+#define H_OPT___INPUT_MSG						"Escolha a heuristica"
 
 void solve8PuzzleWithBestFirstSearch();
 void solve8PuzzleWithHillClimbing();
@@ -29,7 +30,7 @@ using namespace pel216::week4;
 enum Commands {
     SOLVE_8_PUZZLE_WITH_BEST		= 0,
 	SOLVE_8_PUZZLE_WITH_HILL		= 1,
-    SOLVE_8_PUZZLE_WITH_A_START		= 2,
+    SOLVE_8_PUZZLE_WITH_A_STAR		= 2,
     RUN_TESTS                      	= 3,
     EXIT                           	= 99
 };
@@ -47,7 +48,7 @@ MENU_OPTION MAIN_MENU[] = {
 		solve8PuzzleWithHillClimbing
 	},
 	{
-		SOLVE_8_PUZZLE_WITH_A_START,
+		SOLVE_8_PUZZLE_WITH_A_STAR,
 		"Resolver o jogo dos 8 com A*",
 		solve8PuzzleWithAStar
 	},
@@ -64,7 +65,12 @@ MENU_OPTION MAIN_MENU[] = {
     {-1, NULL, NULL}
 };
 
-
+// menu de heurísticas
+MENU_OPTION H_MENU[] = {
+	{H_MISPLACED_BLOCKS,	"Blocos fora de lugar", NULL},
+	{H_MANHATTAN_DISTANCE,	"Distancia Manhattan",  NULL},
+    {-1, NULL, NULL}
+};
 
 /**
  * Imprime o cabecalho.
@@ -119,7 +125,10 @@ void solve8PuzzleWithBestFirstSearch() {
 		debug = true;
 	}
 
-	EightPuzzleBestFirstSearchEngine e = EightPuzzleBestFirstSearchEngine(maxDepth, debug);
+	PMENU_OPTION pMenuOption = pel216::commons::Menu::pickMenuOption(H_MENU, H_OPT___INPUT_MSG);
+	int heuristicType = pel216::commons::Utils::isValidHandle(pMenuOption) ? pMenuOption->iOptionId : H_MISPLACED_BLOCKS;
+
+	EightPuzzleBestFirstSearchEngine e = EightPuzzleBestFirstSearchEngine(maxDepth, debug, heuristicType);
 	EightPuzzleSolver solver(&e, &s, &g);
 	
 	try {
@@ -150,7 +159,10 @@ void solve8PuzzleWithHillClimbing() {
 		debug = true;
 	}
 	
-	EightPuzzleHillClimbingSearchEngine e = EightPuzzleHillClimbingSearchEngine(maxDepth, debug);
+	PMENU_OPTION pMenuOption = pel216::commons::Menu::pickMenuOption(H_MENU, H_OPT___INPUT_MSG);
+	int heuristicType = pel216::commons::Utils::isValidHandle(pMenuOption) ? pMenuOption->iOptionId : H_MISPLACED_BLOCKS;
+
+	EightPuzzleHillClimbingSearchEngine e = EightPuzzleHillClimbingSearchEngine(maxDepth, debug, heuristicType);
 	EightPuzzleSolver solver(&e, &s, &g);
 	
 	try {
@@ -176,7 +188,10 @@ void solve8PuzzleWithAStar() {
 		debug = true;
 	}
 
-	EightPuzzleAStarSearchEngine e = EightPuzzleAStarSearchEngine();
+	PMENU_OPTION pMenuOption = pel216::commons::Menu::pickMenuOption(H_MENU, H_OPT___INPUT_MSG);
+	int heuristicType = pel216::commons::Utils::isValidHandle(pMenuOption) ? pMenuOption->iOptionId : H_MISPLACED_BLOCKS;
+
+	EightPuzzleAStarSearchEngine e = EightPuzzleAStarSearchEngine(-1, false, heuristicType);
 	EightPuzzleSolver solver(&e, &s, &g);
 	
 	try {

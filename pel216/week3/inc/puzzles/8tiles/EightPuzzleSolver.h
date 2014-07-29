@@ -3,6 +3,8 @@
 #ifndef __EIGHTPUZZLESOLVER_H__
 #define __EIGHTPUZZLESOLVER_H__
 
+#include <inc/UserParams.h>
+
 #include <inc/puzzles/Solver.h>
 #include <inc/puzzles/8tiles/EightPuzzleState.h>
 #include <inc/puzzles/8tiles/EightPuzzleBFSSearchEngine.h>
@@ -75,12 +77,12 @@ namespace pel216 {
 					throw new SolutionNotFoundException();
 				}
 
-				std::vector<EightPuzzleNode*> *nodePath = this->searchEngine->getSolutionPath();
-				size_t solutionPathLen = nodePath->size();
-
-				Logger::log("Imprimindo movimentos...\n");
-				for (size_t idx = 0; idx < solutionPathLen; idx++) {
-					Logger::log("> Movimento #%d {%s}\n", (idx + 1), nodePath->at(idx)->getState()->toString().c_str());
+				if (pel216::commons::UserParams::getBoolParam("Imprimir movimentos?")) {
+					std::vector<EightPuzzleNode*> *nodePath = this->searchEngine->getSolutionPath();
+					size_t solutionPathLen = nodePath->size();
+					for (size_t idx = 0; idx < solutionPathLen; idx++) {
+						Logger::log("> Movimento #%d {%s}\n", (idx + 1), nodePath->at(idx)->getState()->toString().c_str());
+					}
 				}
 
 			};

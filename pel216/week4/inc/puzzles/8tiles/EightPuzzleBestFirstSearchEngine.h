@@ -51,8 +51,9 @@ namespace pel216 {
 				for (size_t idx = 0; idx < len; idx++) {
 
 					EightPuzzleState *child = children.at(idx);
-					EightPuzzleNode *childNode = new EightPuzzleNode(
-						child, state, node->getDepth() + 1, child->getMisplacedBlocksCount(this->goalState));
+
+					size_t h = child->h(this->goalState, this->heuristicType);
+					EightPuzzleNode *childNode = new EightPuzzleNode(child, state, node->getDepth() + 1, h);
 
 					// determina se o estado já foi visitado
 					bool discard = isKnownNode(childNode);
@@ -80,9 +81,12 @@ namespace pel216 {
 			 *				o <code>size_t</code> que representa a profundidade máxima permitida
 			 * @param debug
 			 *				determina se as mensagens de <i>debug</i> devem ser exibidas
+			 * @param heuristicType
+			 *				o <code>int</code> que representa o tipo da heurística	
 			 */
-			EightPuzzleBestFirstSearchEngine(size_t maxDepth = -1, bool debug = false) : SearchEngine("Best First Search") {
-				setup(maxDepth, debug);
+			EightPuzzleBestFirstSearchEngine(IN size_t maxDepth = -1, IN bool debug = false, IN int heuristicType = H_MISPLACED_BLOCKS) : 
+					SearchEngine("Best First Search") {
+				setup(maxDepth, debug, heuristicType);
 				this->queue = new PriorityQueue();
 			};
 
@@ -99,7 +103,7 @@ namespace pel216 {
 				
 				EightPuzzleState *initialState = startingNode->getState();
 				EightPuzzleNode *startingNode = new EightPuzzleNode(
-					initialState, NULL, 0, initialState->getMisplacedBlocksCount(this->goalState));
+					initialState, NULL, 0, initialState->h(this->goalState, this->heuristicType));
 
 				this->queue->push_asc(startingNode);
 				addKnownNode(startingNode);

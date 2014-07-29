@@ -54,12 +54,12 @@ namespace pel216 {
 			// os nós conhecidos
 			std::map<std::string,T*> *knownNodes;
 			
+			int heuristicType;					/* indica o tipo da heurística */
 			bool hasSolution;					/* se há solução */
 			size_t maxAllowedDepth;				/* a profundidade máxima permitida */
 			size_t maxKnownDepth;				/* a maior profundidade atingida */
 			std::vector<T*> *solutionPath;		/* o caminho até a solução */
 			size_t solutionDepth;				/* a profundidade até a solução */
-			
 			size_t expandedNodesCount;			/* a quantidade de nós expandidos */
 
 			bool debug;							/* indica se as mensagens de rastreio da execução devem ser exibidas */
@@ -71,10 +71,13 @@ namespace pel216 {
 			 *				o <code>size_t</code> que representa a profundidade máxima permitida
 			 * @param debug
 			 *				determina se as mensagens de <i>debug</i> devem ser exibidas
+			 * @param heuristicType
+			 *				o <code>int</code> que representa o tipo da heurística	
 			 */
-			virtual void setup(size_t maxAllowedDepth, bool debug) {
+			virtual void setup(IN size_t maxAllowedDepth = -1, IN bool debug = false, IN int heuristicType = H_MISPLACED_BLOCKS) {
 				this->maxAllowedDepth = maxAllowedDepth;
 				this->debug = debug;
+				this->heuristicType = heuristicType;
 			};
 
 			/**
