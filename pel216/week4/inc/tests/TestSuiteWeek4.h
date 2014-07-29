@@ -23,6 +23,7 @@ namespace pel216 {
 		class TestSuite {
 
 		private:
+			static void testEightPuzzleStateHeuristics();
 			static void testPriorityQueueClass();
 			static void testEightPuzzleBestFirstSearchEngineClass();
 			static void testEightPuzzleHillClimbingSearchEngineClass();

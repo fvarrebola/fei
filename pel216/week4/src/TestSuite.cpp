@@ -24,6 +24,32 @@ using namespace pel216::commons;
 using namespace pel216::week4;
 
 /**
+ * Testa as heurísticas.
+ */
+PRIVATE void pel216::week4::TestSuite::testEightPuzzleStateHeuristics() {
+
+	Logger::log("Testando busca com  pel216::week3::EightPuzzleState...\n");
+
+	Logger::log("Testando busca com  pel216::week3::EightPuzzleState#getMisplaceBlocksCount()...\n");
+	EightPuzzleState s1(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 2, 3, 4, 5, 6, 7, 8, 0)); //0
+	EightPuzzleState s2(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 2, 3, 4, 5, 0, 7, 8, 6)); // 2
+	EightPuzzleState s3(initVector(EIGHT_PUZZLE_STATE_LENGTH, 0, 2, 1, 4, 3, 6, 7, 5, 8)); // 5
+	assert(s1.h(&s1) == 0);
+	assert(s2.h(&s1) == 2);
+	assert(s3.h(&s1) == 5);
+
+	Logger::log("Testando busca com  pel216::week3::EightPuzzleState#getManhattanDistance()...\n");
+	EightPuzzleState s4(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 2, 3, 4, 5, 6, 7, 8, 0)); // 0
+	EightPuzzleState s5(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 2, 3, 4, 5, 0, 7, 8, 6)); // 2
+	EightPuzzleState s6(initVector(EIGHT_PUZZLE_STATE_LENGTH, 0, 2, 1, 4, 3, 6, 7, 5, 8)); // 5
+
+	assert(s4.h(&s4, H_MANHATTAN_DISTANCE) == 0);
+	assert(s5.h(&s4, H_MANHATTAN_DISTANCE) == 2);
+	assert(s6.h(&s4, H_MANHATTAN_DISTANCE) == 10);
+
+}
+
+/**
  * Testa a classe PriorityQueue.
  */
 PRIVATE void pel216::week4::TestSuite::testPriorityQueueClass() {
@@ -32,22 +58,22 @@ PRIVATE void pel216::week4::TestSuite::testPriorityQueueClass() {
 
 	PriorityQueue *queue = new PriorityQueue();
 	EightPuzzleState s1(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 2, 3, 4, 5, 6, 7, 8, 0)); // 0
-	EightPuzzleNode n1(&s1, &s1, 0, s1.getMisplacedBlocksCount(&s1));
+	EightPuzzleNode n1(&s1, &s1, 0, s1.h(&s1));
 
 	EightPuzzleState s2(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 2, 3, 4, 5, 0, 7, 8, 6)); // 2
-	EightPuzzleNode n2(&s2, &s2, 0, s2.getMisplacedBlocksCount(&s1));
+	EightPuzzleNode n2(&s2, &s2, 0, s2.h(&s1));
 
 	EightPuzzleState s3(initVector(EIGHT_PUZZLE_STATE_LENGTH, 0, 2, 1, 4, 3, 6, 7, 5, 8)); // 5
-	EightPuzzleNode n3(&s3, &s3, 0, s3.getMisplacedBlocksCount(&s1));
+	EightPuzzleNode n3(&s3, &s3, 0, s3.h(&s1));
 
 	EightPuzzleState s4(initVector(EIGHT_PUZZLE_STATE_LENGTH, 3, 0, 4, 1, 8, 7, 6, 2, 5)); // 9
-	EightPuzzleNode n4(&s4, &s4, 0, s4.getMisplacedBlocksCount(&s1));
+	EightPuzzleNode n4(&s4, &s4, 0, s4.h(&s1));
 
 	EightPuzzleState s5(initVector(EIGHT_PUZZLE_STATE_LENGTH, 1, 2, 3, 4, 5, 0, 7, 8, 6)); // 2
-	EightPuzzleNode n5(&s5, &s5, 0, s5.getMisplacedBlocksCount(&s1));
+	EightPuzzleNode n5(&s5, &s5, 0, s5.h(&s1));
 
 	EightPuzzleState s6(initVector(EIGHT_PUZZLE_STATE_LENGTH, 0, 2, 1, 4, 3, 6, 7, 5, 8)); // 5
-	EightPuzzleNode n6(&s6, &s6, 0, s6.getMisplacedBlocksCount(&s1));
+	EightPuzzleNode n6(&s6, &s6, 0, s6.h(&s1));
 
 	queue->push_desc(&n2);
 	queue->push_desc(&n3);
