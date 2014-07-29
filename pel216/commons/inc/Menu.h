@@ -37,13 +37,12 @@ namespace pel216 {
 			 *
 			 * @return o <code>PMENU_OPTION</code> que representa a opcao selecionada
 			 */
-			static PMENU_OPTION pickMenuOption(MENU_OPTION menu[]) {
+			static PMENU_OPTION pickMenuOption(MENU_OPTION menu[], std::string title = "Lista de comandos disponiveis") {
 
 			    PMENU_OPTION pCommand = NULL;
 
 			    pel216::commons::Logger::log("\n");
-
-			    pel216::commons::Logger::log("Lista de comandos disponiveis\n");
+				pel216::commons::Logger::log("%s\n", title.c_str());
 
 			    int iListIdx = 0;
 			    while (menu[iListIdx].pszOptionName) {
