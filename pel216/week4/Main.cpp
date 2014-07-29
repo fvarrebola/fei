@@ -191,7 +191,7 @@ void solve8PuzzleWithAStar() {
 	PMENU_OPTION pMenuOption = pel216::commons::Menu::pickMenuOption(H_MENU, H_OPT___INPUT_MSG);
 	int heuristicType = pel216::commons::Utils::isValidHandle(pMenuOption) ? pMenuOption->iOptionId : H_MISPLACED_BLOCKS;
 
-	EightPuzzleAStarSearchEngine e = EightPuzzleAStarSearchEngine(-1, false, heuristicType);
+	EightPuzzleAStarSearchEngine e = EightPuzzleAStarSearchEngine(-1, debug, heuristicType);
 	EightPuzzleSolver solver(&e, &s, &g);
 	
 	try {
