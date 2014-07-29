@@ -55,10 +55,10 @@ namespace pel216 {
 					EightPuzzleNode *childNode = new EightPuzzleNode(child, state, node->getDepth() + 1, heuristic);
 
 					// determina se a heurística é melhor que a heurística do nó pai 
-					bool discard = isKnownNode(childNode) || (heuristic > node->getHeuristic());
+					bool discard = isKnownNode(childNode) || (heuristic >= node->getHeuristic());
 
 					if (this->debug) {
-						Logger::logToFile("> Estado #%d: %s (%s)\n", (idx + 1),  child->toString().c_str(), (discard ? "D" : "M"));
+						Logger::logToFile("> %s no %s...\n", (discard ? "Descartando" : "Armazenando"), (child)->toString().c_str());
 					}
 
 					if (discard) {
