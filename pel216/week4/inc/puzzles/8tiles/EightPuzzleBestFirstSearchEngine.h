@@ -25,7 +25,7 @@ namespace pel216 {
 	namespace week4 {
 
 		/**
-		 * Classe que representa a busca da melhor opção (<i>best-first-search</i>) utilizando a heurística de blocos fora do lugar.
+		 * Classe que representa a busca da melhor opção (<i>best-first-search</i>).
 		 *
 		 * @author arrebola
 		 */
