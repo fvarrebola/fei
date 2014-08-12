@@ -16,7 +16,8 @@ namespace pel216 {
 	namespace commons {
 
 		#define OUTPUT_FILE				"log.txt"
-		#define SIMPLE_FORMAT			"[%02i:%02i:%02i] %s"
+		#define SIMPLE_FORMAT			"%s"
+		#define SIMPLE_FORMAT_WITH_TIME	"[%02i:%02i:%02i] %s"
 		#define COMPLETE_FORMAT			"[%02i:%02i:%02i] (%s:%i) %s"
 
 		/**
@@ -29,10 +30,16 @@ namespace pel216 {
 			/**
 			 * Registra uma mensagem.
 			 *
+			 * @param useConsole
+			 *				o <code>bool</code> que indica se a mensagem deve ser registrada no console
+			 * @param useFile
+			 *				o <code>bool</code> que indica se a mensagem deve ser registrada em arquivo
+			 * @param useTimeStamp
+			 *				o <code>bool</code> que indica se a mensagem deve ser incluir <i>timestamp</i>
 			 * @param pszFormat
 			 *				o <code>char *</code> que representa a mensagem
 			 */
-			static void _log(IN bool useConsole, IN bool useFile, IN const char *pszFormat, IN va_list varArgs) {
+			static void _log(IN bool useConsole, IN bool useFile, IN bool useTimeStamp, IN const char *pszFormat, IN va_list varArgs) {
 
 				if (pszFormat == NULL) {
 					return;
@@ -54,7 +61,15 @@ namespace pel216 {
 				struct tm tm = {0x00};
 				localtime_s(&tm, &timer);
 
-				if (sprintf_s(pszLogMsg, iLogMsgLen, SIMPLE_FORMAT, tm.tm_hour, tm.tm_min, tm.tm_sec, pszVarArgMsg) > 0) {
+				bool gotMessage = false;
+				if (useTimeStamp) {
+					gotMessage = (sprintf_s(pszLogMsg, iLogMsgLen, 
+						SIMPLE_FORMAT_WITH_TIME, tm.tm_hour, tm.tm_min, tm.tm_sec, pszVarArgMsg) > 0);
+				} else {
+					gotMessage = (sprintf_s(pszLogMsg, iLogMsgLen, SIMPLE_FORMAT, pszVarArgMsg) > 0);
+				}
+
+				if (gotMessage) {
 					
 					if (useConsole) {
 						std::cout << pszLogMsg;
@@ -85,7 +100,7 @@ namespace pel216 {
 			static void log(IN const char *pszFormat, ...) {
 				va_list varArgs;
 				va_start(varArgs, pszFormat);
-				_log(true, false, pszFormat, varArgs);
+				_log(true, false, true, pszFormat, varArgs);
 				va_end(varArgs);
 			};
 
@@ -98,11 +113,35 @@ namespace pel216 {
 			static void logToFile(IN const char *pszFormat, ...) {
 				va_list varArgs;
 				va_start(varArgs, pszFormat);
-				_log(false, true, pszFormat, varArgs);
+				_log(false, true, true, pszFormat, varArgs);
 				va_end(varArgs);
 			};
 
+			/**
+			 * Registra uma mensagem no console sem <i>timestamp</i>.
+			 *
+			 * @param pszFormat
+			 *				o <code>char *</code> que representa a mensagem
+			 */
+			static void logWithoutTimestamp(IN const char *pszFormat, ...) {
+				va_list varArgs;
+				va_start(varArgs, pszFormat);
+				_log(true, false, false, pszFormat, varArgs);
+				va_end(varArgs);
+			};
 
+			/**
+			 * Registra uma mensagem em arquivo sem <i>timestamp</i>.
+			 *
+			 * @param pszFormat
+			 *				o <code>char *</code> que representa a mensagem
+			 */
+			static void logToFileWithoutTimestamp(IN const char *pszFormat, ...) {
+				va_list varArgs;
+				va_start(varArgs, pszFormat);
+				_log(false, true, false, pszFormat, varArgs);
+				va_end(varArgs);
+			};
 
 		}; // class Logger
 

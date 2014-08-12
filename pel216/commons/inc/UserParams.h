@@ -113,6 +113,28 @@ namespace pel216 {
 
 			};
 
+			/**
+			 * Obtém um <code>double</code> como parâmetro de entrada.
+			 *
+			 * @param inputMsg
+			 *				o <code>std::string</code> que representa a mensagem exibida para o usuario
+			 */
+			static double getDoubleParam(std::string inputMsg = NULL) {
+
+				double intParam = 0.0f;
+
+				if (pel216::commons::Utils::isValidHandle(&inputMsg)) {
+					pel216::commons::Logger::log("%s: ", inputMsg.c_str());
+				} else {
+					pel216::commons::Logger::log("Informe um numero: ");
+				}
+
+				std::cin >> intParam;
+
+				return intParam;
+
+			};
+
 		}; /* class UserParams */
 
 	} /* namespace commons */

@@ -7,6 +7,8 @@
 #include <cstring>
 #include <cstdio>
 #include <iostream>
+#include <sstream>
+#include <vector>
 
 // marcadores que facilitam a leitura do código
 #define IN
@@ -35,6 +37,10 @@
 
 #ifndef ONE
 	#define ONE									1
+#endif
+
+#ifndef TWO
+	#define TWO									2
 #endif
 
 // definicoes de macros
@@ -89,9 +95,7 @@ namespace pel216 {
 				 */
 				static bool isValidHandle(IN PVOID pSomePtr) {
 					return (pSomePtr != NULL);
-				}
-
-
+				};
 
 				/**
 				 * Determina se um ponteiro para uma memória eh valido.
@@ -103,9 +107,7 @@ namespace pel216 {
 				 */
 				static bool isInvalidHandle(IN PVOID pSomePtr) {
 					return (!isValidHandle(pSomePtr));
-				}
-
-
+				};
 
 				/**
 				 * Cria um ponteiro do tipo <code>void *</code>.
@@ -129,9 +131,7 @@ namespace pel216 {
     
 					return bReturn;
     
-				}
-
-
+				};
 
 				/**
 				 * Destrói um ponteiro do tipo <code>PVOID</code>.
@@ -155,17 +155,15 @@ namespace pel216 {
     
 					return bReturn;
     
-				}
-
-
+				};
 
 				/**
-				 *  Cria um vetor de dados aleatório.
+				 * Cria um vetor de dados aleatório.
 				 *
-				 *  @param cbData
-				 *  			o <code>unsigned long</code> que representa o tamanho de dados
-				 *  @param pbData
-				 *  			o <code>char **</code> que representa o vetor de dados aleatório
+				 * @param cbData
+				 * 				o <code>unsigned long</code> que representa o tamanho de dados
+				 * @param pbData
+				 *				o <code>char **</code> que representa o vetor de dados aleatório
 				 */
 				static void createRandomData(IN unsigned long cbData, OUT char **pbData) {
 					if (pel216::commons::Utils::createPtr(cbData, (PVOID*)(pbData))) {
@@ -173,7 +171,38 @@ namespace pel216 {
 							(*pbData)[idx] = (char)(rand() % 127);
 						}
 					}
-				}
+				};
+
+				/**
+				 * Converte um <code>std::vector</code> de <code>double</code> em um <code>std::string</code>.
+				 *
+				 * @param vector 
+				 *				o <code>std::vector</code> a ser convertido
+				 * 
+				 * @return a <code>std::string</code> que representa o vetor
+				 */
+				static std::string doubleVectorToString(IN std::vector<double> vector) {
+
+					std::stringstream stream;
+					stream.precision(5);
+					stream.setf(std::ios::fixed, std:: ios::floatfield);
+					stream << "(";
+
+					if (!vector.empty()) {
+						size_t size = vector.size();
+						for (size_t idx = 0; idx < size; idx++) {
+							stream << vector[idx];
+							if (idx < size - 1) {
+								stream << ", ";
+							}
+						}
+					}
+
+					stream << ")";
+
+					return stream.str();
+
+				};
 
 		}; // class Utils
 
