@@ -5,8 +5,6 @@
 
 #include <string>
 
-#include <inc/Point.h>
-
 namespace pel216 {
 
 	namespace week5 {
