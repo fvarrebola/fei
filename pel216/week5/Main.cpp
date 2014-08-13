@@ -38,17 +38,17 @@ enum Commands {
 /* menu principal */
 MENU_OPTION MAIN_MENU[] = {
 	{
-		RUN_TESTS,
+		PLAY_WITH_FIRST_FUNCTION,
 		"Executa a descida de grandiente em f(x) = x^2",
 		playWithFirstFunction
 	},	
 	{
-		RUN_TESTS,
+		PLAY_WITH_SECOND_FUNCTION,
 		"Executa a descida de gradiente em f(x) = x^3 - 2x^2 + 2",
 		playWithSecondFunction
 	},
 	{
-		RUN_TESTS,
+		PLAY_WITH_THIRD_FUNCTION,
 		"Executa a descida de gradiente em f(x, y) = (1 - x)^2 + 100(x - y^2)^2",
 		playWithThirdFunction
 	},
