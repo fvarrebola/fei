@@ -19,7 +19,7 @@ namespace pel216 {
 
 		/**
 		 * Classe que representa a função f(x) = x^2.<br />
-		 * Sua primeira derivada é df/dx = 2*x.
+		 * Sua primeira derivada é df/dx = 2*x.<br />
 		 *
 		 * @author arrebola
 		 */
@@ -29,7 +29,7 @@ namespace pel216 {
 
 		public:
 			/**
-			 * Construtor.
+			 * Construtor.<br />
 			 *
 			 * @param x0
 			 *			o <code>double</double> que representa o ponto inicial

@@ -10,8 +10,8 @@ namespace pel216 {
 	namespace week5 {
 
 		/**
-		 * Classe que representa a função f(x) = x^3 - 2x^2	+ 2.<be />
-		 * A primeira derivada é df/dx = 3x^2 - 4x
+		 * Classe que representa a função f(x) = x^3 - 2x^2	+ 2.<br />
+		 * A primeira derivada é df/dx = 3x^2 - 4x.<br />
 		 *
 		 * @author arrebola
 		 */
@@ -21,7 +21,7 @@ namespace pel216 {
 
 		public:
 			/**
-			 * Construtor.
+			 * Construtor.<br />
 			 *
 			 * @param x0
 			 *			o <code>double</double> que representa o ponto inicial

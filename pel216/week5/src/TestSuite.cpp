@@ -16,7 +16,7 @@ using namespace pel216::commons;
 using namespace pel216::week5;
 
 /**
- * Testa a classe FirstFunction.
+ * Testa a classe FirstFunction.<br />
  */
 PRIVATE void pel216::week5::TestSuite::testFirstFunctionClass() {
 
@@ -33,7 +33,7 @@ PRIVATE void pel216::week5::TestSuite::testFirstFunctionClass() {
 }
 
 /**
- * Testa a classe SecondFunction.
+ * Testa a classe SecondFunction.<br />
  */
 PRIVATE void pel216::week5::TestSuite::testSecondFunctionClass() {
 
@@ -50,7 +50,7 @@ PRIVATE void pel216::week5::TestSuite::testSecondFunctionClass() {
 }
 
 /**
- * Testa a classe ThirdFunction.
+ * Testa a classe ThirdFunction.<br />
  */
 PRIVATE void pel216::week5::TestSuite::testThirdFunctionClass() {
 
@@ -68,7 +68,7 @@ PRIVATE void pel216::week5::TestSuite::testThirdFunctionClass() {
 }
 
 /**
- * Executa todos os testes.
+ * Executa todos os testes.<br />
  */
 PUBLIC void pel216::week5::TestSuite::run() {
 	

@@ -15,7 +15,7 @@ namespace pel216 {
 	namespace week5 {
 
 		/**
-		 * Classe de testes.
+		 * Classe que representa o algoritmo de descida de gradiente.<br />
 		 *
 		 * @author arrebola
 		 */
@@ -25,7 +25,7 @@ namespace pel216 {
 			bool debug;
 
 			/**
-			 * Determina se um vetor de <code>double</code> contém valores válidos.
+			 * Determina se um vetor de <code>double</code> contém valores válidos.<br />
 			 *
 			 * @param value
 			 *			o <code>std::vector</code> de <code>double</code> que representa o vetor de valores
@@ -52,7 +52,7 @@ namespace pel216 {
 
 			/**
 			 * Determina se a função convergiu.<br />
-			 * A convergência é determinada com base na...
+			 * A convergência é determinada com base em um fator de precisão informado.<br />
 			 *
 			 * @return <code>true</code> caso a função tenha convergido; do contrário <code>false</code>
 			 */
@@ -72,7 +72,7 @@ namespace pel216 {
 			/**
 			 * Determina o novo valor de uma iteração no algoritmo de descida de gradiente.<br />
 			 * O novo valor é determinado para todas as dimensões da função utilizando a seguinte fórmula:<br />
-			 * valor = valor - beta * derivada(valor)
+			 * valor = valor - beta * derivada(valor)<br />
 			 *
 			 * @param function
 			 *			o @link{Function} que determina a função
@@ -106,7 +106,7 @@ namespace pel216 {
 
 		public:
 			/**
-			 * Construtor.
+			 * Construtor.<br />
 			 *
 			 * @param debug
 			 *			o <code>bool</code> que indica se as mensagens de <i>debug</i> devem ser exibidas
@@ -116,7 +116,7 @@ namespace pel216 {
 			};
 
 			/**
-			 * Avalia a descida de gradiente de uma função.
+			 * Avalia a descida de gradiente de uma função.<br />
 			 *
 			 * @param function
 			 *			o @link{Function} que determina a função

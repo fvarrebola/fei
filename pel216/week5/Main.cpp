@@ -66,7 +66,7 @@ MENU_OPTION MAIN_MENU[] = {
 };
 
 /**
- * Imprime o cabecalho.
+ * Imprime o cabecalho.<br />
  */
 void printHeader() {
     Logger::log("%s\n", STARS);
@@ -78,7 +78,7 @@ void printHeader() {
 
 
 /**
- * Imprime o rodape.
+ * Imprime o rodape.<br />
  */
 void printFooter() {
     Logger::log("%s\n", STARS);
@@ -87,7 +87,7 @@ void printFooter() {
 
 
 /**
- * Tenta executar o algoritmo de descida de gradiente com a funcao f(x) = x^2.
+ * Tenta executar o algoritmo de descida de gradiente com a funcao f(x) = x^2.<br />
  *
  * @see FirstFunction
  */
@@ -112,7 +112,7 @@ void playWithFirstFunction() {
 
 
 /**
- * Tenta executar o algoritmo de descida de gradiente com a funcao f(x) = x^3 - 2x^2 + 2.
+ * Tenta executar o algoritmo de descida de gradiente com a funcao f(x) = x^3 - 2x^2 + 2.<br />
  *
  * @see SecondFunction
  */
@@ -137,7 +137,7 @@ void playWithSecondFunction() {
 
 
 /**
- * Tenta executar o algoritmo de descida de gradiente com a funcao f(y, x) = (1 - y)^2 + 100(x - y^2)^2.
+ * Tenta executar o algoritmo de descida de gradiente com a funcao f(y, x) = (1 - y)^2 + 100(x - y^2)^2.<br />
  *
  * @see ThirdFunction
  */
@@ -163,7 +163,7 @@ void playWithThirdFunction() {
 
 
 /**
- * Ponto de entrada.
+ * Ponto de entrada.<br />
  */
 int main(int argc, char** argv) {
 

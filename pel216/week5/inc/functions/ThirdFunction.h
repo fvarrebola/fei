@@ -12,8 +12,8 @@ namespace pel216 {
 
 		/**
 		 * Classe que representa a função f(x, y) = (1 - x)^2 + 100*(y - x^2)^2.<br />
-		 * A primeira derivada em função de x é df/dx = −400*x*(y − x^2) − 2*(1 − x).
-		 * A primeira derivada em função de y é df/dy = 200*(y - x^2).
+		 * A primeira derivada em função de x é df/dx = −400*x*(y − x^2) − 2*(1 − x).<br />
+		 * A primeira derivada em função de y é df/dy = 200*(y - x^2).<br />
 		 *
 		 * @author arrebola
 		 */
@@ -23,7 +23,7 @@ namespace pel216 {
 
 		public:
 			/**
-			 * Construtor.
+			 * Construtor.<br />
 			 *
 			 * @param x0
 			 *			o <code>double</double> que representa o ponto inicial
