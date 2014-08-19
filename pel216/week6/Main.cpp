@@ -16,12 +16,13 @@
 #define A___INPUT_MSG							"Informe o ponto inicial (a) (double)"
 #define B___INPUT_MSG							"Informe o ponto final (b) (double)"
 #define INTERVAL__INPUT_MSG						"Informe a quantidade de intervalos (int)"
+#define PRECISION__INPUT_MSG					"Informe a precisao para a quadratura adaptativa (double)"
 
 #define RULE_PRINT_FORMAT						"> %s = %0.6f, EA=%0.9f, ER=%0.9f\n"
 
-void playWithRectangleRuleFunction();
-void playWithTrapezoidalRuleFunction();
-void playWithSimpsonRuleFunction();
+void playWithFirstFunction();
+void playWithSecondFunction();
+void playWithThirdFunction();
 
 using namespace pel216::commons;
 using namespace pel216::week6;
@@ -38,19 +39,19 @@ enum Commands {
 /* menu principal */
 MENU_OPTION MAIN_MENU[] = {
 	{
-		RUN_TESTS,
-		"Executa a integracao baseado na regra do retangulo",
-		playWithRectangleRuleFunction
+		PLAY_WITH_FIRST_FUNCTION,
+		"Considere a funcao e^x",
+		playWithFirstFunction
 	},	
 	{
-		RUN_TESTS,
-		"Executa a integracao baseado na regra do trapezoide",
-		playWithTrapezoidalRuleFunction
+		PLAY_WITH_SECOND_FUNCTION,
+		"Considere a funcao sqrt(1 - x^2)",
+		playWithSecondFunction
 	},
 	{
-		RUN_TESTS,
-		"Executa a integracao baseado na regra de Simpson",
-		playWithSimpsonRuleFunction
+		PLAY_WITH_THIRD_FUNCTION,
+		"Considere a funcao e^(-x^2)",
+		playWithThirdFunction
 	},
 	{
 		RUN_TESTS,
@@ -103,98 +104,98 @@ void printFooter() {
 void doNumericalIntegration(IntegrationRule *rule, Function *function, double a, double b, size_t intervals = -1) {
 
 	double result = rule->evaluate(function, a, b, intervals);
+
+	Logger::log("\n");
+	Logger::log("%s\n", STARS);
+	Logger::log("%s\n", rule->toString().c_str());
+	Logger::log("%s\n", STARS);
 	Logger::log(RULE_PRINT_FORMAT, function->toString().c_str(), result, rule->getAbsoluteError(), rule->getRelativeError());
+	Logger::log("%s\n", STARS);
 
 }
 
 /**
- * Tenta executar a integração numérica utilizando a regra do retângulo.
- *
- * @see RectangleRule
- */
-void playWithRectangleRuleFunction() {
+* Tenta executar a integração numérica para a função @link{FirstFunction}.
+*/
+void playWithFirstFunction() {
 
 	double a = UserParams::getDoubleParam(A___INPUT_MSG);
 	double b = UserParams::getDoubleParam(B___INPUT_MSG);
 	int intervals = UserParams::getIntParam(INTERVAL__INPUT_MSG);
+	double precision = UserParams::getDoubleParam(PRECISION__INPUT_MSG);
 
-	FirstFunction *first = new FirstFunction();
-	SecondFunction *second = new SecondFunction();
-	ThirdFunction *third = new ThirdFunction();
+	FirstFunction *function = new FirstFunction();
 
-	RectangleRule *rule = new RectangleRule();
+	RectangleRule *rule1 = new RectangleRule();
+	TrapezoidalRule *rule2 = new TrapezoidalRule();
+	SimpsonRule *rule3 = new SimpsonRule();
 
-	Logger::log("%s\n", rule->toString().c_str());
-	doNumericalIntegration(rule, first, a, b, intervals);
-	doNumericalIntegration(rule, second, a, b, intervals);
-	doNumericalIntegration(rule, third, a, b, intervals);
+	doNumericalIntegration(rule1, function, a, b, intervals);
+	doNumericalIntegration(rule2, function, a, b, intervals);
+	doNumericalIntegration(rule3, function, a, b, intervals);
 
-	delete rule;
-	delete first;
-	delete second;
-	delete third;
-
-}
-
-
-
-/**
- * Tenta executar a integração numérica utilizando a regra do trapezóide.
- *
- * @see TrapezoidalRule
- */
-void playWithTrapezoidalRuleFunction() {
-
-	double a = UserParams::getDoubleParam(A___INPUT_MSG);
-	double b = UserParams::getDoubleParam(B___INPUT_MSG);
-	int intervals = UserParams::getIntParam(INTERVAL__INPUT_MSG);
-
-	FirstFunction *first = new FirstFunction();
-	SecondFunction *second = new SecondFunction();
-	ThirdFunction *third = new ThirdFunction();
-
-	TrapezoidalRule *rule = new TrapezoidalRule();
-
-	Logger::log("%s\n", rule->toString().c_str());
-	doNumericalIntegration(rule, first, a, b, intervals);
-	doNumericalIntegration(rule, second, a, b, intervals);
-	doNumericalIntegration(rule, third, a, b, intervals);
-
-	delete rule;
-	delete first;
-	delete second;
-	delete third;
+	delete rule1;
+	delete rule2;
+	delete rule3;
+	delete function;
 
 }
 
 
 
 /**
- * Tenta executar a integração numérica utilizando a regra de Simpson.
- *
- * @see SimpsonRule
+ * Tenta executar a integração numérica para a função @link{SecondFunction}.
  */
-void playWithSimpsonRuleFunction() {
+void playWithSecondFunction() {
 
 	double a = UserParams::getDoubleParam(A___INPUT_MSG);
 	double b = UserParams::getDoubleParam(B___INPUT_MSG);
 	int intervals = UserParams::getIntParam(INTERVAL__INPUT_MSG);
+	double precision = UserParams::getDoubleParam(PRECISION__INPUT_MSG);
 
-	FirstFunction *first = new FirstFunction();
-	SecondFunction *second = new SecondFunction();
-	ThirdFunction *third = new ThirdFunction();
+	SecondFunction *function = new SecondFunction();
 
-	SimpsonRule *rule = new SimpsonRule();
+	RectangleRule *rule1 = new RectangleRule();
+	TrapezoidalRule *rule2 = new TrapezoidalRule();
+	SimpsonRule *rule3 = new SimpsonRule();
 
-	Logger::log("%s\n", rule->toString().c_str());
-	doNumericalIntegration(rule, first, a, b, intervals);
-	doNumericalIntegration(rule, second, a, b, intervals);
-	doNumericalIntegration(rule, third, a, b, intervals);
+	doNumericalIntegration(rule1, function, a, b, intervals);
+	doNumericalIntegration(rule2, function, a, b, intervals);
+	doNumericalIntegration(rule3, function, a, b, intervals);
 
-	delete rule;
-	delete first;
-	delete second;
-	delete third;
+	delete rule1;
+	delete rule2;
+	delete rule3;
+	delete function;
+
+}
+
+
+
+/**
+ * Tenta executar a integração numérica para a função @link{ThirdFunction}.
+ */
+void playWithThirdFunction() {
+
+	double a = UserParams::getDoubleParam(A___INPUT_MSG);
+	double b = UserParams::getDoubleParam(B___INPUT_MSG);
+	int intervals = UserParams::getIntParam(INTERVAL__INPUT_MSG);
+	double precision = UserParams::getDoubleParam(PRECISION__INPUT_MSG);
+
+	ThirdFunction *function = new ThirdFunction();
+
+	RectangleRule *rule1 = new RectangleRule();
+	TrapezoidalRule *rule2 = new TrapezoidalRule();
+	SimpsonRule *rule3 = new SimpsonRule();
+
+	doNumericalIntegration(rule1, function, a, b, intervals);
+	doNumericalIntegration(rule2, function, a, b, intervals);
+	doNumericalIntegration(rule3, function, a, b, intervals);
+
+	delete rule1;
+	delete rule2;
+	delete rule3;
+	delete function;
 
 }
 
