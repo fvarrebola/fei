@@ -33,7 +33,15 @@ double precision = 0.00001f;
  *				o @link{Function} que representa a função a ser integrada
  */
 void assertNumericalIntegration(IntegrationRule *rule, Function *function, double expectedValue) {
-	assert(std::abs(rule->evaluate(function, a, b, intervals) - expectedValue) < precision);
+
+	bool expression = (std::abs(rule->evaluate(function, a, b, intervals) - expectedValue) < precision);
+	
+	Logger::log("> Funcao %s\n", function->toString().c_str());
+	Logger::log("  > [a=%.2f, b=%.2f] em %d intervalos...", a, b, intervals);
+	Logger::logWithoutTimestamp("[%s]\n", expression ? "OK" : "FALHA");
+
+	assert(expression);
+
 }
 
 
@@ -59,6 +67,8 @@ PRIVATE void pel216::week6::TestSuite::testRectangleRuleClass() {
 	delete second;
 	delete third;
 
+	Logger::log("\n");
+
 }
 
 /**
@@ -82,6 +92,8 @@ PRIVATE void pel216::week6::TestSuite::testTrapezoidalRuleClass() {
 	delete first;
 	delete second;
 	delete third;
+
+	Logger::log("\n");
 
 }
 
@@ -107,6 +119,8 @@ PRIVATE void pel216::week6::TestSuite::testSimpsonRuleClass() {
 	delete second;
 	delete third;
 
+	Logger::log("\n");
+	
 }
 
 /**
