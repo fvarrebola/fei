@@ -11,7 +11,7 @@ namespace pel216 {
 	namespace week6 {
 
 		/**
-		 * Classe que representa o método de integração baseado na regra do trapezóide.
+		 * Classe que representa o método de integração baseado na regra do trapezóide.<br />
 		 *
 		 * @author arrebola
 		 */
@@ -21,7 +21,7 @@ namespace pel216 {
 
 		public:
 			/**
-			 * Construtor padrão.
+			 * Construtor padrão.<br />
 			 */
 			TrapezoidalRule() {
 			};

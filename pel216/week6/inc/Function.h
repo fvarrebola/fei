@@ -10,7 +10,7 @@ namespace pel216 {
 	namespace week6 {
 
 		/**
-		 * Classe que representa uma função matemática.
+		 * Classe que representa uma função matemática.<br />
 		 *
 		 * @author arrebola
 		 */
@@ -18,13 +18,13 @@ namespace pel216 {
 
 		public:
 			/**
-			 * Construtor padrão.
+			 * Construtor padrão.<br />
 			 */
 			Function() {
 			};
 
 			/**
-			 * Avalia a função considerando os parâmetros informados.
+			 * Avalia a função considerando os parâmetros informados.<br />
 			 *
 			 * @param x 
 			 *			o <code>double</code> que representa o x
@@ -36,7 +36,7 @@ namespace pel216 {
 			};
 			
 			/**
-			 * Avalia a integração <quote>precisa</quote> da função considerando os parâmetros informados.
+			 * Avalia a integração <quote>precisa</quote> da função considerando os parâmetros informados.<br />
 			 *
 			 * @param a
 			 *				o <code>double</code> que representa o valor do limite inferior da integração
@@ -50,7 +50,7 @@ namespace pel216 {
 			};
 			
 			/**
-			 * Retorna uma representação da função.
+			 * Retorna uma representação da função.<br />
 			 *
 			 * @return o <code>std::string</code> que representa a função
 			 */

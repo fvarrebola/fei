@@ -19,7 +19,7 @@ namespace pel216 {
 		/**
 		 * Classe que representa a função f(x) = sqrt(1 - x^2).<br />
 		 * A primeira derivada é df/dx = - (x  / sqrt(1 - x^2)).<br />
-		 * A segunda derivada é df/dx = - (x  / sqrt(1 - x^2)) - (x^2 / (1 - x^2)^3/2).
+		 * A segunda derivada é df/dx = - (x  / sqrt(1 - x^2)) - (x^2 / (1 - x^2)^3/2).<br />
 		 *
 		 * @author arrebola
 		 */
@@ -29,7 +29,7 @@ namespace pel216 {
 
 		public:
 			/**
-			 * Construtor.
+			 * Construtor padrão.<br />
 			 */
 			SecondFunction() {
 			};

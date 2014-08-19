@@ -11,7 +11,7 @@ namespace pel216 {
 	namespace week6 {
 
 		/**
-		 * Classe que representa o método de integração baseado na regra de Simpson.
+		 * Classe que representa o método de integração baseado na regra de Simpson.<br />
 		 *
 		 * @author arrebola
 		 */
@@ -19,7 +19,7 @@ namespace pel216 {
 
 		public:
 			/**
-			 * Construtor padrão.
+			 * Construtor padrão.<br />
 			 */
 			SimpsonRule() {
 			};

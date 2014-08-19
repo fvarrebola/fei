@@ -13,7 +13,7 @@ namespace pel216 {
 	namespace week6 {
 
 		/**
-		 * Classe que representa um método de integração numérica.
+		 * Classe que representa um método de integração numérica.<br />
 		 *
 		 * @author arrebola
 		 */
@@ -25,7 +25,7 @@ namespace pel216 {
 
 		public:
 			/**
-			 * Construtor.
+			 * Construtor padrão.<br />
 			 */
 			IntegrationRule() {
 				this->absoluteError = 0.0f;
@@ -33,7 +33,7 @@ namespace pel216 {
 			};
 
 			/**
-			 * Executa o método de integração numérica.
+			 * Executa o método de integração numérica.<br />
 			 *
 			 * @param function
 			 *				o @link{Function} que representa a função a ser integrada
@@ -51,7 +51,7 @@ namespace pel216 {
 			};
 
 			/**
-			 * Executa o método de integração numérica.
+			 * Executa o método de integração numérica.<br />
 			 *
 			 * @param function
 			 *				o @link{Function} que representa a função a ser integrada
@@ -90,7 +90,7 @@ namespace pel216 {
 			};
 
 			/**
-			 * Retorna o erro absoluto da integração numérica.
+			 * Retorna o erro absoluto da integração numérica.<br />
 			 *
 			 * @return o <code>double</code> que representa o valor de erro absoluto da integração numérica
 			 */
@@ -99,7 +99,7 @@ namespace pel216 {
 			};
 
 			/**
-			 * Retorna o erro relativo (em %) da integração numérica.
+			 * Retorna o erro relativo (em %) da integração numérica.<br />
 			 *
 			 * @return o <code>double</code> que representa o valor de erro relativo (em %) da integração numérica
 			 */

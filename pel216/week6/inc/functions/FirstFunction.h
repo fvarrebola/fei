@@ -17,7 +17,7 @@ namespace pel216 {
 
 		/**
 		 * Classe que representa a função f(x) = e^x.<br />
-		 * Sua primeira derivada é df/dx = e^x.
+		 * Sua primeira derivada é df/dx = e^x.<br />
 		 *
 		 * @author arrebola
 		 */
@@ -27,7 +27,7 @@ namespace pel216 {
 
 		public:
 			/**
-			 * Construtor.
+			 * Construtor padrão.<br />
 			 */
 			FirstFunction() {
 			};

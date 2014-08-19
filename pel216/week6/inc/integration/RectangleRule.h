@@ -13,7 +13,7 @@ namespace pel216 {
 	namespace week6 {
 
 		/**
-		 * Classe que representa o método de integração baseado na regra do retângulo.
+		 * Classe que representa o método de integração baseado na regra do retângulo.<br />
 		 *
 		 * @author arrebola
 		 */
@@ -23,7 +23,7 @@ namespace pel216 {
 
 		public:
 			/**
-			 * Construtor padrão.
+			 * Construtor padrão.<br />
 			 */
 			RectangleRule() {
 			};

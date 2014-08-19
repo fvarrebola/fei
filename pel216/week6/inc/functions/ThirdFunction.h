@@ -17,7 +17,7 @@ namespace pel216 {
 		/**
 		 * Classe que representa a função f(x) = e^(-x^2).<br />
 		 * A primeira derivada é df/dx = -2x * e^(-x^2).<br />
-		 * A segunda derivada é df/dx = ((4x^2) * e^(-x^2)) - 2*(-x^2).
+		 * A segunda derivada é df/dx = ((4x^2) * e^(-x^2)) - 2*(-x^2).<br />
 		 *
 		 * @author arrebola
 		 */
@@ -26,7 +26,7 @@ namespace pel216 {
 		private:
 
 			/**
-			 * Reprodução da função erf() obtida de http://www.johndcook.com/cpp_erf.html.
+			 * Reprodução da função erf() obtida de http://www.johndcook.com/cpp_erf.html.<br />
 			 */
 			static double erf(double x) {
 
@@ -50,7 +50,7 @@ namespace pel216 {
 
 		public:
 			/**
-			 * Construtor.
+			 * Construtor padrão.<br />
 			 */
 			ThirdFunction() {
 			};
