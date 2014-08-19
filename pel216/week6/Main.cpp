@@ -10,15 +10,15 @@
 #include <inc/integration/RectangleRule.h>
 #include <inc/integration/TrapezoidalRule.h>
 #include <inc/integration/SimpsonRule.h>
-#include <inc/integration/AdaptativeQuadrature.h>
 
 #include <inc/tests/TestSuiteWeek6.h>
 
 #define A___INPUT_MSG							"Informe o ponto inicial (a) (double)"
 #define B___INPUT_MSG							"Informe o ponto final (b) (double)"
 #define INTERVAL__INPUT_MSG						"Informe a quantidade de intervalos (int)"
+#define PRECISION__INPUT_MSG					"Informe a precisao para a quadratura adaptativa (double)"
 
-#define RULE_PRINT_FORMAT						
+#define RULE_PRINT_FORMAT						"> %s = %0.6f, EA=%0.9f, ER=%0.9f\n"
 
 void playWithFirstFunction();
 void playWithSecondFunction();
@@ -88,28 +88,6 @@ void printFooter() {
 
 
 /**
- * Imprime o cabeçalho de uma função.
- *
- * @param function
- *				o @link{Function} que representa a função a ser integrada
- * @param a
- *				o <code>double</code> que representa o valor do limite inferior da integração
- * @param b
- *				o <code>double</code> que representa o valor do limite superior da integração
- */
-void printFunctionHeader(Function *function, double a, double b) {
-
-	Logger::log("\n");
-	Logger::log("%s\n", STARS);
-	Logger::log("* Funcao: %s\n", function->toString().c_str());
-	Logger::log("*   Integral entre [a=%.2f, b=%.2f]: %0.12f\n", a, b, function->evaluatePreciseIntegration(a, b));
-	Logger::log("%s\n", STARS);
-
-}
-
-
-
-/**
  * Executa a integração numérica registrando o resultado.
  *
  * @param rule
@@ -125,14 +103,14 @@ void printFunctionHeader(Function *function, double a, double b) {
  */
 void doNumericalIntegration(IntegrationRule *rule, Function *function, double a, double b, size_t intervals = -1) {
 
-	double ruleResult = rule->evaluate(function, a, b, intervals);
-	Logger::log("> %s\n", rule->toString().c_str());
-	Logger::log("  > integral = %0.12f, EA=%0.12f, ER=%0.12f\n", ruleResult, rule->getAbsoluteError(), rule->getRelativeError());
+	double result = rule->evaluate(function, a, b, intervals);
 
-	AdaptativeQuadrature *adapQuad = new AdaptativeQuadrature();
-	double adapQuadResult = adapQuad->evaluate(rule, function, a, b);
-	Logger::log("  > quadadap = %0.12f, EA=%0.12f, ER=%0.12f\n", adapQuadResult, adapQuad->getAbsoluteError(), adapQuad->getRelativeError());
 	Logger::log("\n");
+	Logger::log("%s\n", STARS);
+	Logger::log("%s\n", rule->toString().c_str());
+	Logger::log("%s\n", STARS);
+	Logger::log(RULE_PRINT_FORMAT, function->toString().c_str(), result, rule->getAbsoluteError(), rule->getRelativeError());
+	Logger::log("%s\n", STARS);
 
 }
 
@@ -144,19 +122,17 @@ void playWithFirstFunction() {
 	double a = UserParams::getDoubleParam(A___INPUT_MSG);
 	double b = UserParams::getDoubleParam(B___INPUT_MSG);
 	int intervals = UserParams::getIntParam(INTERVAL__INPUT_MSG);
+	double precision = UserParams::getDoubleParam(PRECISION__INPUT_MSG);
 
 	FirstFunction *function = new FirstFunction();
-	printFunctionHeader(function, a, b);
 
 	RectangleRule *rule1 = new RectangleRule();
 	TrapezoidalRule *rule2 = new TrapezoidalRule();
 	SimpsonRule *rule3 = new SimpsonRule();
-	
+
 	doNumericalIntegration(rule1, function, a, b, intervals);
-	doNumericalIntegration(rule2, function, a, b, intervals);	
+	doNumericalIntegration(rule2, function, a, b, intervals);
 	doNumericalIntegration(rule3, function, a, b, intervals);
-	
-	Logger::log("%s\n", STARS);
 
 	delete rule1;
 	delete rule2;
@@ -175,9 +151,9 @@ void playWithSecondFunction() {
 	double a = UserParams::getDoubleParam(A___INPUT_MSG);
 	double b = UserParams::getDoubleParam(B___INPUT_MSG);
 	int intervals = UserParams::getIntParam(INTERVAL__INPUT_MSG);
+	double precision = UserParams::getDoubleParam(PRECISION__INPUT_MSG);
 
 	SecondFunction *function = new SecondFunction();
-	printFunctionHeader(function, a, b);
 
 	RectangleRule *rule1 = new RectangleRule();
 	TrapezoidalRule *rule2 = new TrapezoidalRule();
@@ -204,9 +180,9 @@ void playWithThirdFunction() {
 	double a = UserParams::getDoubleParam(A___INPUT_MSG);
 	double b = UserParams::getDoubleParam(B___INPUT_MSG);
 	int intervals = UserParams::getIntParam(INTERVAL__INPUT_MSG);
+	double precision = UserParams::getDoubleParam(PRECISION__INPUT_MSG);
 
 	ThirdFunction *function = new ThirdFunction();
-	printFunctionHeader(function, a, b);
 
 	RectangleRule *rule1 = new RectangleRule();
 	TrapezoidalRule *rule2 = new TrapezoidalRule();
