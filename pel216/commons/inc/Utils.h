@@ -9,6 +9,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <cmath>
 
 // marcadores que facilitam a leitura do código
 #define IN
@@ -73,7 +74,9 @@
 #endif
 
 // definição utilizada para verificar se o valor X é NaN 
-#ifndef __NO_LONG_DOUBLE_MATH
+#ifdef __GNUC__
+	#define isnan(x)		std::isnan(x)
+#else
 	#define isnan(x)		_isnan(x)
 #endif
 
