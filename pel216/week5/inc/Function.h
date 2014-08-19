@@ -10,7 +10,7 @@ namespace pel216 {
 	namespace week5 {
 
 		/**
-		 * Classe que representa uma função matemática.
+		 * Classe que representa uma função matemática.<br />
 		 *
 		 * @author arrebola
 		 */
@@ -22,13 +22,13 @@ namespace pel216 {
 
 		public:
 			/**
-			 * Construtor padrão.
+			 * Construtor padrão.<br />
 			 */
 			Function() {
 			};
 
 			/**
-			 * Retorna a quantidade de dimensões que a função possui.
+			 * Retorna a quantidade de dimensões que a função possui.<br />
 			 *
 			 * @return o <code>size_t</code> que representa a quantiodade de dimensões
 			 */
@@ -37,7 +37,7 @@ namespace pel216 {
 			};
 
 			/**
-			 * Obtém o valor inicial.
+			 * Obtém o valor inicial.<br />
 			 *
 			 * @return o <code>std::vector<double></code> que representa o valor inicial
 			 */
@@ -46,7 +46,7 @@ namespace pel216 {
 			};
 
 			/**
-			 * Avalia a função considerando os parâmetros informados.
+			 * Avalia a função considerando os parâmetros informados.<br />
 			 *
 			 * @param params 
 			 *			o <code>std::vector<double></code> que representa os parâmetros da função
@@ -58,7 +58,7 @@ namespace pel216 {
 			};
 			
 			/**
-			 * Avalia a primeira derivada em x função considerando os parâmetros informados.
+			 * Avalia a primeira derivada em x função considerando os parâmetros informados.<br />
 			 *
 			 * @param params 
 			 *			o <code>std::vector<double></code> que representa os parâmetros da função
@@ -70,7 +70,7 @@ namespace pel216 {
 			};
 			
 			/**
-			 * Avalia a primeira derivada em y função considerando os parâmetros informados.
+			 * Avalia a primeira derivada em y função considerando os parâmetros informados.<br />
 			 *
 			 * @param params 
 			 *			o <code>std::vector<double></code> que representa os parâmetros da função
@@ -82,7 +82,7 @@ namespace pel216 {
 			};
 
 			/**
-			 * Retorna uma representação da função.
+			 * Retorna uma representação da função.<br />
 			 *
 			 * @return o <code>std::string</code> que representa a função
 			 */

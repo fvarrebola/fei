@@ -10,7 +10,7 @@ namespace pel216 {
 	namespace week5 {
 
 		/**
-		 * Classe de testes.
+		 * Classe de testes.<br />
 		 *
 		 * @author arrebola
 		 */
@@ -23,7 +23,7 @@ namespace pel216 {
 
 		public:
 			/**
-			 * Executa todos os testes.
+			 * Executa todos os testes.<br />
 			 */
 			static void run(); 
 
