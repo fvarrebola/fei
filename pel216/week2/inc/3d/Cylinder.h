@@ -79,15 +79,15 @@ namespace pel216 {
 			 * @see pel216::week2::ThreeDShape::getSurfaceArea()
 			 */
 			double getSurfaceArea() const {
-				return ((2 * pel216::week2::pi * std::pow((this->diameter / 2.0f), 2)) +
-						(2 * pel216::week2::pi * (this->diameter / 2.f) * this->height));
+				return ((2 * pel216::commons::pi * std::pow((this->diameter / 2.0f), 2)) +
+						(2 * pel216::commons::pi * (this->diameter / 2.f) * this->height));
 			};
 
 			/**
 			 * @see pel216::week2::ThreeDShape::getVolume()
 			 */
 			double getVolume() const {
-				return (pel216::week2::pi * std::pow((this->diameter / 2.0f), 2) * this->height);
+				return (pel216::commons::pi * std::pow((this->diameter / 2.0f), 2) * this->height);
 			};
 
 			/**

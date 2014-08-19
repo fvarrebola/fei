@@ -41,7 +41,7 @@ namespace pel216 {
 			 */
 			double getArea() const {
 				/* (5/2)*(t^2)*cot(PI/10) */
-				return (5 / 2) * pow(this->getSideLength(), 2) * (pel216::week2::cot(pel216::week2::pi / 10));
+				return (5 / 2) * pow(this->getSideLength(), 2) * (pel216::week2::cot(pel216::commons::pi / 10));
 			};
 
 		}; /* class Decagon */

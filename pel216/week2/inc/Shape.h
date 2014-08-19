@@ -12,8 +12,6 @@ namespace pel216 {
 
 	namespace week2 {
 
-		static const float pi = 3.141592654f;
-
 		/**
 		 * Transforma um angulo de graus para radianos.
 		 *T
@@ -23,7 +21,7 @@ namespace pel216 {
 		 * @return o <code>double</code> que representa o angulo em radianos
 		 */
 		inline float toRadians(float angle) {
-			return ((pel216::week2::pi /180) * angle);
+			return ((pel216::commons::pi /180) * angle);
 		};
 
 		/**

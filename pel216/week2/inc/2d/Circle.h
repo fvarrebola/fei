@@ -43,7 +43,7 @@ namespace pel216 {
 			 * @return <code>double</code> que representa a area do circulo
 			 */
 			double getArea() const {
-				return ((pel216::week2::pi * std::pow(this->diameter, 2)) / 4);
+				return ((pel216::commons::pi * std::pow(this->diameter, 2)) / 4);
 			};
 
 			/**
@@ -52,7 +52,7 @@ namespace pel216 {
 			 * @return <code>double</code> que representa o perimetro do circulo
 			 */
 			double getPerimeter() const {
-				return (pel216::week2::pi * this->diameter);
+				return (pel216::commons::pi * this->diameter);
 			};
 
 			/**

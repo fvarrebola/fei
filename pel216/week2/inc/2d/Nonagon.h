@@ -41,7 +41,7 @@ namespace pel216 {
 			 */
 			double getArea() const {
 				/* (9/4)*(t^2)*cot(PI/9) */
-				return (9 / 4) * std::pow(this->getSideLength(), 2) * (pel216::week2::cot(pel216::week2::pi / 9));
+				return (9 / 4) * std::pow(this->getSideLength(), 2) * (pel216::week2::cot(pel216::commons::pi / 9));
 			};
 
 		}; /* class Nonagon */

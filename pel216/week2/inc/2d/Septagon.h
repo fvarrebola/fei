@@ -41,7 +41,7 @@ namespace pel216 {
 			 */
 			double getArea() const {
 				/* (7/4)*(t^2)*cot(PI/7) */
-				return ((7 / 4) * std::pow(this->getSideLength(), 2) * pel216::week2::cot(pel216::week2::pi / 7));
+				return ((7 / 4) * std::pow(this->getSideLength(), 2) * pel216::week2::cot(pel216::commons::pi / 7));
 			};
 
 		}; /* class Septagon */

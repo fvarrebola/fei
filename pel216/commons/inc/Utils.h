@@ -76,6 +76,8 @@ namespace pel216 {
 
 	namespace commons {
 
+		static const float pi = 3.141592654f;
+
 		/**
 		 * Classe utilitaria.
 		 *

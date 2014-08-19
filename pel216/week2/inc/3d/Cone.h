@@ -80,15 +80,15 @@ namespace pel216 {
 			 */
 			double getSurfaceArea() const {
 				double radius = this->diameter / 2.0f;
-				return ((pel216::week2::pi * std::pow(radius, 2)) +
-						(pel216::week2::pi * radius * std::sqrt(std::pow(radius, 2) + std::pow(this->heigth, 2))));
+				return ((pel216::commons::pi * std::pow(radius, 2)) +
+						(pel216::commons::pi * radius * std::sqrt(std::pow(radius, 2) + std::pow(this->heigth, 2))));
 			};
 
 			/**
 			 * @see pel216::week2::ThreeDShape::getVolume()
 			 */
 			double getVolume() const {
-				return ((pel216::week2::pi * std::pow((this->diameter / 2.0f), 2) * this->heigth) / 3.0f);
+				return ((pel216::commons::pi * std::pow((this->diameter / 2.0f), 2) * this->heigth) / 3.0f);
 			};
 
 			/**

@@ -41,7 +41,7 @@ namespace pel216 {
 			 */
 			double getArea() const {
 				/* 2*cot(PI/8)*(t^2) */
-				return (2 * pel216::week2::cot(pel216::week2::pi / 8) * std::pow(this->getSideLength(), 2));
+				return (2 * pel216::week2::cot(pel216::commons::pi / 8) * std::pow(this->getSideLength(), 2));
 			};
 
 		}; /* class Octagon */

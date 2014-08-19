@@ -144,9 +144,9 @@ PRIVATE void pel216::week2::TestSuite::testCircleClass() {
 	pel216::week2::Circle *circle= new Circle(1);
 	Logger::log("> %s\n", circle->toString().c_str());
 	Logger::log("Testando pel216::week2::Circle::getArea() ...\n");
-	assert(circle->getArea() == ((pel216::week2::pi * pow(1, 2)) / 4));
+	assert(circle->getArea() == ((pel216::commons::pi * pow(1, 2)) / 4));
 	Logger::log("Testando pel216::week2::Circle::getPerimeter() ...\n");
-	assert(circle->getPerimeter() == pel216::week2::pi);
+	assert(circle->getPerimeter() == pel216::commons::pi);
 	delete circle;
 
 }
