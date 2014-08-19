@@ -37,7 +37,7 @@ namespace pel216 {
 			 */
 			virtual double evaluate(double x) {
 				double result = std::sqrt(1 - std::pow(x, 2.0f));
-				return _isnan(result) ? 0.0f : result;
+				return isnan(result) ? 0.0f : result;
 			};
 
 			/**

@@ -58,7 +58,7 @@ namespace pel216 {
 			 */
 			virtual double evaluate(double x) {
 				double result = std::exp(-1.0f * std::pow(x, 2.0f));
-				return _isnan(result) ? 0.0f : result;
+				return isnan(result) ? 0.0f : result;
 			};
 
 			/**

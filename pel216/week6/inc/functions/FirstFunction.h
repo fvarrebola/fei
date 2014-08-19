@@ -6,6 +6,7 @@
 #include <cstdarg>
 #include <cmath>
 
+#include <inc/Utils.h>
 #include <inc/Logger.h>
 #include <inc/ex/IllegalParameterException.h>
 
@@ -36,7 +37,7 @@ namespace pel216 {
 			 */
 			virtual double evaluate(double x) {
 				double result = std::exp(x);
-				return _isnan(result) ? 0.0f : result;
+				return isnan(result) ? 0.0f : result;
 			};
 
 			/**
