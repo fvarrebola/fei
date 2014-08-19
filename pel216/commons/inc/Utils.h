@@ -60,7 +60,7 @@
     #define MAX_PATH                            256
 #endif
 
-// definicao utilizada para determinar se as funcoes de runtime com sufixo '_s' estao disponiveis
+// definição utilizada para determinar se as funções de runtime com sufixo '_s' estão disponíveis
 #if !__STDC_WANT_SECURE_LIB__
     #define vsprintf_s(buffer, buffer_size, stringbuffer, ...) \
         (vsprintf(buffer, stringbuffer, __VA_ARGS__))
@@ -70,6 +70,11 @@
 
     #define localtime_s(tm, timer) \
 		(*tm = *localtime(timer))
+#endif
+
+// definição utilizada para verificar se o valor X é NaN 
+#ifndef __NO_LONG_DOUBLE_MATH
+	#define isnan(x)		_isnan(x)
 #endif
 
 namespace pel216 {
