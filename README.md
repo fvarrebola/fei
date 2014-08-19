@@ -2,16 +2,16 @@
 
 Repositorio de código-fonte para FEI.
 
-Atualmente, esse repositorio abriga código-fonte para as seguintes disciplinas:
+Atualmente, esse repositório abriga código-fonte para as seguintes disciplinas:
 
 * 1. PEL216 - Computação Científica
 
-# PEL216 - Computacao Cientifica
+# PEL216 - Computação Científica
 
 Para esta disciplina, os projetos são os seguintes:
 * [commons](https://github.com/fvarrebola/fei/tree/master/pel216/commons): funcionalidades comuns
 * [semana-01](https://github.com/fvarrebola/fei/tree/master/pel216/week1): exercício sobre pilhas e filas
-* [semana-02](https://github.com/fvarrebola/fei/tree/master/pel216/week2): exercício sobre figuras geometricas
+* [semana-02](https://github.com/fvarrebola/fei/tree/master/pel216/week2): exercício sobre figuras geométricas
 * [semana-03](https://github.com/fvarrebola/fei/tree/master/pel216/week3): exercício sobre buscas (Breadth First, Depth First)
 * [semana-04](https://github.com/fvarrebola/fei/tree/master/pel216/week4): exercício sobre buscas (Best First, Hill Climbing, A Star)
 * [semana-05](https://github.com/fvarrebola/fei/tree/master/pel216/week5): exercício sobre descida de gradiente
