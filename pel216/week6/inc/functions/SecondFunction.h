@@ -18,8 +18,6 @@ namespace pel216 {
 
 		/**
 		 * Classe que representa a função f(x) = sqrt(1 - x^2).<br />
-		 * A primeira derivada é df/dx = - (x  / sqrt(1 - x^2)).<br />
-		 * A segunda derivada é df/dx = - (x  / sqrt(1 - x^2)) - (x^2 / (1 - x^2)^3/2).<br />
 		 *
 		 * @author arrebola
 		 */
@@ -38,7 +36,8 @@ namespace pel216 {
 			 * @see pel216::week6::Function#evaluate()
 			 */
 			virtual double evaluate(double x) {
-				return std::sqrt(1 - std::pow(x, 2.0f));
+				double result = std::sqrt(1 - std::pow(x, 2.0f));
+				return _isnan(result) ? 0.0f : result;
 			};
 
 			/**

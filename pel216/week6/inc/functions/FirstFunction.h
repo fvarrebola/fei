@@ -17,7 +17,6 @@ namespace pel216 {
 
 		/**
 		 * Classe que representa a função f(x) = e^x.<br />
-		 * Sua primeira derivada é df/dx = e^x.<br />
 		 *
 		 * @author arrebola
 		 */
@@ -36,7 +35,8 @@ namespace pel216 {
 			 * @see pel216::week6::Function#evaluate()
 			 */
 			virtual double evaluate(double x) {
-				return std::exp(x);
+				double result = std::exp(x);
+				return _isnan(result) ? 0.0f : result;
 			};
 
 			/**
