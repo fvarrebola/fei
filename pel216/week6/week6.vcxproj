@@ -76,6 +76,7 @@
     <ClInclude Include="inc\functions\SecondFunction.h" />
     <ClInclude Include="inc\functions\ThirdFunction.h" />
     <ClInclude Include="inc\IntegrationRule.h" />
+    <ClInclude Include="inc\integration\AdaptativeQuadrature.h" />
     <ClInclude Include="inc\integration\RectangleRule.h" />
     <ClInclude Include="inc\integration\SimpsonRule.h" />
     <ClInclude Include="inc\integration\TrapezoidalRule.h" />

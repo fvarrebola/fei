@@ -51,6 +51,9 @@
     <ClInclude Include="inc\IntegrationRule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="inc\integration\AdaptativeQuadrature.h">
+      <Filter>Header Files\integration</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
