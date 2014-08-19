@@ -96,13 +96,17 @@ void printFooter() {
  *				o <code>double</code> que representa o valor do limite inferior da integração
  * @param b
  *				o <code>double</code> que representa o valor do limite superior da integração
+ * @param intervals 
+ *				o <code>size_t</code> que indica a quantidade de intervalos
  */
-void printFunctionHeader(Function *function, double a, double b) {
+void printFunctionHeader(Function *function, double a, double b, size_t intervals) {
 
 	Logger::log("\n");
 	Logger::log("%s\n", STARS);
 	Logger::log("* Funcao: %s\n", function->toString().c_str());
-	Logger::log("*   Integral entre [a=%.2f, b=%.2f]: %0.12f\n", a, b, function->evaluatePreciseIntegration(a, b));
+	Logger::log("*   intervalo [a=%.2f, b=%.2f]\n", a, b);
+	Logger::log("*   integracao precisa: %0.12f\n", function->evaluatePreciseIntegration(a, b));
+	Logger::log("*   intervalos a considerar: %d\n", intervals);
 	Logger::log("%s\n", STARS);
 
 }
@@ -125,13 +129,17 @@ void printFunctionHeader(Function *function, double a, double b) {
  */
 void doNumericalIntegration(IntegrationRule *rule, Function *function, double a, double b, size_t intervals = -1) {
 
-	double ruleResult = rule->evaluate(function, a, b, intervals);
+
 	Logger::log("> %s\n", rule->toString().c_str());
-	Logger::log("  > integral = %0.12f, EA=%0.12f, ER=%0.12f\n", ruleResult, rule->getAbsoluteError(), rule->getRelativeError());
+	double ruleResultWithOneInterval = rule->evaluate(function, a, b, ONE);
+	Logger::log("  > in (%06d) = %0.12f, EA=%0.12f, ER=%0.12f\n", ONE, ruleResultWithOneInterval, rule->getAbsoluteError(), rule->getRelativeError());
+
+	double ruleResultWithNIntervals = rule->evaluate(function, a, b, intervals);
+	Logger::log("  > in (%06d) = %0.12f, EA=%0.12f, ER=%0.12f\n", intervals, ruleResultWithNIntervals, rule->getAbsoluteError(), rule->getRelativeError());
 
 	AdaptativeQuadrature *adapQuad = new AdaptativeQuadrature();
 	double adapQuadResult = adapQuad->evaluate(rule, function, a, b);
-	Logger::log("  > quadadap = %0.12f, EA=%0.12f, ER=%0.12f\n", adapQuadResult, adapQuad->getAbsoluteError(), adapQuad->getRelativeError());
+	Logger::log("  > qa (10^-12) = %0.12f, EA=%0.12f, ER=%0.12f\n", adapQuadResult, adapQuad->getAbsoluteError(), adapQuad->getRelativeError());
 	Logger::log("\n");
 
 }
@@ -146,7 +154,7 @@ void playWithFirstFunction() {
 	int intervals = UserParams::getIntParam(INTERVAL__INPUT_MSG);
 
 	FirstFunction *function = new FirstFunction();
-	printFunctionHeader(function, a, b);
+	printFunctionHeader(function, a, b, intervals);
 
 	RectangleRule *rule1 = new RectangleRule();
 	TrapezoidalRule *rule2 = new TrapezoidalRule();
@@ -177,7 +185,7 @@ void playWithSecondFunction() {
 	int intervals = UserParams::getIntParam(INTERVAL__INPUT_MSG);
 
 	SecondFunction *function = new SecondFunction();
-	printFunctionHeader(function, a, b);
+	printFunctionHeader(function, a, b, intervals);
 
 	RectangleRule *rule1 = new RectangleRule();
 	TrapezoidalRule *rule2 = new TrapezoidalRule();
@@ -186,6 +194,8 @@ void playWithSecondFunction() {
 	doNumericalIntegration(rule1, function, a, b, intervals);
 	doNumericalIntegration(rule2, function, a, b, intervals);
 	doNumericalIntegration(rule3, function, a, b, intervals);
+
+	Logger::log("%s\n", STARS);
 
 	delete rule1;
 	delete rule2;
@@ -206,7 +216,7 @@ void playWithThirdFunction() {
 	int intervals = UserParams::getIntParam(INTERVAL__INPUT_MSG);
 
 	ThirdFunction *function = new ThirdFunction();
-	printFunctionHeader(function, a, b);
+	printFunctionHeader(function, a, b, intervals);
 
 	RectangleRule *rule1 = new RectangleRule();
 	TrapezoidalRule *rule2 = new TrapezoidalRule();
@@ -216,6 +226,8 @@ void playWithThirdFunction() {
 	doNumericalIntegration(rule2, function, a, b, intervals);
 	doNumericalIntegration(rule3, function, a, b, intervals);
 
+	Logger::log("%s\n", STARS);
+		
 	delete rule1;
 	delete rule2;
 	delete rule3;
