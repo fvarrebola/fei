@@ -38,7 +38,7 @@ namespace pel216 {
 				double a_prime = a;
 				double b_prime = a_prime + alpha;
 				for (size_t idx = 0; idx < intervals; idx++) {
-					result += alpha * ((function->evaluate(a_prime) + function->evaluate(b_prime)) / 2);
+					result += alpha * ((function->evaluate(a_prime) + function->evaluate(b_prime)) / 2.0f);
 					a_prime += alpha;
 					b_prime += alpha;
 				}
