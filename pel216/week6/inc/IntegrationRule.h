@@ -47,7 +47,7 @@ namespace pel216 {
 			 * @return o <code>double</code> que representa o valor resultante da integração numérica
 			 */
 			virtual double doEvaluate(Function *function, double a, double b, size_t intervals = -1) {
-				throw new _exception(); 
+				throw new std::exception(); 
 			};
 
 			/**
@@ -113,7 +113,7 @@ namespace pel216 {
 			 * @return o <code>std::string</code> que representa o método de integração
 			 */
 			virtual std::string toString() { 
-				throw new _exception(); 
+				throw new std::exception(); 
 			};
 
 

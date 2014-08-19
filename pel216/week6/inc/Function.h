@@ -3,6 +3,7 @@
 #ifndef __FUNCTION_H__
 #define __FUNCTION_H__
 
+#include <stdexcept>
 #include <string>
 
 namespace pel216 {
@@ -32,7 +33,7 @@ namespace pel216 {
 			 * @return o <code>double</code> que representa o resultado da avaliação
 			 */
 			virtual double evaluate(double x) { 
-				throw new _exception(); 
+				throw new std::exception(); 
 			};
 			
 			/**
@@ -46,7 +47,7 @@ namespace pel216 {
 			 * @return o <code>double</code> que representa o resultado da avaliação
 			 */
 			virtual double evaluatePreciseIntegration(double a = -1, double b = -1) { 
-				throw new _exception(); 
+				throw new std::exception(); 
 			};
 			
 			/**
@@ -55,7 +56,7 @@ namespace pel216 {
 			 * @return o <code>std::string</code> que representa a função
 			 */
 			virtual std::string toString() { 
-				throw new _exception(); 
+				throw new std::exception(); 
 			};
 
 		}; /* class Function */
