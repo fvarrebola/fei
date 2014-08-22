@@ -23,7 +23,7 @@ namespace pel216 {
 			/**
 			 * Construtor padrão.<br />
 			 */
-			TrapezoidalRule() {
+			TrapezoidalRule() : IntegrationRule() {
 			};
 
 			/**

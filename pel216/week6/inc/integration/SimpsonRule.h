@@ -21,7 +21,7 @@ namespace pel216 {
 			/**
 			 * Construtor padrão.<br />
 			 */
-			SimpsonRule() {
+			SimpsonRule() : IntegrationRule() {
 			};
 
 			/**

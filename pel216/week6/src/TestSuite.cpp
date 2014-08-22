@@ -31,6 +31,8 @@ double precision = 0.00001f;
  *				o @link{IntegrationRule} que representa a regra a ser utilizada
  * @param function
  *				o @link{Function} que representa a função a ser integrada
+ * @param expectedValue
+ *				o <code>double</code> que representa o valor esperado para a integração
  */
 void assertNumericalIntegration(IntegrationRule *rule, Function *function, double expectedValue) {
 
