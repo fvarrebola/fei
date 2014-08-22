@@ -35,7 +35,7 @@ namespace pel216 {
 			/**
 			 * @see pel216::week6::Function#evaluate()
 			 */
-			virtual double evaluate(double x) {
+			virtual double evaluate(double x, double y = 0.0f, double z = 0.0f) {
 				double result = std::sqrt(1 - std::pow(x, 2.0f));
 				return isnan(result) ? 0.0f : result;
 			};

@@ -29,13 +29,17 @@ namespace pel216 {
 			 *
 			 * @param x 
 			 *			o <code>double</code> que representa o x
+			 * @param y 
+			 *			o <code>double</code> que representa o y
+			 * @param z 
+			 *			o <code>double</code> que representa o z
 			 *
 			 * @return o <code>double</code> que representa o resultado da avaliação
 			 */
-			virtual double evaluate(double x) { 
+			virtual double evaluate(double x, double y = 0.0f, double z = 0.0f) { 
 				throw new std::exception(); 
 			};
-			
+
 			/**
 			 * Avalia a integração <quote>precisa</quote> da função considerando os parâmetros informados.<br />
 			 *
