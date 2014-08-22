@@ -72,13 +72,13 @@ namespace pel216 {
 			 * @param toroidBounds
 			 *				o @link{NumericalBounds} que representa os limites numéricos do toróide (para que a escolha aleatória de amostras seja mais eficaz)
 			 * @param intervals 
-			 *				o <code>size_t</code> que indica a quantidade de intervalos
+			 *				o <code>double</code> que indica a quantidade de intervalos
 			 */
 			void evaluate(
 					pel216::week6::Function *function, 
 					double enclosingCubeVolume = DEFAULT_TOROID_ENCLOSING_CUBE_VOLUME, 
 					NumericalBounds bounds = DEFAULT_TOROID_BOUNDS, 
-					size_t samples = -1) {
+					double samples = -1.0f) {
 
 				if (pel216::commons::Utils::isInvalidHandle(function)) {
 					throw new IllegalParameterException();
@@ -99,7 +99,7 @@ namespace pel216 {
 				double ySum = 0.0f;
 				double zSum = 0.0f;
 
-				for (size_t idx = 0; idx < samples; idx++) {
+				for (double idx = 0.0f; idx < samples; idx++) {
 					
 					register double x = x_dist(generator);
 					register double y = y_dist(generator);

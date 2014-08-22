@@ -18,8 +18,8 @@ namespace pel216 {
 
 	namespace week7 {
 
-		static const size_t MAX_SAMPLES = 100000000;
-		static const size_t MIN_STEP_COUNT = 2;
+		static const double MAX_SAMPLES = std::pow(10, 15);
+		static const size_t MIN_STEP_COUNT = 10;
 
 		/**
 		 * Classe que representa um método de integração numérica.<br />
@@ -45,7 +45,7 @@ namespace pel216 {
 			/**
 			 * @see pel216::week6::IntegrationRule#evaluate()
 			 */
-			virtual double doEvaluate(pel216::week6::Function *function, double a, double b, size_t intervals = -1) {
+			virtual double doEvaluate(pel216::week6::Function *function, double a, double b, double intervals = -1) {
 
 				if (Utils::isInvalidHandle(function)) {
 					throw new IllegalParameterException();
@@ -57,7 +57,7 @@ namespace pel216 {
 
 				// calcula o resultado aproximado da integração numérica
 				double sum = 0.0f;
-				for (size_t idx = 0; idx < intervals; idx++) {
+				for (double idx = 0.0f; idx < intervals; idx++) {
 					
 					register double random = distribution(generator);
 					register double value = function->evaluate(random);

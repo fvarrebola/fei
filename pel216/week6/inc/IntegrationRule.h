@@ -42,11 +42,11 @@ namespace pel216 {
 			 * @param b
 			 *				o <code>double</code> que representa o valor do limite superior da integração
 			 * @param intervals 
-			 *				o <code>size_t</code> que indica a quantidade de intervalos
+			 *				o <code>double</code> que indica a quantidade de intervalos
 			 *
 			 * @return o <code>double</code> que representa o valor resultante da integração numérica
 			 */
-			virtual double doEvaluate(Function *function, double a, double b, size_t intervals = -1) {
+			virtual double doEvaluate(Function *function, double a, double b, double intervals = -1.0f) {
 				throw new std::exception(); 
 			};
 
@@ -60,11 +60,11 @@ namespace pel216 {
 			 * @param b
 			 *				o <code>double</code> que representa o valor do limite superior da integração
 			 * @param intervals 
-			 *				o <code>size_t</code> que indica a quantidade de intervalos
+			 *				o <code>double</code> que indica a quantidade de intervalos
 			 *
 			 * @return o <code>double</code> que representa o valor resultante da integração numérica
 			 */
-			double evaluate(Function *function, double a, double b, size_t intervals = -1) {
+			double evaluate(Function *function, double a, double b, double intervals = -1.0f) {
 
 				if (Utils::isInvalidHandle(function)) {
 					throw new IllegalParameterException();

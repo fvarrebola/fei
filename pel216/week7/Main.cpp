@@ -12,15 +12,11 @@
 
 #include <inc/tests/TestSuiteWeek7.h>
 
-#define A___INPUT_MSG							"Informe o ponto inicial (a)    [dbl]"
-#define B___INPUT_MSG							"Informe o ponto final   (b)    [dbl]"
-#define MAX_SAMPLES__INPUT_MSG					"Informe a qtde max de amostras [int]"
-#define STEP_COUNT__INPUT_MSG					"Informe o incremento (am*=inc) [int]"
+#define A___INPUT_MSG							"Informe o ponto inicial (a)"
+#define B___INPUT_MSG							"Informe o ponto final   (b)"
+#define SAMPLES__INPUT_MSG						"Informe as amostras (10^?) [1-12]"
 
-#define PLEASE_CONSIDER_MORE_SAMPLES_ERROR_MSG	"Por favor considere mais que 10 amostras\n"
-#define PLEASE_CONSIDER_FEWER_SAMPLES_ERROR_MSG	"Por favor considere menos que %d amostras\n"
-#define PLEASE_CONSIDER_MORE_STEPS_ERROR_MSG	"Por favor considere um incremento maior que %d\n"
-#define PLEASE_CONSIDER_FEWER_STEPS_ERROR_MSG	"Por favor considere um incremento menor que %d\n"
+#define ILLEGAL_VALUE_ERROR_MSG					"Por favor considere valores entre 1 e 12\n"
 
 void playWithFirstFunction();
 void playWithSecondFunction();
@@ -107,16 +103,16 @@ void printFooter() {
  * @param b
  *				o <code>double</code> que representa o valor do limite superior da integração
  * @param intervals 
- *				o <code>size_t</code> que indica a quantidade de intervalos
+ *				o <code>double</code> que indica a quantidade de intervalos
  */
-void printFunctionHeader(Function *function, double a, double b, size_t intervals) {
+void printFunctionHeader(Function *function, double a, double b, double intervals) {
 
 	Logger::log("\n");
 	Logger::log("%s\n", STARS);
 	Logger::log("* Funcao: %s\n", function->toString().c_str());
 	Logger::log("*   intervalo [a=%.2f, b=%.2f]\n", a, b);
-	Logger::log("*   integracao precisa: %0.12f\n", function->evaluatePreciseIntegration(a, b));
-	Logger::log("*   amostras a considerar: %d\n", intervals);
+	Logger::log("*   integracao precisa: %015.12f\n", function->evaluatePreciseIntegration(a, b));
+	Logger::log("*   amostras a considerar: %12.0f\n", intervals);
 	Logger::log("%s\n", STARS);
 
 }
@@ -126,60 +122,29 @@ void printFunctionHeader(Function *function, double a, double b, size_t interval
 /**
  * Obtém a quantidade máxima de amostras.
  *
- * @return o <code>size_t</code> que representa a quantidade máxima de amostras
+ * @return o <code>double</code> que representa a quantidade máxima de amostras
  */
-size_t getMaxSamples() {
+double getMaxSamples() {
 	
-	size_t maxSamples = 0;
+	double maxSamples = 10.0f;
 
+	int exponent = 0;
 	bool isValid = false;
 	while (!isValid) {
-		maxSamples = UserParams::getIntParam(MAX_SAMPLES__INPUT_MSG);
-		if (maxSamples < 10) {
-			Logger::log(PLEASE_CONSIDER_MORE_SAMPLES_ERROR_MSG);
-		} else if (maxSamples > pel216::week7::MAX_SAMPLES) {
-			Logger::log(PLEASE_CONSIDER_FEWER_SAMPLES_ERROR_MSG, pel216::week7::MAX_SAMPLES);
+		exponent = UserParams::getIntParam(SAMPLES__INPUT_MSG);
+		if (exponent < 1 || exponent > 12) {
+			Logger::log(ILLEGAL_VALUE_ERROR_MSG);
 		} else {
 			isValid = true;
 		}
 	}
 
-	return maxSamples;
+	return std::pow(maxSamples, exponent);
 
 }
 	
 	
 	
-/**
- * Obtém o incremento de amostras.
- * 
- * @param maxSamples
- *				o <code>size_t</code> que representa a quantidade máxima de amostras
- *
- * @return o <code>size_t</code> que representa o incremento de amostras
- */
-size_t getStepCount(size_t maxSamples) {
-	
-	size_t stepCount = 0;
-
-	bool isValid = false;
-	while (!isValid) {
-		stepCount = UserParams::getIntParam(STEP_COUNT__INPUT_MSG);
-		if (stepCount < MIN_STEP_COUNT) {
-			Logger::log(PLEASE_CONSIDER_MORE_STEPS_ERROR_MSG, MIN_STEP_COUNT);
-		} else if (stepCount >= maxSamples) {
-			Logger::log(PLEASE_CONSIDER_FEWER_STEPS_ERROR_MSG, maxSamples);
-		} else {
-			isValid = true;
-		}
-	}
-
-	return stepCount;
-
-}
-
-
-
 /**
  * Executa a integração numérica registrando o resultado.
  *
@@ -193,23 +158,21 @@ size_t getStepCount(size_t maxSamples) {
  *				o <code>double</code> que representa o valor do limite superior da integração
  * @param maxSamples 
  *				o <code>size_t</code> que indica a quantidade máxima de amostras
- * @param stepCount 
- *				o <code>size_t</code> que indica o incremento de amostras
  */
-void doNumericalIntegration(IntegrationRule *rule, Function *function, double a, double b, size_t maxSamples = -1, size_t stepCount = 10) {
+void doNumericalIntegration(IntegrationRule *rule, Function *function, double a, double b, double maxSamples = -1.0f) {
 
 	Logger::log("> %s\n", rule->toString().c_str());
 
-	Logger::log("  -------- ------------ ------------ ------------\n");
-	Logger::log("  QTDE     VALOR        EA           ER          \n");
-	Logger::log("  -------- ------------ ------------ ------------\n");
+	Logger::log("  ------------ ------------ ------------ ------------\n");
+	Logger::log("  QTDE         VALOR        EA           ER          \n");
+	Logger::log("  ------------ ------------ ------------ ------------\n");
 
-	for (size_t idx = 1; idx < maxSamples + 1; idx *= stepCount) {
+	for (double idx = 10.0f; idx < maxSamples + 1; idx *= 10) {
 		register double result = rule->evaluate(function, a, b, idx);
-		Logger::log("  %-8d %012.9f %012.9f %012.9f\n", idx, result, rule->getAbsoluteError(), rule->getRelativeError());
+		Logger::log("  %-12.0f %012.9f %012.9f %012.9f\n", idx, result, rule->getAbsoluteError(), rule->getRelativeError());
 	}
 
-	Logger::log("  -------- ------------ ------------ ------------\n");
+	Logger::log("  ------------ ------------ ------------ ------------\n");
 
 }
 
@@ -220,13 +183,12 @@ void playWithFirstFunction() {
 
 	double a = UserParams::getDoubleParam(A___INPUT_MSG);
 	double b = UserParams::getDoubleParam(B___INPUT_MSG);
-	size_t maxSamples = getMaxSamples();
-	size_t stepCount = getStepCount(maxSamples);
+	double maxSamples = getMaxSamples();
 
 	MonteCarloRule *rule = new MonteCarloRule();
 	FirstFunction *function = new FirstFunction();
 	printFunctionHeader(function, a, b, maxSamples);
-	doNumericalIntegration(rule, function, a, b, maxSamples, stepCount);
+	doNumericalIntegration(rule, function, a, b, maxSamples);
 
 	Logger::log("%s\n", STARS);
 
@@ -244,13 +206,12 @@ void playWithSecondFunction() {
 
 	double a = UserParams::getDoubleParam(A___INPUT_MSG);
 	double b = UserParams::getDoubleParam(B___INPUT_MSG);
-	size_t maxSamples = getMaxSamples();
-	size_t stepCount = getStepCount(maxSamples);
+	double maxSamples = getMaxSamples();
 
 	MonteCarloRule *rule = new MonteCarloRule();
 	SecondFunction *function = new SecondFunction();
 	printFunctionHeader(function, a, b, maxSamples);
-	doNumericalIntegration(rule, function, a, b, maxSamples, stepCount);
+	doNumericalIntegration(rule, function, a, b, maxSamples);
 
 	Logger::log("%s\n", STARS);
 
@@ -268,13 +229,12 @@ void playWithThirdFunction() {
 
 	double a = UserParams::getDoubleParam(A___INPUT_MSG);
 	double b = UserParams::getDoubleParam(B___INPUT_MSG);
-	size_t maxSamples = getMaxSamples();
-	size_t stepCount = getStepCount(maxSamples);
+	double maxSamples = getMaxSamples();
 
 	MonteCarloRule *rule = new MonteCarloRule();
 	ThirdFunction *function = new ThirdFunction();
 	printFunctionHeader(function, a, b, maxSamples);
-	doNumericalIntegration(rule, function, a, b, maxSamples, stepCount);
+	doNumericalIntegration(rule, function, a, b, maxSamples);
 
 	Logger::log("%s\n", STARS);
 
@@ -290,8 +250,7 @@ void playWithThirdFunction() {
  */
 void playWithToroidFunction() {
 
-	size_t maxSamples = getMaxSamples();
-	size_t stepCount = getStepCount(maxSamples);
+	double maxSamples = getMaxSamples();
 
 	ToroidFunction *function = new ToroidFunction();
 	ToroidVolumeCalculator *calculator = new ToroidVolumeCalculator();
@@ -299,15 +258,14 @@ void playWithToroidFunction() {
 	Logger::log("\n");
 	Logger::log("%s\n", STARS);
 	Logger::log("* Funcao: %s\n", function->toString().c_str());
-	Logger::log("*   intervalo da aproximacao [a=%d, b=%d]\n", 10, maxSamples);
-	Logger::log("*   incremento (amostras *= incremento): %d\n", stepCount);
+	Logger::log("*   intervalo da aproximacao [a=%d, b=%12.0f]\n", 10, maxSamples);
 	Logger::log("%s\n", STARS);
 
-	Logger::log(" -------- ------- --------- -------- ------------------------------------\n");
-	Logger::log(" QTDE     %%       VALOR     ERRO     CENTRO DE MASSA                      \n");
-	Logger::log(" -------- ------- --------- -------- ------------------------------------\n");
+	Logger::log(" ------------ ------- --------- ------------ --------------------------------\n");
+	Logger::log(" QTDE         %%       VOLUME    ERRO         CENTRO DE MASSA                    \n");
+	Logger::log(" ------------ ------- --------- ------------ --------------------------------\n");
 
-	for (size_t idx = 10; idx < maxSamples + 1; idx *= stepCount) {
+	for (double idx = 10; idx < maxSamples + 1; idx *= 10) {
 
 		calculator->evaluate(
 				function, DEFAULT_TOROID_ENCLOSING_CUBE_VOLUME, DEFAULT_TOROID_BOUNDS, idx);
@@ -317,11 +275,11 @@ void playWithToroidFunction() {
 		register double hitCount = calculator->getHitCountAsPercentage();
 		pel216::week7::CENTER_OF_MASS centerOfMass = calculator->getCenterOfMass();
 
-		Logger::log(" %-8d %06.2f%% %08.6f %08.6f (x=%+8.6f,y=%+8.6f,z=%+8.6f)\n", 
+		Logger::log(" %-12.0f %06.2f%% %08.6f %012.9f %+9.7f,%+9.7f,%+9.7f\n", 
 				idx, hitCount, mass, error, centerOfMass.x, centerOfMass.y, centerOfMass.z);
 
 	}
-	Logger::log(" -------- ------- --------- -------- ------------------------------------\n");
+	Logger::log(" ------------ ------- --------- ------------- --------------------------------\n");
 
 	Logger::log("%s\n", STARS);
 

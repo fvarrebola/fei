@@ -27,7 +27,7 @@ namespace pel216 {
 			/**
 			 * @see pel216::week6::IntegrationRule#evaluate()
 			 */
-			virtual double doEvaluate(Function *function, double a, double b, size_t intervals) {
+			virtual double doEvaluate(Function *function, double a, double b, double intervals) {
 
 				double result = 0.0f;
 
@@ -35,7 +35,7 @@ namespace pel216 {
 
 				double a_prime = a;
 				double b_prime = a_prime + alpha;
-				for (size_t idx = 0; idx < intervals; idx++) {
+				for (double idx = 0.0f; idx < intervals; idx++) {
 					double a_plus_b_div_2 = (a_prime + b_prime) / 2;
 					result += ((b_prime - a_prime) / 6) * (function->evaluate(a_prime) + 4 * function->evaluate(a_plus_b_div_2) + function->evaluate(b_prime));
 					a_prime += alpha;
