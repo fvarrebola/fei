@@ -16,6 +16,7 @@ Para esta disciplina, os projetos são os seguintes:
 * [semana-04](https://github.com/fvarrebola/fei/tree/master/pel216/week4): exercício sobre buscas (Best First, Hill Climbing, A Star)
 * [semana-05](https://github.com/fvarrebola/fei/tree/master/pel216/week5): exercício sobre descida de gradiente
 * [semana-06](https://github.com/fvarrebola/fei/tree/master/pel216/week6): exercício sobre integração numérica (método do retângulo, do trapezóide e de Simpson)
+* [semana-07](https://github.com/fvarrebola/fei/tree/master/pel216/week7): exercício sobre integração numérica e cálculo de volume (método Monte Carlo)
 
 ## Executando os projetos
 
