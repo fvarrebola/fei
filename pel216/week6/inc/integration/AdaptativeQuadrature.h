@@ -44,7 +44,7 @@ namespace pel216 {
 			 *
 			 * @return o <code>double</code> que representa o resultado da avaliação
 			 */
-			double doEvaluate(IntegrationRule *rule, Function *function, double a, double b, double tau = 0.000000000001f) {
+			double doEvaluate(IntegrationRule *rule, Function *function, double a, double b, double tau = 10^-12) {
 
 				double a_prime = a;
 				double b_prime = b;
