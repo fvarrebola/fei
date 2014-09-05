@@ -23,7 +23,7 @@ namespace pel216 {
 
 		private:
 			std::list<BookAttendGrade> samples;
-			std::list<BookAttendGrade> neighborsList;
+			std::vector<BookAttendGrade> neighborsList;
 
 			/**
 			 * Determina a distância de uma amostra para o alvo utilizando a distância euclidiana.<br />
@@ -101,10 +101,10 @@ namespace pel216 {
 				double result = 0.0f;
 
 				buildNearestNeighborList(target, neighbors);
-				for (std::list<BookAttendGrade>::iterator iterator = this->neighborsList.begin();  
-						iterator != this->neighborsList.end(); 
-						++iterator) {
-					result += (*iterator).getGrade();
+
+				size_t length = this->neighborsList.size();
+				for (size_t idx = 0; idx < length; idx++) {
+					result += this->neighborsList[idx].getGrade();
 				}
 
 				result /= (neighbors * 1.0f);
@@ -117,9 +117,9 @@ namespace pel216 {
 			/**
 			 * Obtém a lista de amostras mais próximas ao alvo.<br />
 			 *
-			 * @return o <code>std::list</code> de @link{BookAttendGrade} que representa a lista de amostras mais próximas ao alvo
+			 * @return o <code>std::vector</code> de @link{BookAttendGrade} que representa a lista de amostras mais próximas ao alvo
 			 */
-			std::list<BookAttendGrade> getNeighborList() {
+			std::vector<BookAttendGrade> getNeighborList() {
 				return this->neighborsList;
 			};
 

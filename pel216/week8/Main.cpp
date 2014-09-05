@@ -87,6 +87,13 @@ void playWithNearestNeighborFunction() {
 
 	Logger::log(" NOTA: %02.9f\n", method->evaluate(target, neighbors));
 
+	Logger::log(" VIZINHOS ESCOLHIDOS:\n"); 
+	std::vector<BookAttendGrade> neighborList = method->getNeighborList();
+	size_t length = neighborList.size();
+	for (size_t idx = 0; idx < length; idx++) {
+		Logger::log(" > %03d: %s\n", idx + 1, neighborList[idx].toString().c_str());
+	}
+
 	Logger::log("%s\n", STARS);
 
 }
