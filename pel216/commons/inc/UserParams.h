@@ -25,6 +25,31 @@ namespace pel216 {
 
 		public:
 			/**
+			 * Obtém um <code>std::string</code> como parâmetro de entrada.<br />
+			 *
+			 * @param inputMsg
+			 *				o <code>std::string</code> que representa a mensagem exibida para o usuario
+			 *
+			 * @return o <code>std::string</code> informado pelo usuário
+			 */
+			static std::string getStringParam(std::string inputMsg) {
+
+				bool boolParam = false;
+
+				if (pel216::commons::Utils::isInvalidHandle(&inputMsg)) {
+					throw new pel216::commons::IllegalParameterException();
+				}
+
+				std::string inputString;
+
+				pel216::commons::Logger::log("%s: ", inputMsg.c_str());
+				std::cin >> inputString;
+
+				return inputString;
+
+			};
+			
+			/**
 			 * Obtém um <code>bool</code> como parâmetro de entrada.
 			 *
 			 * @param inputMsg
