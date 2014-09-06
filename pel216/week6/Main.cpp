@@ -18,8 +18,6 @@
 #define B___INPUT_MSG							"Informe o ponto final (b) (double)"
 #define INTERVAL__INPUT_MSG						"Informe a quantidade de intervalos (int)"
 
-#define RULE_PRINT_FORMAT						
-
 void playWithFirstFunction();
 void playWithSecondFunction();
 void playWithThirdFunction();
