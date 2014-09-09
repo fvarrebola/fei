@@ -273,13 +273,13 @@ int main(int argc, char** argv) {
     printHeader();
 
 	// realiza as integrações para as funções 1, 2 e 3 da week6
-	playWithNewtonCoatesIntegration();
+	playWithNewtonCoatesIntegration(true);
 
 	// realiza as integrações para as funções 1, 2 e 3 da week7
-	playWithMonteCarloIntegration();
+	playWithMonteCarloIntegration(true);
 
 	// realiza o cálculo de volume para o toróide
-	playWithToroidVolumeCalculation();
+	playWithToroidVolumeCalculation(true);
 
 	// finalizando a biblioteca MPI
 	assertMPIReturnCode(MPI_Finalize());
