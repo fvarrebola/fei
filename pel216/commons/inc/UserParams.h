@@ -34,8 +34,6 @@ namespace pel216 {
 			 */
 			static std::string getStringParam(std::string inputMsg) {
 
-				bool boolParam = false;
-
 				if (pel216::commons::Utils::isInvalidHandle(&inputMsg)) {
 					throw new pel216::commons::IllegalParameterException();
 				}

@@ -61,23 +61,16 @@
     #define MAX_PATH                            256
 #endif
 
-// definição utilizada para determinar se as funções de runtime com sufixo '_s' estão disponíveis
-#if !__STDC_WANT_SECURE_LIB__
-    #define vsprintf_s(buffer, buffer_size, stringbuffer, ...) \
-        (vsprintf(buffer, stringbuffer, __VA_ARGS__))
-
-    #define sprintf_s(buffer, buffer_size, stringbuffer, ...) \
-        (sprintf(buffer, stringbuffer, __VA_ARGS__))
-
-    #define localtime_s(tm, timer) \
-		(*tm = *localtime(timer))
-#endif
-
-// definição utilizada para verificar se o valor X é NaN 
-#ifdef __GNUC__
-	#define isnan(x)		std::isnan(x)
+// definição utilizada para 
+// 1. determinar se as funções de runtime com sufixo '_s' estão disponíveis
+// 2. utilizada para verificar se o valor X é NaN 
+#if __GNUC__
+    #define vsprintf_s(buf, size, str, ...)	(vsprintf(buf, str, __VA_ARGS__))
+    #define sprintf_s(buf, size, str, ...)	(sprintf(buf, str, __VA_ARGS__))
+    #define localtime_s(tm, timer)			(*tm = *localtime(timer))
+	#define isnan(x)						std::isnan(x)
 #else
-	#define isnan(x)		_isnan(x)
+	#define isnan(x)						_isnan(x)
 #endif
 
 namespace pel216 {

@@ -57,7 +57,7 @@ namespace pel216 {
 				std::priority_queue<
 					BookAttendGradeNode, 
 					std::vector<BookAttendGradeNode>,
-					std::less<std::vector<BookAttendGradeNode>::value_type>>  queue;
+					std::less<std::vector<BookAttendGradeNode>::value_type> >  queue;
 
 				// determina a proximidade de cada uma das amostras para o alvo
 				for (std::list<BookAttendGrade>::iterator iterator = this->samples.begin(); 

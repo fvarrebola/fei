@@ -73,8 +73,9 @@ namespace pel216 {
 			 */
 			std::string toString() {
 				
+
 				char pszMsg[13] = {0x00};
-				sprintf_s(pszMsg, "(%2d, %2d, %2d)", this->books, this->attendance, this->grade);
+				sprintf_s(pszMsg, 13, "(%2d, %2d, %2d)", this->books, this->attendance, this->grade);
 
 				return std::string(pszMsg);
 

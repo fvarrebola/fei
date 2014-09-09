@@ -39,7 +39,7 @@ namespace pel216 {
 			 * 
 			 * @return o @link{BookAttendGrade} que representa a amostra
 			 */
-			BookAttendGrade getData() {
+			BookAttendGrade getData() const {
 				return this->data;
 			};
 
