@@ -125,12 +125,10 @@ namespace pel208 {
 			/**
 			 * Configura todas as linhas de uma coluna com o valor informado.<br />
 			 *
+			 * @param column
+			 *				o <code>size_t</code> que representa a coluna da matriz
 			 * @param value
 			 *				o <code>double</code> que representa o valor
-			 * @param rows
-			 *				o <code>size_t</code> que representa a linha da matriz
-			 * @param columns
-			 *				o <code>size_t</code> que representa a coluna da matriz
 			 */
 			void setColumnCellsValue(size_t column, double value = 0.0f) {
 				for (size_t idx = 0; idx < this->rows; idx++) {
@@ -142,7 +140,7 @@ namespace pel208 {
 			 * Transpõe uma matriz.<br />
 			 *
 			 * @param transposed
-			 *				o @link{Matrix} que representa a matriz transposta
+			 *				o Matrix que representa a matriz transposta
 			 *
 			 * @return <code>true</code> caso a transposição tenha sido bem sucedida; do contrário <code>false</code>
 			 */
@@ -164,9 +162,9 @@ namespace pel208 {
 			 * Multiplica uma matriz por outra.<br />
 			 *
 			 * @param by
-			 *				o @link{Matrix} que representa o fator de multiplicação
+			 *				o Matrix que representa o fator de multiplicação
 			 * @param product
-			 *				o @link{Matrix} que representa a matriz resultante
+			 *				o Matrix que representa a matriz resultante
 			 *
 			 * @return <code>true</code> caso a multiplicação tenha sido bem sucedida; do contrário <code>false</code>
 			 */
@@ -192,7 +190,7 @@ namespace pel208 {
 			 * Inverte uma matrix 2 x 2.<br />
 			 * 
 			 * @param inverse
-			 *				o @link{Matrix} que representa a matriz inversa
+			 *				o Matrix que representa a matriz inversa
 			 *
 			 * @return <code>true</code> caso a inversão tenha sido bem sucedida; do contrário <code>false</code>
 			 */
@@ -224,7 +222,7 @@ namespace pel208 {
 			 * Inverte uma matrix 3 x 3.<br />
 			 * 
 			 * @param inverse
-			 *				o @link{Matrix} que representa a matriz inversa
+			 *				o Matrix que representa a matriz inversa
 			 *
 			 * @return <code>true</code> caso a inversão tenha sido bem sucedida; do contrário <code>false</code>
 			 */
@@ -271,7 +269,7 @@ namespace pel208 {
 			 * Inverte uma matriz.<br />
 			 *
 			 * @param inverse
-			 *				o @link{Matrix} que representa a matriz resultante
+			 *				o Matrix que representa a matriz resultante
 			 *
 			 * @return <code>true</code> caso a inversão tenha sido bem sucedida; do contrário <code>false</code>
 			 */

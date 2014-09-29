@@ -73,12 +73,12 @@ namespace pel208 {
 
 		public:
 			/**
-			 * Carrega os dados contidos no arquivo como um <code>std::list</code> de @link{BookAttendGrade}.
+			 * Carrega os dados contidos no arquivo como um <code>std::list</code> de BookAttendGrade.
 			 *
 			 * @param file
 			 *				o <code>char *</code> que representa o nome do arquivo
 			 *
-			 * @return o <code>std::list</code> de @link{BookAttendGrade} que representa a lista de dados
+			 * @return o <code>std::list</code> de BookAttendGrade que representa a lista de dados
 			 */
 			static std::list<BookAttendGrade> loadAsBookAttendGrade(const char *file) {
 
@@ -113,12 +113,12 @@ namespace pel208 {
 			};
 
 			/**
-			 * Carrega os dados contidos no arquivo como um <code>std::list</code> de @link{BoiolingPointPressure}.
+			 * Carrega os dados contidos no arquivo como um <code>std::list</code> de BoiolingPointPressure.
 			 *
 			 * @param file
 			 *				o <code>char *</code> que representa o nome do arquivo
 			 *
-			 * @return o <code>std::list</code> de @link{BoiolingPointPressure} que representa a lista de dados
+			 * @return o <code>std::list</code> de BoiolingPointPressure que representa a lista de dados
 			 */
 			static std::list<BoiolingPointPressure> loadAsBoiolingPointPressure(const char *file) {
 

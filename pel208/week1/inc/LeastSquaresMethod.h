@@ -31,9 +31,9 @@ namespace pel208 {
 			 * Construtor.
 			 *
 			 * @param xMatrix
-			 *				o @link{Matrix} que representa a matriz de entradas
+			 *				o Matrix que representa a matriz de entradas
 			 * @param yMatrix
-			 *				o @link{Matrix} que representa a matriz de resultados
+			 *				o Matrix que representa a matriz de resultados
 			 * @param bias
 			 *				o <code>double</code> que representa o bias
 			 */
@@ -47,7 +47,7 @@ namespace pel208 {
 			 * Executa o método dos mínimos quadrados.
 			 *
 			 * @param target
-			 *				o @link{Matrix} que representa a matriz com as entradas que se quer estimar
+			 *				o Matrix que representa a matriz com as entradas que se quer estimar
 			 * @param debug
 			 *				indica se as matrizes devem ser impressas
 			 *
