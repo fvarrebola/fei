@@ -20,8 +20,10 @@ Para esta disciplina, os projetos são os seguintes:
 * [semana-08](https://github.com/fvarrebola/fei/tree/master/pel216/week8): exercício sobre aprendizado de máquina utilizando o método k-Nearest Neighbors
 * [semana-09](https://github.com/fvarrebola/fei/tree/master/pel216/week9): exercício sobre integração numérica utilizando a biblioteca MPI
 
+* 2. PEL208 - Tópicos Especiais de Aprendizagem
 
-## Executando os projetos
+# PEL208 - Tópicos Especiais de Aprendizagem
 
-Inicialmente, todos os projetos dessa disciplina foram criados utilizando o [Eclipse CPP Luna](http://www.eclipse.org/downloads/). Mas agora tudo foi migrado para o [Microsoft Visual Studio 2012](http://www.visualstudio.com/).
-Outras interfaces de desenvolvimento também podem ser utilizadas.
+Para esta disciplina, os projetos são os seguintes:
+* [commons](https://github.com/fvarrebola/fei/tree/master/pel208/commons): funcionalidades comuns
+* [semana-01](https://github.com/fvarrebola/fei/tree/master/pel208/week1): exercício sobre método dos mínimos quadrados
