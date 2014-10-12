@@ -36,27 +36,93 @@ namespace pel208 {
 			/**
 			 * Inicializa a matriz.
 			 */
-			void initialize() {
+			PRIVATE void initialize() {
 
 				this->_data = new double*[this->rows];
 				for (size_t idx = 0; idx < this->rows; idx++) {
 					this->_data[idx] = new double[this->columns];
 				}
 
+				for (size_t rowIdx = 0; rowIdx < this->rows; rowIdx++) {
+					for (size_t colIdx = 0; colIdx < this->columns; colIdx++) {
+						this->_data[rowIdx][colIdx] = 0.0f;
+					}
+				}
+
 			};
 
 			/**
+			 * Soma do produto de todos os valores da linha da matriz atual com a coluna da matriz <code>by</code>.<br />
 			 *
+			 * @param by
+			 *				o Matrix que representa o fator de multiplicação
+			 * @param column
+			 *				o <code>size_t</code> que represente a linha
+			 * @param row
+			 *				o <code>size_t</code> que represente a coluna
+			 *
+			 * @return o <code>double</code> que representa a soma
 			 */
-			double sum(Matrix *by, size_t row, size_t column) {
+			PRIVATE	double multi_sum(Matrix *by, size_t row, size_t column) {
 
 				double result = 0.0f;
 				
-				for (size_t idx = 0; idx < this->columns; idx++) {
+				for (size_t idx = 0; idx < by->getColumns(); idx++) {
 					result += this->data()[row][idx] * by->data()[idx][column];
 				}
 
 				return result;
+
+			};
+
+			/**
+			 * Obtém os valores médios para as amostras de uma das colunas da matriz.<br />
+			 * As médias são armazenadas em uma matriz com a mesma quantidade de colunas da matriz sendo analisada.<br />
+			 * 		
+			 * @return o Matrix que representa a matriz de valores médios
+			 */
+			PRIVATE Matrix *getMeanValues() {
+				
+				Matrix *means = new Matrix(1, this->columns);
+
+				for (size_t colIdx = 0; colIdx < this->columns; colIdx++) {
+					double sum = 0.0f;
+					for (size_t rowIdx = 0; rowIdx < this->rows; rowIdx++) {
+						sum += this->_data[rowIdx][colIdx];
+					}
+					means->data()[0][colIdx] = sum / (this->rows * 1.0f);
+				}
+				
+				return means;
+
+			};
+
+			/**
+			 * Ajusta uma matriz subtraindo o valor da média.<br />
+			 *
+			 * @return o Matrix que representa a matriz resultante
+			 */
+			Matrix *adjustByMeanValue() {
+
+				Matrix *adjusted = NULL;
+				
+				Matrix *means = getMeanValues();
+				if (pel216::commons::Utils::isInvalidHandle(means)) {
+					return adjusted;
+				}
+				
+				adjusted = new Matrix(this->rows, this->columns);
+
+				// subtrai as médias das amostras
+				for (size_t colIdx = 0; colIdx < this->columns; colIdx++) {
+					for (size_t rowIdx = 0; rowIdx < this->rows; rowIdx++) {
+						adjusted->data()[rowIdx][colIdx] = this->_data[rowIdx][colIdx] - means->data()[0][colIdx];
+					}
+				}
+
+				delete means;
+
+				return adjusted;
 
 			};
 
@@ -69,14 +135,14 @@ namespace pel208 {
 			 * @param columns
 			 *				o <code>size_t</code> que representa a quantidade de colunas da matriz
 			 */
-			Matrix(size_t rows, size_t columns) {
+			Matrix(size_t rows, size_t columns = 0) {
 				
-				if (rows < 1 || columns < 1) {
+				if (rows < 1) {
 					throw new pel216::commons::IllegalParameterException();
 				}
 
 				this->rows = rows;
-				this->columns = columns;
+				this->columns = (columns == 0) ? this->rows : columns;
 
 				this->initialize();
 
@@ -100,7 +166,7 @@ namespace pel208 {
 			 *
 			 * @return o <code>size_t</code> que representa a quantidade de linhas da matriz
 			 */
-			size_t getRows() {
+			PUBLIC size_t getRows() {
 				return this->rows;
 			};
 
@@ -109,7 +175,7 @@ namespace pel208 {
 			 *
 			 * @return o <code>size_t</code> que representa a quantidade de colunas da matriz
 			 */
-			size_t getColumns() {
+			PUBLIC size_t getColumns() {
 				return this->columns;
 			};
 			
@@ -118,8 +184,27 @@ namespace pel208 {
 			 *
 			 * @return o <code>double**</code> que representa os dados da matriz
 			 */
-			double **data() {
+			PUBLIC double **data() {
 				return this->_data;
+			};
+
+			/**
+			 * Clona uma matriz.<br />
+			 *
+			 * @return o Matrix que representa o clone
+			 */
+			PUBLIC Matrix *clone() {
+
+				Matrix *clone = new Matrix(this->rows, this->columns);
+
+				for (size_t rowIdx = 0; rowIdx < this->rows; rowIdx++) {
+					for (size_t colIdx = 0; colIdx < this->columns; colIdx++) {
+						clone->data()[rowIdx][colIdx] = this->_data[rowIdx][colIdx];
+					}
+				}
+
+				return clone;
+
 			};
 
 			/**
@@ -130,7 +215,7 @@ namespace pel208 {
 			 * @param value
 			 *				o <code>double</code> que representa o valor
 			 */
-			void setColumnCellsValue(size_t column, double value = 0.0f) {
+			PUBLIC void setColumnCellsValue(size_t column, double value = 0.0f) {
 				for (size_t idx = 0; idx < this->rows; idx++) {
 					this->_data[idx][column] = value;
 				}
@@ -139,22 +224,19 @@ namespace pel208 {
 			/**
 			 * Transpõe uma matriz.<br />
 			 *
-			 * @param transposed
-			 *				o Matrix que representa a matriz transposta
-			 *
-			 * @return <code>true</code> caso a transposição tenha sido bem sucedida; do contrário <code>false</code>
+			 * @return o Matrix que representa a matriz transposta
 			 */
-			bool transpose(Matrix **transposed) {
+			PUBLIC Matrix *transpose() {
 
-				*transposed = new Matrix(this->columns, this->rows);
+				Matrix *transposed = new Matrix(this->columns, this->rows);
 				
 				for (size_t i = 0; i < this->rows; i++) {
 					for (size_t j = 0; j < this->columns; j++) {
-						(*transposed)->data()[j][i] = this->_data[i][j];
+						transposed->data()[j][i] = this->_data[i][j];
 					}
 				}
 
-				return true;
+				return transposed;
 
 			};
 
@@ -163,26 +245,24 @@ namespace pel208 {
 			 *
 			 * @param by
 			 *				o Matrix que representa o fator de multiplicação
-			 * @param product
-			 *				o Matrix que representa a matriz resultante
 			 *
-			 * @return <code>true</code> caso a multiplicação tenha sido bem sucedida; do contrário <code>false</code>
+			 * @return o Matrix que representa a matriz resultante
 			 */
-			bool multiply(Matrix *by, Matrix **product) {
+			PUBLIC Matrix *multiply(IN Matrix *by) {
 
 				if (pel216::commons::Utils::isInvalidHandle(by)) {
 					throw new pel216::commons::IllegalParameterException();
 				}
 
-				*product = new Matrix(this->rows, by->columns);
+				Matrix *product = new Matrix(this->rows, by->columns);
 
-				for (size_t prodRowIdx = 0; prodRowIdx < (*product)->rows; prodRowIdx++) {
-					for (size_t prodColIdx = 0; prodColIdx < (*product)->columns; prodColIdx++) {
-						(*product)->data()[prodRowIdx][prodColIdx] = sum(by, prodRowIdx, prodColIdx);
+				for (size_t prodRowIdx = 0; prodRowIdx < product->getRows(); prodRowIdx++) {
+					for (size_t prodColIdx = 0; prodColIdx < product->getColumns(); prodColIdx++) {
+						product->data()[prodRowIdx][prodColIdx] = multi_sum(by, prodRowIdx, prodColIdx);
 					}
 				}
 
-				return true;
+				return product;
 
 			};
 
@@ -194,7 +274,7 @@ namespace pel208 {
 			 *
 			 * @return <code>true</code> caso a inversão tenha sido bem sucedida; do contrário <code>false</code>
 			 */
-			bool invert2x2(Matrix **inverse) {
+			PUBLIC bool invert2x2(OUT Matrix **inverse) {
 
 				double a = this->_data[0][0];
 				double b = this->_data[0][1];
@@ -226,7 +306,7 @@ namespace pel208 {
 			 *
 			 * @return <code>true</code> caso a inversão tenha sido bem sucedida; do contrário <code>false</code>
 			 */
-			bool invert3x3(Matrix **inverse) {
+			PUBLIC bool invert3x3(OUT Matrix **inverse) {
 
 				Matrix identity(3,3);
 				identity.data()[0][0] = 1;
@@ -273,7 +353,7 @@ namespace pel208 {
 			 *
 			 * @return <code>true</code> caso a inversão tenha sido bem sucedida; do contrário <code>false</code>
 			 */
-			bool invert(Matrix **inverse) {
+			PUBLIC bool invert(OUT Matrix **inverse) {
 
 				// matrizes com inverso devem ser quadradas 
 				if (this->rows != this->columns) {
@@ -295,14 +375,121 @@ namespace pel208 {
 			};
 
 			/**
-			 * Faz a impressão de uma matriz.
+			 * Calcula a matriz de covariância.<br />
+			 *
+			 * @param adjusted
+			 *				o Matrix que representa a matriz de valores ajustados
+			 *
+			 * @return o Matrix que representa a matriz de covariância
+			 */
+			PUBLIC Matrix *covariate(OUT Matrix **adjusted = NULL) {
+
+				Matrix *covariate = NULL;
+
+				*adjusted = adjustByMeanValue();
+				if (pel216::commons::Utils::isInvalidHandle(adjusted)) {
+					return covariate;
+				}
+
+				double samples = this->rows; 
+
+				size_t covarSize = this->getColumns(); 
+				covariate = new Matrix(covarSize);
+				for (size_t covarRowIdx = 0; covarRowIdx < covarSize; covarRowIdx++) {
+					for (size_t covarColIdx = 0; covarColIdx < covarSize; covarColIdx++) {
+						register double sum = 0.0f;
+						for (size_t rowIdx = 0; rowIdx < this->rows; rowIdx++) {
+							sum += (*adjusted)->data()[rowIdx][covarRowIdx] * (*adjusted)->data()[rowIdx][covarColIdx];
+						}
+						covariate->data()[covarRowIdx][covarColIdx] = (sum / ((samples - 1) * 1.0f));
+					}
+				}
+
+				return covariate;
+
+			};
+
+			/**
+			 * Retorna a matriz identidade de uma matriz.<br />
+			 *
+			 * @param identity
+			 *				o Matrix que representa a matriz identidade
+			 *
+			 * @return <code>true</code> caso o cálculo tenha sido bem sucedido; do contrário <code>false</code>
+			 */			 
+			PUBLIC bool identity(OUT Matrix **identity) {
+
+				size_t size = this->getColumns(); 
+				
+				*identity = new Matrix(size);
+				for (size_t idx = 0; idx < size; idx++) {
+					(*identity)->data()[idx][idx] = 1.0f;
+				}
+
+				return true;
+
+			};
+
+			/**
+			 * Retorna a matriz diagonal de uma matriz.<br />
+			 *
+			 * @return o Matrix que representa a matriz diagonal
+			 */			 
+			PUBLIC Matrix *diagonal() {
+
+				size_t size = this->getColumns(); 
+				
+				Matrix *diagonal = new Matrix(size, 1);
+				for (size_t idx = 0; idx < size; idx++) {
+					diagonal->data()[idx][0] = this->data()[idx][idx];
+				}
+
+				return diagonal;
+
+			};
+
+			/**
+			 * Obtém o elemento com maior valor.<br />
+			 *
+			 * @param max
+			 *			o <code>double</code> que representa o maior valor encontrado
+			 * @param maxRowIdx
+			 *			o <code>size_t</code> que representa o índice da linha do maior valor encontrado
+			 * @param maxColIdx
+			 *			o <code>size_t</code> que representa o índice da coluna do maior valor encontrado
+			 *
+			 * @return <code>true</code> caso a obtenção tenha sido bem sucedida; do contrário <code>false</code>
+			 */
+			PUBLIC bool max(OUT double *max, OUT size_t *maxRowIdx, OUT size_t *maxColIdx) {
+				
+				size_t rowsCount = this->getRows();
+				size_t colsCount = this->getColumns();
+        
+				*max = FLT_MIN;
+				for (size_t rowIdx = 0; rowIdx < rowsCount; rowIdx++) {
+					for (size_t colIdx = 0; colIdx < colsCount; colIdx++) {
+						register double v = this->data()[rowIdx][colIdx];
+						if (v > *max) {
+							*max = v;
+							*maxRowIdx = rowIdx;
+							*maxColIdx = colIdx;
+						}
+					}
+				}
+				
+				return (*max == FLT_MIN);
+
+			};
+
+			/**
+			 * Faz a impressão de uma matriz.<br />
 			 *
 			 * @param prefix
 			 *				o <code>std::string</code> que representa o prefixo da impressão
 			 */
-			void dump(std::string prefix) {
+			PUBLIC void dump(std::string prefix) {
 
-				Logger::log("Imprimindo matrix %s (%d x %d)...\n", prefix.c_str(), this->rows, this->columns);
+				Logger::log(">>>> Imprimindo matrix %s (%d x %d)...\n", prefix.c_str(), this->rows, this->columns);
 				for (size_t i = 0; i < this->rows; i++) {
 					
 					Logger::log("|");

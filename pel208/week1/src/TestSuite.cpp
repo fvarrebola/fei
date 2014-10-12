@@ -82,20 +82,17 @@ PRIVATE void pel208::week1::TestSuite::testMatrixClass() {
 	initialize();
 
 	// X^T
-	Matrix *x_t = NULL;
-	xMatrix->transpose(&x_t);
+	Matrix *x_t = xMatrix->transpose();
 
 	// X * X^T
-	Matrix *x___times___x_t = NULL;
-	x_t->multiply(xMatrix, &x___times___x_t);
+	Matrix *x___times___x_t = x_t->multiply(xMatrix);
 	assertCellValue(x___times___x_t, 0, 0, 10);
 	assertCellValue(x___times___x_t, 0, 1, 689);
 	assertCellValue(x___times___x_t, 1, 0, 689);
 	assertCellValue(x___times___x_t, 1, 1, 47565);
 
 	// X^T * Y
-	Matrix *x_t___times___y = NULL;
-	x_t->multiply(yMatrix, &x_t___times___y);
+	Matrix *x_t___times___y = x_t->multiply(yMatrix);
 	assertCellValue(x_t___times___y, 0, 0, 98);
 	assertCellValue(x_t___times___y, 1, 0, 6800);
 
@@ -108,8 +105,7 @@ PRIVATE void pel208::week1::TestSuite::testMatrixClass() {
 	assertCellValue(inverted, 1, 1, 0.0108);
 
 	// B
-	Matrix *beta_approx = NULL;
-	inverted->multiply(x_t___times___y, &beta_approx);
+	Matrix *beta_approx = inverted->multiply(x_t___times___y);
 	assertCellValue(beta_approx, 0, 0, -25.65);
 	assertCellValue(beta_approx, 1, 0, 0.5145);
 
@@ -118,8 +114,7 @@ PRIVATE void pel208::week1::TestSuite::testMatrixClass() {
 	target.data()[0][0] = 1;
 	target.data()[0][1] = 60;
 
-	Matrix *estimate = NULL;
-	target.multiply(beta_approx, &estimate);
+	Matrix *estimate = target.multiply(beta_approx);
 	assertCellValue(estimate, 0, 0, 5.22);
 
 	delete beta_approx;

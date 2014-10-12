@@ -61,24 +61,20 @@ namespace pel208 {
 				xMatrix->setColumnCellsValue(0, bias);
 
 				// X^T
-				Matrix *x_t = NULL;
-				xMatrix->transpose(&x_t);
+				Matrix *x_t = xMatrix->transpose();
 
 				// X * X^T
-				Matrix *x___times___x_t = NULL;
-				x_t->multiply(xMatrix, &x___times___x_t);
+				Matrix *x___times___x_t = x_t->multiply(xMatrix);
 	
 				// X^T * Y
-				Matrix *x_t___times___y = NULL;
-				x_t->multiply(yMatrix, &x_t___times___y);
+				Matrix *x_t___times___y = x_t->multiply(yMatrix);
 
 				// (X * X^T) ^ -1
 				Matrix *inverted = NULL;
 				x___times___x_t->invert(&inverted);
 
 				// B
-				Matrix *beta_approx = NULL;
-				inverted->multiply(x_t___times___y, &beta_approx);
+				Matrix *beta_approx = inverted->multiply(x_t___times___y);
 
 				// alvo
 				Matrix target_matrix(1, target->getColumns() + 1);
@@ -88,8 +84,7 @@ namespace pel208 {
 				}
 
 				// matriz de resultado
-				Matrix *result_matrix = NULL;
-				target_matrix.multiply(beta_approx, &result_matrix);
+				Matrix *result_matrix = target_matrix.multiply(beta_approx);
 
 				if (debug) {
 					xMatrix->dump("X");
