@@ -26,3 +26,4 @@ Para esta disciplina, os projetos são os seguintes:
 Para esta disciplina, os projetos são os seguintes:
 * [commons](https://github.com/fvarrebola/fei/tree/master/pel208/commons): funcionalidades comuns
 * [semana-01](https://github.com/fvarrebola/fei/tree/master/pel208/week1): método dos mínimos quadrados
+* [semana-02](https://github.com/fvarrebola/fei/tree/master/pel208/week2): análise do componente principal
