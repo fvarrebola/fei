@@ -34,9 +34,23 @@ namespace pel208 {
 			double **_data;
 
 			/**
-			 * Inicializa a matriz.
+			 * Inicializa a matriz.<br />
+			 *
+			 * @param rows
+			 *				o <code>size_t</code> que representa a quantidade de linhas da matriz
+			 * @param columns
+			 *				o <code>size_t</code> que representa a quantidade de colunas da matriz
+			 * @param value
+			 *				o <code>double</code> que representa o valor inicial
 			 */
-			PRIVATE void initialize() {
+			PRIVATE void initialize(IN size_t rows, IN size_t columns = 0, IN double value = 0.0f) {
+
+				if (rows < 1) {
+					throw new pel216::commons::IllegalParameterException();
+				}
+
+				this->rows = rows;
+				this->columns = (columns == 0) ? this->rows : columns;
 
 				this->_data = new double*[this->rows];
 				for (size_t idx = 0; idx < this->rows; idx++) {
@@ -45,10 +59,142 @@ namespace pel208 {
 
 				for (size_t rowIdx = 0; rowIdx < this->rows; rowIdx++) {
 					for (size_t colIdx = 0; colIdx < this->columns; colIdx++) {
-						this->_data[rowIdx][colIdx] = 0.0f;
+						this->_data[rowIdx][colIdx] = value;
 					}
 				}
 
+			};
+
+
+			/**
+			 * Inverte uma matrix 2 x 2.<br />
+			 * 
+			 * @param inverse
+			 *				o Matrix que representa a matriz inversa
+			 *
+			 * @return <code>true</code> caso a inversão tenha sido bem sucedida; do contrário <code>false</code>
+			 */
+			PRIVATE bool invert2x2(OUT Matrix **inverse) {
+
+				double a = this->_data[0][0];
+				double b = this->_data[0][1];
+				double c = this->_data[1][0];
+				double d = this->_data[1][1];
+				
+				double det = ((a * d) - (b * c)) * 1.0f;
+				if (det == 0.0f) {
+					return false;
+				}
+
+				double det_inv = 1 / det;
+				
+				*inverse = new Matrix(this->rows, this->columns);
+				(*inverse)->data()[0][0] = det_inv * d;
+				(*inverse)->data()[0][1] = det_inv * b * -1.0f;
+				(*inverse)->data()[1][0] = det_inv * c * -1.0f;
+				(*inverse)->data()[1][1] = det_inv * a;
+			
+				return true;
+
+			};
+
+			/**
+			 * Inverte uma matrix 3 x 3.<br />
+			 * 
+			 * @param inverse
+			 *				o Matrix que representa a matriz inversa
+			 *
+			 * @return <code>true</code> caso a inversão tenha sido bem sucedida; do contrário <code>false</code>
+			 */
+			PRIVATE bool invert3x3(OUT Matrix **inverse) {
+
+				Matrix identity(3,3);
+				identity.data()[0][0] = 1;
+				identity.data()[1][1] = 1;
+				identity.data()[2][2] = 1;
+
+				double a = this->_data[0][0];
+				double b = this->_data[0][1];
+				double c = this->_data[0][2];
+				double d = this->_data[1][0];
+				double e = this->_data[1][1];
+				double f = this->_data[1][2];
+				double g = this->_data[2][0];
+				double h = this->_data[2][1];
+				double i = this->_data[2][2];
+				
+				double det = (a * (e * i - f * h)) - (b * (i * d - f * g)) + (c * (d * h - e * g));
+				if (det == 0) {
+					return false;
+				}
+
+				double det_inv = 1 / det;
+				
+				*inverse = new Matrix(this->rows, this->columns);
+				(*inverse)->data()[0][0] = det_inv * (e * i - f * h);
+				(*inverse)->data()[0][1] = det_inv * (b * i - c * h) * -1.0f;
+				(*inverse)->data()[0][2] = det_inv * (b * f - c * e);
+				(*inverse)->data()[1][0] = det_inv * (d * i - f * g) * -1.0f;
+				(*inverse)->data()[1][1] = det_inv * (a * i - c * g);
+				(*inverse)->data()[1][2] = det_inv * (a * f - c * d) * -1.0f;
+				(*inverse)->data()[2][0] = det_inv * (d * h - e * g);
+				(*inverse)->data()[2][1] = det_inv * (a * h - b * g) * -1.0f;
+				(*inverse)->data()[2][2] = det_inv * (a * e - b * d);
+
+				return true;
+
+			};
+
+			/**
+			 * Inverte uma matrix 4 x 4.<br />
+			 * Extraído de <a href="http://www.mesa3d.org/">MESA</a>.<br />
+			 * 
+			 * @param inverse
+			 *				o Matrix que representa a matriz inversa
+			 *
+			 * @return <code>true</code> caso a inversão tenha sido bem sucedida; do contrário <code>false</code>
+			 */
+			PRIVATE bool invert4x4(OUT Matrix **inverse) {
+
+				double inv[16], det;
+
+				double m[16] = {0.0f};
+				for (size_t idx = 0; idx < 16; idx++) {
+					m[idx] = this->data()[idx / 4][idx % 4];
+				}
+
+				inv[0] = m[5] * m[10] * m[15] - m[5] * m[11] * m[14] - m[9] * m[6] * m[15] + m[9] * m[7] * m[14] + m[13] * m[6] * m[11] - m[13] * m[7] * m[10];
+				inv[4] = -m[4] * m[10] * m[15] + m[4] * m[11] * m[14] + m[8] * m[6] * m[15] - m[8] * m[7] * m[14] - m[12] * m[6] * m[11] + m[12] * m[7] * m[10];
+				inv[8] = m[4] * m[9] * m[15] - m[4] * m[11] * m[13] - m[8] * m[5] * m[15] + m[8] * m[7] * m[13] + m[12] * m[5] * m[11] - m[12] * m[7] * m[9];
+				inv[12] = -m[4] * m[9] * m[14] + m[4] * m[10] * m[13] + m[8] * m[5] * m[14] - m[8] * m[6] * m[13] - m[12] * m[5] * m[10] + m[12] * m[6] * m[9];
+				inv[1] = -m[1] * m[10] * m[15] + m[1] * m[11] * m[14] + m[9] * m[2] * m[15] - m[9] * m[3] * m[14] - m[13] * m[2] * m[11] + m[13] * m[3] * m[10];
+				inv[5] = m[0] * m[10] * m[15] - m[0] * m[11] * m[14] -m[8] * m[2] * m[15] + m[8] * m[3] * m[14] + m[12] * m[2] * m[11] - m[12] * m[3] * m[10];
+				inv[9] = -m[0] * m[9] * m[15] + m[0] * m[11] * m[13] + m[8] * m[1] * m[15] - m[8] * m[3] * m[13] - m[12] * m[1] * m[11] + m[12] * m[3] * m[9];
+				inv[13] = m[0] * m[9] * m[14] - m[0] * m[10] * m[13] - m[8] * m[1] * m[14] + m[8] * m[2] * m[13] + m[12] * m[1] * m[10] - m[12] * m[2] * m[9];
+				inv[2] = m[1] * m[6] * m[15] - m[1] * m[7] * m[14] - m[5] * m[2] * m[15] + m[5] * m[3] * m[14] + m[13] * m[2] * m[7] - m[13] * m[3] * m[6];
+				inv[6] = -m[0] * m[6] * m[15] + m[0] * m[7] * m[14] + m[4] * m[2] * m[15] - m[4] * m[3] * m[14] - m[12] * m[2] * m[7] + m[12] * m[3] * m[6];
+				inv[10] = m[0] * m[5] * m[15] - m[0] * m[7] * m[13] - m[4] * m[1] * m[15] + m[4] * m[3] * m[13] + m[12] * m[1] * m[7] - m[12] * m[3] * m[5];
+				inv[14] = -m[0] * m[5] * m[14] + m[0] * m[6] * m[13] + m[4] * m[1] * m[14] - m[4] * m[2] * m[13] - m[12] * m[1] * m[6] + m[12] * m[2] * m[5];
+				inv[3] = -m[1] * m[6] * m[11] + m[1] * m[7] * m[10] + m[5] * m[2] * m[11] - m[5] * m[3] * m[10] - m[9] * m[2] * m[7] + m[9] * m[3] * m[6];
+				inv[7] = m[0] * m[6] * m[11] - m[0] * m[7] * m[10] - m[4] * m[2] * m[11] + m[4] * m[3] * m[10] + m[8] * m[2] * m[7] - m[8] * m[3] * m[6];
+				inv[11] = -m[0] * m[5] * m[11] + m[0] * m[7] * m[9] + m[4] * m[1] * m[11] - m[4] * m[3] * m[9] - m[8] * m[1] * m[7] + m[8] * m[3] * m[5];
+				inv[15] = m[0] * m[5] * m[10] - m[0] * m[6] * m[9] - m[4] * m[1] * m[10] + m[4] * m[2] * m[9] + m[8] * m[1] * m[6] - m[8] * m[2] * m[5];
+
+				det = m[0] * inv[0] + m[1] * inv[4] + m[2] * inv[8] + m[3] * inv[12];
+
+				if (det == 0) {
+					return false;
+				}
+
+				det = 1.0 / det;
+
+				*inverse = new Matrix(4, 4);
+				for (size_t idx = 0; idx < 16; idx++) {
+					(*inverse)->data()[idx / 4][idx % 4] = inv[idx] * det;
+				}
+
+				return true;
+		
 			};
 
 			/**
@@ -68,32 +214,12 @@ namespace pel208 {
 				double result = 0.0f;
 				
 				for (size_t idx = 0; idx < by->getColumns(); idx++) {
-					result += this->data()[row][idx] * by->data()[idx][column];
+					if (idx < by->getRows()) {
+						result += this->data()[row][idx] * by->data()[idx][column];
+					}
 				}
 
 				return result;
-
-			};
-
-			/**
-			 * Obtém os valores médios para as amostras de uma das colunas da matriz.<br />
-			 * As médias são armazenadas em uma matriz com a mesma quantidade de colunas da matriz sendo analisada.<br />
-			 * 		
-			 * @return o Matrix que representa a matriz de valores médios
-			 */
-			PRIVATE Matrix *getMeanValues() {
-				
-				Matrix *means = new Matrix(1, this->columns);
-
-				for (size_t colIdx = 0; colIdx < this->columns; colIdx++) {
-					double sum = 0.0f;
-					for (size_t rowIdx = 0; rowIdx < this->rows; rowIdx++) {
-						sum += this->_data[rowIdx][colIdx];
-					}
-					means->data()[0][colIdx] = sum / (this->rows * 1.0f);
-				}
-				
-				return means;
 
 			};
 
@@ -102,11 +228,11 @@ namespace pel208 {
 			 *
 			 * @return o Matrix que representa a matriz resultante
 			 */
-			Matrix *adjustByMeanValue() {
+			PRIVATE Matrix *adjustByMeanValue() {
 
 				Matrix *adjusted = NULL;
 				
-				Matrix *means = getMeanValues();
+				Matrix *means = mean();
 				if (pel216::commons::Utils::isInvalidHandle(means)) {
 					return adjusted;
 				}
@@ -135,17 +261,22 @@ namespace pel208 {
 			 * @param columns
 			 *				o <code>size_t</code> que representa a quantidade de colunas da matriz
 			 */
-			Matrix(size_t rows, size_t columns = 0) {
-				
-				if (rows < 1) {
-					throw new pel216::commons::IllegalParameterException();
-				}
+			Matrix(IN size_t rows, IN size_t columns = 0) {
+				this->initialize(rows, columns);
+			};
 
-				this->rows = rows;
-				this->columns = (columns == 0) ? this->rows : columns;
-
-				this->initialize();
-
+			/**
+			 * Construtor.
+			 *
+			 * @param rows
+			 *				o <code>size_t</code> que representa a quantidade de linhas da matriz
+			 * @param columns
+			 *				o <code>size_t</code> que representa a quantidade de colunas da matriz
+			 * @param value
+			 *				o <code>double</code> que representa o valor inicial
+			 */
+			Matrix(IN size_t rows, IN size_t columns, IN double value) {
+				this->initialize(rows, columns, value);
 			};
 
 			/**
@@ -267,81 +398,46 @@ namespace pel208 {
 			};
 
 			/**
-			 * Inverte uma matrix 2 x 2.<br />
-			 * 
-			 * @param inverse
-			 *				o Matrix que representa a matriz inversa
+			 * Multiplica uma matriz por um valor.<br />
 			 *
-			 * @return <code>true</code> caso a inversão tenha sido bem sucedida; do contrário <code>false</code>
+			 * @param double
+			 *				o <code>double</code> que representa o fator de multiplicação
+			 *
+			 * @return o Matrix que representa a matriz resultante
 			 */
-			PUBLIC bool invert2x2(OUT Matrix **inverse) {
+			PUBLIC Matrix *multiply(IN double value) {
 
-				double a = this->_data[0][0];
-				double b = this->_data[0][1];
-				double c = this->_data[1][0];
-				double d = this->_data[1][1];
-				
-				double det = ((a * d) - (b * c)) * 1.0f;
-				if (det == 0.0f) {
-					return false;
+				Matrix *product = new Matrix(this->rows, this->columns);
+
+				for (size_t rowIdx = 0; rowIdx < this->rows; rowIdx++) {
+					for (size_t colIdx = 0; colIdx < this->columns; colIdx++) {
+						product->data()[rowIdx][colIdx] = this->data()[rowIdx][colIdx] * value;
+					}
 				}
 
-				double det_inv = 1 / det;
-				
-				*inverse = new Matrix(this->rows, this->columns);
-				(*inverse)->data()[0][0] = det_inv * d;
-				(*inverse)->data()[0][1] = det_inv * b * -1.0f;
-				(*inverse)->data()[1][0] = det_inv * c * -1.0f;
-				(*inverse)->data()[1][1] = det_inv * a;
-			
-				return true;
+				return product;
 
 			};
 
 			/**
-			 * Inverte uma matrix 3 x 3.<br />
-			 * 
-			 * @param inverse
-			 *				o Matrix que representa a matriz inversa
+			 * Divide uma matriz por um valor.<br />
 			 *
-			 * @return <code>true</code> caso a inversão tenha sido bem sucedida; do contrário <code>false</code>
+			 * @param double
+			 *				o <code>double</code> que representa o divisor
+			 *
+			 * @return o Matrix que representa a matriz resultante
 			 */
-			PUBLIC bool invert3x3(OUT Matrix **inverse) {
+			PUBLIC Matrix *divide(IN double value) {
 
-				Matrix identity(3,3);
-				identity.data()[0][0] = 1;
-				identity.data()[1][1] = 1;
-				identity.data()[2][2] = 1;
+				Matrix *result = new Matrix(this->rows, this->columns);
 
-				double a = this->_data[0][0];
-				double b = this->_data[0][1];
-				double c = this->_data[0][2];
-				double d = this->_data[1][0];
-				double e = this->_data[1][1];
-				double f = this->_data[1][2];
-				double g = this->_data[2][0];
-				double h = this->_data[2][1];
-				double i = this->_data[2][2];
-				
-				double det = (a * (e * i - f * h)) - (b * (i * d - f * g)) + (c * (d * h - e * g));
-				if (det == 0) {
-					return false;
+				for (size_t rowIdx = 0; rowIdx < this->rows; rowIdx++) {
+					for (size_t colIdx = 0; colIdx < this->columns; colIdx++) {
+						result->data()[rowIdx][colIdx] = this->data()[rowIdx][colIdx] / value;
+					}
 				}
 
-				double det_inv = 1 / det;
-				
-				*inverse = new Matrix(this->rows, this->columns);
-				(*inverse)->data()[0][0] = det_inv * (e * i - f * h);
-				(*inverse)->data()[0][1] = det_inv * (b * i - c * h) * -1.0f;
-				(*inverse)->data()[0][2] = det_inv * (b * f - c * e);
-				(*inverse)->data()[1][0] = det_inv * (d * i - f * g) * -1.0f;
-				(*inverse)->data()[1][1] = det_inv * (a * i - c * g);
-				(*inverse)->data()[1][2] = det_inv * (a * f - c * d) * -1.0f;
-				(*inverse)->data()[2][0] = det_inv * (d * h - e * g);
-				(*inverse)->data()[2][1] = det_inv * (a * h - b * g) * -1.0f;
-				(*inverse)->data()[2][2] = det_inv * (a * e - b * d);
-
-				return true;
+				return result;
 
 			};
 
@@ -366,6 +462,8 @@ namespace pel208 {
 					result = invert2x2(inverse);
 				} else if (this->rows == 3) {
 					result = invert3x3(inverse);
+				}  else if (this->rows == 4) {
+					result = invert4x4(inverse);
 				} else {
 					throw new pel216::commons::IllegalParameterException(); // apenas matrizes 2x2 e 3x3 são suportadas
 				}
@@ -382,7 +480,7 @@ namespace pel208 {
 			 *
 			 * @return o Matrix que representa a matriz de covariância
 			 */
-			PUBLIC Matrix *covariate(OUT Matrix **adjusted = NULL) {
+			PUBLIC Matrix *covariate(OUT Matrix **adjusted) {
 
 				Matrix *covariate = NULL;
 
@@ -394,7 +492,7 @@ namespace pel208 {
 				double samples = this->rows; 
 
 				size_t covarSize = this->getColumns(); 
-				covariate = new Matrix(covarSize);
+				covariate = new Matrix(covarSize, covarSize);
 				for (size_t covarRowIdx = 0; covarRowIdx < covarSize; covarRowIdx++) {
 					for (size_t covarColIdx = 0; covarColIdx < covarSize; covarColIdx++) {
 						register double sum = 0.0f;
@@ -421,7 +519,7 @@ namespace pel208 {
 
 				size_t size = this->getColumns(); 
 				
-				*identity = new Matrix(size);
+				*identity = new Matrix(size, size);
 				for (size_t idx = 0; idx < size; idx++) {
 					(*identity)->data()[idx][idx] = 1.0f;
 				}
@@ -465,7 +563,7 @@ namespace pel208 {
 				size_t rowsCount = this->getRows();
 				size_t colsCount = this->getColumns();
         
-				*max = FLT_MIN;
+				*max = LONG_MIN;
 				for (size_t rowIdx = 0; rowIdx < rowsCount; rowIdx++) {
 					for (size_t colIdx = 0; colIdx < colsCount; colIdx++) {
 						register double v = this->data()[rowIdx][colIdx];
@@ -477,9 +575,166 @@ namespace pel208 {
 					}
 				}
 				
-				return (*max == FLT_MIN);
+				return (*max == LONG_MIN);
 
 			};
+
+			/**
+			 * Obtém os valores médios para as amostras de uma das colunas da matriz.<br />
+			 * As médias são armazenadas em uma matriz com a mesma quantidade de colunas da matriz sendo analisada.<br />
+			 * 		
+			 * @return o Matrix que representa a matriz de valores médios
+			 */
+			PUBLIC Matrix *mean() {
+				
+				Matrix *means = new Matrix(1, this->columns);
+
+				for (size_t colIdx = 0; colIdx < this->columns; colIdx++) {
+					double sum = 0.0f;
+					for (size_t rowIdx = 0; rowIdx < this->rows; rowIdx++) {
+						sum += this->_data[rowIdx][colIdx];
+					}
+					means->data()[0][colIdx] = sum / (this->rows * 1.0f);
+				}
+				
+				return means;
+
+			};
+
+			/**
+			 * Encolhe uma matriz.<br />
+			 *
+			 * @param rows
+			 *			o <code>size_t</code> que representa a quantidade de linhas
+			 */
+			PUBLIC void shrink(size_t rows = 0) {
+
+				if (rows == 0 || rows > this->rows) {
+					throw new pel216::commons::IllegalParameterException();
+				}
+
+				if (rows > 0) {
+					for (size_t idx = rows; idx < this->rows; idx++) {
+						delete [] this->_data[idx];
+					}
+					this->rows = rows;
+				}
+
+			};
+
+			/**
+			 * Gera uma matriz de elementos únicos considerando as amostras da coluna informada.<br />
+			 *
+			 * @param column
+			 *			o <code>size_t</code> que representa o índice da coluna
+			 */
+			PUBLIC Matrix *unique(size_t column = 0) {
+
+				// em termos de quantidade de linhas a matriz de valores únicos
+				// é, no máximo, igual à matriz atual
+				Matrix *unique = new Matrix(this->rows, 1);
+
+				size_t count = 0;
+				
+				for (size_t rowIdx = 0; rowIdx < this->rows; rowIdx++) {
+
+					register double value = data()[rowIdx][column];
+
+					bool known = false;
+
+					if (rowIdx > 0) {
+						size_t invRowIdx = rowIdx;
+						while (invRowIdx > 0 && !known) {
+							if (data()[rowIdx][column] == data()[invRowIdx - 1][column]) {
+								known = true;							
+							}
+							invRowIdx--;
+						}
+					}
+
+					if (!known) {
+						unique->data()[count++][0] = value;
+					}
+
+				}
+
+				unique->shrink(count);
+
+				return unique;
+
+			};
+
+			/**
+			 * Soma uma matriz à matriz atual.<br />
+			 *
+			 * @param identity
+			 *				o Matrix que representa a matriz a ser somada
+			 * @param identity
+			 *				o Matrix que representa o resultado
+			 *
+			 * @return <code>true</code> caso a soma seja bem sucedida; do contrário <code>false</code>
+			 */
+			PUBLIC bool sum(IN Matrix *with, IN OUT Matrix **result) {
+
+				if (pel216::commons::Utils::isInvalidHandle(with)) {
+					throw new pel216::commons::IllegalParameterException();
+				}
+
+				size_t rows = this->getRows();
+				size_t cols = this->getColumns();
+				if ((with->getRows() != rows) || (with->getColumns() != cols)) {
+					throw new pel216::commons::IllegalParameterException();
+				}
+
+				if (pel216::commons::Utils::isInvalidHandle((*result))) {
+					*result = this->clone();
+				}
+
+				for (size_t rowIdx = 0; rowIdx < rows; rowIdx++) {
+					for (size_t colIdx = 0; colIdx < cols; colIdx++) {
+						(*result)->data()[rowIdx][colIdx] = this->data()[rowIdx][colIdx] + with->data()[rowIdx][colIdx];
+					}
+				}
+
+				return true;
+
+			}
+
+			/**
+			 * Subtrai uma matriz da matriz atual.<br />
+			 *
+			 * @param identity
+			 *				o Matrix que representa a matriz a ser subtraída
+			 * @param identity
+			 *				o Matrix que representa o resultado
+			 *
+			 * @return <code>true</code> caso a sbbtração seja bem sucedida; do contrário <code>false</code>
+			 */
+			PUBLIC bool minus(IN Matrix *with, IN OUT Matrix **result) {
+
+				if (pel216::commons::Utils::isInvalidHandle(with)) {
+					throw new pel216::commons::IllegalParameterException();
+				}
+
+				size_t rows = this->getRows();
+				size_t cols = this->getColumns();
+				if ((with->getRows() != rows) || (with->getColumns() != cols)) {
+					throw new pel216::commons::IllegalParameterException();
+				}
+
+				if (pel216::commons::Utils::isInvalidHandle(*result)) {
+					*result = this->clone();
+				}
+
+				for (size_t rowIdx = 0; rowIdx < rows; rowIdx++) {
+					for (size_t colIdx = 0; colIdx < cols; colIdx++) {
+						(*result)->data()[rowIdx][colIdx] = this->data()[rowIdx][colIdx] - with->data()[rowIdx][colIdx];
+					}
+				}
+
+				return true;
+
+			}
 
 			/**
 			 * Faz a impressão de uma matriz.<br />
