@@ -60,6 +60,26 @@ close();
 
 
 # *****************************************************************************
+# Distribuicao PL vs PW
+# *****************************************************************************
+hold on;
+scatter(c1(:,3), c1(:,4), 10, 'r', '^'); 
+scatter(c2(:,3), c2(:,4), 10, 'g', 's'); 
+scatter(c3(:,3), c3(:,4), 10, 'b', 'o'); 
+hold off;
+axis("tight");
+title("Distribuicao das classes (PL vs PW)");
+xlabel("Petal length");
+ylabel("Petal width");
+legend('Setosa', 'Versicolor', 'Virginica', 'location', 'southeast');
+legend boxon;
+print("distribuicao_pl-vs-pw.jpg");
+close();
+# *****************************************************************************
+
+
+
+# *****************************************************************************
 # histograma SL
 # *****************************************************************************
 hold on; 
@@ -70,7 +90,6 @@ hold off;
 axis("tight");
 title("Histograma (SL)");
 xlabel("Sepal length");
-ylabel("Sepal width");
 legend('Setosa', 'Versicolor', 'Virginica');
 legend boxon;
 print("histograma_sl.jpg");
@@ -79,7 +98,7 @@ close();
 
 
 # *****************************************************************************
-# histograma SL
+# histograma SW
 # *****************************************************************************
 hold on; 
 hist(c1(:,2), "r");
@@ -88,10 +107,46 @@ hist(c3(:,2), "b");
 hold off;
 axis("tight");
 title("Histograma (SW)");
-xlabel("Sepal length");
-ylabel("Sepal width");
+xlabel("Sepal width");
 legend('Setosa', 'Versicolor', 'Virginica');
 legend boxon;
 print("histograma_sw.jpg");
+close();
+# *****************************************************************************
+
+
+
+# *****************************************************************************
+# histograma PL
+# *****************************************************************************
+hold on; 
+hist(c1(:,3), "r");
+hist(c2(:,3), "g");
+hist(c3(:,3), "b");
+hold off;
+axis("tight");
+title("Histograma (PL)");
+xlabel("Petal length");
+legend('Setosa', 'Versicolor', 'Virginica');
+legend boxon;
+print("histograma_pl.jpg");
+close();
+# *****************************************************************************
+
+
+# *****************************************************************************
+# histograma PW
+# *****************************************************************************
+hold on; 
+hist(c1(:,4), "r");
+hist(c2(:,4), "g");
+hist(c3(:,4), "b");
+hold off;
+axis("tight");
+title("Histograma (PW)");
+xlabel("Petal width");
+legend('Setosa', 'Versicolor', 'Virginica');
+legend boxon;
+print("histograma_pw.jpg");
 close();
 # *****************************************************************************
