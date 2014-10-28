@@ -13,9 +13,11 @@
 #include <inc/BookAttendGrade.h>
 #include <inc/BoilingPointPressure.h>
 #include <inc/Hald.h>
+#include <inc/IrisData.h>
 
 using namespace pel216::commons;
 using namespace pel208::week2;
+using namespace pel208::week3;
 
 namespace pel208 {
 
@@ -191,6 +193,51 @@ namespace pel208 {
 							toDouble(tokens, 3), 
 							toDouble(tokens, 4), 
 							toDouble(tokens, 0)));
+
+				}
+
+				return dataList;
+
+			};
+
+			/**
+			 * Carrega os dados contidos no arquivo como um <code>std::list</code> de IrisData.
+			 *
+			 * @param file
+			 *				o <code>char *</code> que representa o nome do arquivo
+			 *
+			 * @return o <code>std::list</code> de IrisData que representa a lista de dados
+			 */
+			static std::list<IrisData> loadAsIris(const char *file) {
+
+				if (Utils::isInvalidHandle((char*)file)) {
+					throw new IllegalParameterException();
+				}
+
+				std::list<IrisData> dataList;
+
+				std::ifstream ifstream(file);
+				
+				// leio o stream enquanto houver caracteres válidos
+				while (ifstream.good()) { 
+
+					std::string line;
+					std::getline(ifstream, line);
+
+					// a delimitação por tab é feita
+					std::vector<std::string> tokens = tokenize(line.c_str(), ',');
+					if (tokens.size() != 5) {
+						continue;
+					}
+
+					// um novo elemento é adicionado na lista
+					dataList.push_back(
+						IrisData(
+							toInt(tokens, 4), 
+							toDouble(tokens, 0), 
+							toDouble(tokens, 1), 
+							toDouble(tokens, 2), 
+							toDouble(tokens, 3)));
 
 				}
 

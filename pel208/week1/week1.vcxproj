@@ -50,7 +50,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;..\commons;..\week2;..\..\pel216\commons</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\commons;..\week2;..\week3;..\..\pel216\commons</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -62,7 +62,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>.;..\commons;..\week2;..\..\pel216\commons</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\commons;..\week2;..\week3;..\..\pel216\commons</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
