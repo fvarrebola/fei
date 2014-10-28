@@ -33,8 +33,8 @@ invsw_by_sb = invsw * sb;
 
 [v,d]=eig(invsw_by_sb);
 
-w1 = v(:,1);
-w2 = v(:,2);
+new_c = transpose(transpose(v(:,1:2)) * transpose(c(:,1:4)));
+
 # *****************************************************************************
 
 
@@ -148,5 +148,24 @@ xlabel("Petal width");
 legend('Setosa', 'Versicolor', 'Virginica');
 legend boxon;
 print("histograma_pw.jpg");
+close();
+# *****************************************************************************
+
+
+# *****************************************************************************
+# Novos valores
+# *****************************************************************************
+hold on; 
+scatter(new_c(   1:50,1), new_c(   1:50,2), 10, 'r', '^'); 
+scatter(new_c( 51:100,1), new_c( 51:100,2), 10, 'g', 's'); 
+scatter(new_c(101:150,1), new_c(101:150,2), 10, 'b', 'o'); 
+hold off;
+axis("tight");
+title("Distribuicao das classes (PL vs PW)");
+xlabel("LDA 1");
+ylabel("LDA 2");
+legend('Setosa', 'Versicolor', 'Virginica', 'location', 'southeast');
+legend boxon;
+print("distribuicao_lda1_lda2.jpg");
 close();
 # *****************************************************************************
