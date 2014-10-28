@@ -51,7 +51,7 @@ namespace pel208 {
 						}
 					}
 				}
-					
+				
 			    return true;
 
 			};
@@ -70,7 +70,11 @@ namespace pel208 {
 			 *
 			 * @return <code>true</code> caso a rotação tenha sido bem sucedida; do contrário <code>false</code>
 			 */
-			PRIVATE static bool rotate(IN OUT Matrix **C, IN OUT Matrix **U, IN size_t p, IN size_t q) {
+			PRIVATE static bool rotateUsingStandardMethod(
+					IN OUT Matrix **C, 
+					IN OUT Matrix **U, 
+					IN size_t p, 
+					IN size_t q) {
 				
 				if (pel216::commons::Utils::isInvalidHandle(*C) || pel216::commons::Utils::isInvalidHandle(*U)) {
 					throw new IllegalParameterException();
@@ -82,9 +86,10 @@ namespace pel208 {
 				double phi = ((*C)->data()[q][q] - (*C)->data()[p][p]) / (2.0f * (*C)->data()[p][q]);
 
 				// calcula o t
-				int sign = (phi > 0 ? 1 : -1);
-				double t = 1.0f / (phi + (sign * std::sqrt(std::pow(phi, 2) + 1.0f)));
-				
+				//int sign = (phi > 0 ? 1 : -1);
+				//double t = 1.0f / (phi + (sign * std::sqrt(std::pow(phi, 2) + 1.0f)));
+				double t = (phi < 0.0f ? -1 : 1) / (std::abs(phi) + std::sqrt(std::pow(phi, 2) + 1.0f));
+
 				// calcula o coseno e o seno de rotação
 				double cos = 1.0f / sqrt(std::pow(t, 2) + 1.0); // cos (lower_phi) = 1 / sqrt (1 + t^2)
 				double sin = t * cos; // sin (lower_phi) = t / sqrt (1 + t^2)
@@ -130,18 +135,78 @@ namespace pel208 {
 			};
 
 			/**
-			 * Rotaciona uma matriz.<br />
+			 * Rotaciona uma matriz utilizando multiplicações.<br />
+			 * Baseado no método interativo encontrado em 
+			 * <a href="http://www.math.utoledo.edu/~codenth/Linear_Algebra/Calculators/jacobi_algorithm.html">
+			 * Linear Algebra Calculators - Jacobi Algorithm</a>.<br />
 			 * 
 			 * @param C
 			 *				o Matrix que representa a matriz de covariância
 			 * @param U
 			 *				o Matrix que representa a matriz de rotação
+			 * @param tolerance
+			 *				o <code>double</code> que representa a tolerância para o método de Jacobi
+			 *
+			 * @return <code>true</code> caso a rotação tenha sido bem sucedida; do contrário <code>false</code>
+			 */
+			PRIVATE static bool rotateUsingMatrixMul(
+					IN OUT Matrix **C, 
+					IN OUT Matrix **U, 
+					IN double tolerance) {
+
+				size_t dimensions = (*C)->getRows();
+
+				for (size_t p = 0; p < dimensions; p++) {
+
+					for (size_t q = p + 1; q < dimensions; q++) {
+						
+						if (p == q) {
+							continue;
+						}
+
+						register double phi = ((*C)->data()[p][p] - (*C)->data()[q][q]) / (2.0f * (*C)->data()[p][q]);
+						if (std::abs((*C)->data()[p][q]) < tolerance) {
+							continue;
+						}
+
+						register double t = (phi < 0.0f ? -1 : 1) / (std::abs(phi) + std::sqrt(std::pow(phi, 2) + 1.0f));
+						register double cos = 1.0f / sqrt(std::pow(t, 2) + 1.0);
+						register double sin = t * cos;
+
+						Matrix *R = NULL;
+						
+						(*C)->identity(&R);
+						R->data()[p][p] = cos;
+						R->data()[p][q] = -sin;
+						R->data()[q][p] = sin;
+						R->data()[q][q] = cos;
+						
+						(*C) = R->transpose()->multiply((*C)->multiply(R));
+						(*U) = (*U)->multiply(R);
+
+						delete R;				
+
+					}
+
+				}
+
+				return true;
+
+			};
+
+			/**
+			 * Ordena os autovalores e autovetores.<br />
+			 * 
+			 * @param C
+			 *				o Matrix que representa a matriz de covariância
+			 * @param U
+			 *				o Matrix que representa a matriz de rotação
+			 * @param components
+			 *				o <code>size_t</code> que representa a quantidade de componentes a serem considerados
 			 * @param L
 			 *				o Matrix que representa a matriz de autovalores
 			 * @param V
 			 *				o Matrix que representa a matriz de autovetores
-			 *
-			 * @return <code>true</code> caso a rotação tenha sido bem sucedida; do contrário <code>false</code>
 			 */
 			PRIVATE static void sortEigenValuesAndVectors(
 					IN Matrix *C, 
@@ -160,12 +225,12 @@ namespace pel208 {
 				// obtém os índices dos autovalores de forma decrescente
 				Matrix *diagonal = C->diagonal();
 				for (size_t idx = 0; idx < dimensions; idx++) {
-					register double max = FLT_MIN;
+					register double max = LONG_MIN;
 					register size_t r = UINT_MAX;
 					register size_t c = UINT_MAX;
 					diagonal->max(&max, &r, &c);
 					indexes[idx] = r;
-					diagonal->data()[r][c] = FLT_MIN;	
+					diagonal->data()[r][c] = LONG_MIN;	
 				}
 
 				delete diagonal;
@@ -182,7 +247,6 @@ namespace pel208 {
 
 			};
 
-
 		public:
 			/**
 			 * Construtor.
@@ -191,7 +255,7 @@ namespace pel208 {
 			};
 
 			/**
-			 * Executa o método de busca.
+			 * Executa o método de busca.<br />
 			 *
 			 * @param covarMatrix
 			 *				o Matrix que representa a matrix de covariância
@@ -201,6 +265,9 @@ namespace pel208 {
 			 *				o Matrix que representa os autovetores
 			 * @param maxComponents
 			 *				o <code>size_t</code> que representa a quantidade máxima de componentes a serem considerados
+			 * @param useMaxOffDiagonal
+			 *				indica se deve ser utilizado o método que rotaciona a matriz a partir do maior valor fora da diagonal
+			 *				encontrado no triangulo superior
 			 * @param sort
 			 *				indica se os componentes devem ser ordenados por importância
 			 * @param maxRotations
@@ -217,6 +284,7 @@ namespace pel208 {
 					OUT Matrix **eigenValues, 
 					OUT Matrix **eigenVectors, 
 					IN size_t maxComponents = UINT_MAX,
+					IN bool useMaxOffDiagonal = false,
 					IN bool sort = true,
 					IN size_t maxRotations = UINT_MAX, 
 					IN double tolerance = 0.000001f, 
@@ -228,9 +296,14 @@ namespace pel208 {
 
 				if (debug) {
 					Logger::log("%s\n", STARS);
-					Logger::log("Metodo iterativo de Jacobi para autovalores e autovetores\n");
+					Logger::log("Metodo de Jacobi para autovalores e autovetores\n");
 					Logger::log("  rotacoes = %d\n", maxRotations);
 					Logger::log("  tolerancia = %f\n", tolerance);
+					if (useMaxOffDiagonal) {
+						Logger::log("  tecnica = maior valor no triangulo superior acima da diagonal\n");
+					} else {
+						Logger::log("  tecnica = ciclica\n");
+					}
 					Logger::log("%s\n", STARS);
 				}
 
@@ -240,11 +313,12 @@ namespace pel208 {
 					return false;
 				}
 
-				bool converged = false;
-
 				// a matriz que será rotacionada
 				Matrix *C = covarMatrix->clone();
-				for (size_t idx = 0; idx < maxRotations && !converged; idx++) {
+
+				bool converged = false;
+				size_t rotations = (maxRotations == UINT_MAX) ? 5 * C->getRows() * C->getRows() : maxRotations;
+				for (size_t idx = 0; idx < rotations && !converged; idx++) {
 					
 					register double maxAbs = 0.0f;
 					register size_t maxRowIdx = UINT_MAX;
@@ -263,11 +337,16 @@ namespace pel208 {
 					if (maxAbs < tolerance) {
 						converged = true;
 					} else {
-						rotate(&C, &U, maxRowIdx, maxColIdx);
+						if (useMaxOffDiagonal) {
+							rotateUsingStandardMethod(&C, &U, maxRowIdx, maxColIdx);
+						} else {
+							rotateUsingMatrixMul(&C, &U, tolerance);
+						}
 					}
 
 				}
 
+				// caso a solução tenha convergido...
 				if (converged) {
 					size_t dimensions = C->getRows();
 					size_t components = (maxComponents != UINT_MAX && maxComponents < dimensions) ? maxComponents : dimensions;
