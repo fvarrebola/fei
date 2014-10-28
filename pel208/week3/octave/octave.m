@@ -161,7 +161,7 @@ scatter(new_c( 51:100,1), new_c( 51:100,2), 10, 'g', 's');
 scatter(new_c(101:150,1), new_c(101:150,2), 10, 'b', 'o'); 
 hold off;
 axis("tight");
-title("Distribuicao das classes (PL vs PW)");
+title("Distribuicao das classes (LDA1 e LDA2)");
 xlabel("LDA 1");
 ylabel("LDA 2");
 legend('Setosa', 'Versicolor', 'Virginica', 'location', 'southeast');
