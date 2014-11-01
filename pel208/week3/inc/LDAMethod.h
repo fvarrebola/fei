@@ -170,7 +170,7 @@ namespace pel208 {
 				}
 
 				return true;
-			}
+			};
 
 			/**
 			 * Calcula a média a covariância das classes contidas no <code>std::map</code>.<br />
