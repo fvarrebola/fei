@@ -18,7 +18,9 @@ namespace pel208 {
 		public:
 
 			/**
+			 * Obtém a matriz de amostras com duas dimensões para uso no PCA.<br />
 			 *
+			 * @return o Matrix que representa o conjunto de amostras
 			 */
 			PUBLIC static Matrix *getPCASimpleDS() {
 
@@ -53,7 +55,9 @@ namespace pel208 {
 			};
 
 			/**
+			 * Obtém a matriz de amostras <i>hald</i> para uso no PCA.<br />
 			 *
+			 * @return o Matrix que representa o conjunto de amostras
 			 */
 			PUBLIC static Matrix *getPCAHaldDS() {
 
@@ -320,6 +324,81 @@ namespace pel208 {
 
 				return m;
 
+			};
+
+			/**
+			 * Obtém a matriz de amostras de rendimentos para uso no Naive Bayes.<br />
+			 *
+			 * @return o Matrix que representa o conjunto de amostras
+			 */
+			PUBLIC static Matrix *getNaiveBayesPlayTennisDS() {
+
+				Matrix *m = new Matrix(14, 5);
+
+				m->data()[0][0] = 0;	m->data()[0][1] = 0;	m->data()[0][2] = 0;	m->data()[0][3] = 0;	m->data()[0][4] = 0;
+				m->data()[1][0] = 0;	m->data()[1][1] = 0;	m->data()[1][2] = 0;	m->data()[1][3] = 1;	m->data()[1][4] = 0;
+				m->data()[2][0] = 1;	m->data()[2][1] = 0;	m->data()[2][2] = 0;	m->data()[2][3] = 0;	m->data()[2][4] = 1;
+				m->data()[3][0] = 2;	m->data()[3][1] = 1;	m->data()[3][2] = 0;	m->data()[3][3] = 0;	m->data()[3][4] = 1;
+				m->data()[4][0] = 2;	m->data()[4][1] = 2;	m->data()[4][2] = 1;	m->data()[4][3] = 0;	m->data()[4][4] = 1;
+				m->data()[5][0] = 2;	m->data()[5][1] = 2;	m->data()[5][2] = 1;	m->data()[5][3] = 1;	m->data()[5][4] = 0;
+				m->data()[6][0] = 1;	m->data()[6][1] = 2;	m->data()[6][2] = 1;	m->data()[6][3] = 1;	m->data()[6][4] = 1;
+				m->data()[7][0] = 0;	m->data()[7][1] = 1;	m->data()[7][2] = 0;	m->data()[7][3] = 0;	m->data()[7][4] = 0;
+				m->data()[8][0] = 0;	m->data()[8][1] = 2;	m->data()[8][2] = 1;	m->data()[8][3] = 0;	m->data()[8][4] = 1;
+				m->data()[9][0] = 3;	m->data()[9][1] = 1;	m->data()[9][2] = 1;	m->data()[9][3] = 0;	m->data()[9][4] = 1;
+				m->data()[10][0] = 0;	m->data()[10][1] = 1;	m->data()[10][2] = 1;	m->data()[10][3] = 1;	m->data()[10][4] = 1;
+				m->data()[11][0] = 1;	m->data()[11][1] = 1;	m->data()[11][2] = 0;	m->data()[11][3] = 1;	m->data()[11][4] = 1;
+				m->data()[12][0] = 1;	m->data()[12][1] = 0;	m->data()[12][2] = 1;	m->data()[12][3] = 0;	m->data()[12][4] = 1;
+				m->data()[13][0] = 2;	m->data()[13][1] = 1;	m->data()[13][2] = 0;	m->data()[13][3] = 1;	m->data()[13][4] = 0;
+
+				return m;
+
+			};
+
+			/**
+			 * Obtém a matriz de amostras de rendimentos para uso no Naive Bayes.<br />
+			 *
+			 * @return o Matrix que representa o conjunto de amostras
+			 */
+			PUBLIC static Matrix *getNaiveBayesFirstDS() {
+
+				Matrix *m = new Matrix(10, 4);
+
+				m->data()[0][0]=1;	m->data()[0][1]=0;	m->data()[0][2]=2;	m->data()[0][3]=0;
+				m->data()[1][0]=0;	m->data()[1][1]=1;	m->data()[1][2]=1;	m->data()[1][3]=0;
+				m->data()[2][0]=0;	m->data()[2][1]=0;	m->data()[2][2]=0;	m->data()[2][3]=0;
+				m->data()[3][0]=1;	m->data()[3][1]=1;	m->data()[3][2]=2;	m->data()[3][3]=0;
+				m->data()[4][0]=0;	m->data()[4][1]=2;	m->data()[4][2]=1;	m->data()[4][3]=1;
+				m->data()[5][0]=0;	m->data()[5][1]=1;	m->data()[5][2]=0;	m->data()[5][3]=0;
+				m->data()[6][0]=1;	m->data()[6][1]=2;	m->data()[6][2]=2;	m->data()[6][3]=0;
+				m->data()[7][0]=0;	m->data()[7][1]=0;	m->data()[7][2]=1;	m->data()[7][3]=1;
+				m->data()[8][0]=0;	m->data()[8][1]=1;	m->data()[8][2]=0;	m->data()[8][3]=0;
+				m->data()[9][0]=0;	m->data()[9][1]=0;	m->data()[9][2]=1;	m->data()[9][3]=1;
+
+				return m;
+
+			};
+
+			/**
+			 * Obtém a matriz de amostras de rendimentos para uso no Naive Bayes.<br />
+			 *
+			 * @return o Matrix que representa o conjunto de amostras
+			 */
+			PUBLIC static Matrix *getNaiveBayesSecondDS() {
+
+				Matrix *m = new Matrix(10, 2);
+
+				m->data()[0][0]=0;	m->data()[0][1]=0;
+				m->data()[1][0]=0;	m->data()[1][1]=0;
+				m->data()[2][0]=0;	m->data()[2][1]=0;
+				m->data()[3][0]=1;	m->data()[3][1]=1;
+				m->data()[4][0]=1;	m->data()[4][1]=0;
+				m->data()[5][0]=1;	m->data()[5][1]=1;
+				m->data()[6][0]=1;	m->data()[6][1]=1;
+				m->data()[7][0]=1;	m->data()[7][1]=0;
+				m->data()[8][0]=0;	m->data()[8][1]=1;
+				m->data()[9][0]=1;	m->data()[9][1]=1;
+
+				return m;
 			};
 
 		}; // class SampleDataSets
