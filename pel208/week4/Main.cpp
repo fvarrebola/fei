@@ -16,7 +16,7 @@
 #define PLAY_TENNIS_RESULT						"Nao jogar (0) ou jogar (1)"
 
 #define HOUSE_OWNER___INPUT_MSG					"Casa propria (0) ou nao (1)?"
-#define MARTIAL_STATS___INPUT_MSG				"Solteio (0), casado (1) ou divorciado (2)?"
+#define MARTIAL_STATS___INPUT_MSG				"Solteiro (0), casado (1) ou divorciado (2)?"
 #define INCOME___INPUT_MSG						"Alto (0), medio (1) ou baixo (2)?"
 #define RISK_RESULT								"Bom pagador (0) ou mau pagador (1)"
 
