@@ -19,8 +19,7 @@ namespace pel208 {
 			/**
 			 * Construtor.
 			 */
-			NBStatsMatrix(size_t rows) : Matrix(rows, 5) {
-			};
+			NBStatsMatrix(size_t rows) : Matrix(rows, 5) {};
 
 		};
 
@@ -219,16 +218,18 @@ namespace pel208 {
 			 * Destrutor.<br />
 			 */
 			~NaiveBayes() {
+			
 				if (pel216::commons::Utils::isValidHandle(this->model)) {
 					for (it_type iterator = (this->model)->begin(); iterator != (this->model)->end(); iterator++) {
 						delete iterator->second;
 					}
 					delete this->model;
 				}
+				
 			};
 
 			/**
-			 * Executa o método Naive Bayes.<br />
+			 * Constrói o modelo para análise de Bayes.<br />
 			 *
 			 * @param dataMatrix
 			 *				o Matrix que representa a matriz com as entradas que se quer analisar
@@ -269,11 +270,11 @@ namespace pel208 {
 			 * @param dataMatrix
 			 *				o Matrix que representa a matriz com as entradas que se quer analisar
 			 * @param hipothesis
-			 *				o Matrix que representa a matriz de hiótesis
+			 *				o Matrix que representa a matriz de hipótesis
 			 * @param debug
 			 *				indica se as matrizes devem ser impressas
 			 *
-			 * @return o <code>true</code> caso a construção do modelo tenha sido bem sucedida; do contrário <code>false</code>
+			 * @return o <code>true</code> caso a avaliação tenha sido bem sucedida; do contrário <code>false</code>
 			 */
 			PUBLIC bool evaluate(
 					IN Matrix *dataMatrix, 
