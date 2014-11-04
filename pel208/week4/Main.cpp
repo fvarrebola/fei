@@ -23,6 +23,8 @@
 #define LAPTOP___INPUT_MSG						"PC (0) ou MAC (1)?"
 #define PHONE_RESULT							"Android (0), iPhone (1)?"
 
+#define DEBUG___INPUT_MSG						"Imprimir o conteudo das matrizes?"
+
 using namespace pel216::commons;
 using namespace pel208::commons;
 using namespace pel208::week4;
@@ -92,19 +94,20 @@ void printFooter() {
  */
 void playWithTennisDataSet() {
 
-	Matrix *ds = SampleDataSets::getNaiveBayesPlayTennisDS();
-	NaiveBayes *nb = new NaiveBayes();
-	nb->buildModel(ds, 4);
-
 	Matrix *m = new Matrix(1, 4);
-
 	m->data()[0][0] = UserParams::getIntParam(OUTLOOK___INPUT_MSG);
 	m->data()[0][1] = UserParams::getIntParam(TEMP___INPUT_MSG);
 	m->data()[0][2] = UserParams::getIntParam(HUMIDITY___INPUT_MSG);
 	m->data()[0][3] = UserParams::getIntParam(WIND___INPUT_MSG);
 
+	bool debug = UserParams::getBoolParam(DEBUG___INPUT_MSG);
+
+	NaiveBayes *nb = new NaiveBayes();
+	Matrix *ds = SampleDataSets::getNaiveBayesPlayTennisDS();
+	nb->buildModel(ds, 4, debug);
+
 	Matrix *h = NULL;
-	nb->evaluate(m, &h);
+	nb->evaluate(m, &h, debug);
 
 	h->dump(PLAY_TENNIS_RESULT);
 
@@ -119,18 +122,19 @@ void playWithTennisDataSet() {
  */
 void playWithFirstDataSet() {
 
-	Matrix *ds = SampleDataSets::getNaiveBayesFirstDS();
-	NaiveBayes *nb = new NaiveBayes();
-	nb->buildModel(ds, 3);
-
 	Matrix *m = new Matrix(1, 3);
-
 	m->data()[0][0] = UserParams::getIntParam(HOUSE_OWNER___INPUT_MSG);
 	m->data()[0][1] = UserParams::getIntParam(MARTIAL_STATS___INPUT_MSG);
 	m->data()[0][2] = UserParams::getIntParam(INCOME___INPUT_MSG);
 
+	bool debug = UserParams::getBoolParam(DEBUG___INPUT_MSG);
+
+	NaiveBayes *nb = new NaiveBayes();
+	Matrix *ds = SampleDataSets::getNaiveBayesFirstDS();
+	nb->buildModel(ds, 3, debug);
+
 	Matrix *h = NULL;
-	nb->evaluate(m, &h);
+	nb->evaluate(m, &h, debug);
 
 	h->dump(RISK_RESULT);
 
@@ -145,17 +149,17 @@ void playWithFirstDataSet() {
  */
 void playWithSecondDataSet() {
 
-
-	Matrix *ds = SampleDataSets::getNaiveBayesSecondDS();
-	NaiveBayes *nb = new NaiveBayes();
-	nb->buildModel(ds, 1);
-
 	Matrix *m = new Matrix(1, 1);
-
 	m->data()[0][0] = UserParams::getIntParam(LAPTOP___INPUT_MSG);
 
+	bool debug = UserParams::getBoolParam(DEBUG___INPUT_MSG);
+
+	NaiveBayes *nb = new NaiveBayes();
+	Matrix *ds = SampleDataSets::getNaiveBayesSecondDS();
+	nb->buildModel(ds, 1, debug);
+
 	Matrix *h = NULL;
-	nb->evaluate(m, &h);
+	nb->evaluate(m, &h, debug);
 
 	h->dump(PHONE_RESULT);
 
