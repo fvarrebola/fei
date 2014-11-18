@@ -7,6 +7,9 @@
 #include <vector>
 #include <algorithm>
 
+#include <chrono>
+#include <random>
+
 #include <inc/Utils.h>
 #include <inc/Logger.h>
 #include <inc/ex/IllegalParameterException.h>
@@ -19,7 +22,7 @@ namespace pel208 {
 	namespace commons {
 
 		static const int MAX_DIMENSIONS = 3;
-		static const int MAX_COLUMNS_TO_DUMP = 5;
+		static const int MAX_COLUMNS_TO_DUMP = 10;
 
 		/**
 		 * Classe que representa uma matrix.
@@ -57,11 +60,7 @@ namespace pel208 {
 					this->_data[idx] = new double[this->columns];
 				}
 
-				for (size_t rowIdx = 0; rowIdx < this->rows; rowIdx++) {
-					for (size_t colIdx = 0; colIdx < this->columns; colIdx++) {
-						this->_data[rowIdx][colIdx] = value;
-					}
-				}
+				fill(value);
 
 			};
 
@@ -575,7 +574,51 @@ namespace pel208 {
 					}
 				}
 				
-				return (*max == LONG_MIN);
+				return (*max != LONG_MIN);
+
+			};
+
+			/**
+			 * Preenche a matriz com o valor informado.<br />
+			 *
+			 * @param value
+			 *			o <code>double</code> que representa o valor 
+			 */
+			PUBLIC bool fill(IN double value = LONG_MIN) {
+
+				// calcula o resultado aproximado da integração numérica
+				for (size_t rowIdx = 0; rowIdx < this->getRows(); rowIdx++) {
+					for (size_t colIdx = 0; colIdx < this->getColumns(); colIdx++) {
+						this->data()[rowIdx][colIdx] = value;
+					}
+				}
+
+				return true;
+
+			};
+			
+			/**
+			 * Preenche a matriz com valores aleatórios dentro de um intervalo.<br />
+			 *
+			 * @param min
+			 *			o <code>double</code> que representa o valor mínimo do intervalo
+			 * @param max
+			 *			o <code>double</code> que representa o valor máximo do intervalo
+			 */
+			PUBLIC bool randomFill(IN double min = LONG_MIN, IN double max = LONG_MAX) {
+
+				// cria o gerador aleatório
+				std::random_device generator;
+				std::uniform_real_distribution<double> distribution(min, max);
+
+				// calcula o resultado aproximado da integração numérica
+				for (size_t rowIdx = 0; rowIdx < this->getRows(); rowIdx++) {
+					for (size_t colIdx = 0; colIdx < this->getColumns(); colIdx++) {
+						this->data()[rowIdx][colIdx] = distribution(generator);
+					}
+				}
+
+				return true;
 
 			};
 
@@ -667,9 +710,9 @@ namespace pel208 {
 			/**
 			 * Soma uma matriz à matriz atual.<br />
 			 *
-			 * @param identity
+			 * @param with
 			 *				o Matrix que representa a matriz a ser somada
-			 * @param identity
+			 * @param result
 			 *				o Matrix que representa o resultado
 			 *
 			 * @return <code>true</code> caso a soma seja bem sucedida; do contrário <code>false</code>
@@ -742,13 +785,24 @@ namespace pel208 {
 			 * @param prefix
 			 *				o <code>std::string</code> que representa o prefixo da impressão
 			 */
-			PUBLIC void dump(std::string prefix) {
+			PUBLIC void dump(
+					IN std::string prefix, 
+					IN bool printPrefix = true, 
+					IN size_t rows = 0,
+					IN size_t columns = 0) {
 
-				Logger::log(">>>> Imprimindo matrix %s (%d x %d)...\n", prefix.c_str(), this->rows, this->columns);
-				for (size_t i = 0; i < this->rows; i++) {
+				if (printPrefix) {
+					Logger::log(">>>> Imprimindo matrix %s (%d x %d)...\n", prefix.c_str(), this->rows, this->columns);
+				}
+
+				size_t rows_to_Dump = (rows > this->rows) ?  this->rows : rows;
+				size_t cols_to_Dump = (columns > this->columns) ?  
+					((this->columns > MAX_COLUMNS_TO_DUMP) ? MAX_COLUMNS_TO_DUMP : this->columns) : columns;
+
+				for (size_t i = 0; i < rows_to_Dump; i++) {
 					
 					Logger::log("|");
-					for (size_t j = 0; j < this->columns && j < MAX_COLUMNS_TO_DUMP + 1; j++) {
+					for (size_t j = 0; j < cols_to_Dump; j++) {
 						Logger::logWithoutTimestamp(" %12.5f ", this->_data[i][j]);
 					}
 					
@@ -759,6 +813,36 @@ namespace pel208 {
 					Logger::logWithoutTimestamp("|\n");
 				}
 				Logger::log("\n");
+
+			};
+
+			/**
+			 * Faz a impressão de uma matriz.<br />
+			 *
+			 * @param prefix
+			 *				o <code>std::string</code> que representa o prefixo da impressão
+			 */
+			PUBLIC void dumpToFile(
+					IN size_t rows = 0, 
+					IN size_t columns = 0) {
+
+				size_t rows_to_Dump = (rows > 0) ? ((rows > this->rows) ?  this->rows : rows) : this->rows;
+				size_t cols_to_Dump = (columns > 0) ?  ((columns > this->columns) ?  this->columns : columns) : this->columns;
+
+				for (size_t i = 0; i < rows_to_Dump; i++) {
+					
+					Logger::logToFile("|");
+					for (size_t j = 0; j < cols_to_Dump &&  j < MAX_COLUMNS_TO_DUMP; j++) {
+						Logger::logToFileWithoutTimestamp(" %9.6f ", this->_data[i][j]);
+					}
+					
+					if (this->columns > MAX_COLUMNS_TO_DUMP) {
+						Logger::logToFileWithoutTimestamp(" ... ");
+					}
+
+					Logger::logToFileWithoutTimestamp("|\n");
+				}
+				Logger::logToFile("\n");
 
 			};
 
