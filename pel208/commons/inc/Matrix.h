@@ -283,10 +283,13 @@ namespace pel208 {
 			 */
 			~Matrix() {
 
+				if (Utils::isInvalidHandle(this->_data)) {
+					return;
+				}
+
 				for (size_t idx = 0; idx < this->rows; idx++) {
 					delete [] this->_data[idx];
 				}
-				
 				delete [] this->_data;
 
 			};
@@ -325,15 +328,15 @@ namespace pel208 {
 			 */
 			PUBLIC Matrix *clone() {
 
-				Matrix *clone = new Matrix(this->rows, this->columns);
+				Matrix *matrix = new Matrix(this->rows, this->columns);
 
 				for (size_t rowIdx = 0; rowIdx < this->rows; rowIdx++) {
 					for (size_t colIdx = 0; colIdx < this->columns; colIdx++) {
-						clone->data()[rowIdx][colIdx] = this->_data[rowIdx][colIdx];
+						matrix->data()[rowIdx][colIdx] = this->_data[rowIdx][colIdx];
 					}
 				}
 
-				return clone;
+				return matrix;
 
 			};
 
@@ -795,9 +798,9 @@ namespace pel208 {
 					Logger::log(">>>> Imprimindo matrix %s (%d x %d)...\n", prefix.c_str(), this->rows, this->columns);
 				}
 
-				size_t rows_to_Dump = (rows > this->rows) ?  this->rows : rows;
-				size_t cols_to_Dump = (columns > this->columns) ?  
-					((this->columns > MAX_COLUMNS_TO_DUMP) ? MAX_COLUMNS_TO_DUMP : this->columns) : columns;
+				size_t rows_to_Dump = (rows > 0) ? ((rows > this->rows) ?  this->rows : rows) : this->rows;
+				size_t cols_to_Dump = (columns > 0) ? ((columns > this->columns) ?  
+					((this->columns > MAX_COLUMNS_TO_DUMP) ? MAX_COLUMNS_TO_DUMP : this->columns) : columns) : this->columns;
 
 				for (size_t i = 0; i < rows_to_Dump; i++) {
 					
