@@ -50,6 +50,8 @@ namespace pel208 {
 			 *					o SmallGridWorld que representa o <i>small grid world</i>
 			 * @param state
 			 *					o SmallGridWorldState que representa o estado
+			 * @param stateIdx
+			 *					o <code>size_t</code> que representa o índice do estado
 			 * @param gamma
 			 *					o <code>double</code> que representa o gamma (o desconto)
 			 * @param debug
@@ -94,6 +96,22 @@ namespace pel208 {
 
 			};
 
+			/**
+			 * Avalia a melhoria de política.<br />
+			 *
+			 * @param world
+			 *					o SmallGridWorld que representa o <i>small grid world</i>
+			 * @param state
+			 *					o SmallGridWorldState que representa o estado
+			 * @param stateIdx
+			 *					o <code>size_t</code> que representa o índice do estado
+			 * @param gamma
+			 *					o <code>double</code> que representa o gamma (o desconto)
+			 * @param debug
+			 *					indica se as mensagens de depuração devem ser exibidas
+			 *
+			 * @return o Matrix que representa a nova política
+			 */
 			PRIVATE static Matrix *evaluatePolicyImprovement(
 					IN SmallGridWorld *world, 
 					IN SmallGridWorldState *state, 
