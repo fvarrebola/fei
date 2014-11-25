@@ -210,14 +210,14 @@ namespace pel208 {
 			 */
 			PUBLIC void dump() {
 
-				Logger::log("Imprimindo detalhes sobre o estado %d...\n", stateIdx);
-				Logger::log(">> V = %5.2f\n", this->getValue());
+				Logger::log("%6d %6.2f ", this->stateIdx, this->getValue());
 				for (size_t idx = 0; idx < ALLOWED_ACTIONS_QTY; idx++) {
-					Logger::log("   >> P(%02d,%s,%02d) = %.2f\n", 
+					Logger::logWithoutTimestamp("P(%02d,%s,%02d)=%.2f ", 
 						this->stateIdx, 
 						(idx == 0 ? "U" : ((idx == 1) ? "D" : ((idx == 2) ? "L" : "R"))), 
 						(size_t)this->nextStates->data()[0][idx], this->transitionProbabilities->data()[0][idx]);
 				}
+				Logger::logWithoutTimestamp("\n");
 
 			};
 
