@@ -175,11 +175,13 @@ namespace pel208 {
 			/**
 			 * Imprime detalhes sobre o <i>grid</i>.
 			 */
-			PUBLIC void dump() {
+			PUBLIC void dump(IN bool printP = true, IN bool printQ = true) {
 
 				Logger::log("Imprimindo detalhes sobre o grid...\n");
+				Logger::log("#   V         P(U)      P(D)      P(L)      P(R)      Q(U)       Q(D)       Q(L)       Q(R)\n");
+				Logger::log("--- --------  --------  --------  --------  --------  ---------  ---------  ---------  ---------\n");
 				for (size_t stateIdx = 0; stateIdx < this->stateCount; stateIdx++) {
-					this->states->at(stateIdx)->dump();
+					this->states->at(stateIdx)->dump(printP, printQ);
 				}
 			};
 

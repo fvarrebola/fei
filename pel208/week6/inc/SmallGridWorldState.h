@@ -42,6 +42,8 @@ namespace pel208 {
 			Matrix *transitionProbabilities;
 			Matrix *transitionRewards;
 
+			Matrix *Q;
+
 			double stateValue_V;
 
 			/**
@@ -58,7 +60,7 @@ namespace pel208 {
 			 */
 			PRIVATE static void updateMatrix(IN Matrix *matrix, IN size_t rowIdx, IN size_t colIdx, IN double value) {
 				matrix->data()[rowIdx][colIdx] = value;
-			}
+			};
 
 		public:
 			/**
@@ -95,6 +97,11 @@ namespace pel208 {
 
 				this->stateValue_V = 0.0f;
 
+				this->Q = new Matrix(1, ALLOWED_ACTIONS_QTY);
+				if (stateIdx > 0 && stateIdx < 15) {
+					this->Q->randomFill(0, 1);
+				}
+
 			};
 
 			/**
@@ -118,6 +125,10 @@ namespace pel208 {
 					delete this->nextStatesCompleteInfo;
 				}
 
+				if (Utils::isValidHandle(this->Q)) {
+					delete this->Q;
+				}
+
 			};
 
 			/**
@@ -134,6 +145,15 @@ namespace pel208 {
 
 			};
 
+			/**
+			 * Obtém o índice do estado.<br />
+			 *
+			 * @return o <code>size_t</code> que representa o índice do estado
+			 */
+			PUBLIC size_t getStateIdx() {
+				return this->stateIdx;
+			};
+			
 			/**
 			 * Obtém o valor V de um estado.<br />
 			 *
@@ -179,7 +199,16 @@ namespace pel208 {
 			PUBLIC Matrix *getTransitionRewards() {
 				return this->transitionRewards;
 			};
-			
+
+			/**
+			 * Obtém a matriz Q.<br />
+			 *
+			 * @return o Matrix Q
+			 */
+			PUBLIC Matrix *getQ() {
+				return this->Q;
+			};
+
 			/**
 			 * Atualiza a matriz de probabilidades de transição para os próximos estados.<br />
 			 *
@@ -208,16 +237,30 @@ namespace pel208 {
 			/**
 			 * Imprime detalhes sobre o estado.
 			 */
-			PUBLIC void dump() {
+			PUBLIC void dump(IN bool printP = true, IN bool printQ = true) {
 
-				Logger::log("%6d %6.2f ", this->stateIdx, this->getValue());
-				for (size_t idx = 0; idx < ALLOWED_ACTIONS_QTY; idx++) {
-					Logger::logWithoutTimestamp("P(%02d,%s,%02d)=%.2f ", 
-						this->stateIdx, 
-						(idx == 0 ? "U" : ((idx == 1) ? "D" : ((idx == 2) ? "L" : "R"))), 
-						(size_t)this->nextStates->data()[0][idx], this->transitionProbabilities->data()[0][idx]);
+				Logger::log("%3d %8.2f  ", this->stateIdx, this->getValue());
+
+				char *emptyFormat = "          ";
+				char *printPFormat = emptyFormat;
+				if (printP) {
+					printPFormat = "%02d=%.2f   ";
 				}
-				Logger::logWithoutTimestamp("\n");
+				for (size_t idx = 0; idx < ALLOWED_ACTIONS_QTY; idx++) {
+					Logger::logWithoutTimestamp(printPFormat, (size_t)this->nextStates->data()[0][idx], this->transitionProbabilities->data()[0][idx]);
+				}
+				
+				char *printQFormat = emptyFormat;
+				if (printQ) {
+					printQFormat = "%9.6f  ";
+				}
+				for (size_t idx = 0; idx < ALLOWED_ACTIONS_QTY; idx++) {
+					Logger::logWithoutTimestamp(printQFormat, this->getQ()->data()[0][idx]);
+				}
+
+				if (printP || printQ) {
+					Logger::logWithoutTimestamp("\n");
+				}
 
 			};
 

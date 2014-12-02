@@ -10,7 +10,6 @@
 #include <inc\SmallGridWorld.h>
 #include <inc\SmallGridWorldState.h>
 
-#define PRECISION							0.000001f
 #define DEFAULT_THETA						0.000001f
 #define DEFAULT_GAMMA						1.0f
 #define MAX_ITERATIONS						1000
@@ -22,7 +21,7 @@ namespace pel208 {
 	namespace week6 {
 
 		/**
-		 * Classe de testes.<br />
+		 * Classe de implementação de programação dinâmica.<br />
 		 *
 		 * @author arrebola
 		 */
@@ -150,13 +149,13 @@ namespace pel208 {
 					return P->clone();
 				}
 				
-				if (std::abs(max - 0.0f) < PRECISION) {
+				if (std::abs(max - 0.0f) < pel208::commons::PRECISION) {
 					return P->clone();
 				}
 
 				std::vector<size_t> indexes;
 				for (size_t idx = 0; idx < ALLOWED_ACTIONS_QTY; idx++) {
-					if (std::abs(max - P_prime->data()[0][idx]) < PRECISION) {
+					if (std::abs(max - P_prime->data()[0][idx]) < pel208::commons::PRECISION) {
 						indexes.push_back(idx);
 					}
 				}
@@ -251,14 +250,14 @@ namespace pel208 {
 			 *
 			 * @param world
 			 *					o SmallGridWorld que representa o <i>small grid world</i>
+			 * @param newWorld
+			 *					o SmallGridWorld que representa o <i>small grid world</i> final
+			 * @param iteractions
+			 *					o <code>size_t</code> que representa a quantidade de iterações
 			 * @param theta
 			 *					o <code>double</code> que representa o theta (a precisão)
 			 * @param gamma
 			 *					o <code>double</code> que representa o gamma (o desconto)
-			 * @param values
-			 *					o Matrix que representa os valores do estado final
-			 * @param policies
-			 *					o Matrix que representa a política do estado final
 			 * @param debug
 			 *					indica se as mensagens de depuração devem ser exibidas
 			 *
