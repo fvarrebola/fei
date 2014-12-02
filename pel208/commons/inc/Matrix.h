@@ -23,6 +23,7 @@ namespace pel208 {
 
 		static const int MAX_DIMENSIONS = 3;
 		static const int MAX_COLUMNS_TO_DUMP = 10;
+		static const double PRECISION = 0.000001;
 
 		/**
 		 * Classe que representa uma matrix.
@@ -565,7 +566,7 @@ namespace pel208 {
 				size_t rowsCount = this->getRows();
 				size_t colsCount = this->getColumns();
         
-				*max = LONG_MIN;
+				*max = DBL_MIN;
 				for (size_t rowIdx = 0; rowIdx < rowsCount; rowIdx++) {
 					for (size_t colIdx = 0; colIdx < colsCount; colIdx++) {
 						register double v = this->data()[rowIdx][colIdx];
@@ -577,7 +578,7 @@ namespace pel208 {
 					}
 				}
 				
-				return (*max != LONG_MIN);
+				return (std::abs(DBL_MIN - (*max)) > pel208::commons::PRECISION);
 
 			};
 
