@@ -207,6 +207,13 @@ namespace pel216 {
 
 				};
 
+				/**
+				 * Executa o comando pause.<br />
+				 */
+				PUBLIC static void pressAnyKeyToContinue() {
+					system("pause");
+				};
+
 		}; // class Utils
 
 	} // namespace commons
