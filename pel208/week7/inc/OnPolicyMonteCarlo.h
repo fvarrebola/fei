@@ -227,11 +227,11 @@ namespace pel208 {
 			/**
 			 * Imprime detalhes sobre o episódio.<br />
 			 */
-			PUBLIC void dump() {
+			PUBLIC void dumpToFile() {
 
 				size_t size = this->visitedStates->size();
 
-				Logger::log("Episodio com %d estados...\n", size);
+				Logger::logToFile("Episodio com %d estados...\n", size);
 
 				size_t counter = 1;
 				for (std::vector<EpisodeState*>::iterator iterator =  this->visitedStates->begin() ; 
@@ -242,7 +242,7 @@ namespace pel208 {
 					register size_t actionIdx = (*iterator)->getActionIdx();
 					register double r = (*iterator)->getR();
 
-					Logger::log("  %05d: s=%02d a=%s Rt=%f\n", 
+					Logger::logToFile("  %05d: s=%02d a=%s Rt=%f\n", 
 						counter++,
 						stateIdx, 
 						(actionIdx == 0 ? "U" : ((actionIdx == 1) ? "D" : ((actionIdx == 2) ? "L" : "R"))),
@@ -376,8 +376,7 @@ namespace pel208 {
 						(*iterator)->setR(DEFAULT_REWARD * --counter * 1.0f);
 					}
 					if (debug) {
-						(*episode)->dump();
-						Utils::pressAnyKeyToContinue();
+						(*episode)->dumpToFile();
 					}
 				} else {
 					delete (*episode);
@@ -450,8 +449,8 @@ namespace pel208 {
 				do {
 
 					if (debug) {
-						Logger::log("\n");
-						Logger::log("%s\n", STARS);
+						Logger::logToFile("\n");
+						Logger::logToFile("%s\n", STARS);
 					}
 
 					// 1. Gera um episódio
@@ -524,10 +523,9 @@ namespace pel208 {
 					}
 
 					if (debug) {
-						(*goal)->dump();
-						Logger::log("%s\n", STARS);
-						Logger::log("\n");
-						Utils::pressAnyKeyToContinue();
+						(*goal)->dumpToFile();
+						Logger::logToFile("%s\n", STARS);
+						Logger::logToFile("\n");
 					}
 
 				} while (episodes++ < maxEpisodes);

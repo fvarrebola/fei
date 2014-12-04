@@ -81,6 +81,9 @@ void playWithSmallGridWorldUsingOnPolicyMC() {
 
 	SmallGridWorld *world = new SmallGridWorld(states);
 	world->dump();
+	if (debug) {
+		world->dumpToFile();
+	}
 
 	Logger::log("\n");
 	Logger::log("%s\n", STARS);
@@ -91,6 +94,9 @@ void playWithSmallGridWorldUsingOnPolicyMC() {
 	SmallGridWorld *goal = NULL;
 	if (OnPolicyMonteCarlo::evaluate(world, &goal, iterations, epsilon, uniqueQ, debug)) {
 		goal->dump();
+		if (debug) {
+			goal->dumpToFile();
+		}
 		delete goal;
 	}
 
