@@ -50,15 +50,21 @@ namespace pel216 {
 			        iListIdx++;
 			    }
 
-			    int iChosenIdx = 0;
-			    pel216::commons::Logger::log("Escolha o comando [1-%d]: ", iListIdx);
-			    std::cin >> iChosenIdx;
+				do {
 
-			    if (iChosenIdx > 0 && iChosenIdx < iListIdx + 1) {
-			        pCommand = (PMENU_OPTION)(&menu[iChosenIdx - 1]);
-			    } else {
-			        pCommand = pickMenuOption(menu);
-			    }
+					pel216::commons::Logger::log("Escolha o comando [1-%d]: ", iListIdx);
+
+					std::string str;
+					while (str.empty()) {
+						std::getline(std::cin, str);
+					}
+
+					int iChosenIdx = std::atoi(str.c_str());
+					if (iChosenIdx > 0 && iChosenIdx < iListIdx + 1) {
+						pCommand = (PMENU_OPTION)(&menu[iChosenIdx - 1]);
+					}
+
+				} while (Utils::isInvalidHandle(pCommand));
 
 			    return pCommand;
 
