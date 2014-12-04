@@ -237,36 +237,48 @@ namespace pel208 {
 			/**
 			 * Imprime detalhes sobre o estado.<br />
 			 *
-			 * @param printP
-			 *					indica se os valores de P devem ser impressos
-			 * @param printQ
-			 *					indica se os valores de Q devem ser impressos
+			 * @param dumpToFile
+			 *					indica se os valores de devem ser impressos em arquivo
 			 */
-			PUBLIC void dump(IN bool printP = true, IN bool printQ = true) {
+			PUBLIC void dump(IN bool dumpToFile = false) {
 
-				Logger::log("%3d %8.2f  ", this->stateIdx, this->getValue());
-
-				char *emptyFormat = "          ";
-				char *printPFormat = emptyFormat;
-				if (printP) {
-					printPFormat = "%02d=%.2f   ";
+				if (dumpToFile) {
+					Logger::logToFile("%3d %8.2f  ", this->stateIdx, this->getValue());
+				} else {
+					Logger::log("%3d %8.2f  ", this->stateIdx, this->getValue());
 				}
+
+				const char *printPFormat = "%02d=%.2f   ";
 				for (size_t idx = 0; idx < ALLOWED_ACTIONS_QTY; idx++) {
-					Logger::logWithoutTimestamp(printPFormat, (size_t)this->nextStates->data()[0][idx], this->transitionProbabilities->data()[0][idx]);
+					if (dumpToFile) {
+						Logger::logToFileWithoutTimestamp(printPFormat, (size_t)this->nextStates->data()[0][idx], this->transitionProbabilities->data()[0][idx]);
+					} else {
+						Logger::logWithoutTimestamp(printPFormat, (size_t)this->nextStates->data()[0][idx], this->transitionProbabilities->data()[0][idx]);
+					}
 				}
 				
-				char *printQFormat = emptyFormat;
-				if (printQ) {
-					printQFormat = "%12.6f  ";
-				}
+				const char *printQFormat = "%12.6f  ";
 				for (size_t idx = 0; idx < ALLOWED_ACTIONS_QTY; idx++) {
-					Logger::logWithoutTimestamp(printQFormat, this->getQ()->data()[0][idx]);
+					if (dumpToFile) {
+						Logger::logToFileWithoutTimestamp(printQFormat, this->getQ()->data()[0][idx]);
+					} else {
+						Logger::logWithoutTimestamp(printQFormat, this->getQ()->data()[0][idx]);
+					}
 				}
 
-				if (printP || printQ) {
+				if (dumpToFile) {
+					Logger::logToFileWithoutTimestamp("\n");
+				} else {
 					Logger::logWithoutTimestamp("\n");
 				}
 
+			};
+
+			/**
+			 * Imprime em arquivo os detalhes sobre o estado.<br />
+			 */
+			PUBLIC void dumpToFile() {
+				dump(true);
 			};
 
 		}; /* class SmallGridWorldState */

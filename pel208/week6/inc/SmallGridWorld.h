@@ -175,23 +175,40 @@ namespace pel208 {
 			/**
 			 * Imprime detalhes sobre o <i>grid</i>.<br />
 			 *
-			 * @param printP
-			 *					indica se os valores de P devem ser impressos
-			 * @param printQ
-			 *					indica se os valores de Q devem ser impressos
+			 * @param dumpToFile
+			 *					indica se os valores de devem ser impressos em arquivo
 			 */
-			PUBLIC void dump(IN bool printP = true, IN bool printQ = true) {
+			PUBLIC void dump(IN bool dumpToFile = false) {
 
-				Logger::log("Imprimindo detalhes sobre o grid...\n");
-				Logger::log("#   V         P(U)      P(D)      P(L)      P(R)      ");
-				Logger::logWithoutTimestamp("Q(U)          Q(D)          Q(L)          Q(R)\n");
-				Logger::log("--- --------  --------  --------  --------  --------  ");
-				Logger::logWithoutTimestamp("------------  ------------  ------------  ------------\n");
-				
-				for (size_t stateIdx = 0; stateIdx < this->stateCount; stateIdx++) {
-					this->states->at(stateIdx)->dump(printP, printQ);
+				char *str1 = "Imprimindo detalhes sobre o grid...\n";
+				char *str2 = "#   V         P(U)      P(D)      P(L)      P(R)      Q(U)          Q(D)          Q(L)          Q(R)\n";
+				char *str3 = "--- --------  --------  --------  --------  --------  ------------  ------------  ------------  ------------\n";
+
+				if (dumpToFile) {
+					Logger::logToFile(str1);
+					Logger::logToFile(str2);
+					Logger::logToFile(str3);
+				} else {
+					Logger::log(str1);
+					Logger::log(str2);
+					Logger::log(str3);
 				}
 
+				for (size_t stateIdx = 0; stateIdx < this->stateCount; stateIdx++) {
+					if (dumpToFile) {
+						this->states->at(stateIdx)->dumpToFile();
+					} else {
+						this->states->at(stateIdx)->dump();
+					}
+				}
+
+			};
+
+			/**
+			 * Imprime em arquivo os detalhes sobre o <i>grid</i>.<br />
+			 */
+			PUBLIC void dumpToFile() {
+				dump(true);
 			};
 
 		}; /* class SmallGridWorld */
