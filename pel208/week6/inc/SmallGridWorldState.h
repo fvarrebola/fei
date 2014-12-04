@@ -235,7 +235,12 @@ namespace pel208 {
 			};
 
 			/**
-			 * Imprime detalhes sobre o estado.
+			 * Imprime detalhes sobre o estado.<br />
+			 *
+			 * @param printP
+			 *					indica se os valores de P devem ser impressos
+			 * @param printQ
+			 *					indica se os valores de Q devem ser impressos
 			 */
 			PUBLIC void dump(IN bool printP = true, IN bool printQ = true) {
 
@@ -252,7 +257,7 @@ namespace pel208 {
 				
 				char *printQFormat = emptyFormat;
 				if (printQ) {
-					printQFormat = "%9.6f  ";
+					printQFormat = "%12.6f  ";
 				}
 				for (size_t idx = 0; idx < ALLOWED_ACTIONS_QTY; idx++) {
 					Logger::logWithoutTimestamp(printQFormat, this->getQ()->data()[0][idx]);
