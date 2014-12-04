@@ -11,7 +11,7 @@
 #define GRID_SIZE___INPUT_MSG					"Informe as dimensoes do grid..........."
 #define ITERATIONS___INPUT_MSG					"Informe a quantidade de iteracoes......"
 #define EPISLON___INPUT_MSG						"Informe o epsilon......................"
-#define DISCOUNT_RATE___GAMMA___INPUT_MSG		"Informe a taxa de desconto............."
+#define UNIQUE_Q___INPUT_MSG					"Atualizar politicas com Q unico? "
 
 #define DEBUG___INPUT_MSG						"Imprimir mensagens de progresso? "
 
@@ -60,7 +60,10 @@ void printFooter() {
 }
 
 /**
- * Analise de programação dinâmica para o problema do <i>small grid world</i> utilizando o método On-Policy Monte Carlo Controla.<br />
+ * Analise de programação dinâmica para o problema do <i>small grid world</i>.<br />
+ * Utiliza o método On-Policy Monte Carlo Control.<br />
+ *
+ * @see OnPolicyMonteCarlo
  */
 void playWithSmallGridWorldUsingOnPolicyMC() {
 
@@ -72,17 +75,28 @@ void playWithSmallGridWorldUsingOnPolicyMC() {
 
 	size_t iterations = UserParams::getIntParam(ITERATIONS___INPUT_MSG);
 	
-	double epsilon = UserParams::getDoubleParam(EPISLON___INPUT_MSG); // 0.1f
+	double epsilon = UserParams::getDoubleParam(EPISLON___INPUT_MSG);
+	bool uniqueQ = UserParams::getBoolParam(UNIQUE_Q___INPUT_MSG);
 	bool debug = UserParams::getBoolParam(DEBUG___INPUT_MSG);
 
 	SmallGridWorld *world = new SmallGridWorld(states);
-	
+	world->dump();
+
+	Logger::log("\n");
+	Logger::log("%s\n", STARS);
 	Logger::log("Iniciando avaliacao utilizando monte carlo...\n");
+	Logger::log("%s\n", STARS);
+	Logger::log("\n");
+
 	SmallGridWorld *goal = NULL;
-	if (OnPolicyMonteCarlo::evaluate(world, &goal, iterations, epsilon, debug)) {
+	if (OnPolicyMonteCarlo::evaluate(world, &goal, iterations, epsilon, uniqueQ, debug)) {
 		goal->dump();
 		delete goal;
 	}
+
+	Logger::log("\n");
+	Logger::log("%s\n", STARS);
+	Logger::log("\n");
 
 	delete world;
 	

@@ -23,8 +23,5 @@
     <ClInclude Include="inc\OnPolicyMonteCarlo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="inc\Random.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

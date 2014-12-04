@@ -72,7 +72,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="inc\OnPolicyMonteCarlo.h" />
-    <ClInclude Include="inc\Random.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />

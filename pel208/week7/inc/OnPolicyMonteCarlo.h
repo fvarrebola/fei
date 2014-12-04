@@ -20,53 +20,82 @@
 
 using namespace pel208::commons;
 using namespace pel208::week6;
-using namespace pel208::week7;
 
 namespace pel208 {
 
 	namespace week7 {
 
 		/**
-		 * Classe que representa um par de estado-ação.<br />
+		 * Classe que representa um estado do episódio.<br />
 		 *
 		 * @author arrebola
 		 */
-		class StateActionPair {
+		class EpisodeState {
 		private:
-			size_t state;
-			size_t action;
-			SmallGridWorldState *stateInfo;
+			size_t stateIdx;
+			size_t actionIdx;
+			EpisodeState *previous;
+			EpisodeState *next;
+			double R;
 
 		public:
 			/**
 			 * Construtor.<br />
 			 *
-			 * @param state
+			 * @param stateIdx
 			 *					 o <code>size_t</code> que representa o estado
-			 * @param action
+			 * @param actionIdx
 			 *					 o <code>size_t</code> que representa a ação
-			 * @param stateInfo
-			 *					o SmallGridWorldState que representa as informações do estado
+			 * @param previous
+			 *					 o EpisodeState que representa o estado anterior
+			 * @param next
+			 *					 o EpisodeState que representa o estado posterior
 			 */
-			StateActionPair(IN size_t state, IN size_t action, IN SmallGridWorldState *stateInfo = NULL) {
-				this->state = state;
-				this->action = action;
-				this->stateInfo = stateInfo;
+			EpisodeState(
+					IN size_t stateIdx, 
+					IN size_t actionIdx, 
+					IN EpisodeState *previous = NULL, 
+					IN EpisodeState *next = NULL) {
+				this->stateIdx = stateIdx;
+				this->actionIdx = actionIdx;
+				this->previous = previous;
+				this->next = next;
+				this->R = 0;
 			};
 			
 			/**
 			 * Destrutor.<br />
 			 */
-			~StateActionPair() {
+			~EpisodeState() {
 			};
 			
+			/**
+			 * Determina se um objeto é igual à instância atual.<br />
+			 *
+			 * @param that
+			 *					o EpisodeState que representa o objeto
+			 *
+			 * @return <code>true</code> caso o objeto seja igual; do contrário <code>false</code>
+			 */
+			PUBLIC bool equals(IN EpisodeState *that) {
+				
+				bool equals = false;
+				if (Utils::isValidHandle(that)) {
+					equals = ((this->getActionIdx() == that->getActionIdx()) && 
+						(this->getStateIdx() == that->getStateIdx()));
+				}
+
+				return equals;
+			
+			};
+
 			/**
 			 * Retorna o estado.<br />
 			 *
 			 * @return o <code>size_t</code> que representa o estado
 			 */
-			PUBLIC size_t getState() {
-				return this->state;
+			PUBLIC size_t getStateIdx() {
+				return this->stateIdx;
 			};
 
 			/**
@@ -74,20 +103,68 @@ namespace pel208 {
 			 *
 			 * @return o <code>size_t</code> que representa a ação
 			 */
-			PUBLIC size_t getAction() {
-				return this->action;
+			PUBLIC size_t getActionIdx() {
+				return this->actionIdx;
 			};
 
 			/**
-			 * Retorna informações sobre o estado.<br />
+			 * Retorna o estado anterior.<br />
 			 *
-			 * @return o SmallGridWorldState que representa as informações do estado
+			 * @return o <code>EpisodeState</code> que representa o estado
 			 */
-			PUBLIC SmallGridWorldState *getStateInfo() {
-				return this->stateInfo;
+			PUBLIC EpisodeState *getPrevious() {
+				return this->previous;
 			};
-		
-		}; /* class StateActionPair */
+
+			/**
+			 * Retorna o estado anterior.<br />
+			 *
+			 * @param previous 
+			 *					o <code>EpisodeState</code> que representa o estado
+			 */
+			PUBLIC void setPrevious(IN EpisodeState *previous) {
+				this->previous = previous;
+			};
+
+			/**
+			 * Retorna o próximo estado.<br />
+			 *
+			 * @return o <code>EpisodeState</code> que representa o estado
+			 */
+			PUBLIC EpisodeState *getNext() {
+				return this->next;
+			};
+
+			/**
+			 * Retorna o próximo estado.<br />
+			 *
+			 * @param next 
+			 *					o <code>EpisodeState</code> que representa o estado
+			 */
+			PUBLIC void setNext(IN EpisodeState *next) {
+				this->next = next;
+			};
+
+			/**
+			 * Obtém valor de R.<br />
+			 *
+			 * @return o <code>double</code> que representa o R
+			 */
+			PUBLIC double getR() {
+				return this->R;
+			};
+
+			/**
+			 * Configura o valor de R.<br />
+			 *
+			 * @param R 
+			 *					o <code>double</code> que representa o R
+			 */
+			PUBLIC void setR(IN double R) {
+				this->R = R;
+			};
+
+		}; /* class EpisodeState */
 
 		/**
 		 * Classe que representa um episódio.<br />
@@ -96,36 +173,36 @@ namespace pel208 {
 		 */
 		class Episode {
 		private:
-			std::vector<StateActionPair*> *pairs;
+			std::vector<EpisodeState*> *visitedStates;
 
 		public:
 			/**
 			 * Construtor.<br />
 			 */
 			Episode() {
-				this->pairs = new std::vector<StateActionPair*>();
+				this->visitedStates = new std::vector<EpisodeState*>();
 			};
 
 			/**
 			 * Destrutor.<br />
 			 */
 			~Episode() {
-				delete this->pairs;
+				delete this->visitedStates;
 			};
 
 			/**
-			 * Adição um par estado-ação ao episódio.<br />
+			 * Adição um estado ao episódio.<br />
 			 * 
-			 * @param pair
-			 *					o StateActionPair que representa um par de estado-ação
+			 * @param state
+			 *					o EpisodeState que representa o estado do episódio
 			 */
-			PUBLIC void add(IN StateActionPair* pair) {
+			PUBLIC void add(IN EpisodeState* state) {
 
-				if (Utils::isInvalidHandle(pair)) {
+				if (Utils::isInvalidHandle(state)) {
 					throw new IllegalParameterException();
 				}
 
-				this->pairs->push_back(pair);
+				this->visitedStates->push_back(state);
 
 			};
 
@@ -135,49 +212,43 @@ namespace pel208 {
 			 * @return o <code>size_t</code> que representa o tamanho do episódio
 			 */
 			PUBLIC size_t size() {
-				return this->pairs->size();
+				return this->visitedStates->size();
 			};
 
 			/**
-			 * Retorna os pares de estado-ação contidos no episódio.<br />
+			 * Retorna os estados do episódio.<br />
 			 *
-			 * @return o <code>std::vector</code> de StateActionPair que representa os pares de estado-ação
+			 * @return o <code>std::vector</code> de EpisodeState que representa os estado do episódio
 			 */
-			PUBLIC std::vector<StateActionPair*> *getPairs() {
-				return new std::vector<StateActionPair*>(this->pairs->begin(), this->pairs->end());
+			PUBLIC std::vector<EpisodeState*> *getVisitedStates() {
+				return this->visitedStates;
 			};
 
 			/**
-			 * Imprime detalhes sobre o episódio.
+			 * Imprime detalhes sobre o episódio.<br />
 			 */
 			PUBLIC void dump() {
 
-				size_t size = this->pairs->size();
+				size_t size = this->visitedStates->size();
 
 				Logger::log("Episodio com %d estados...\n", size);
-				Logger::log("");
 
 				size_t counter = 1;
-				for (std::vector<StateActionPair*>::iterator iterator =  this->pairs->begin() ; 
-						iterator != this->pairs->end(); 
+				for (std::vector<EpisodeState*>::iterator iterator =  this->visitedStates->begin() ; 
+						iterator != this->visitedStates->end(); 
 						++iterator) {
 
-					register size_t stateIdx = (*iterator)->getState();
-					register size_t actionIdx = (*iterator)->getAction();
-					register SmallGridWorldState *state = (*iterator)->getStateInfo();
+					register size_t stateIdx = (*iterator)->getStateIdx();
+					register size_t actionIdx = (*iterator)->getActionIdx();
+					register double r = (*iterator)->getR();
 
-					Logger::logWithoutTimestamp("(s=%02d,%s) ", 
+					Logger::log("  %05d: s=%02d a=%s Rt=%f\n", 
+						counter++,
 						stateIdx, 
-						(actionIdx == 0 ? "U" : ((actionIdx == 1) ? "D" : ((actionIdx == 2) ? "L" : "R"))));
-
-					if (counter++ % 8 == 0) {
-						Logger::logWithoutTimestamp("\n");
-						Logger::log("");
-					}
+						(actionIdx == 0 ? "U" : ((actionIdx == 1) ? "D" : ((actionIdx == 2) ? "L" : "R"))),
+						 r);
 
 				}
-
-				Logger::logWithoutTimestamp("\n");
 
 			};
 
@@ -193,19 +264,6 @@ namespace pel208 {
 		private:
 			const static int DEFAULT_REWARD = -1;	
 
-		public:
-			/**
-			 * Construtor.<br />
-			 */
-			OnPolicyMonteCarlo() {
-			};
-
-			/**
-			 * Destrutor.<br />
-			 */
-			~OnPolicyMonteCarlo() {
-			};
-
 			/**
 			 * Seleciona um estado aleatório diferente dos alvos seguindo uma distribuição uniforme.<br />
 			 *
@@ -220,7 +278,8 @@ namespace pel208 {
 					throw new IllegalParameterException();
 				}
 
-				return Random::nextUint(1, world->getStateCount() - 1);
+				// o estado 0 e o estado 15 são considerados estados terminais
+				return Random::nextUint(1, 14);
 
 			};
 
@@ -241,14 +300,14 @@ namespace pel208 {
 				}
 
 				Matrix *P = state->getTransitionProbabilities();
-
+				
 				std::discrete_distribution<size_t>::param_type::_Noinit noInit;
 				std::discrete_distribution<size_t>::param_type pType(noInit);
 				for (size_t idx = 0; idx < ALLOWED_ACTIONS_QTY; idx++) {
 					pType._Pvec.push_back(P->data()[0][idx]);
 				}
 				pType._Init();
-
+				
 				std::random_device generator;
 				std::discrete_distribution<size_t> distribution(pType);
 
@@ -261,28 +320,85 @@ namespace pel208 {
 			 *
 			 * @param world
 			 *					o SmallGridWorld que representa o <i>small grid world</i>
-			 * @param P
-			 *					o Matrix que representa a matriz de probabilidades
 			 * @param episode
 			 *					o Episode que representa o episódio
+			 * @param debug
+			 *					indica se as mensagens de depuração devem ser exibidas
 			 *
 			 * @return <code>true</code> caso a geração tenha sido bem sucedida; do contrário <code>false</code>
 			 */
-			PRIVATE static bool generateEpisode(IN SmallGridWorld *world, IN OUT Episode **episode) {
+			PRIVATE static bool generateEpisode(IN SmallGridWorld *world, IN OUT Episode **episode, IN bool debug = false) {
+
+				bool succeeded = false;
 
 				(*episode) = new Episode();
 
+				std::vector<EpisodeState*> *visited = (*episode)->getVisitedStates();
+
 				size_t stateIdx = selectRandomState(world);
 				
-				while (stateIdx != 0 && stateIdx != 15 && (*episode)->size() < MAX_EPISODE_LEN) {
-					SmallGridWorldState *state = world->getState(stateIdx);
+				bool ended = false;
+				while (!ended && (*episode)->size() < MAX_EPISODE_LEN) {
+					
+					register SmallGridWorldState *state = world->getState(stateIdx);
 					register size_t actionIdx = selectRandomAction(world, state);
-					(*episode)->add(new StateActionPair(stateIdx, actionIdx, state));
+					register EpisodeState *current = new EpisodeState(stateIdx, actionIdx);
+					register EpisodeState *last = NULL;
+					
+					if (!visited->empty()) {
+						last = visited->back();
+					}
+
+					if (current->equals(last)) {
+						continue;
+					}
+					
+					if (Utils::isValidHandle(last)) {
+						last->setNext(current);
+						current->setPrevious(last);
+					}
+					
+					(*episode)->add(current);
+
 					stateIdx = (size_t)state->getNextStates()->data()[0][actionIdx];
+				
+					ended = (stateIdx == 0 || stateIdx == 15);
+
 				}
 
-				return ((*episode)->size() < MAX_EPISODE_LEN);
+				succeeded = (*episode)->size() < MAX_EPISODE_LEN;
+				
+				if (succeeded) {
+					int counter = visited->size();
+					for (std::vector<EpisodeState*>::iterator iterator = visited->begin() ; 
+							iterator != visited->end(); 
+							++iterator) {
+						(*iterator)->setR(DEFAULT_REWARD * --counter * 1.0f);
+					}
+					if (debug) {
+						(*episode)->dump();
+						Utils::pressAnyKeyToContinue();
+					}
+				} else {
+					delete (*episode);
+					(*episode) = NULL;
+				}
 
+				return succeeded;
+
+			};
+
+		public:
+			/**
+			 * Construtor.<br />
+			 */
+			OnPolicyMonteCarlo() {
+			};
+
+			/**
+			 * Destrutor.<br />
+			 */
+			~OnPolicyMonteCarlo() {
 			};
 
 			/**
@@ -299,6 +415,8 @@ namespace pel208 {
 			 *					o <code>size_t</code> que representa a quantidade máxima de episódios
 			 * @param epsilon
 			 *					o <code>double</code> que representa o epsilon para a geração de políticas
+			 * @param uniqueQ
+			 *					indica se um único Q deve ser considerado de depuração devem ser exibidas
 			 * @param debug
 			 *					indica se as mensagens de depuração devem ser exibidas
 			 *
@@ -309,6 +427,7 @@ namespace pel208 {
 					IN OUT SmallGridWorld **goal,
 					IN size_t maxEpisodes = MAX_EPISODES,
 					IN double epsilon = DEFAULT_EPSILON, 
+					IN bool uniqueQ = false,
 					IN bool debug = false) {
 
 				if (Utils::isInvalidHandle(world)) {
@@ -327,53 +446,44 @@ namespace pel208 {
 				double policy_for_nomax_action = epsilon / 4;
 				double policy_for_max_action = 1 - epsilon + epsilon / 4;
 
-				size_t counter = 0;
+				size_t episodes = 0;
 				do {
-
-					// 1. Gera um episódio
-					Episode *episode = NULL;
-					if (!generateEpisode((*goal), &episode)) {
-						continue;
-					}
 
 					if (debug) {
 						Logger::log("\n");
 						Logger::log("%s\n", STARS);
-						episode->dump();
-						Utils::pressAnyKeyToContinue();
+					}
+
+					// 1. Gera um episódio
+					Episode *episode = NULL;
+					if (!generateEpisode((*goal), &episode, debug)) {
+						continue;
 					}
 
 					std::vector<bool> foundInEpisode(stateCount);
 
-					// 2. Para cada par estado-ação do episódio...
-					size_t counter = 0;
+					// 2. Para cada estado visitado no episódio...
 					size_t episodeSize = episode->size();
-					std::vector<StateActionPair*> *pairs = episode->getPairs();
-					for (std::vector<StateActionPair*>::iterator iterator =  pairs->begin() ; 
-						iterator != pairs->end(); 
+					std::vector<EpisodeState*> *episodeStates = episode->getVisitedStates();
+					for (std::vector<EpisodeState*>::iterator iterator = episodeStates->begin(); 
+						iterator != episodeStates->end(); 
 						++iterator) {
 
-						register size_t stateIdx = (*iterator)->getState();
-						register size_t actionIdx = (*iterator)->getAction();
+						register size_t stateIdx = (*iterator)->getStateIdx();
+						register size_t actionIdx = (*iterator)->getActionIdx();
+						register double R = (*iterator)->getR();
 						register SmallGridWorldState *state = (*goal)->getState(stateIdx);
 						register Matrix *Q = state->getQ();
 
 						foundInEpisode.at(stateIdx) = true;
 						
 						Q->data()[0][actionIdx] = 
-								(((counter == episodeSize - 1) ? 0 : DEFAULT_REWARD)) / 
-								++W->data()[stateIdx][actionIdx];
-
-						counter++;
+							Q->data()[0][actionIdx] + 
+							((R - Q->data()[0][actionIdx]) / ++W->data()[stateIdx][actionIdx]);
 
 					}
 					
 					delete episode;
-
-					if (debug) {
-						(*goal)->dump(false, true);
-						Utils::pressAnyKeyToContinue();
-					}
 
 					// 3. Atualize a política para cada estado encontrado no episódio
 					for (size_t stateIdx = 0; stateIdx < stateCount; stateIdx++) {
@@ -386,30 +496,44 @@ namespace pel208 {
 						register Matrix *Q = state->getQ();
 						register Matrix *P = state->getTransitionProbabilities();
 
-						// a* <- argmax a Q (s, a)
 						double max = DBL_MIN;
 						size_t maxRowId = 0;
 						size_t maxColIdx = 0;
-						std::vector<size_t> indexes;
-						// atualiza a política, P(s, a) <- 1 - e + e/4, if a = a*; e/4, if a != a* 
-						if (Q->max(&max, &maxRowId, &maxColIdx)) {
-							P->fill(policy_for_nomax_action);
-							P->data()[0][maxColIdx] = policy_for_max_action;
-							/* for (size_t idx = 0; idx < ALLOWED_ACTIONS_QTY; idx++) { if (std::abs(max - Q->data()[0][idx]) < PRECISION) { indexes.push_back(idx); }  } */
-						} 
+						if (!Q->max(&max, &maxRowId, &maxColIdx)) {
+							return false;
+						}
+
+						P->fill(policy_for_nomax_action);
 						
-						/* for (size_t idx = 0; idx < indexes.size(); idx++) {  P->data()[0][indexes.at(idx)] = policy_for_max_action;  }  */
+						if (uniqueQ) {
+							std::vector<size_t> argMax;
+							for (size_t idx = 0; idx < ALLOWED_ACTIONS_QTY; idx++) { 
+								if (std::abs(max - Q->data()[0][idx]) < PRECISION) { 
+									argMax.push_back(idx); 
+								}  
+							}
+							register size_t argMaxCount = argMax.size();
+							register double new_policy_for_max_action = policy_for_max_action / (argMaxCount * 1.0f);
+							for (size_t idx = 0; idx < argMaxCount; idx++) {  
+								P->data()[0][argMax.at(idx)] = new_policy_for_max_action;  
+							} 
+						} else { 
+							P->data()[0][maxColIdx] = policy_for_max_action;
+						}
 
 					}
 
 					if (debug) {
-						(*goal)->dump(false, true);
+						(*goal)->dump();
 						Logger::log("%s\n", STARS);
+						Logger::log("\n");
 						Utils::pressAnyKeyToContinue();
 					}
 
-				} while (counter++ < maxEpisodes);
-				
+				} while (episodes++ < maxEpisodes);
+
+				delete W;
+
 				return true;
 
 			};
