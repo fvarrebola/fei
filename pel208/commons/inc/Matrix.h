@@ -566,7 +566,7 @@ namespace pel208 {
 				size_t rowsCount = this->getRows();
 				size_t colsCount = this->getColumns();
         
-				*max = DBL_MIN;
+				*max = std::numeric_limits<double>::lowest();
 				for (size_t rowIdx = 0; rowIdx < rowsCount; rowIdx++) {
 					for (size_t colIdx = 0; colIdx < colsCount; colIdx++) {
 						register double v = this->data()[rowIdx][colIdx];
@@ -578,7 +578,7 @@ namespace pel208 {
 					}
 				}
 				
-				return (std::abs(DBL_MIN - (*max)) > pel208::commons::PRECISION);
+				return (*max > std::numeric_limits<double>::lowest());
 
 			};
 
