@@ -9,11 +9,14 @@
 #include <inc/OnPolicyMonteCarlo.h>
 
 #define GRID_SIZE___INPUT_MSG					"Informe as dimensoes do grid..........."
-#define ITERATIONS___INPUT_MSG					"Informe a quantidade de iteracoes......"
+#define EPISODES___INPUT_MSG					"Informe a quantidade de episodios......"
 #define EPISLON___INPUT_MSG						"Informe o epsilon......................"
 #define UNIQUE_Q___INPUT_MSG					"Atualizar politicas com Q unico? "
 
 #define DEBUG___INPUT_MSG						"Imprimir mensagens de progresso? "
+
+#define PRINT_R___INPUT_MSG						"Imprimir matriz R dos episodios? "
+#define EPISODES_TO_PRINT___INPUT_MSG			"Informe a qtde de episodios (0 = todos)"
 
 using namespace pel216::commons;
 using namespace pel208::commons;
@@ -73,7 +76,7 @@ void playWithSmallGridWorldUsingOnPolicyMC() {
 		states = UserParams::getIntParam(GRID_SIZE___INPUT_MSG);
 	}
 
-	size_t iterations = UserParams::getIntParam(ITERATIONS___INPUT_MSG);
+	size_t episodes = UserParams::getIntParam(EPISODES___INPUT_MSG);
 	
 	double epsilon = UserParams::getDoubleParam(EPISLON___INPUT_MSG);
 	bool uniqueQ = UserParams::getBoolParam(UNIQUE_Q___INPUT_MSG);
@@ -92,12 +95,23 @@ void playWithSmallGridWorldUsingOnPolicyMC() {
 	Logger::log("\n");
 
 	SmallGridWorld *goal = NULL;
-	if (OnPolicyMonteCarlo::evaluate(world, &goal, iterations, epsilon, uniqueQ, debug)) {
+	Matrix *R = NULL;
+	if (OnPolicyMonteCarlo::evaluate(world, &goal, &R, episodes, epsilon, uniqueQ, debug)) {
+		
 		goal->dump();
 		if (debug) {
 			goal->dumpToFile();
 		}
+
 		delete goal;
+
+		Logger::log("\n");
+		if (UserParams::getBoolParam(PRINT_R___INPUT_MSG)) {
+			R->dumpToFile(UserParams::getIntParam(EPISODES_TO_PRINT___INPUT_MSG));
+		}
+
+		delete R;
+
 	}
 
 	Logger::log("\n");

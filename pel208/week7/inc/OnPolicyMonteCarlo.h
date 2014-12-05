@@ -43,13 +43,13 @@ namespace pel208 {
 			 * Construtor.<br />
 			 *
 			 * @param stateIdx
-			 *					 o <code>size_t</code> que representa o estado
+			 *				 o <code>size_t</code> que representa o estado
 			 * @param actionIdx
-			 *					 o <code>size_t</code> que representa a ação
+			 *				 o <code>size_t</code> que representa a ação
 			 * @param previous
-			 *					 o EpisodeState que representa o estado anterior
+			 *				 o EpisodeState que representa o estado anterior
 			 * @param next
-			 *					 o EpisodeState que representa o estado posterior
+			 *				 o EpisodeState que representa o estado posterior
 			 */
 			EpisodeState(
 					IN size_t stateIdx, 
@@ -73,7 +73,7 @@ namespace pel208 {
 			 * Determina se um objeto é igual à instância atual.<br />
 			 *
 			 * @param that
-			 *					o EpisodeState que representa o objeto
+			 *				o EpisodeState que representa o objeto
 			 *
 			 * @return <code>true</code> caso o objeto seja igual; do contrário <code>false</code>
 			 */
@@ -120,7 +120,7 @@ namespace pel208 {
 			 * Retorna o estado anterior.<br />
 			 *
 			 * @param previous 
-			 *					o <code>EpisodeState</code> que representa o estado
+			 *				o <code>EpisodeState</code> que representa o estado
 			 */
 			PUBLIC void setPrevious(IN EpisodeState *previous) {
 				this->previous = previous;
@@ -139,7 +139,7 @@ namespace pel208 {
 			 * Retorna o próximo estado.<br />
 			 *
 			 * @param next 
-			 *					o <code>EpisodeState</code> que representa o estado
+			 *				o <code>EpisodeState</code> que representa o estado
 			 */
 			PUBLIC void setNext(IN EpisodeState *next) {
 				this->next = next;
@@ -158,7 +158,7 @@ namespace pel208 {
 			 * Configura o valor de R.<br />
 			 *
 			 * @param R 
-			 *					o <code>double</code> que representa o R
+			 *				o <code>double</code> que representa o R
 			 */
 			PUBLIC void setR(IN double R) {
 				this->R = R;
@@ -194,7 +194,7 @@ namespace pel208 {
 			 * Adição um estado ao episódio.<br />
 			 * 
 			 * @param state
-			 *					o EpisodeState que representa o estado do episódio
+			 *				o EpisodeState que representa o estado do episódio
 			 */
 			PUBLIC void add(IN EpisodeState* state) {
 
@@ -268,7 +268,7 @@ namespace pel208 {
 			 * Seleciona um estado aleatório diferente dos alvos seguindo uma distribuição uniforme.<br />
 			 *
 			 * @param world
-			 *					o SmallGridWorld que representa o <i>small grid world</i>
+			 *				o SmallGridWorld que representa o <i>small grid world</i>
 			 *
 			 * @return <code>size_t</code> que representa o estado
 			 */
@@ -287,9 +287,9 @@ namespace pel208 {
 			 * Seleciona uma ação aleatória seguindo a distribuição determinada pela política de transição do estado.<br />
 			 *
 			 * @param world
-			 *					o SmallGridWorld que representa o <i>small grid world</i>
+			 *				o SmallGridWorld que representa o <i>small grid world</i>
 			 * @param state
-			 *					o SmallGridWorldState que representa o estado
+			 *				o SmallGridWorldState que representa o estado
 			 *
 			 * @return <code>size_t</code> que representa a ação
 			 */
@@ -319,15 +319,18 @@ namespace pel208 {
 			 * Gera um episódio.<br />
 			 *
 			 * @param world
-			 *					o SmallGridWorld que representa o <i>small grid world</i>
+			 *				o SmallGridWorld que representa o <i>small grid world</i>
 			 * @param episode
-			 *					o Episode que representa o episódio
+			 *				o Episode que representa o episódio
 			 * @param debug
-			 *					indica se as mensagens de depuração devem ser exibidas
+			 *				indica se as mensagens de depuração devem ser exibidas
 			 *
 			 * @return <code>true</code> caso a geração tenha sido bem sucedida; do contrário <code>false</code>
 			 */
-			PRIVATE static bool generateEpisode(IN SmallGridWorld *world, IN OUT Episode **episode, IN bool debug = false) {
+			PRIVATE static bool generateEpisode(
+					IN SmallGridWorld *world, 
+					IN OUT Episode **episode, 
+					IN bool debug = false) {
 
 				bool succeeded = false;
 
@@ -405,25 +408,28 @@ namespace pel208 {
 			 * O primeiro e o último estado do grid são considerados estados terminais.<br />
 			 *
 			 * @param world
-			 *					o SmallGridWorld que representa o <i>small grid world</i>
+			 *				o SmallGridWorld que representa o <i>small grid world</i>
 			 * @param goal
-			 *					o SmallGridWorld que representa o <i>small grid world</i> final
+			 *				o SmallGridWorld que representa o <i>small grid world</i> final
+			 * @param R
+			 *				o Matrix que representa a matrix de recompensas por episódio
 			 * @param maxIterations
-			 *					o <code>size_t</code> que representa a quantidade máxima de iterações
+			 *				o <code>size_t</code> que representa a quantidade máxima de iterações
 			 * @param maxEpisodes
-			 *					o <code>size_t</code> que representa a quantidade máxima de episódios
+			 *				o <code>size_t</code> que representa a quantidade máxima de episódios
 			 * @param epsilon
-			 *					o <code>double</code> que representa o epsilon para a geração de políticas
+			 *				o <code>double</code> que representa o epsilon para a geração de políticas
 			 * @param uniqueQ
-			 *					indica se um único Q deve ser considerado de depuração devem ser exibidas
+			 *				indica se um único Q deve ser considerado de depuração devem ser exibidas
 			 * @param debug
-			 *					indica se as mensagens de depuração devem ser exibidas
+			 *				indica se as mensagens de depuração devem ser exibidas
 			 *
 			 * @return <code>true</code> caso a avaliação tenha sido bem sucedida; do contrário <code>false</code>
 			 */
 			PUBLIC static bool evaluate(
 					IN SmallGridWorld *world, 
 					IN OUT SmallGridWorld **goal,
+					IN OUT Matrix **R,
 					IN size_t maxEpisodes = MAX_EPISODES,
 					IN double epsilon = DEFAULT_EPSILON, 
 					IN bool uniqueQ = false,
@@ -439,6 +445,8 @@ namespace pel208 {
 
 				(*goal) = world->clone();
 				size_t stateCount = (*goal)->getStateCount();
+
+				(*R) = new Matrix(maxEpisodes, 1);
 
 				Matrix *W = new Matrix(stateCount, ALLOWED_ACTIONS_QTY);
 
@@ -482,6 +490,8 @@ namespace pel208 {
 
 					}
 					
+					(*R)->data()[episodes][0] = ((double)episodeSize) * DEFAULT_REWARD;
+
 					delete episode;
 
 					// 3. Atualize a política para cada estado encontrado no episódio
@@ -528,7 +538,7 @@ namespace pel208 {
 						Logger::logToFile("\n");
 					}
 
-				} while (episodes++ < maxEpisodes);
+				} while (++episodes < maxEpisodes);
 
 				delete W;
 
