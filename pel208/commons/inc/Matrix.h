@@ -583,6 +583,33 @@ namespace pel208 {
 			};
 
 			/**
+			 * Obtém o elemento com maior valor.<br />
+			 *
+			 * @param max
+			 *			o <code>double</code> que representa o maior valor encontrado
+			 *
+			 * @return <code>true</code> caso a obtenção tenha sido bem sucedida; do contrário <code>false</code>
+			 */
+			PUBLIC bool max(OUT double *max) {
+				
+				size_t rowsCount = this->getRows();
+				size_t colsCount = this->getColumns();
+        
+				*max = std::numeric_limits<double>::lowest();
+				for (size_t rowIdx = 0; rowIdx < rowsCount; rowIdx++) {
+					for (size_t colIdx = 0; colIdx < colsCount; colIdx++) {
+						register double v = this->data()[rowIdx][colIdx];
+						if (v > *max) {
+							*max = v;
+						}
+					}
+				}
+				
+				return (*max > std::numeric_limits<double>::lowest());
+
+			};
+			
+			/**
 			 * Preenche a matriz com o valor informado.<br />
 			 *
 			 * @param value
