@@ -61,6 +61,8 @@ namespace pel208 {
 			};
 
 		public:
+			const static int DEFAULT_REWARD = -1;	
+						
 			/**
 			 * Determina se a quantidade de estados é um quadrado perfeito.<br />
 			 *
