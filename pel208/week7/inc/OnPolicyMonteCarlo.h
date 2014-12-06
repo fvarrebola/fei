@@ -3,8 +3,6 @@
 #ifndef __ON_POLICY_MONTE_CARLO_H__
 #define __ON_POLICY_MONTE_CARLO_H__
 
-#include <array>
-
 #include <inc\Utils.h>
 
 #include <inc\Matrix.h>
@@ -15,7 +13,7 @@
 
 #define MAX_EPISODES					UINT_MAX - 1
 #define MAX_EPISODE_LEN					256
-#define DEFAULT_GAMMA					1.0f
+#define MAX_EPSILON						1.0f
 #define DEFAULT_EPSILON					0.1f
 
 using namespace pel208::commons;
@@ -262,8 +260,6 @@ namespace pel208 {
 		class OnPolicyMonteCarlo {
 
 		private:
-			const static int DEFAULT_REWARD = -1;	
-
 			/**
 			 * Seleciona um estado aleatório diferente dos alvos seguindo uma distribuição uniforme.<br />
 			 *
@@ -338,12 +334,15 @@ namespace pel208 {
 
 				std::vector<EpisodeState*> *visited = (*episode)->getVisitedStates();
 
+				// escolhe um estado aleatório
 				size_t stateIdx = selectRandomState(world);
 				
 				bool ended = false;
 				while (!ended && (*episode)->size() < MAX_EPISODE_LEN) {
 					
 					register SmallGridWorldState *state = world->getState(stateIdx);
+
+					// escolhe uma ação aleatória de acordo com a política vigente
 					register size_t actionIdx = selectRandomAction(world, state);
 					register EpisodeState *current = new EpisodeState(stateIdx, actionIdx);
 					register EpisodeState *last = NULL;
@@ -371,12 +370,13 @@ namespace pel208 {
 
 				succeeded = (*episode)->size() < MAX_EPISODE_LEN;
 				
+				// atualiza as recompensas...
 				if (succeeded) {
 					int counter = visited->size();
 					for (std::vector<EpisodeState*>::iterator iterator = visited->begin() ; 
 							iterator != visited->end(); 
 							++iterator) {
-						(*iterator)->setR(DEFAULT_REWARD * --counter * 1.0f);
+						(*iterator)->setR(pel208::week6::SmallGridWorld::DEFAULT_REWARD * --counter * 1.0f);
 					}
 					if (debug) {
 						(*episode)->dumpToFile();
@@ -413,8 +413,6 @@ namespace pel208 {
 			 *				o SmallGridWorld que representa o <i>small grid world</i> final
 			 * @param R
 			 *				o Matrix que representa a matrix de recompensas por episódio
-			 * @param maxIterations
-			 *				o <code>size_t</code> que representa a quantidade máxima de iterações
 			 * @param maxEpisodes
 			 *				o <code>size_t</code> que representa a quantidade máxima de episódios
 			 * @param epsilon
@@ -439,7 +437,7 @@ namespace pel208 {
 					throw new IllegalParameterException();
 				}
 
-				if (maxEpisodes > MAX_EPISODES || epsilon < 0.0f) {
+				if (maxEpisodes > MAX_EPISODES || (epsilon < 0.0f || epsilon > MAX_EPSILON)) {
 					throw new IllegalParameterException();
 				}
 
@@ -490,7 +488,7 @@ namespace pel208 {
 
 					}
 					
-					(*R)->data()[episodes][0] = ((double)episodeSize) * DEFAULT_REWARD;
+					(*R)->data()[episodes][0] = ((double)episodeSize) * pel208::week6::SmallGridWorld::DEFAULT_REWARD;
 
 					delete episode;
 
@@ -506,9 +504,9 @@ namespace pel208 {
 						register Matrix *P = state->getTransitionProbabilities();
 
 						double max = DBL_MIN;
-						size_t maxRowId = 0;
+						size_t maxRowIdx = 0;
 						size_t maxColIdx = 0;
-						if (!Q->max(&max, &maxRowId, &maxColIdx)) {
+						if (!Q->max(&max, &maxRowIdx, &maxColIdx)) {
 							return false;
 						}
 

@@ -77,7 +77,6 @@ void playWithSmallGridWorldUsingOnPolicyMC() {
 	}
 
 	size_t episodes = UserParams::getIntParam(EPISODES___INPUT_MSG);
-	
 	double epsilon = UserParams::getDoubleParam(EPISLON___INPUT_MSG);
 	bool uniqueQ = UserParams::getBoolParam(UNIQUE_Q___INPUT_MSG);
 	bool debug = UserParams::getBoolParam(DEBUG___INPUT_MSG);
@@ -102,14 +101,12 @@ void playWithSmallGridWorldUsingOnPolicyMC() {
 		if (debug) {
 			goal->dumpToFile();
 		}
-
 		delete goal;
 
 		Logger::log("\n");
 		if (UserParams::getBoolParam(PRINT_R___INPUT_MSG)) {
 			R->dumpToFile(UserParams::getIntParam(EPISODES_TO_PRINT___INPUT_MSG));
 		}
-
 		delete R;
 
 	}
