@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "commons", "commons\commons.vcxproj", "{517EF50E-4A55-46CC-A0EF-6C2E2C1E8B98}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "neural", "neural\neural.vcxproj", "{6E978048-B0C5-4164-8B76-B9154B7C5351}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{517EF50E-4A55-46CC-A0EF-6C2E2C1E8B98}.Debug|Win32.ActiveCfg = Debug|Win32
+		{517EF50E-4A55-46CC-A0EF-6C2E2C1E8B98}.Debug|Win32.Build.0 = Debug|Win32
+		{517EF50E-4A55-46CC-A0EF-6C2E2C1E8B98}.Release|Win32.ActiveCfg = Release|Win32
+		{517EF50E-4A55-46CC-A0EF-6C2E2C1E8B98}.Release|Win32.Build.0 = Release|Win32
+		{6E978048-B0C5-4164-8B76-B9154B7C5351}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6E978048-B0C5-4164-8B76-B9154B7C5351}.Debug|Win32.Build.0 = Debug|Win32
+		{6E978048-B0C5-4164-8B76-B9154B7C5351}.Release|Win32.ActiveCfg = Release|Win32
+		{6E978048-B0C5-4164-8B76-B9154B7C5351}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
