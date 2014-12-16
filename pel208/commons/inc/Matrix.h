@@ -860,7 +860,6 @@ namespace pel208 {
 				size_t rows_to_Dump = (rows > 0) ? ((rows > this->rows) ?  this->rows : rows) : this->rows;
 				size_t cols_to_Dump = (columns > 0) ?  ((columns > this->columns) ?  this->columns : columns) : this->columns;
 
-				Logger::logToFile("\n");
 				for (size_t i = 0; i < rows_to_Dump; i++) {
 					
 					Logger::logToFile("|");
@@ -874,7 +873,6 @@ namespace pel208 {
 
 					Logger::logToFileWithoutTimestamp("|\n");
 				}
-				Logger::logToFile("\n");
 
 			};
 
