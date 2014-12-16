@@ -9,6 +9,7 @@
 
 #define GRID_SIZE___INPUT_MSG					"Informe as dimensoes do grid..........."
 #define EPISODES___INPUT_MSG					"Informe a quantidade de iteracoes......"
+#define EPISLON___INPUT_MSG						"Informe o epsilon......................"
 #define LEARNING_RATE___ALPHA___INPUT_MSG		"Informe a taxa de aprendizado.........."
 #define DISCOUNT_RATE___GAMMA___INPUT_MSG		"Informe a taxa de desconto............."
 
@@ -76,7 +77,8 @@ void playWithQLearning() {
 	}
 
 	size_t episodes = UserParams::getIntParam(EPISODES___INPUT_MSG);
-	double alpha= UserParams::getDoubleParam(LEARNING_RATE___ALPHA___INPUT_MSG);
+	double epsilon = UserParams::getDoubleParam(EPISLON___INPUT_MSG);
+	double alpha = UserParams::getDoubleParam(LEARNING_RATE___ALPHA___INPUT_MSG);
 	double gamma = UserParams::getDoubleParam(DISCOUNT_RATE___GAMMA___INPUT_MSG);
 	bool debug = UserParams::getBoolParam(DEBUG___INPUT_MSG);
 
@@ -94,7 +96,7 @@ void playWithQLearning() {
 
 	SmallGridWorld *goal = NULL;
 	Matrix *R = NULL;
-	if (QLearningOffPolicyTDControl::evaluate(world, &goal, &R, episodes, alpha, gamma, debug)) {
+	if (QLearningOffPolicyTDControl::evaluate(world, &goal, &R, episodes, epsilon, alpha, gamma, debug)) {
 		
 		goal->dump();
 		if (debug) {

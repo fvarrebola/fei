@@ -4,21 +4,15 @@
 #define __Q_LEARNING_OFF_POLICY_TD_CONTROL_H__
 
 #include <inc\Utils.h>
-
 #include <inc\Matrix.h>
 #include <inc\Random.h>
 
 #include <inc\SmallGridWorld.h>
 #include <inc\SmallGridWorldState.h>
+#include <inc\Episode.h>
+#include <inc\EpisodeState.h>
 
-#include <inc\OnPolicyMonteCarlo.h>
-
-#define MAX_EPISODES					UINT_MAX - 1
-#define MAX_EPISODE_LEN					256
-#define MAX_ALPHA						1.0f
-#define DEFAULT_ALPHA					0.5f
-#define MAX_GAMMA						1.0f
-#define DEFAULT_GAMMA					1.0f
+#include <inc\RLConstants.h>
 
 using namespace pel208::commons;
 using namespace pel208::week6;
@@ -37,81 +31,14 @@ namespace pel208 {
 
 		private:
 			/**
-			 * Seleciona um estado aleatório diferente dos alvos seguindo uma distribuição uniforme.<br />
-			 *
-			 * @param world
-			 *				o SmallGridWorld que representa o <i>small grid world</i>
-			 *
-			 * @return <code>size_t</code> que representa o estado
-			 */
-			PRIVATE static size_t selectRandomState(IN SmallGridWorld *world) {
-
-				if (Utils::isInvalidHandle(world) || world->getStateCount() < 1) {
-					throw new IllegalParameterException();
-				}
-
-				// o estado 0 e o estado 15 são considerados estados terminais
-				return Random::nextUint(1, 14);
-
-			};
-
-			/**
-			 * Seleciona uma ação aleatória seguindo a distribuição determinada pela política de transição do estado.<br />
-			 *
-			 * @param world
-			 *				o SmallGridWorld que representa o <i>small grid world</i>
-			 * @param state
-			 *				o SmallGridWorldState que representa o estado
-			 *
-			 * @return <code>size_t</code> que representa a ação
-			 */
-			PRIVATE static size_t selectRandomAction(IN SmallGridWorld *world, IN SmallGridWorldState *state) {
-
-				if (Utils::isInvalidHandle(world) || Utils::isInvalidHandle(state)) {
-					throw new IllegalParameterException();
-				}
-
-				Matrix *P = state->getTransitionProbabilities();
-				
-				std::discrete_distribution<size_t>::param_type::_Noinit noInit;
-				std::discrete_distribution<size_t>::param_type pType(noInit);
-				for (size_t idx = 0; idx < ALLOWED_ACTIONS_QTY; idx++) {
-					pType._Pvec.push_back(P->data()[0][idx]);
-				}
-				pType._Init();
-				
-				std::random_device generator;
-				std::discrete_distribution<size_t> distribution(pType);
-
-				return distribution(generator);
-			
-			};
-
-			/**
-			 * Obtém o valor máximo de Q(s, a) de um estado.<br />
-			 *
-			 * @param state
-			 *				o SmallGridWorldState que representa o estado
-			 *
-			 * @return <code>true</code> caso a operação tenha sido bem sucedida; do contrário <code>false</code>
-			 */
-			PRIVATE static bool getMaxFutureValue(IN SmallGridWorldState *state, OUT double *max) {
-
-				if (Utils::isInvalidHandle(state)) {
-					throw new IllegalParameterException();
-				}
-
-				return state->getQ()->max(&(*max));
-
-			};
-
-			/**
 			 * Gera um episódio.<br />
 			 *
 			 * @param world
 			 *				o SmallGridWorld que representa o <i>small grid world</i>
 			 * @param episode
 			 *				o Episode que representa o episódio
+			 * @param epsilon
+			 *				o <code>double</code> que representa o epsilon para a geração de políticas
 			 * @param alpha
 			 *				o <code>double</code> que representa o alpha (taxa de aprendizado)
 			 * @param gamma
@@ -124,6 +51,7 @@ namespace pel208 {
 			PRIVATE static bool generateEpisode(
 					IN SmallGridWorld *world, 
 					IN OUT Episode **episode, 
+					IN double epsilon = DEFAULT_EPSILON, 
 					IN double alpha = DEFAULT_ALPHA,
 					IN double gamma = DEFAULT_GAMMA,
 					IN bool debug = false) {
@@ -135,7 +63,7 @@ namespace pel208 {
 				std::vector<EpisodeState*> *visited = (*episode)->getVisitedStates();
 
 				// escolhe um estado aleatório
-				size_t stateIdx = selectRandomState(world);
+				size_t stateIdx = world->selectRandomState();
 				
 				bool ended = false;
 				while (!ended && (*episode)->size() < MAX_EPISODE_LEN) {
@@ -144,7 +72,7 @@ namespace pel208 {
 					register Matrix *Q = state->getQ();
 					
 					// escolhe uma ação aleatória de acordo com a política vigente
-					register size_t actionIdx = selectRandomAction(world, state);
+					register size_t actionIdx = world->selectRandomActionUsingQ(state, epsilon);
 					register EpisodeState *current = new EpisodeState(stateIdx, actionIdx);
 					register EpisodeState *last = NULL;
 					
@@ -152,10 +80,6 @@ namespace pel208 {
 						last = visited->back();
 					}
 
-					if (current->equals(last)) {
-						continue;
-					}
-					
 					if (Utils::isValidHandle(last)) {
 						last->setNext(current);
 						current->setPrevious(last);
@@ -164,18 +88,17 @@ namespace pel208 {
 					// observa o próximo estado para determinar o valor máximo
 					register size_t nextStateIdx = (size_t)state->getNextStates()->data()[0][actionIdx];
 					register double max = 0;
-					if (!getMaxFutureValue(world->getState(nextStateIdx), &max)) {
+					if (!world->getState(nextStateIdx)->getMaxQValue(&max)) {
 						continue;
 					}
 
-					// Q(s, a) = Q(s, a) + alpha * (r + (gamma * max(a) Q(s', a)) - Q(s, a))
+					// Q(s, a) = Q(s, a) + alpha * (r + (gamma * max(a') Q(s', a')) - Q(s, a))
 					register double currentValue = Q->data()[0][actionIdx];
-					Q->data()[0][actionIdx] = currentValue + alpha * 
-						(pel208::week6::SmallGridWorld::DEFAULT_REWARD + (gamma * max) - currentValue);
+					Q->data()[0][actionIdx] = currentValue + alpha * (DEFAULT_ACTION_REWARD + (gamma * max) - currentValue);
 
 					(*episode)->add(current);
 
-					ended = (nextStateIdx == 0 || nextStateIdx == 15);
+					ended = world->isTerminalState(nextStateIdx);
 					stateIdx = nextStateIdx;
 
 				}
@@ -188,7 +111,7 @@ namespace pel208 {
 					for (std::vector<EpisodeState*>::iterator iterator = visited->begin() ; 
 							iterator != visited->end(); 
 							++iterator) {
-						(*iterator)->setR(pel208::week6::SmallGridWorld::DEFAULT_REWARD * --counter * 1.0f);
+						(*iterator)->setR(DEFAULT_ACTION_REWARD * --counter * 1.0f);
 					}
 					if (debug) {
 						(*episode)->dumpToFile();
@@ -225,8 +148,10 @@ namespace pel208 {
 			 *				o SmallGridWorld que representa o <i>small grid world</i> final
 			 * @param R
 			 *				o Matrix que representa a matrix de recompensas por episódio
-			 * @param maxIterations
+			 * @param maxEpisodes
 			 *				o <code>size_t</code> que representa a quantidade máxima de iterações
+			 * @param epsilon
+			 *				o <code>double</code> que representa o epsilon para a geração de políticas
 			 * @param alpha
 			 *				o <code>double</code> que representa o alpha (taxa de aprendizado)
 			 * @param gamma
@@ -241,6 +166,7 @@ namespace pel208 {
 					IN OUT SmallGridWorld **goal,
 					IN OUT Matrix **R,
 					IN size_t maxEpisodes = MAX_EPISODES,
+					IN double epsilon = DEFAULT_EPSILON, 
 					IN double alpha = DEFAULT_ALPHA,
 					IN double gamma = DEFAULT_GAMMA,
 					IN bool debug = false) {
@@ -267,7 +193,7 @@ namespace pel208 {
 					}
 
 					Episode *episode = NULL;
-					if (generateEpisode((*goal), &episode, alpha, gamma, debug)) {
+					if (generateEpisode((*goal), &episode, epsilon, alpha, gamma, debug)) {
 
 						if (debug) {
 							(*goal)->dumpToFile();
@@ -275,7 +201,7 @@ namespace pel208 {
 							Logger::logToFile("\n");
 						}
 
-						(*R)->data()[episodes][0] = ((double)episode->size()) * pel208::week6::SmallGridWorld::DEFAULT_REWARD;
+						(*R)->data()[episodes][0] = ((double)episode->size()) * DEFAULT_ACTION_REWARD;
 
 						delete episode;
 
