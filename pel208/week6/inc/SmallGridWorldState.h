@@ -4,9 +4,11 @@
 #define __SMALL_GRID_WORLD_STATE_H__
 
 #include <inc\Utils.h>
+#include <inc\Matrix.h>
+#include <inc\Random.h>
 #include <inc\ex\IllegalParameterException.h>
 
-#include <inc\Matrix.h>
+#include <inc\RLConstants.h>
 
 #define ALLOWED_ACTIONS_QTY							4
 
@@ -14,13 +16,6 @@
 #define NEXT_STATE_IDX								0
 #define TRANSITION_PROBABILITY_IDX					1
 #define TRANSITION_REWARD_IDX						2
-
-// a probabilidade padrão de transição
-#define DEFAULT_TRANSITION_PROBABILITY				0.25f
-
-// as recompensas
-#define ACTION_REWARD								-1.0f
-#define END_STATE_REWARD							0.0f
 
 using namespace pel208::commons;
 
@@ -43,6 +38,7 @@ namespace pel208 {
 			Matrix *transitionRewards;
 
 			Matrix *Q;
+			Matrix *E;
 
 			double stateValue_V;
 
@@ -66,12 +62,14 @@ namespace pel208 {
 			/**
 			 * Construtor.<br />
 			 *
+			 * @param world
+			 *					o SmallGridWorld que representa o mundo
 			 * @para stateIdx
 			 *					o <code>size_t</code> que representa o estado
 			 * @param nextStatesCompleteInfo
 			 *					o Matrix de informações sobre os próximos estados
 			 */
-			SmallGridWorldState(IN size_t stateIdx, Matrix *nextStatesCompleteInfo) {
+			SmallGridWorldState(IN size_t stateIdx, IN Matrix *nextStatesCompleteInfo, IN bool initQ = true) {
 				
 				if (Utils::isInvalidHandle(nextStatesCompleteInfo)) {
 					throw new IllegalParameterException();
@@ -88,7 +86,7 @@ namespace pel208 {
 				// inicializa as matrizes auxiliares, que serão atualizadas conforme o algoritmo
 				this->nextStates = new Matrix(1, ALLOWED_ACTIONS_QTY);
 				this->transitionProbabilities = new Matrix(1, ALLOWED_ACTIONS_QTY, DEFAULT_TRANSITION_PROBABILITY);
-				this->transitionRewards = new Matrix(1, ALLOWED_ACTIONS_QTY, ACTION_REWARD);
+				this->transitionRewards = new Matrix(1, ALLOWED_ACTIONS_QTY, DEFAULT_ACTION_REWARD);
 				for (size_t colIdx = 0; colIdx < ALLOWED_ACTIONS_QTY; colIdx++) {
 					this->nextStates->data()[0][colIdx] = this->nextStatesCompleteInfo->data()[0][colIdx];
 					this->transitionProbabilities->data()[0][colIdx] = this->nextStatesCompleteInfo->data()[1][colIdx];
@@ -97,10 +95,14 @@ namespace pel208 {
 
 				this->stateValue_V = 0.0f;
 
-				this->Q = new Matrix(1, ALLOWED_ACTIONS_QTY);
-				if (stateIdx > 0 && stateIdx < 15) {
-					this->Q->randomFill(0, 1);
+				if (initQ) {
+					this->Q = new Matrix(1, ALLOWED_ACTIONS_QTY);
+					if (stateIdx > 0 && stateIdx < 15) {
+						this->Q->randomFill(ZERO, ONE);
+					}
 				}
+
+				this->E = new Matrix(1, ALLOWED_ACTIONS_QTY);
 
 			};
 
@@ -129,6 +131,9 @@ namespace pel208 {
 					delete this->Q;
 				}
 
+				if (Utils::isValidHandle(this->E)) {
+					delete this->E;
+				}
 			};
 
 			/**
@@ -138,9 +143,15 @@ namespace pel208 {
 			 */
 			PUBLIC SmallGridWorldState *clone() {
 				
-				SmallGridWorldState *clone = new SmallGridWorldState(this->stateIdx, this->nextStatesCompleteInfo);
+				SmallGridWorldState *clone = new SmallGridWorldState(
+						this->stateIdx, 
+						this->nextStatesCompleteInfo,
+						false);
+				
 				clone->setValue(this->getValue());
 				clone->updateTransitionProbabilities(this->transitionProbabilities);
+				clone->Q = this->Q->clone();
+
 				return clone;
 
 			};
@@ -210,6 +221,24 @@ namespace pel208 {
 			};
 
 			/**
+			 * Obtém a matriz E.<br />
+			 *
+			 * @return o Matrix E
+			 */
+			PUBLIC Matrix *getE() {
+				return this->E;
+			};
+			
+			/**
+			 * Obtém o valor máximo de Q(s, a) de um estado.<br />
+			 *
+			 * @return <code>true</code> caso a operação tenha sido bem sucedida; do contrário <code>false</code>
+			 */
+			PUBLIC bool getMaxQValue(OUT double *max) {
+				return this->getQ()->max(&(*max));
+			};
+
+			/**
 			 * Atualiza a matriz de probabilidades de transição para os próximos estados.<br />
 			 *
 			 * @param matrix
@@ -232,6 +261,7 @@ namespace pel208 {
 				for (size_t idx = 0; idx < ALLOWED_ACTIONS_QTY; idx++) {
 					updateMatrix(this->transitionProbabilities, 0, idx, matrix->data()[0][idx]);
 				}
+
 			};
 
 			/**

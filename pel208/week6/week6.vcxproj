@@ -74,6 +74,7 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inc\RLConstants.h" />
     <ClInclude Include="inc\DynamicProgramming.h" />
     <ClInclude Include="inc\SmallGridWorldState.h" />
     <ClInclude Include="inc\SmallGridWorld.h" />

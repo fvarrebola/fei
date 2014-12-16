@@ -126,18 +126,9 @@ void playWithSmallGridWorldUsingValueIteration() {
 
 	Logger::log("Iniciando avaliacao utilizando iteracao de valor...\n");
 	if (DynamicProgramming::evaluateUsingValueIteration(world, &newWorld, &iteractions, theta, gamma, debug)) {
-
 		Logger::log("Convergencia atingida apos %d iteracoes\n", iteractions);
-
-		Logger::log("Estado Valor  Politica\n");
-		Logger::log("------ ------ ---------------------------------------------------------------\n");
-
-		for (size_t stateIdx = 0; stateIdx < states; stateIdx++) {
-			newWorld->getState(stateIdx)->dump();
-		}
-
+		newWorld->dump();
 		delete newWorld;
-
 	}
 
 	delete world;

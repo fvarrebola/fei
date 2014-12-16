@@ -29,5 +29,8 @@
     <ClInclude Include="inc\SmallGridWorldState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="inc\RLConstants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

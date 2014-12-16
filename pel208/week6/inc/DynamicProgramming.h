@@ -4,15 +4,12 @@
 #define __DYNAMIC_PROGRAMMING_H__
 
 #include <inc\Utils.h>
-
 #include <inc\Matrix.h>
+
+#include <inc\RLConstants.h>
 
 #include <inc\SmallGridWorld.h>
 #include <inc\SmallGridWorldState.h>
-
-#define DEFAULT_THETA						0.000001f
-#define DEFAULT_GAMMA						1.0f
-#define MAX_ITERATIONS						1000
 
 using namespace pel208::commons;
 
