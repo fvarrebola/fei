@@ -4,17 +4,12 @@
 #define __ON_POLICY_MONTE_CARLO_H__
 
 #include <inc\Utils.h>
-
 #include <inc\Matrix.h>
-#include <inc\Random.h>
 
 #include <inc\SmallGridWorld.h>
 #include <inc\SmallGridWorldState.h>
-
-#define MAX_EPISODES					UINT_MAX - 1
-#define MAX_EPISODE_LEN					256
-#define MAX_EPSILON						1.0f
-#define DEFAULT_EPSILON					0.1f
+#include <inc\Episode.h>
+#include <inc\EpisodeState.h>
 
 using namespace pel208::commons;
 using namespace pel208::week6;
@@ -24,235 +19,6 @@ namespace pel208 {
 	namespace week7 {
 
 		/**
-		 * Classe que representa um estado do episódio.<br />
-		 *
-		 * @author arrebola
-		 */
-		class EpisodeState {
-		private:
-			size_t stateIdx;
-			size_t actionIdx;
-			EpisodeState *previous;
-			EpisodeState *next;
-			double R;
-
-		public:
-			/**
-			 * Construtor.<br />
-			 *
-			 * @param stateIdx
-			 *				 o <code>size_t</code> que representa o estado
-			 * @param actionIdx
-			 *				 o <code>size_t</code> que representa a ação
-			 * @param previous
-			 *				 o EpisodeState que representa o estado anterior
-			 * @param next
-			 *				 o EpisodeState que representa o estado posterior
-			 */
-			EpisodeState(
-					IN size_t stateIdx, 
-					IN size_t actionIdx, 
-					IN EpisodeState *previous = NULL, 
-					IN EpisodeState *next = NULL) {
-				this->stateIdx = stateIdx;
-				this->actionIdx = actionIdx;
-				this->previous = previous;
-				this->next = next;
-				this->R = 0;
-			};
-			
-			/**
-			 * Destrutor.<br />
-			 */
-			~EpisodeState() {
-			};
-			
-			/**
-			 * Determina se um objeto é igual à instância atual.<br />
-			 *
-			 * @param that
-			 *				o EpisodeState que representa o objeto
-			 *
-			 * @return <code>true</code> caso o objeto seja igual; do contrário <code>false</code>
-			 */
-			PUBLIC bool equals(IN EpisodeState *that) {
-				
-				bool equals = false;
-				if (Utils::isValidHandle(that)) {
-					equals = ((this->getActionIdx() == that->getActionIdx()) && 
-						(this->getStateIdx() == that->getStateIdx()));
-				}
-
-				return equals;
-			
-			};
-
-			/**
-			 * Retorna o estado.<br />
-			 *
-			 * @return o <code>size_t</code> que representa o estado
-			 */
-			PUBLIC size_t getStateIdx() {
-				return this->stateIdx;
-			};
-
-			/**
-			 * Retorna o ação.<br />
-			 *
-			 * @return o <code>size_t</code> que representa a ação
-			 */
-			PUBLIC size_t getActionIdx() {
-				return this->actionIdx;
-			};
-
-			/**
-			 * Retorna o estado anterior.<br />
-			 *
-			 * @return o <code>EpisodeState</code> que representa o estado
-			 */
-			PUBLIC EpisodeState *getPrevious() {
-				return this->previous;
-			};
-
-			/**
-			 * Retorna o estado anterior.<br />
-			 *
-			 * @param previous 
-			 *				o <code>EpisodeState</code> que representa o estado
-			 */
-			PUBLIC void setPrevious(IN EpisodeState *previous) {
-				this->previous = previous;
-			};
-
-			/**
-			 * Retorna o próximo estado.<br />
-			 *
-			 * @return o <code>EpisodeState</code> que representa o estado
-			 */
-			PUBLIC EpisodeState *getNext() {
-				return this->next;
-			};
-
-			/**
-			 * Retorna o próximo estado.<br />
-			 *
-			 * @param next 
-			 *				o <code>EpisodeState</code> que representa o estado
-			 */
-			PUBLIC void setNext(IN EpisodeState *next) {
-				this->next = next;
-			};
-
-			/**
-			 * Obtém valor de R.<br />
-			 *
-			 * @return o <code>double</code> que representa o R
-			 */
-			PUBLIC double getR() {
-				return this->R;
-			};
-
-			/**
-			 * Configura o valor de R.<br />
-			 *
-			 * @param R 
-			 *				o <code>double</code> que representa o R
-			 */
-			PUBLIC void setR(IN double R) {
-				this->R = R;
-			};
-
-		}; /* class EpisodeState */
-
-		/**
-		 * Classe que representa um episódio.<br />
-		 *
-		 * @author arrebola
-		 */
-		class Episode {
-		private:
-			std::vector<EpisodeState*> *visitedStates;
-
-		public:
-			/**
-			 * Construtor.<br />
-			 */
-			Episode() {
-				this->visitedStates = new std::vector<EpisodeState*>();
-			};
-
-			/**
-			 * Destrutor.<br />
-			 */
-			~Episode() {
-				delete this->visitedStates;
-			};
-
-			/**
-			 * Adição um estado ao episódio.<br />
-			 * 
-			 * @param state
-			 *				o EpisodeState que representa o estado do episódio
-			 */
-			PUBLIC void add(IN EpisodeState* state) {
-
-				if (Utils::isInvalidHandle(state)) {
-					throw new IllegalParameterException();
-				}
-
-				this->visitedStates->push_back(state);
-
-			};
-
-			/**
-			 * Retorna o tamanho do episódio.<br />
-			 *
-			 * @return o <code>size_t</code> que representa o tamanho do episódio
-			 */
-			PUBLIC size_t size() {
-				return this->visitedStates->size();
-			};
-
-			/**
-			 * Retorna os estados do episódio.<br />
-			 *
-			 * @return o <code>std::vector</code> de EpisodeState que representa os estado do episódio
-			 */
-			PUBLIC std::vector<EpisodeState*> *getVisitedStates() {
-				return this->visitedStates;
-			};
-
-			/**
-			 * Imprime detalhes sobre o episódio.<br />
-			 */
-			PUBLIC void dumpToFile() {
-
-				size_t size = this->visitedStates->size();
-
-				Logger::logToFile("Episodio com %d estados...\n", size);
-
-				size_t counter = 1;
-				for (std::vector<EpisodeState*>::iterator iterator =  this->visitedStates->begin() ; 
-						iterator != this->visitedStates->end(); 
-						++iterator) {
-
-					register size_t stateIdx = (*iterator)->getStateIdx();
-					register size_t actionIdx = (*iterator)->getActionIdx();
-					register double r = (*iterator)->getR();
-
-					Logger::logToFile("  %05d: s=%02d a=%s Rt=%f\n", 
-						counter++,
-						stateIdx, 
-						(actionIdx == 0 ? "U" : ((actionIdx == 1) ? "D" : ((actionIdx == 2) ? "L" : "R"))),
-						 r);
-
-				}
-
-			};
-
-		}; /* class Episode */
-
-		/**
 		 * Implementação do método On Policy Monte Carlo.<br />
 		 *
 		 * @author arrebola
@@ -260,57 +26,6 @@ namespace pel208 {
 		class OnPolicyMonteCarlo {
 
 		private:
-			/**
-			 * Seleciona um estado aleatório diferente dos alvos seguindo uma distribuição uniforme.<br />
-			 *
-			 * @param world
-			 *				o SmallGridWorld que representa o <i>small grid world</i>
-			 *
-			 * @return <code>size_t</code> que representa o estado
-			 */
-			PRIVATE static size_t selectRandomState(IN SmallGridWorld *world) {
-
-				if (Utils::isInvalidHandle(world) || world->getStateCount() < 1) {
-					throw new IllegalParameterException();
-				}
-
-				// o estado 0 e o estado 15 são considerados estados terminais
-				return Random::nextUint(1, 14);
-
-			};
-
-			/**
-			 * Seleciona uma ação aleatória seguindo a distribuição determinada pela política de transição do estado.<br />
-			 *
-			 * @param world
-			 *				o SmallGridWorld que representa o <i>small grid world</i>
-			 * @param state
-			 *				o SmallGridWorldState que representa o estado
-			 *
-			 * @return <code>size_t</code> que representa a ação
-			 */
-			PRIVATE static size_t selectRandomAction(IN SmallGridWorld *world, IN SmallGridWorldState *state) {
-
-				if (Utils::isInvalidHandle(world) || Utils::isInvalidHandle(state)) {
-					throw new IllegalParameterException();
-				}
-
-				Matrix *P = state->getTransitionProbabilities();
-				
-				std::discrete_distribution<size_t>::param_type::_Noinit noInit;
-				std::discrete_distribution<size_t>::param_type pType(noInit);
-				for (size_t idx = 0; idx < ALLOWED_ACTIONS_QTY; idx++) {
-					pType._Pvec.push_back(P->data()[0][idx]);
-				}
-				pType._Init();
-				
-				std::random_device generator;
-				std::discrete_distribution<size_t> distribution(pType);
-
-				return distribution(generator);
-			
-			};
-
 			/**
 			 * Gera um episódio.<br />
 			 *
@@ -335,7 +50,7 @@ namespace pel208 {
 				std::vector<EpisodeState*> *visited = (*episode)->getVisitedStates();
 
 				// escolhe um estado aleatório
-				size_t stateIdx = selectRandomState(world);
+				size_t stateIdx = world->selectRandomState();
 				
 				bool ended = false;
 				while (!ended && (*episode)->size() < MAX_EPISODE_LEN) {
@@ -343,7 +58,7 @@ namespace pel208 {
 					register SmallGridWorldState *state = world->getState(stateIdx);
 
 					// escolhe uma ação aleatória de acordo com a política vigente
-					register size_t actionIdx = selectRandomAction(world, state);
+					register size_t actionIdx = world->selectRandomActionUsingP(state);
 					register EpisodeState *current = new EpisodeState(stateIdx, actionIdx);
 					register EpisodeState *last = NULL;
 					
@@ -364,7 +79,7 @@ namespace pel208 {
 
 					stateIdx = (size_t)state->getNextStates()->data()[0][actionIdx];
 				
-					ended = (stateIdx == 0 || stateIdx == 15);
+					ended = world->isTerminalState(stateIdx);
 
 				}
 
@@ -376,7 +91,7 @@ namespace pel208 {
 					for (std::vector<EpisodeState*>::iterator iterator = visited->begin() ; 
 							iterator != visited->end(); 
 							++iterator) {
-						(*iterator)->setR(pel208::week6::SmallGridWorld::DEFAULT_REWARD * --counter * 1.0f);
+						(*iterator)->setR(DEFAULT_ACTION_REWARD * --counter * 1.0f);
 					}
 					if (debug) {
 						(*episode)->dumpToFile();
@@ -488,7 +203,7 @@ namespace pel208 {
 
 					}
 					
-					(*R)->data()[episodes][0] = ((double)episodeSize) * pel208::week6::SmallGridWorld::DEFAULT_REWARD;
+					(*R)->data()[episodes][0] = ((double)episodeSize) * DEFAULT_ACTION_REWARD;
 
 					delete episode;
 

@@ -23,5 +23,11 @@
     <ClInclude Include="inc\OnPolicyMonteCarlo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="inc\Episode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\EpisodeState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

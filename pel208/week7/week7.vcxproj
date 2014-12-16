@@ -71,6 +71,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="inc\Episode.h" />
+    <ClInclude Include="inc\EpisodeState.h" />
     <ClInclude Include="inc\OnPolicyMonteCarlo.h" />
   </ItemGroup>
   <ItemGroup>
