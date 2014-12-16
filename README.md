@@ -32,7 +32,10 @@ Para esta disciplina, os projetos são os seguintes:
 * [semana-06](https://github.com/fvarrebola/fei/tree/master/pel208/week6): aprendizado por reforço com programação dinâmica
 * [semana-07](https://github.com/fvarrebola/fei/tree/master/pel208/week7): aprendizado por reforço com Monte Carlo
 * [semana-08](https://github.com/fvarrebola/fei/tree/master/pel208/week8): aprendizado por reforço com Q-Learning
+* [semana-09](https://github.com/fvarrebola/fei/tree/master/pel208/week9): aprendizado por reforço com Q-Lambda (Watkins e Naïve)
 
 # PEL203 - Inteligência Computacional
 Para esta disciplina, os projetos são os seguintes:
-...
+* [commons](https://github.com/fvarrebola/fei/tree/master/pel203/commons): funcionalidades comuns
+* [neural](https://github.com/fvarrebola/fei/tree/master/pel203/neural): rede neural para reconhecimento de dígitos
+
