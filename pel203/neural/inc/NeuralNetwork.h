@@ -51,27 +51,38 @@ namespace pel203 {
 			 *				o Matrix que representa a saída da rede
 			 * @param expectedIdx
 			 *				o <code>size_t</code> que representa o valor esperado
-			 * @param debug
-			 *				indica se devem ser impressas mensagens com os valores
+			 * @param actualIdx
+			 *				o <code>size_t</code> que representa o valor obtido
 			 *
 			 * @return o <code>true</code> caso o feed forward tenha sido bem sucedido; do contrário <code>false</code>
 			 */
-			PRIVATE static bool succeeded(IN Matrix *output, IN size_t expectedIdx, IN bool debug = false) {
+			PRIVATE static bool succeeded(IN Matrix *output, IN size_t expectedIdx, IN OUT size_t *actualIdx) {
+				
+				(*actualIdx) = 0;
 				
 				double max = DBL_MIN;
-				size_t maxRowIdx = 0;
 				size_t maxColIdx = 0;
-				if (!output->max(&max, &maxRowIdx, &maxColIdx)) {
+				if (!output->max(&max, &(*actualIdx), &maxColIdx)) {
 					return false;
 				}
 
-				if (debug) {
-					output->dumpToFile();
-					Logger::logToFile("Valor obtido: %d (%f), Valor esperado: %d\n", maxRowIdx, max, expectedIdx);
-				}
+				return ((*actualIdx) == expectedIdx);
 
-				return (maxRowIdx == expectedIdx);
+			};
 
+			/**
+			 * Determina se o resultado obtido é o esperado.<br />
+			 *
+			 * @param output
+			 *				o Matrix que representa a saída da rede
+			 * @param expectedIdx
+			 *				o <code>size_t</code> que representa o valor esperado
+			 *
+			 * @return o <code>true</code> caso o feed forward tenha sido bem sucedido; do contrário <code>false</code>
+			 */
+			PRIVATE static bool succeeded( IN Matrix *output, IN size_t expectedIdx) {
+				size_t actualIdx = 0;
+				return succeeded(output, expectedIdx, &actualIdx);
 			};
 
 			/**
@@ -108,8 +119,8 @@ namespace pel203 {
 			 *				o <code>size_t</code> que representa o índice da amostra de treino
 			 * @param output
 			 *				o Matrix que representa a saída da rede
-			 * @param trace
-			 *				indica se os neuronios devem ser impressos
+			 * @param logToFile
+			 *				indica se as mensagens de progresso devem ser salvas em arquivo
 			 *
 			 * @return o <code>true</code> caso o feed forward tenha sido bem sucedido; do contrário <code>false</code>
 			 */
@@ -117,9 +128,9 @@ namespace pel203 {
 					IN Matrix *input, 
 					IN size_t rowIdx, 
 					IN OUT Matrix **output, 
-					IN bool trace = false) {
+					IN bool logToFile = false) {
 
-				if (trace) {
+				if (logToFile) {
 					Logger::logToFile("\n");
 					Logger::logToFile(">>>> feedForward()\n");
 				}
@@ -137,7 +148,7 @@ namespace pel203 {
 					register Layer *layer = layers->at(layerIdx);
 					register Layer *previousLayer = layers->at(layerIdx - 1);
 					
-					if (trace) {
+					if (logToFile) {
 						Logger::logToFile("Imprimindo neuronios da camada #%d...\n", layerIdx);
 					}
 
@@ -154,14 +165,12 @@ namespace pel203 {
 						neuron->setNetValue(sum);
 						neuron->setNeuronOutput(sigmoid(sum));
 
-						if (trace) {
+						if (logToFile) {
 							Logger::logToFile("[%05d] %s\n", neuronIdx, neuron->toString().c_str());
 							size_t inputs = neuron->getInputs();
-							/*
 							for (size_t weightIdx = 0; weightIdx < inputs; weightIdx++) {
 								Logger::logToFile("       W__%d_%d = %9.6f\n", neuronIdx, weightIdx, neuron->getWeight(weightIdx));
 							}
-							*/
 						}
 					
 					}
@@ -176,7 +185,7 @@ namespace pel203 {
 					(*output)->data()[idx][0] = lastLayer->getNeuron(idx)->getNeuronOutput();
 				}
 
-				if (trace) {
+				if (logToFile) {
 					Logger::logToFile("<<<< feedForward()\n");
 					Logger::logToFile("\n");
 				}
@@ -192,8 +201,8 @@ namespace pel203 {
 			 *				o Matrix que representa a saída da rede
 			 * @param expectedIdx
 			 *				o <code>size_t</code> que representa o valor esperado
-			 * @param trace
-			 *				indica se os neuronios devem ser impressos
+			 * @param logToFile
+			 *				indica se as mensagens de progresso devem ser salvas em arquivo
 			 *
 			 * @return o <code>true</code> caso o back propagation tenha sido bem sucedido; do contrário <code>false</code>
 			 */
@@ -201,15 +210,15 @@ namespace pel203 {
 					IN Matrix *output, 
 					IN size_t expectedIdx, 
 					OUT double *quadraticError, 
-					IN bool trace = false) {
+					IN bool logToFile = false) {
 
-				if (trace) {
+				if (logToFile) {
 					Logger::logToFile("\n");
 					Logger::logToFile(">> backPropagate()\n");
 				}
 
 				// obtém o resultado esperado
-				if (succeeded(output, expectedIdx, trace)) {
+				if (succeeded(output, expectedIdx)) {
 					this->trainingSuccesses++;
 					this->overallTrainingSuccesses++;
 				} else {
@@ -217,7 +226,7 @@ namespace pel203 {
 					this->overallTrainingFailures++;
 				}
 
-				if (trace) {
+				if (logToFile) {
 					Logger::logToFile("Analisando a camada de saida...\n");
 				}
 
@@ -238,7 +247,7 @@ namespace pel203 {
 
 					neuron->setDelta(sigmoidPrime(neuron->getNetValue()) * error);
 					
-					if (trace) {
+					if (logToFile) {
 						Logger::logToFile("[%05d] %s E: %+9.6f\n", idx, neuron->toString().c_str(), error);
 					}
 				
@@ -252,7 +261,7 @@ namespace pel203 {
 				// iniciando na última camada escondida...
 				for (size_t layerIdx = this->hiddenLayers; layerIdx != 0; layerIdx--) {
 					
-					if (trace) {
+					if (logToFile) {
 						Logger::logToFile("Analisando a camada escondida %d...\n", layerIdx);
 					}
 				
@@ -275,7 +284,7 @@ namespace pel203 {
 						}
 						neuron->setDelta(sigmoidPrime(neuron->getNetValue()) * sum);
 
-						if (trace) {
+						if (logToFile) {
 							Logger::logToFile("[%05d] %s\n", neuronIdx, neuron->toString().c_str());
 						}
 
@@ -286,7 +295,7 @@ namespace pel203 {
 							register double weight = this->learningRate * sigmoid(neuron->getNetValue()) * nextLayerNeuron->getDelta();
 							nextLayerNeuron->updateWeight(neuronIdx,  weight);
 
-							if (trace) {
+							if (logToFile) {
 								Logger::logToFile("       W__%d_%d = %9.6f\n", 
 									neuronIdx, nextLayerNeuronIdx, nextLayerNeuron->getWeight(neuronIdx));
 							}
@@ -297,12 +306,69 @@ namespace pel203 {
 
 				}
 				
-				if (trace) {
+				if (logToFile) {
 					Logger::logToFile("<<<< backPropagate()\n");
 					Logger::logToFile("\n");
 				}
 
 				return true;
+
+			};
+
+			/**
+			 * Imprime um falha de reconhecimento.<br />
+			 *
+			 * @param input
+			 *				o Matrix que representa o conjunto de amostras de treino
+			 * @param inputRowIdx
+			 *				o <code>size_t</code> que representa o registro da matriz de entrada
+			 * @param output
+			 *				o Matrix que representa a saída da rede
+			 * @param expectedIdx
+			 *				o <code>size_t</code> que representa o valor esperado
+			 * @param actualIdx
+			 *				o <code>size_t</code> que representa o valor obtido
+			 * @param logToFile
+			 *				indica se as mensagens de progresso devem ser salvas em arquivo
+			 */
+			PRIVATE static void printFailure(
+					IN Matrix *input, 
+					IN size_t inputRowIdx, 
+					IN Matrix *output, 
+					IN size_t expectedIdx, 
+					IN size_t actualIdx,
+					IN bool logToFile = false) {
+				
+				Logger::log("\n");
+
+				const char *pszMsg = "[FALHA]: Valor obtido: %d, Valor esperado: %d\n";
+				Logger::log(pszMsg, actualIdx, expectedIdx);
+
+				Logger::log("         IN  :");
+				const size_t inputColumns = input->getColumns();
+				for (size_t idx = 1; idx < inputColumns; idx++) {
+					Logger::logWithoutTimestamp(" %2.0f ", input->data()[inputRowIdx][idx]);
+					if (idx % 4 == 0) {
+						Logger::logWithoutTimestamp("\n");
+						if (idx < 17) { 
+							Logger::log("              ");
+						}
+					}
+				}
+				Logger::log("\n");
+
+				const size_t outputRows = output->getRows();
+				Logger::log("         OUT :");
+				for (size_t idx = 0; idx < outputRows; idx++) {
+					Logger::logWithoutTimestamp(" %8.5f ", output->data()[idx][0]);
+				}
+				Logger::logWithoutTimestamp("\n");
+				
+				if (logToFile) {
+					Logger::logToFile(pszMsg, actualIdx, expectedIdx);
+					input->dumpToFile(inputRowIdx);
+					output->dumpToFile();
+				}
 
 			};
 
@@ -374,10 +440,10 @@ namespace pel203 {
 			 *				o <code>size_t</code> que representa a quantidade de ciclos
 			 * @param groupStatsBy
 			 *				o <code>size_t</code> que representa em que as estatísticas de treino devem ser agrupadas para exibição
-			 * @param debug
+			 * @param logNNToFile
 			 *				indica se a rede deve ser impressa ao fim de cada ciclo
-			 * @param trace
-			 *				indica se os neuronios devem ser impressos
+			 * @param logToFile
+			 *				indica se as mensagens de progresso devem ser salvas em arquivo
 			 *
 			 * @return o <code>true</code> caso o treinamento tenha sido bem sucedido; do contrário <code>false</code>
 			 */
@@ -385,8 +451,8 @@ namespace pel203 {
 					IN Matrix *input, 
 					IN size_t cycles = DEFAULT_TRAINING_CYCLES, 
 					IN size_t groupStatsBy = DEFAULT_STATS_GROUP_SIZE,
-					IN bool debug = false, 
-					IN bool trace = false) {
+					IN bool logNNToFile = false, 
+					IN bool logToFile = false) {
 
 				if (Utils::isInvalidHandle(input)) {
 					throw new IllegalParameterException();
@@ -395,6 +461,7 @@ namespace pel203 {
 				size_t rows = input->getRows();
 				size_t columns = input->getColumns();
 
+				Logger::log("\n");
 				Logger::log("Realizando treino. Aguarde...\n");
 				for (size_t cycleIdx = 0; cycleIdx < cycles; cycleIdx++) {
 
@@ -405,12 +472,12 @@ namespace pel203 {
 						register size_t expected = (size_t)input->data()[rowIdx][0];
 
 						Matrix *output = NULL;
-						if (!feedForward(input, rowIdx, &output, trace)) {
+						if (!feedForward(input, rowIdx, &output, logToFile)) {
 							continue;
 						}
 					
 						register double quadraticError = 0.0f;	
-						backPropagate(output, expected, &quadraticError, trace);
+						backPropagate(output, expected, &quadraticError, logToFile);
 
 						mse += quadraticError;
 
@@ -427,7 +494,7 @@ namespace pel203 {
 								(this->trainingFailures  / div_factor) * 100.0f);
 					}
 
-					if (debug) {
+					if (logNNToFile) {
 						for (size_t idx = 1; idx < this->hiddenLayers + 1; idx++) {
 							register Layer *layer = this->layers->at(idx);
 							layer->dumpToFile();
@@ -444,6 +511,7 @@ namespace pel203 {
 				Logger::log(">> TOTAL:                            +%013.9f%% -%013.9f%%\n", 
 						(this->overallTrainingSuccesses / cycles_times_rows) * 100.0f, 
 						(this->overallTrainingFailures  / cycles_times_rows) * 100.0f);
+				Logger::log("\n");
 
 				return true;
 
@@ -454,45 +522,58 @@ namespace pel203 {
 			 *
 			 * @param input
 			 *				o Matrix que representa o conjunto de amostras de treino
-			 * @param debug
-			 *				indica se as matrizes devem ser impressas
+			 * @param logToFile
+			 *				indica se as mensagens de progresso devem ser salvas em arquivo
+			 * @param printFailures
+			 *				indica se os resultados negativos devem ser impressos
 			 *
 			 * @return o <code>true</code> caso a avaliação tenha sido bem sucedida; do contrário <code>false</code>
 			 */
-			PUBLIC bool test(IN Matrix *input, IN bool debug = false) {
+			PUBLIC bool test(
+					IN Matrix *input, 
+					IN bool logToFile = false,
+					IN bool printFailures = false) {
 
 				if (Utils::isInvalidHandle(input)) {
 					throw new IllegalParameterException();
 				}
 
+				size_t rows = input->getRows();
 				size_t columns = input->getColumns();
 
-				Logger::log("Realizando teste. Aguarde............... ");
-				size_t rows = input->getRows();
+				Logger::log("\n");
+				Logger::log("Realizando teste. Aguarde............... \n");
+				
 				for (size_t rowIdx = 0; rowIdx < rows; rowIdx++) {
 					
 					Matrix *output = NULL;
-					
-					if (feedForward(input, rowIdx, &output, debug)) {
-						register size_t expectedIdx = (size_t)input->data()[rowIdx][0];
-						if (succeeded(output, expectedIdx)) {
-							this->overallTestingSuccesses++;
-						} else {
-							this->overallTestingFailures++;
-						}
-						delete output;
+
+					if (!feedForward(input, rowIdx, &output, logToFile)) {
+						continue;
 					}
 
+					register size_t expectedIdx = (size_t)input->data()[rowIdx][0];
+					register size_t actualIdx = 0;
+
+					if (succeeded(output, expectedIdx, &actualIdx)) {
+						this->overallTestingSuccesses++;
+					} else {
+						if (printFailures) {
+							printFailure(input, rowIdx, output, expectedIdx, actualIdx, logToFile);
+						}
+						this->overallTestingFailures++;
+					}
+
+					delete output;
 
 				}
-
-				Logger::logWithoutTimestamp("[ OK ]\n");
 
 				double div_factor = (rows * 1.0f);
 				Logger::log("\n");
 				Logger::log(">> TOTAL:                            +%013.9f%% -%013.9f%%\n", 
 						(this->overallTestingSuccesses / div_factor) * 100.0f, 
 						(this->overallTestingFailures  / div_factor) * 100.0f);
+				Logger::log("\n");
 
 				return true;
 

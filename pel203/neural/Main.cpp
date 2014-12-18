@@ -32,6 +32,8 @@
 #define DEBUG___INPUT_MSG						"Imprimir a rede a cada ciclo?    "
 #define TRACE___INPUT_MSG						"Imprimir conteudo dos neuronios? "
 
+#define PRINT_FAILURES___INPUT_MSG				"Imprimir falhas?                 "
+
 using namespace pel203::commons;
 using namespace pel203::neural;
 
@@ -123,7 +125,7 @@ bool loadMatrix(IN std::string filePath, IN size_t minColumnCount, IN OUT Matrix
 	ifstream.seekg(0, std::ios::beg);
 
 	// cria a matriz
-	*matrix = new Matrix(samples, minColumnCount);
+	(*matrix) = new Matrix(samples, minColumnCount);
 
 	Logger::log("Carregando as amostras.................. ");
 
@@ -178,17 +180,19 @@ void playWithICADemoDataSet() {
 	}
 
 	// parâmetros de configuração da rede
-	size_t hiddenLayers = UserParams::getIntParam(HIDDEN_LAYERS___INPUT_MSG); // 2
-	std::vector<int> neuronsPerLayer = UserParams::getIntVectorParam(hiddenLayers, NEURONS_PER_LAYER___INPUT_MSG); // 64, 32
+	const size_t hiddenLayers = UserParams::getIntParam(HIDDEN_LAYERS___INPUT_MSG); // 1
+	std::vector<int> neuronsPerLayer = UserParams::getIntVectorParam(hiddenLayers, NEURONS_PER_LAYER___INPUT_MSG); // 15
 
-	double bias = UserParams::getDoubleParam(BIAS___INPUT_MSG); // 1.0f
-	double learningRate = UserParams::getDoubleParam(LEARNING_RATE___INPUT_MSG); // 0.01f
-	size_t trainingCycles = UserParams::getIntParam(TRAINING_CYCLES___INPUT_MSG);
-	size_t groupStatsBy = UserParams::getIntParam(GROUP_STATS_BY___INPUT_MSG);
+	const double bias = UserParams::getDoubleParam(BIAS___INPUT_MSG); // 1.0f
+	const double learningRate = UserParams::getDoubleParam(LEARNING_RATE___INPUT_MSG); // 0.5f
+	const size_t trainingCycles = UserParams::getIntParam(TRAINING_CYCLES___INPUT_MSG);
+	const size_t groupStatsBy = UserParams::getIntParam(GROUP_STATS_BY___INPUT_MSG);
 	
-	bool debug = UserParams::getBoolParam(DEBUG___INPUT_MSG);
-	bool trace = UserParams::getBoolParam(TRACE___INPUT_MSG);
+	const bool logNNToFile = UserParams::getBoolParam(DEBUG___INPUT_MSG);
+	const bool logToFile = UserParams::getBoolParam(TRACE___INPUT_MSG);
+	const bool printFailures = UserParams::getBoolParam(PRINT_FAILURES___INPUT_MSG);
 
+	// cria a rede
 	NeuralNetwork *neuralNetwork = new NeuralNetwork(
 			hiddenLayers, 
 			ICADEMO_INPUT_LAYER_NEURONS_COUNT, 
@@ -197,19 +201,25 @@ void playWithICADemoDataSet() {
 			learningRate, 
 			bias);
 
-	if (neuralNetwork->train(trainingMatrix, trainingCycles, groupStatsBy, debug, trace)) {
+	// realiza o treinamento
+	if (neuralNetwork->train(trainingMatrix, trainingCycles, groupStatsBy, logNNToFile, logToFile)) {
+
+		// carrega a matriz de testes
 		Matrix *testMatrix = NULL;
 		if (loadMatrix(
 				UserParams::getStringParam(TEST_SET____INPUT_MSG), 
 				ICADEMO_DATA_SET_COLUMN_COUNT, 
 				&testMatrix)) {
-			neuralNetwork->test(testMatrix, debug);
+			
+			// realiza o teste
+			neuralNetwork->test(testMatrix, logToFile, printFailures);
 			delete testMatrix;
+		
 		}
 	}
 
 	delete neuralNetwork;
-	delete trainingMatrix;
+	//delete trainingMatrix;
 
 }
 
@@ -228,17 +238,18 @@ void playWithUSPSDataSet() {
 	}
 
 	// parâmetros de configuração da rede
-	size_t hiddenLayers = UserParams::getIntParam(HIDDEN_LAYERS___INPUT_MSG); // 2
+	const size_t hiddenLayers = UserParams::getIntParam(HIDDEN_LAYERS___INPUT_MSG); // 2
 	std::vector<int> neuronsPerLayer = UserParams::getIntVectorParam(hiddenLayers, NEURONS_PER_LAYER___INPUT_MSG); // 64, 32
 
-	double bias = UserParams::getDoubleParam(BIAS___INPUT_MSG); // 1.0f
-	double learningRate = UserParams::getDoubleParam(LEARNING_RATE___INPUT_MSG); // 0.01f
-	size_t trainingCycles = UserParams::getIntParam(TRAINING_CYCLES___INPUT_MSG);
-	size_t groupStatsBy = UserParams::getIntParam(GROUP_STATS_BY___INPUT_MSG);
+	const double bias = UserParams::getDoubleParam(BIAS___INPUT_MSG); // 1.0f
+	const double learningRate = UserParams::getDoubleParam(LEARNING_RATE___INPUT_MSG); // 0.01f
+	const size_t trainingCycles = UserParams::getIntParam(TRAINING_CYCLES___INPUT_MSG);
+	const size_t groupStatsBy = UserParams::getIntParam(GROUP_STATS_BY___INPUT_MSG);
 
-	bool debug = UserParams::getBoolParam(DEBUG___INPUT_MSG);
-	bool trace = UserParams::getBoolParam(TRACE___INPUT_MSG);
+	const bool logNNToFile = UserParams::getBoolParam(DEBUG___INPUT_MSG);
+	const bool logToFile = UserParams::getBoolParam(TRACE___INPUT_MSG);
 
+	// cria a rede
 	NeuralNetwork *neuralNetwork = new NeuralNetwork(
 			hiddenLayers, 
 			USPS_INPUT_LAYER_NEURONS_COUNT, 
@@ -247,19 +258,26 @@ void playWithUSPSDataSet() {
 			learningRate, 
 			bias);
 
-	if (neuralNetwork->train(trainingMatrix, trainingCycles, groupStatsBy, debug, trace)) {
+	// realiza o treinamento
+	if (neuralNetwork->train(trainingMatrix, trainingCycles, groupStatsBy, logNNToFile, logToFile)) {
+		
 		Matrix *testMatrix = NULL;
+		
+		// carrega a matriz de testes
 		if (loadMatrix(
 				UserParams::getStringParam(TEST_SET____INPUT_MSG), 
 				USPS_DATA_SET_COLUMN_COUNT,
 				&testMatrix)) {
-			neuralNetwork->test(testMatrix, debug);
+
+			// realiza o teste
+			neuralNetwork->test(testMatrix, logToFile);
 			delete testMatrix;
 		}
+
 	}
 
 	delete neuralNetwork;
-	delete trainingMatrix;
+	//delete trainingMatrix;
 
 }
 

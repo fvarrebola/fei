@@ -66,7 +66,7 @@ namespace pel203 {
 
 		public:
 			/**
-			 * Construtor.
+			 * Construtor.<br />
 			 *
 			 * @param rows
 			 *				o <code>size_t</code> que representa a quantidade de linhas da matriz
@@ -78,7 +78,7 @@ namespace pel203 {
 			};
 
 			/**
-			 * Construtor.
+			 * Construtor.<br />
 			 *
 			 * @param rows
 			 *				o <code>size_t</code> que representa a quantidade de linhas da matriz
@@ -92,7 +92,7 @@ namespace pel203 {
 			};
 
 			/**
-			 * Destrutor.
+			 * Destrutor.<br />
 			 */
 			~Matrix() {
 
@@ -256,7 +256,7 @@ namespace pel203 {
 				return true;
 
 			};
-
+			
 			/**
 			 * Faz a impressão de uma matriz.<br />
 			 *
@@ -270,7 +270,7 @@ namespace pel203 {
 					IN size_t columns = 0) {
 
 				if (printPrefix) {
-					Logger::log(">>>> Imprimindo matrix %s (%d x %d)...\n", prefix.c_str(), this->rows, this->columns);
+					Logger::log(">>>> Imprimindo matrix \"%s\" (%d x %d)...\n", prefix.c_str(), this->rows, this->columns);
 				}
 
 				size_t rows_to_Dump = (rows > 0) ? ((rows > this->rows) ?  this->rows : rows) : this->rows;
