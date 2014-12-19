@@ -10,8 +10,8 @@
 
 using namespace pel203::commons;
 
-#define MIN_W_VALUE									+0.0f
-#define MAX_W_VALUE									+0.1f
+#define MIN_W_VALUE									-1.0f
+#define MAX_W_VALUE									+1.0f
 
 namespace pel203 {
 
