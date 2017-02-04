@@ -1,8 +1,6 @@
 # FEI
 
-Repositorio de código-fonte para FEI.
-
-Atualmente, esse repositório abriga código-fonte para as seguintes disciplinas:
+Aqui você encontra código-fonte para as seguintes disciplinas:
 
 * 1. PEL216 - Computação Científica
 * 2. PEL208 - Tópicos Especiais de Aprendizagem
