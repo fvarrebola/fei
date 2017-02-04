@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse?>
+<plugin>
+
+  <!-- This is an extension of the standard code completion assistant -->
+  <extension point="org.eclipse.jdt.ui.javaCompletionProposalComputer"
+      id="br.edu.fei.hcii17.codeassist.javaCompletionProposalComputer.std"
+      name="[HCII17]: Standard">
+    <javaCompletionProposalComputer
+        activate="true"
+        categoryId="br.edu.fei.hcii17.codeassist.std"
+        class="br.edu.fei.hcii17.codeassist.StandardCompletionExtension">
+    </javaCompletionProposalComputer>   
+  </extension>
+  
+  <!-- This is the type-filtering code completion assistant -->
+  <!--
+  <extension point="org.eclipse.jdt.ui.javaCompletionProposalComputer"
+      id="br.edu.fei.hcii17.codeassist.javaCompletionProposalComputer.stdTypeFiltering"
+      name="[HCII17]: StandardTypeFiltering">
+    <javaCompletionProposalComputer
+        activate="true"
+        categoryId="br.edu.fei.hcii17.codeassist.stdTypeFiltering"
+        class="br.edu.fei.hcii17.codeassist.StandardTypeFilteringCompletionExtension">
+    </javaCompletionProposalComputer>   
+  </extension>
+  -->
+
+  <!-- This is an extension of the standard CodeRecommenders code completion assistant -->
+  <extension point="org.eclipse.jdt.ui.javaCompletionProposalComputer"
+      id="br.edu.fei.hcii17.codeassist.javaCompletionProposalComputer.intelligent"
+      name="[HCII17]: Intelligent">
+    <javaCompletionProposalComputer
+        activate="true"
+        categoryId="br.edu.fei.hcii17.codeassist.intelligent"
+        class="org.eclipse.recommenders.injection.ExtensionFactory:br.edu.fei.hcii17.codeassist.IntelligentCompletionExtension"
+        needsSortingAfterFiltering="true"/>
+  </extension>
+ 
+  <!-- This is the combination between CodeRecommenders and Type-Filtering code completion assistants -->
+  <!--
+  <extension point="org.eclipse.jdt.ui.javaCompletionProposalComputer"
+      id="br.edu.fei.hcii17.codeassist.javaCompletionProposalComputer.intelligentTypeFiltering"
+      name="[HCII17]: Intelligent + TypeFiltering">
+    <javaCompletionProposalComputer
+        activate="true"
+        categoryId="br.edu.fei.hcii17.codeassist.intelligentTypeFiltering"
+        class="org.eclipse.recommenders.injection.ExtensionFactory:br.edu.fei.hcii17.codeassist.IntelligentTypeFilteringCompletionExtension"
+        needsSortingAfterFiltering="true"/>
+  </extension>
+  -->
+  
+</plugin>
