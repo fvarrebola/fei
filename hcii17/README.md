@@ -36,7 +36,8 @@ Each programming task is represented by two classes; the main class and the unit
 
 ### Observing interactions and extending code assistants
 To actually observe how software programmers interact with code asistants we created the `code-assistants` project. It adds a logging layer to the ordinary code assistants that ship with [Eclipse IDE](https://www.eclipse.org) which records how many times a particular code assistant was invoked, how long it was active, the user input (if any) once the assistant was invoked and the eventual user choice.
-In order to do so we define a few [extension points](http://www.vogella.com/tutorials/EclipseExtensionPoint/article.html) of type `org.eclipse.jdt.ui.javaCompletionProposalComputer` (see reference documentation [here](http://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.jdt.doc.isv%2Freference%2Fextension-points%2Forg_eclipse_jdt_ui_javaCompletionProposalComputer.html)) that extend the ordinary implementations (take a look at the [plugin.xml](/code-assistants/src/main/resources/plugin.xml) file to see how extension points are defined) [^1].
+In order to do so we define a few [extension points](http://www.vogella.com/tutorials/EclipseExtensionPoint/article.html) of type `org.eclipse.jdt.ui.javaCompletionProposalComputer` (see reference documentation [here](http://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.jdt.doc.isv%2Freference%2Fextension-points%2Forg_eclipse_jdt_ui_javaCompletionProposalComputer.html)) that extend the ordinary implementations (take a look at the [plugin.xml](/code-assistants/src/main/resources/plugin.xml) file to see how extension points are defined).
+
 You can modify implementations at your own will, and since the `code-assistants` project was designed to build as an ordinary [Maven](https://www.maven.org) then all you have to do to build it is to run a simple
 ```sh
 $ mvn package
@@ -44,8 +45,7 @@ $ mvn package
 
 Once a build is successful the resulting artifact will be an ordinary JAR file named `hcii17-code-assistants_1.0.0.jar` (or whatever version you are building).
 
-[^1]: 
-Please note that despite functional, these extensions access a few internal APIs and thus they do not follow Eclipse plugin coding guidelines.
+*Please note that despite functional, these extensions access a few internal APIs and thus they do not follow Eclipse plugin coding guidelines.*
 
 #### Enabling and disabling custom extensions
 You can also modify the [plugin.xml](/code-assistants/src/main/resources/plugin.xml) file at your own discretion to enable or disable a particular extension. Use XMLs comment marks to do so and remember that since `plugin.xml` is embedded in the JAR file you should rebuild `code-assistants` at every change.
@@ -63,7 +63,7 @@ You can also modify the [plugin.xml](/code-assistants/src/main/resources/plugin.
 ```
 
 #### Log files
-Log files are defined in [logging.properties](/code-assistants/src/main/resources/logging.properties) file, which is also embedded in the JAR file. You can set the log location and log level, but a standard log file should like this once the `INFO` level is set.
+Log files are defined in the [logging.properties](/code-assistants/src/main/resources/logging.properties) file, which is also embedded in the JAR file. You can set the log location and log level, but a standard log file should like this:
 ```
 ...
 INFO 2017-02-01 20:21:57,768 StandardCompletionExtension - Session started.
@@ -78,9 +78,7 @@ Prepare a custom [Eclipse Neon 4.6.1](https://eclipse.org/neon/) distribution by
 ### Choosing the programming tasks
 Select the programming tasks that are more suitable to your target audience and create a workspace. Assign to each participant a set pair of programming task and code assistant and mark task completion time.
 Remember to configure code assistance properly, by ...
-FIG1
-...
-FIG2
+
 Remember that everytime you build `code-assistants` make sure you place the resulting JAR file in the `dropins` folder of your Eclipse distribution.
 
 ## Parsing log files
