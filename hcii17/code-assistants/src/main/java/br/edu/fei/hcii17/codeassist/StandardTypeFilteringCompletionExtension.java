@@ -10,7 +10,7 @@ import br.edu.fei.hcii17.codeassist.ctx.FilteringContextHelper;
  * This is the standard type-filtering code completion proposal extension.<br />
  * 
  * @see AbstractCompletionExtension
- * 
+ * @deprecated
  */
 public final class StandardTypeFilteringCompletionExtension extends AbstractCompletionExtension {
 

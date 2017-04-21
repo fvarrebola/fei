@@ -1,6 +1,7 @@
 package br.edu.fei.hcii17.codeassist;
 
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -28,6 +29,7 @@ public class IntelligentCompletionExtension extends AbstractIntelligentCompletio
             SharedImages images, Map<CompletionContextKey, ICompletionContextFunction> functions,
             Provider<IEditorPart> editorRetriever) {
         super(preferences, astProvider, images, functions, editorRetriever);
+        this.logger = Logger.getLogger(IntelligentCompletionExtension.class.getSimpleName());
     }
 
     @Override

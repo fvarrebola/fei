@@ -1,6 +1,7 @@
 package br.edu.fei.hcii17.codeassist;
 
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -21,7 +22,7 @@ import br.edu.fei.hcii17.codeassist.ctx.FilteringContextHelper;
  * This is the code completion extension that combines intelligent and type-filtering completion features.<br />
  * 
  * @see AbstractIntelligentCompletionExtension
- * 
+ * @deprecated
  */
 @SuppressWarnings({ "rawtypes" })
 public class IntelligentTypeFilteringCompletionExtension extends AbstractIntelligentCompletionExtension {
@@ -31,6 +32,7 @@ public class IntelligentTypeFilteringCompletionExtension extends AbstractIntelli
             IAstProvider astProvider, SharedImages images,
             Map<CompletionContextKey, ICompletionContextFunction> functions, Provider<IEditorPart> editorRetriever) {
         super(preferences, astProvider, images, functions, editorRetriever);
+        this.logger = Logger.getLogger(IntelligentTypeFilteringCompletionExtension.class.getSimpleName());
     }
 
     @Override

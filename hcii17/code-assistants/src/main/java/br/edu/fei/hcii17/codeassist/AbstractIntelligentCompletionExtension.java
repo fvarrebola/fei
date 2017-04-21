@@ -52,7 +52,6 @@ public abstract class AbstractIntelligentCompletionExtension extends Intelligent
             SharedImages images, Map<CompletionContextKey, ICompletionContextFunction> functions,
             Provider<IEditorPart> editorRetriever) {
         super(preferences, astProvider, images, functions, editorRetriever);
-        this.logger = Logger.getLogger(IntelligentCompletionExtension.class.getSimpleName());
         this.proposals = Collections.emptyList();
     }
 

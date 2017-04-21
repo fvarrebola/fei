@@ -51,7 +51,6 @@ public abstract class AbstractCompletionExtension extends JavaAllCompletionPropo
      */
     public AbstractCompletionExtension() {
         super();
-        this.logger = Logger.getLogger(StandardCompletionExtension.class.getSimpleName());
         this.proposals = Collections.emptyList();
     }
 

@@ -1,5 +1,7 @@
 package br.edu.fei.hcii17.codeassist;
 
+import java.util.logging.Logger;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.ui.text.java.ContentAssistInvocationContext;
 
@@ -16,6 +18,7 @@ public final class StandardCompletionExtension extends AbstractCompletionExtensi
      */
     public StandardCompletionExtension() {
         super();
+        this.logger = Logger.getLogger(StandardCompletionExtension.class.getSimpleName());
     }
 
     @Override
