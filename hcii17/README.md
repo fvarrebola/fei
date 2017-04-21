@@ -82,6 +82,7 @@ Select the programming tasks that are more suitable to your target audience and 
 The last step before completing a task is to make sure that other code assistants available in Eclipse are disabled. Go to `Window > Preferences` menu and navigate to the `Java > Editor > Code Assist > Advanced` option.
 Make sure that the HCII17 code assistant is the only option selected both in the _default_ section.
 ![Java > Editor > Code Assist > Advanced > Default section](_images/cfg-default-section.png)
+
 and in the _content assist cycling_ section
 ![Java > Editor > Code Assist > Advanced > Default section](_images/cfg-content-assist-cycling-section.png)
 
