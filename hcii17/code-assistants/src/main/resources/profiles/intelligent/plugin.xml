@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse?>
+<plugin>
+
+  <!-- This is an extension of the standard CodeRecommenders code completion assistant -->
+  <extension point="org.eclipse.jdt.ui.javaCompletionProposalComputer"
+      id="br.edu.fei.hcii17.codeassist.javaCompletionProposalComputer.intelligent"
+      name="[HCII17]: Intelligent">
+    <javaCompletionProposalComputer
+        activate="true"
+        categoryId="br.edu.fei.hcii17.codeassist.intelligent"
+        class="org.eclipse.recommenders.injection.ExtensionFactory:br.edu.fei.hcii17.codeassist.IntelligentCompletionExtension"
+        needsSortingAfterFiltering="true"/>
+  </extension>
+ 
+</plugin>

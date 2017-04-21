@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse?>
+<plugin>
+
+  <!-- This is an extension of the standard code completion assistant -->
+  <extension point="org.eclipse.jdt.ui.javaCompletionProposalComputer"
+      id="br.edu.fei.hcii17.codeassist.javaCompletionProposalComputer.std"
+      name="[HCII17]: Standard">
+    <javaCompletionProposalComputer
+        activate="true"
+        categoryId="br.edu.fei.hcii17.codeassist.std"
+        class="br.edu.fei.hcii17.codeassist.StandardCompletionExtension">
+    </javaCompletionProposalComputer>   
+  </extension>
+  
+</plugin>
