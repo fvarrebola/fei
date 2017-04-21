@@ -30,7 +30,7 @@ public class MainApp {
 	 * Java programming experience.<br />
 	 */
 	private enum JavaProgrammingExperience {
-		INI, INT, ADV;
+		U, I, E;
 	}
 
 	/**
@@ -119,39 +119,39 @@ public class MainApp {
 	// participants time log
 	static List<Participant> participants = new ArrayList<Participant>();
 	static {
-		participants.add(new Participant("01", JavaProgrammingExperience.ADV,
+		participants.add(new Participant("01", JavaProgrammingExperience.E,
 				new Task01(CodeCompletionAssistant.STD, "20:18:08", "21:16:39"),
 				new Task02(CodeCompletionAssistant.INT, "21:20:28", "21:57:14"),
 				new Task03(CodeCompletionAssistant.INT, "22:01:58", "22:17:12")));
-		participants.add(new Participant("02", JavaProgrammingExperience.INT,
+		participants.add(new Participant("02", JavaProgrammingExperience.I,
 				new Task01(CodeCompletionAssistant.INT, "20:10:26", "20:18:49"),
 				new Task02(CodeCompletionAssistant.INT, "19:50:34", "20:02:05"),
 				new Task03(CodeCompletionAssistant.STD, "20:04:10", "20:07:55")));
-		participants.add(new Participant("03", JavaProgrammingExperience.ADV,
+		participants.add(new Participant("03", JavaProgrammingExperience.E,
 				new Task01(CodeCompletionAssistant.STD, "19:49:28", "20:15:07"),
 				new Task02(CodeCompletionAssistant.INT, "20:19:46", "20:53:40"),
 				new Task03(CodeCompletionAssistant.INT, "19:33:47", "19:43:36")));
-		participants.add(new Participant("04", JavaProgrammingExperience.ADV,
+		participants.add(new Participant("04", JavaProgrammingExperience.E,
 				new Task01(CodeCompletionAssistant.STD, "19:54:33", "20:25:52"),
 				new Task02(CodeCompletionAssistant.INT, "20:28:53", "20:41:11"),
 				new Task03(CodeCompletionAssistant.INT, "20:44:54", "20:55:05")));
-		participants.add(new Participant("05", JavaProgrammingExperience.ADV,
+		participants.add(new Participant("05", JavaProgrammingExperience.E,
 				new Task01(CodeCompletionAssistant.INT, "20:58:33", "21:09:37"),
 				new Task02(CodeCompletionAssistant.INT, "19:54:52", "20:38:05"),
 				new Task03(CodeCompletionAssistant.STD, "20:40:38", "20:55:07")));
-		participants.add(new Participant("06", JavaProgrammingExperience.INT,
+		participants.add(new Participant("06", JavaProgrammingExperience.I,
 				new Task01(CodeCompletionAssistant.INT, "20:08:41", "21:51:05"),
 				new Task02(CodeCompletionAssistant.STD, "21:54:17", "22:26:27"),
 				new Task03(CodeCompletionAssistant.INT, "19:55:38", "20:03:29")));
-		participants.add(new Participant("07", JavaProgrammingExperience.INT,
+		participants.add(new Participant("07", JavaProgrammingExperience.I,
 				new Task01(CodeCompletionAssistant.INT, "19:57:09", "20:59:38"),
 				new Task02(CodeCompletionAssistant.INT, "21:02:00", "21:25:41"),
 				new Task03(CodeCompletionAssistant.INT, "21:28:34", "21:34:47")));
-		participants.add(new Participant("08", JavaProgrammingExperience.INI,
+		participants.add(new Participant("08", JavaProgrammingExperience.U,
 				new Task01(CodeCompletionAssistant.INT, "21:39:36", "22:27:15"),
 				new Task02(CodeCompletionAssistant.INT, "19:56:57", "21:04:43"),
 				new Task03(CodeCompletionAssistant.STD, "21:11:33", "21:34:41")));
-		participants.add(new Participant("09", JavaProgrammingExperience.ADV,
+		participants.add(new Participant("09", JavaProgrammingExperience.E,
 				new Task01(CodeCompletionAssistant.INT, "20:24:46", "21:19:03"),
 				new Task02(CodeCompletionAssistant.STD, "21:24:36", "22:18:28"),
 				new Task03(CodeCompletionAssistant.INT, "20:04:02", "20:18:52")));
