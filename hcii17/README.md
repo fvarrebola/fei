@@ -127,18 +127,18 @@ Columns (1) and (2) display the participant's index and the reported programming
 
 Log parsing can also give you a lot of interesting data, like the top 10 suggestions per task. See below the `Task01` example.
 ```
---------------------------------------------------------------------------------------------
-Cnt	%	Suggestion                                                                      
---------------------------------------------------------------------------------------------
-35	8.08	from : Path                                                                     
-21	4.85	visitor : FileVisitor<java.nio.file.Path>                                       
-20	4.62	Path - java.nio.file                                                            
-19	4.39	isDirectory() : boolean - File                                                  
-15	3.46	walkFileTree(Path start, FileVisitor<? super Path> visitor) : Path - Files      
-13	3.00	visitFile(Path file, BasicFileAttributes attrs) : FileVisitResult - FileVisitor 
-13	3.00	copy(Path source, Path target, CopyOption... options) : Path - Files            
-12	2.77	toFile() : File - Path - 5%                                                     
-11	2.54	toAbsolutePath() : Path - Path                                                  
-10	2.31	isAbsolute() : boolean - Path                                                   
----------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+Cnt	%	Suggestion
+------------------------------------------------------------------------------------------------
+35	8.08	from : Path
+21	4.85	visitor : FileVisitor<java.nio.file.Path>
+20	4.62	Path - java.nio.file
+19	4.39	isDirectory() : boolean - File
+15	3.46	walkFileTree(Path start, FileVisitor<? super Path> visitor) : Path - Files
+13	3.00	visitFile(Path file, BasicFileAttributes attrs) : FileVisitResult - FileVisitor
+13	3.00	copy(Path source, Path target, CopyOption... options) : Path - Files
+12	2.77	toFile() : File - Path - 5% 
+11	2.54	toAbsolutePath() : Path - Path
+10	2.31	isAbsolute() : boolean - Path
+-------------------------------------------------------------------------------------------------
 ```
