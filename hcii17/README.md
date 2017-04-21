@@ -4,7 +4,7 @@ Here you will find all Java projects and instructions to conduct the experiment 
 _On Source Code Completion Assistants and the Need of a Context-Aware Approach_.
 
 ## Experiment overview
-The experiment aims to collect and interpret usage information regarding two code assistants that differ in the approaches used to filter and sort the list of possible completions. The first assistant is the longtime default option that ships with the [Eclipse IDE](https://eclipse.org), which filters completions according to the restrictions of code structure and method and variable visibility and scope, and sorts completions alphabetically and eventually according to the expected return type of an expression. The second assistant is the popular [Code Recommenders](https://eclipse.org/recommenders) that adds sorting features that rely upon predefined statistical usage models.
+The experiment aims to collect and interpret usage information regarding two [Eclipse Neon 4.6.1](https://eclipse.org/neon/) code assistants that differ in the approaches used to filter and sort the list of possible completions. The first assistant is the longtime default option that ships with the Eclipse IDE, which filters completions according to the restrictions of code structure and method and variable visibility and scope, and sorts completions alphabetically and eventually according to the expected return type of an expression. The second assistant is the popular [Code Recommenders](https://eclipse.org/recommenders) that adds sorting features that rely upon predefined statistical usage models.
 
 ### The programming tasks
 A number of programming tasks were designed to observe how professional software developers use code code assistants. All tasks can be found in project `programming-tasks` and they all considered the _fill-in-the-blanks_ approach seen below, in which software developers should replace invalid or incomplete statements according to a set of given instructions.
@@ -32,10 +32,11 @@ public static String encode(byte[] input) {
     ...
 }
 ```
+Each programming task is represented by two classes; the main class and the unit test class. The main classe has a clear goal, which can be found in the comments section. The unit tests class is designed to assert whether the task was indeed complete without providing too detailed feedback.
 
 ### Observing interactions and extending code assistants
 To actually observe how software programmers interact with code asistants we created the `code-assistants` project. It adds a logging layer to the ordinary code assistants that ship with [Eclipse IDE](https://www.eclipse.org) which records how many times a particular code assistant was invoked, how long it was active, the user input (if any) once the assistant was invoked and the eventual user choice.
-In order to do so we define a few [extension points](http://www.vogella.com/tutorials/EclipseExtensionPoint/article.html) of type `org.eclipse.jdt.ui.javaCompletionProposalComputer` (see reference documentation [here](http://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.jdt.doc.isv%2Freference%2Fextension-points%2Forg_eclipse_jdt_ui_javaCompletionProposalComputer.html)) that extend the ordinary implementations (take a look at the [plugin.xml](/code-assistants/src/main/resources/plugin.xml) file to see how extension points are defined) [1].
+In order to do so we define a few [extension points](http://www.vogella.com/tutorials/EclipseExtensionPoint/article.html) of type `org.eclipse.jdt.ui.javaCompletionProposalComputer` (see reference documentation [here](http://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.jdt.doc.isv%2Freference%2Fextension-points%2Forg_eclipse_jdt_ui_javaCompletionProposalComputer.html)) that extend the ordinary implementations (take a look at the [plugin.xml](/code-assistants/src/main/resources/plugin.xml) file to see how extension points are defined) [^1].
 You can modify implementations at your own will, and since the `code-assistants` project was designed to build as an ordinary [Maven](https://www.maven.org) then all you have to do to build it is to run a simple
 ```sh
 $ mvn package
@@ -43,7 +44,8 @@ $ mvn package
 
 Once a build is successful the resulting artifact will be an ordinary JAR file named `hcii17-code-assistants_1.0.0.jar` (or whatever version you are building).
 
-[1]: However, please note that despite functional, these extensions access a few internal APIs and thus they do not follow Eclipse plugin coding guidelines.
+[^1]: 
+Please note that despite functional, these extensions access a few internal APIs and thus they do not follow Eclipse plugin coding guidelines.
 
 #### Enabling and disabling custom extensions
 You can also modify the [plugin.xml](/code-assistants/src/main/resources/plugin.xml) file at your own discretion to enable or disable a particular extension. Use XMLs comment marks to do so and remember that since `plugin.xml` is embedded in the JAR file you should rebuild `code-assistants` at every change.
@@ -71,16 +73,15 @@ INFO 2017-02-01 20:22:01,929 StandardCompletionExtension - Session was active fo
 ```
 
 ## Running the experiment
-Once you got your subjects you should prepare a custom [Eclipse Neon 4.6.1](https://eclipse.org/neon/) distribution.
-
-### Configuring Eclipse
-This is the most demanding task. You should add 
+Prepare a custom [Eclipse Neon 4.6.1](https://eclipse.org/neon/) distribution by placing the resulting JAR file of a `code-assistants` build in the `dropins` folder.
 
 ### Choosing the programming tasks
-Select the programming tasks that are more suitable to your target audience and create a workspace.
+Select the programming tasks that are more suitable to your target audience and create a workspace. Assign to each participant a set pair of programming task and code assistant and mark task completion time.
+Remember to configure code assistance properly, by ...
+FIG1
+...
+FIG2
+Remember that everytime you build `code-assistants` make sure you place the resulting JAR file in the `dropins` folder of your Eclipse distribution.
 
-
-## Log files
-
-
- that you should place in the `dropins` folder of your [Eclipse Neon 4.6.1](https://eclipse.org/neon/) distribution
+## Parsing log files
+You can use the `log-parser` tool to interpret the results of your experiment. Take a look at the `MainApp` class and do the proper modifications.
