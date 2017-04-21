@@ -1,0 +1,120 @@
+INFO 2017-02-01 19:44:20,165 JUnit - 
+ 
+******************************************************************************** 
+*                                                                              * 
+*                                                                              * 
+* HCII2017 Relatorio JUnit                                                     * 
+*                                                                              * 
+*                                                                              * 
+******************************************************************************** 
+
+INFO 2017-02-01 19:44:20,560 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.PracticeTaskTest#test01___ParametroDeEntradaEhNuloParaFuncaoEncode() foi iniciado.
+INFO 2017-02-01 19:44:20,565 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.PracticeTaskTest#test02___ParametroDeEntradaEhNuloParaFuncaoDecode() foi iniciado.
+INFO 2017-02-01 19:44:20,568 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.PracticeTaskTest#test03___ParametroDeEntradaEhVazioParaFuncaoEncode() foi iniciado.
+INFO 2017-02-01 19:44:20,569 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.PracticeTaskTest#test04___ParametroDeEntradaEhVazioParaFuncaoDecode() foi iniciado.
+INFO 2017-02-01 19:44:20,571 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.PracticeTaskTest#test05___CodficandoUmVetorDeBytesEmBase64() foi iniciado.
+INFO 2017-02-01 19:44:20,573 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.PracticeTaskTest#test06___DecodficandoUmaStringBase64() foi iniciado.
+INFO 2017-02-01 19:44:20,580 JUnit - A execucao terminou (tests_run=6, test_failures=0, run_time=25 ms).
+INFO 2017-02-01 19:44:20,582 JUnit - A tarefa foi concluida.
+INFO 2017-02-01 19:59:16,483 JUnit - 
+ 
+******************************************************************************** 
+*                                                                              * 
+*                                                                              * 
+* HCII2017 Relatorio JUnit                                                     * 
+*                                                                              * 
+*                                                                              * 
+******************************************************************************** 
+
+INFO 2017-02-01 19:59:16,662 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test01___ParametrosDeEntradaSaoNulos() foi iniciado.
+INFO 2017-02-01 19:59:16,668 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test02___InstanteDeInicioInvalido() foi iniciado.
+INFO 2017-02-01 19:59:16,715 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test03___InstanteDeTerminoInvalido() foi iniciado.
+INFO 2017-02-01 19:59:16,716 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test04___InstantesIguais() foi iniciado.
+INFO 2017-02-01 19:59:16,718 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test05___InstantesValidos() foi iniciado.
+INFO 2017-02-01 19:59:16,721 JUnit - A execucao terminou (tests_run=5, test_failures=1, run_time=63 ms).
+INFO 2017-02-01 20:00:10,264 JUnit - 
+ 
+******************************************************************************** 
+*                                                                              * 
+*                                                                              * 
+* HCII2017 Relatorio JUnit                                                     * 
+*                                                                              * 
+*                                                                              * 
+******************************************************************************** 
+
+INFO 2017-02-01 20:00:10,441 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test01___ParametrosDeEntradaSaoNulos() foi iniciado.
+INFO 2017-02-01 20:00:10,446 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test02___InstanteDeInicioInvalido() foi iniciado.
+INFO 2017-02-01 20:00:10,454 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test03___InstanteDeTerminoInvalido() foi iniciado.
+INFO 2017-02-01 20:00:10,455 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test04___InstantesIguais() foi iniciado.
+INFO 2017-02-01 20:00:10,457 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test05___InstantesValidos() foi iniciado.
+INFO 2017-02-01 20:00:10,461 JUnit - A execucao terminou (tests_run=5, test_failures=2, run_time=23 ms).
+INFO 2017-02-01 20:01:15,319 JUnit - 
+ 
+******************************************************************************** 
+*                                                                              * 
+*                                                                              * 
+* HCII2017 Relatorio JUnit                                                     * 
+*                                                                              * 
+*                                                                              * 
+******************************************************************************** 
+
+INFO 2017-02-01 20:01:15,500 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test01___ParametrosDeEntradaSaoNulos() foi iniciado.
+INFO 2017-02-01 20:01:15,506 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test02___InstanteDeInicioInvalido() foi iniciado.
+INFO 2017-02-01 20:01:15,514 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test03___InstanteDeTerminoInvalido() foi iniciado.
+INFO 2017-02-01 20:01:15,515 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test04___InstantesIguais() foi iniciado.
+INFO 2017-02-01 20:01:15,516 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test05___InstantesValidos() foi iniciado.
+INFO 2017-02-01 20:01:15,520 JUnit - A execucao terminou (tests_run=5, test_failures=1, run_time=25 ms).
+INFO 2017-02-01 20:02:05,647 JUnit - 
+ 
+******************************************************************************** 
+*                                                                              * 
+*                                                                              * 
+* HCII2017 Relatorio JUnit                                                     * 
+*                                                                              * 
+*                                                                              * 
+******************************************************************************** 
+
+INFO 2017-02-01 20:02:05,840 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test01___ParametrosDeEntradaSaoNulos() foi iniciado.
+INFO 2017-02-01 20:02:05,846 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test02___InstanteDeInicioInvalido() foi iniciado.
+INFO 2017-02-01 20:02:05,858 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test03___InstanteDeTerminoInvalido() foi iniciado.
+INFO 2017-02-01 20:02:05,859 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test04___InstantesIguais() foi iniciado.
+INFO 2017-02-01 20:02:05,861 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task02Test#test05___InstantesValidos() foi iniciado.
+INFO 2017-02-01 20:02:05,864 JUnit - A execucao terminou (tests_run=5, test_failures=0, run_time=28 ms).
+INFO 2017-02-01 20:02:05,865 JUnit - A tarefa foi concluida.
+INFO 2017-02-01 20:07:54,942 JUnit - 
+ 
+******************************************************************************** 
+*                                                                              * 
+*                                                                              * 
+* HCII2017 Relatorio JUnit                                                     * 
+*                                                                              * 
+*                                                                              * 
+******************************************************************************** 
+
+INFO 2017-02-01 20:07:55,066 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task03Test#test01___ParametrosDeEntradaSaoNulos() foi iniciado.
+INFO 2017-02-01 20:07:55,071 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task03Test#test02___ListaInvalida() foi iniciado.
+INFO 2017-02-01 20:07:55,073 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task03Test#test03___PredicateNaoFoiAplicado() foi iniciado.
+INFO 2017-02-01 20:07:55,132 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task03Test#test04___FunctionNaoFoiAplicado() foi iniciado.
+INFO 2017-02-01 20:07:55,140 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task03Test#test05___StreamNaoEstaOrdenado() foi iniciado.
+INFO 2017-02-01 20:07:55,148 JUnit - A execucao terminou (tests_run=5, test_failures=0, run_time=86 ms).
+INFO 2017-02-01 20:07:55,149 JUnit - A tarefa foi concluida.
+INFO 2017-02-01 20:18:49,090 JUnit - 
+ 
+******************************************************************************** 
+*                                                                              * 
+*                                                                              * 
+* HCII2017 Relatorio JUnit                                                     * 
+*                                                                              * 
+*                                                                              * 
+******************************************************************************** 
+
+INFO 2017-02-01 20:18:49,199 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task01Test#test01___ParametrosDeEntradaSaoNulos() foi iniciado.
+INFO 2017-02-01 20:18:49,379 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task01Test#test02___ParametrosDeEntradaNaoSaoDiretorios() foi iniciado.
+INFO 2017-02-01 20:18:49,392 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task01Test#test03___DiretoriosNaoExistem() foi iniciado.
+INFO 2017-02-01 20:18:49,406 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task01Test#test04___DiretoriosEstaoVazios() foi iniciado.
+INFO 2017-02-01 20:18:49,524 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task01Test#test05___DiretoriosJaContemArquivos() foi iniciado.
+INFO 2017-02-01 20:18:49,581 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task01Test#test06___DiretorioDeEntradaContemApenasPDFs() foi iniciado.
+INFO 2017-02-01 20:18:49,603 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task01Test#test07___DiretorioDeEntradaContemTodoTipoDeArquivo() foi iniciado.
+INFO 2017-02-01 20:18:49,631 JUnit - O teste br.edu.fei.hcii17.test.internal.tc.Task01Test#test08___DiretorioDeEntradaNaoContemPDFs() foi iniciado.
+INFO 2017-02-01 20:18:49,649 JUnit - A execucao terminou (tests_run=8, test_failures=0, run_time=450 ms).
+INFO 2017-02-01 20:18:49,652 JUnit - A tarefa foi concluida.

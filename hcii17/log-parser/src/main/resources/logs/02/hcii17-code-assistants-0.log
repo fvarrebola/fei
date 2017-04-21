@@ -1,0 +1,518 @@
+INFO 2017-02-01 19:41:30,332 Activator - Logger was successfully initialized.
+INFO 2017-02-01 19:41:30,344 Activator - 
+ 
+******************************************************************************** 
+*                                                                              * 
+*                                                                              * 
+* HCII2017 Eclipse Code Assistants Plug-in Bundle                              * 
+*                                                                              * 
+*                                                                              * 
+******************************************************************************** 
+
+INFO 2017-02-01 19:41:30,344 Activator - Dumping system properties...
+INFO 2017-02-01 19:41:30,345 Activator - java.vendor: Oracle Corporation
+INFO 2017-02-01 19:41:30,346 Activator - osgi.bundles.defaultStartLevel: 4
+INFO 2017-02-01 19:41:30,346 Activator - org.osgi.supports.framework.extension: true
+INFO 2017-02-01 19:41:30,347 Activator - sun.management.compiler: HotSpot Client Compiler
+INFO 2017-02-01 19:41:30,347 Activator - eclipse.p2.profile: epp.package.jee
+INFO 2017-02-01 19:41:30,347 Activator - os.name: Windows 10
+INFO 2017-02-01 19:41:30,348 Activator - sun.boot.class.path: C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\jre\jre\lib\resources.jar;C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\jre\jre\lib\rt.jar;C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\jre\jre\lib\sunrsasign.jar;C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\jre\jre\lib\jsse.jar;C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\jre\jre\lib\jce.jar;C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\jre\jre\lib\charsets.jar;C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\jre\jre\lib\jfr.jar;C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\jre\jre\classes
+INFO 2017-02-01 19:41:30,348 Activator - osgi.ws: win32
+INFO 2017-02-01 19:41:30,349 Activator - sun.desktop: windows
+INFO 2017-02-01 19:41:30,349 Activator - java.vm.specification.vendor: Oracle Corporation
+INFO 2017-02-01 19:41:30,350 Activator - java.runtime.version: 1.8.0_112-b15
+INFO 2017-02-01 19:41:30,350 Activator - osgi.instance.area: file:/C:/Users/jorge.ribeiro/Desktop/hcii17-eclipse/hcii17-eclipse/workspace/
+INFO 2017-02-01 19:41:30,350 Activator - org.osgi.framework.uuid: 2004ab1b-c6e8-0016-113f-f17a97e53195
+INFO 2017-02-01 19:41:30,351 Activator - org.eclipse.m2e.log.dir: C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\workspace\.metadata\.plugins\org.eclipse.m2e.logback.configuration
+INFO 2017-02-01 19:41:30,351 Activator - user.name: jorge.ribeiro
+INFO 2017-02-01 19:41:30,352 Activator - osgi.framework.extensions: reference:file:org.eclipse.osgi.compatibility.state_1.0.200.v20160504-1419.jar,reference:file:org.eclipse.wst.jsdt.nashorn.extension_1.0.0.v201605131737.jar
+INFO 2017-02-01 19:41:30,352 Activator - org.osgi.framework.system.packages: javax.accessibility,javax.activation,javax.activity,javax.annotation,javax.annotation.processing,javax.crypto,javax.crypto.interfaces,javax.crypto.spec,javax.imageio,javax.imageio.event,javax.imageio.metadata,javax.imageio.plugins.bmp,javax.imageio.plugins.jpeg,javax.imageio.spi,javax.imageio.stream,javax.jws,javax.jws.soap,javax.lang.model,javax.lang.model.element,javax.lang.model.type,javax.lang.model.util,javax.management,javax.management.loading,javax.management.modelmbean,javax.management.monitor,javax.management.openmbean,javax.management.relation,javax.management.remote,javax.management.remote.rmi,javax.management.timer,javax.naming,javax.naming.directory,javax.naming.event,javax.naming.ldap,javax.naming.spi,javax.net,javax.net.ssl,javax.print,javax.print.attribute,javax.print.attribute.standard,javax.print.event,javax.rmi,javax.rmi.CORBA,javax.rmi.ssl,javax.script,javax.security.auth,javax.security.auth.callback,javax.security.auth.kerberos,javax.security.auth.login,javax.security.auth.spi,javax.security.auth.x500,javax.security.cert,javax.security.sasl,javax.sound.midi,javax.sound.midi.spi,javax.sound.sampled,javax.sound.sampled.spi,javax.sql,javax.sql.rowset,javax.sql.rowset.serial,javax.sql.rowset.spi,javax.swing,javax.swing.border,javax.swing.colorchooser,javax.swing.event,javax.swing.filechooser,javax.swing.plaf,javax.swing.plaf.basic,javax.swing.plaf.metal,javax.swing.plaf.multi,javax.swing.plaf.nimbus,javax.swing.plaf.synth,javax.swing.table,javax.swing.text,javax.swing.text.html,javax.swing.text.html.parser,javax.swing.text.rtf,javax.swing.tree,javax.swing.undo,javax.tools,javax.transaction,javax.transaction.xa,javax.xml,javax.xml.bind,javax.xml.bind.annotation,javax.xml.bind.annotation.adapters,javax.xml.bind.attachment,javax.xml.bind.helpers,javax.xml.bind.util,javax.xml.crypto,javax.xml.crypto.dom,javax.xml.crypto.dsig,javax.xml.crypto.dsig.dom,javax.xml.crypto.dsig.keyinfo,javax.xml.crypto.dsig.spec,javax.xml.datatype,javax.xml.namespace,javax.xml.parsers,javax.xml.soap,javax.xml.stream,javax.xml.stream.events,javax.xml.stream.util,javax.xml.transform,javax.xml.transform.dom,javax.xml.transform.sax,javax.xml.transform.stax,javax.xml.transform.stream,javax.xml.validation,javax.xml.ws,javax.xml.ws.handler,javax.xml.ws.handler.soap,javax.xml.ws.http,javax.xml.ws.soap,javax.xml.ws.spi,javax.xml.ws.spi.http,javax.xml.ws.wsaddressing,javax.xml.xpath,org.ietf.jgss,org.omg.CORBA,org.omg.CORBA_2_3,org.omg.CORBA_2_3.portable,org.omg.CORBA.DynAnyPackage,org.omg.CORBA.ORBPackage,org.omg.CORBA.portable,org.omg.CORBA.TypeCodePackage,org.omg.CosNaming,org.omg.CosNaming.NamingContextExtPackage,org.omg.CosNaming.NamingContextPackage,org.omg.Dynamic,org.omg.DynamicAny,org.omg.DynamicAny.DynAnyFactoryPackage,org.omg.DynamicAny.DynAnyPackage,org.omg.IOP,org.omg.IOP.CodecFactoryPackage,org.omg.IOP.CodecPackage,org.omg.Messaging,org.omg.PortableInterceptor,org.omg.PortableInterceptor.ORBInitInfoPackage,org.omg.PortableServer,org.omg.PortableServer.CurrentPackage,org.omg.PortableServer.POAManagerPackage,org.omg.PortableServer.POAPackage,org.omg.PortableServer.portable,org.omg.PortableServer.ServantLocatorPackage,org.omg.SendingContext,org.omg.stub.java.rmi,org.w3c.dom,org.w3c.dom.bootstrap,org.w3c.dom.css,org.w3c.dom.events,org.w3c.dom.html,org.w3c.dom.ls,org.w3c.dom.ranges,org.w3c.dom.stylesheets,org.w3c.dom.traversal,org.w3c.dom.views,org.w3c.dom.xpath,org.xml.sax,org.xml.sax.ext,org.xml.sax.helpers
+INFO 2017-02-01 19:41:30,353 Activator - guice.disable.misplaced.annotation.check: true
+INFO 2017-02-01 19:41:30,353 Activator - eclipse.launcher: C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\eclipse.exe
+INFO 2017-02-01 19:41:30,354 Activator - eclipse.launcher.name: Eclipse
+INFO 2017-02-01 19:41:30,354 Activator - org.eclipse.swt.internal.deviceZoom: 100
+INFO 2017-02-01 19:41:30,354 Activator - org.osgi.framework.language: pt
+INFO 2017-02-01 19:41:30,355 Activator - osgi.frameworkClassPath: ., file:c:/Users/jorge.ribeiro/Desktop/hcii17-eclipse/hcii17-eclipse/plugins/org.eclipse.osgi.compatibility.state_1.0.200.v20160504-1419.jar, file:c:/Users/jorge.ribeiro/Desktop/hcii17-eclipse/hcii17-eclipse/plugins/org.eclipse.wst.jsdt.nashorn.extension_1.0.0.v201605131737.jar
+INFO 2017-02-01 19:41:30,355 Activator - equinox.use.ds: true
+INFO 2017-02-01 19:41:30,356 Activator - user.language: pt
+INFO 2017-02-01 19:41:30,356 Activator - org.osgi.framework.processor: x86
+INFO 2017-02-01 19:41:30,356 Activator - osgi.compatibility.bootdelegation.default: true
+INFO 2017-02-01 19:41:30,357 Activator - osgi.syspath: c:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\plugins
+INFO 2017-02-01 19:41:30,357 Activator - sun.boot.library.path: C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\jre\jre\bin
+INFO 2017-02-01 19:41:30,357 Activator - org.osgi.framework.system.capabilities: osgi.ee; osgi.ee="OSGi/Minimum"; version:List<Version>="1.0, 1.1, 1.2",osgi.ee; osgi.ee="JRE"; version:List<Version>="1.0, 1.1",osgi.ee; osgi.ee="JavaSE"; version:List<Version>="1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8",osgi.ee; osgi.ee="JavaSE/compact1"; version:List<Version>="1.8",osgi.ee; osgi.ee="JavaSE/compact2"; version:List<Version>="1.8",osgi.ee; osgi.ee="JavaSE/compact3"; version:List<Version>="1.8"
+INFO 2017-02-01 19:41:30,358 Activator - osgi.compatibility.bootdelegation: true
+INFO 2017-02-01 19:41:30,358 Activator - java.version: 1.8.0_112
+INFO 2017-02-01 19:41:30,359 Activator - org.osgi.framework.os.name: Windows10
+INFO 2017-02-01 19:41:30,359 Activator - user.timezone: America/Sao_Paulo
+INFO 2017-02-01 19:41:30,359 Activator - sun.arch.data.model: 32
+INFO 2017-02-01 19:41:30,360 Activator - osgi.bundles: reference:file:org.eclipse.osgi.compatibility.state_1.0.200.v20160504-1419.jar,reference:file:org.eclipse.wst.jsdt.nashorn.extension_1.0.0.v201605131737.jar,reference:file:org.eclipse.equinox.simpleconfigurator_1.1.200.v20160504-1450.jar@1:start
+INFO 2017-02-01 19:41:30,360 Activator - java.endorsed.dirs: C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\jre\jre\lib\endorsed
+INFO 2017-02-01 19:41:30,361 Activator - osgi.tracefile: C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\workspace\.metadata\trace.log
+INFO 2017-02-01 19:41:30,361 Activator - eclipse.application: org.eclipse.ui.ide.workbench
+INFO 2017-02-01 19:41:30,361 Activator - sun.cpu.isalist: pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86
+INFO 2017-02-01 19:41:30,362 Activator - sun.jnu.encoding: Cp1252
+INFO 2017-02-01 19:41:30,362 Activator - file.encoding.pkg: sun.io
+INFO 2017-02-01 19:41:30,362 Activator - equinox.init.uuid: true
+INFO 2017-02-01 19:41:30,363 Activator - org.osgi.framework.vendor: Eclipse
+INFO 2017-02-01 19:41:30,363 Activator - file.separator: \
+INFO 2017-02-01 19:41:30,363 Activator - java.specification.name: Java Platform API Specification
+INFO 2017-02-01 19:41:30,364 Activator - java.class.version: 52.0
+INFO 2017-02-01 19:41:30,364 Activator - user.country: BR
+INFO 2017-02-01 19:41:30,365 Activator - org.eclipse.equinox.launcher.splash.location: C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\\plugins\org.eclipse.platform_4.6.1.v20160907-1200\splash.bmp
+INFO 2017-02-01 19:41:30,365 Activator - java.home: C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\jre\jre
+INFO 2017-02-01 19:41:30,365 Activator - osgi.os: win32
+INFO 2017-02-01 19:41:30,366 Activator - eclipse.commands: -os
+win32
+-ws
+win32
+-arch
+x86
+-showsplash
+C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\\plugins\org.eclipse.platform_4.6.1.v20160907-1200\splash.bmp
+-launcher
+C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\eclipse.exe
+-name
+Eclipse
+--launcher.library
+C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\\plugins/org.eclipse.equinox.launcher.win32.win32.x86_1.1.400.v20160518-1444\eclipse_1617.dll
+-startup
+C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\\plugins/org.eclipse.equinox.launcher_1.3.200.v20160318-1642.jar
+--launcher.appendVmargs
+-product
+org.eclipse.epp.package.jee.product
+-vm
+C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\jre\bin\..\jre\bin\client\jvm.dll
+
+INFO 2017-02-01 19:41:30,366 Activator - java.vm.info: mixed mode
+INFO 2017-02-01 19:41:30,366 Activator - osgi.splashLocation: C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\\plugins\org.eclipse.platform_4.6.1.v20160907-1200\splash.bmp
+INFO 2017-02-01 19:41:30,367 Activator - os.version: 10.0
+INFO 2017-02-01 19:41:30,367 Activator - osgi.arch: x86
+INFO 2017-02-01 19:41:30,367 Activator - path.separator: ;
+INFO 2017-02-01 19:41:30,368 Activator - java.vm.version: 25.112-b15
+INFO 2017-02-01 19:41:30,368 Activator - org.osgi.supports.framework.fragment: true
+INFO 2017-02-01 19:41:30,368 Activator - user.variant: 
+INFO 2017-02-01 19:41:30,369 Activator - osgi.framework.shape: jar
+INFO 2017-02-01 19:41:30,369 Activator - osgi.instance.area.default: file:/C:/Users/jorge.ribeiro/workspace/
+INFO 2017-02-01 19:41:30,369 Activator - java.awt.printerjob: sun.awt.windows.WPrinterJob
+INFO 2017-02-01 19:41:30,370 Activator - sun.io.unicode.encoding: UnicodeLittle
+INFO 2017-02-01 19:41:30,370 Activator - org.osgi.framework.version: 1.8.0
+INFO 2017-02-01 19:41:30,370 Activator - awt.toolkit: sun.awt.windows.WToolkit
+INFO 2017-02-01 19:41:30,371 Activator - user.script: 
+INFO 2017-02-01 19:41:30,371 Activator - eclipse.stateSaveDelayInterval: 30000
+INFO 2017-02-01 19:41:30,371 Activator - osgi.install.area: file:/C:/Users/jorge.ribeiro/Desktop/hcii17-eclipse/hcii17-eclipse/
+INFO 2017-02-01 19:41:30,372 Activator - osgi.framework: file:/c:/Users/jorge.ribeiro/Desktop/hcii17-eclipse/hcii17-eclipse/plugins/org.eclipse.osgi_3.11.1.v20160708-1632.jar
+INFO 2017-02-01 19:41:30,372 Activator - user.home: C:\Users\jorge.ribeiro
+INFO 2017-02-01 19:41:30,372 Activator - org.eclipse.equinox.simpleconfigurator.configUrl: file:org.eclipse.equinox.simpleconfigurator/bundles.info
+INFO 2017-02-01 19:41:30,373 Activator - osgi.framework.useSystemProperties: true
+INFO 2017-02-01 19:41:30,373 Activator - osgi.splashPath: platform:/base/plugins/org.eclipse.platform
+INFO 2017-02-01 19:41:30,373 Activator - osgi.nl: pt_BR
+INFO 2017-02-01 19:41:30,374 Activator - java.specification.vendor: Oracle Corporation
+INFO 2017-02-01 19:41:30,374 Activator - java.library.path: C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Users/jorge.ribeiro/Desktop/hcii17-eclipse/hcii17-eclipse/jre/bin/../jre/bin/client;C:/Users/jorge.ribeiro/Desktop/hcii17-eclipse/hcii17-eclipse/jre/bin/../jre/bin;C:/Users/jorge.ribeiro/Desktop/hcii17-eclipse/hcii17-eclipse/jre/bin/../jre/lib/i386;C:\Program Files\Haskell\bin;C:\Program Files\Haskell Platform\8.0.2\lib\extralibs\bin;C:\Program Files\Haskell Platform\8.0.2\bin;C:\PROGRA~2\Borland\CBUILD~1\Bin;C:\PROGRA~2\Borland\CBUILD~1\Projects\Bpl;C:\app\jorge.ribeiro\product\11.2.0\client_1\bin;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\AMD APP\bin\x86_64;C:\Program Files (x86)\AMD APP\bin\x86;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Windows\idmu\common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Skype\Phone\;C:\Program Files (x86)\PuTTY\;C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Git\cmd;C:\Program Files\Microsoft\Web Platform Installer\;C:\Program Files\TortoiseSVN\bin;C:\Program Files\cURL\bin;c:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\MinGW\bin;C:\Program Files (x86)\Windows Kits\8.0\Windows Performance Toolkit\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Haskell Platform\8.0.2\mingw\bin;C:\Users\jorge.ribeiro\AppData\Roaming\cabal\bin;C:\Users\jorge.ribeiro\AppData\Roaming\local\bin;C:\Program Files (x86)\Elm Platform\0.17.1\bin;C:\Users\jorge.ribeiro\AppData\Roaming\npm;C:\selenium\allure\bin;C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse;;.
+INFO 2017-02-01 19:41:30,374 Activator - java.vendor.url: http://java.oracle.com/
+INFO 2017-02-01 19:41:30,375 Activator - org.osgi.framework.os.version: 10.0.0
+INFO 2017-02-01 19:41:30,375 Activator - eclipse.p2.data.area: @config.dir/../p2/
+INFO 2017-02-01 19:41:30,375 Activator - eclipse.startTime: 1485984818149
+INFO 2017-02-01 19:41:30,376 Activator - java.vm.vendor: Oracle Corporation
+INFO 2017-02-01 19:41:30,376 Activator - java.runtime.name: Java(TM) SE Runtime Environment
+INFO 2017-02-01 19:41:30,376 Activator - java.class.path: C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\\plugins/org.eclipse.equinox.launcher_1.3.200.v20160318-1642.jar
+INFO 2017-02-01 19:41:30,377 Activator - osgi.requiredJavaVersion: 1.8
+INFO 2017-02-01 19:41:30,377 Activator - org.eclipse.update.reconcile: false
+INFO 2017-02-01 19:41:30,377 Activator - eclipse.vm: C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\jre\bin\..\jre\bin\client\jvm.dll
+INFO 2017-02-01 19:41:30,378 Activator - java.vm.specification.name: Java Virtual Machine Specification
+INFO 2017-02-01 19:41:30,378 Activator - java.vm.specification.version: 1.8
+INFO 2017-02-01 19:41:30,378 Activator - sun.cpu.endian: little
+INFO 2017-02-01 19:41:30,379 Activator - sun.os.patch.level: 
+INFO 2017-02-01 19:41:30,379 Activator - gosh.args: --nointeractive
+INFO 2017-02-01 19:41:30,379 Activator - java.io.tmpdir: C:\Users\JORGE~1.RIB\AppData\Local\Temp\
+INFO 2017-02-01 19:41:30,380 Activator - applicationXMI: org.eclipse.ui.workbench/LegacyIDE.e4xmi
+INFO 2017-02-01 19:41:30,380 Activator - java.vendor.url.bug: http://bugreport.sun.com/bugreport/
+INFO 2017-02-01 19:41:30,380 Activator - eclipse.product: org.eclipse.epp.package.jee.product
+INFO 2017-02-01 19:41:30,380 Activator - eclipse.home.location: file:/C:/Users/jorge.ribeiro/Desktop/hcii17-eclipse/hcii17-eclipse/
+INFO 2017-02-01 19:41:30,381 Activator - os.arch: x86
+INFO 2017-02-01 19:41:30,381 Activator - java.awt.graphicsenv: sun.awt.Win32GraphicsEnvironment
+INFO 2017-02-01 19:41:30,381 Activator - java.ext.dirs: C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\jre\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext
+INFO 2017-02-01 19:41:30,382 Activator - user.dir: C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse
+INFO 2017-02-01 19:41:30,382 Activator - org.osgi.supports.framework.requirebundle: true
+INFO 2017-02-01 19:41:30,382 Activator - line.separator: 
+
+INFO 2017-02-01 19:41:30,383 Activator - java.vm.name: Java HotSpot(TM) Client VM
+INFO 2017-02-01 19:41:30,383 Activator - org.apache.commons.logging.Log: org.apache.commons.logging.impl.NoOpLog
+INFO 2017-02-01 19:41:30,383 Activator - file.encoding: Cp1252
+INFO 2017-02-01 19:41:30,383 Activator - eclipse.buildId: 4.6.1.M20160907-1200
+INFO 2017-02-01 19:41:30,384 Activator - eclipse.vmargs: -Dosgi.requiredJavaVersion=1.8
+-XX:+UseG1GC
+-XX:+UseStringDeduplication
+-Dosgi.requiredJavaVersion=1.8
+-Xms256m
+-Xmx1024m
+-Djava.class.path=C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\\plugins/org.eclipse.equinox.launcher_1.3.200.v20160318-1642.jar
+
+INFO 2017-02-01 19:41:30,384 Activator - java.specification.version: 1.8
+INFO 2017-02-01 19:41:30,384 Activator - org.osgi.framework.executionenvironment: OSGi/Minimum-1.0,OSGi/Minimum-1.1,OSGi/Minimum-1.2,JavaSE/compact1-1.8,JavaSE/compact2-1.8,JavaSE/compact3-1.8,JRE-1.1,J2SE-1.2,J2SE-1.3,J2SE-1.4,J2SE-1.5,JavaSE-1.6,JavaSE-1.7,JavaSE-1.8
+INFO 2017-02-01 19:41:30,385 Activator - osgi.logfile: C:\Users\jorge.ribeiro\Desktop\hcii17-eclipse\hcii17-eclipse\workspace\.metadata\.log
+INFO 2017-02-01 19:41:30,385 Activator - osgi.configuration.area: file:/C:/Users/jorge.ribeiro/Desktop/hcii17-eclipse/hcii17-eclipse/configuration/
+INFO 2017-02-01 19:50:34,641 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:50:34,778 IntelligentCompletionExtension - [Task02.java] - There are 87 completion proposals for 'if (start.'.
+INFO 2017-02-01 19:50:42,073 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:50:42,074 IntelligentCompletionExtension - Session was active for 7 seconds.
+INFO 2017-02-01 19:50:42,109 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'isAfter(ChronoLocalDateTime<?> arg0) : boolean - LocalDateTime' (located at index 39). 
+INFO 2017-02-01 19:50:54,642 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:50:54,688 IntelligentCompletionExtension - [Task02.java] - There are 87 completion proposals for 'if (end.'.
+INFO 2017-02-01 19:50:57,945 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:50:57,946 IntelligentCompletionExtension - Session was active for 3 seconds.
+INFO 2017-02-01 19:50:57,979 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'isBefore(ChronoLocalDateTime<?> other) : boolean - LocalDateTime' (located at index 14). 
+INFO 2017-02-01 19:51:25,777 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:51:25,824 IntelligentCompletionExtension - [Task02.java] - There are 87 completion proposals for 'return end.'.
+INFO 2017-02-01 19:51:38,750 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return end'.
+INFO 2017-02-01 19:51:38,959 IntelligentCompletionExtension - [Task02.java] - There are 3 completion proposals for 'return en'.
+INFO 2017-02-01 19:51:39,131 IntelligentCompletionExtension - [Task02.java] - There are 18 completion proposals for 'return e'.
+INFO 2017-02-01 19:51:39,623 IntelligentCompletionExtension - [Task02.java] - There are 5 completion proposals for 'return'.
+INFO 2017-02-01 19:51:41,464 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:51:41,465 IntelligentCompletionExtension - Session was active for 15 seconds.
+INFO 2017-02-01 19:51:41,471 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'start : LocalDateTime' (located at index 2). 
+INFO 2017-02-01 19:51:41,482 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:51:41,529 IntelligentCompletionExtension - [Task02.java] - There are 87 completion proposals for 'return start.'.
+INFO 2017-02-01 19:51:44,905 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:51:44,906 IntelligentCompletionExtension - Session was active for 3 seconds.
+INFO 2017-02-01 19:51:44,938 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'until(Temporal endExclusive, TemporalUnit unit) : long - LocalDateTime' (located at index 21). 
+INFO 2017-02-01 19:51:57,250 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:51:57,278 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return start.until(end, TemporalUnit.'.
+INFO 2017-02-01 19:51:58,331 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return start.until(end, TemporalUnit'.
+INFO 2017-02-01 19:51:59,503 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:51:59,503 IntelligentCompletionExtension - Session was active for 2 seconds.
+INFO 2017-02-01 19:51:59,551 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'TemporalUnit - java.time.temporal' (located at index 1). 
+INFO 2017-02-01 19:51:59,566 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:51:59,567 IntelligentCompletionExtension - Session was active for 2 seconds.
+INFO 2017-02-01 19:52:01,265 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:52:01,319 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return start.until(end, TemporalUnit.'.
+INFO 2017-02-01 19:52:02,164 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return start.until(end, TemporalUnit'.
+INFO 2017-02-01 19:52:02,872 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:52:02,872 IntelligentCompletionExtension - Session was active for 1 seconds.
+INFO 2017-02-01 19:52:42,156 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:52:42,246 IntelligentCompletionExtension - [Task02.java] - There are 0 completion proposals for 'return start.until(end, SECONDS'.
+INFO 2017-02-01 19:52:42,877 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:52:42,878 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:52:44,141 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:52:44,265 IntelligentCompletionExtension - [Task02.java] - There are 0 completion proposals for 'return start.until(end, SECONDS'.
+INFO 2017-02-01 19:52:44,892 IntelligentCompletionExtension - [Task02.java] - There are 0 completion proposals for 'return start.until(end, SECOND'.
+INFO 2017-02-01 19:52:44,897 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:52:44,898 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:52:46,333 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:52:46,343 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return start.until(end,'.
+INFO 2017-02-01 19:52:46,344 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'until(Temporal endExclusive, TemporalUnit unit) : long - LocalDateTime' (located at index 1). 
+INFO 2017-02-01 19:52:46,364 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:52:46,365 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:52:47,325 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:52:47,336 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return start.until(end,'.
+INFO 2017-02-01 19:52:47,337 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'until(Temporal endExclusive, TemporalUnit unit) : long - LocalDateTime' (located at index 1). 
+INFO 2017-02-01 19:52:47,343 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:52:47,343 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:52:48,781 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:52:48,791 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return start.until(end,'.
+INFO 2017-02-01 19:52:48,792 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'until(Temporal endExclusive, TemporalUnit unit) : long - LocalDateTime' (located at index 1). 
+INFO 2017-02-01 19:52:48,798 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:52:48,799 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:52:54,732 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:52:54,787 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return start.until(end, TemporalUnit'.
+INFO 2017-02-01 19:52:54,788 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'TemporalUnit - java.time.temporal' (located at index 1). 
+INFO 2017-02-01 19:52:54,794 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:52:54,794 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:52:55,811 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:52:55,828 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return start.until(end, TemporalUnit.'.
+INFO 2017-02-01 19:52:56,373 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return start.until(end, TemporalUnit'.
+INFO 2017-02-01 19:52:56,831 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:52:56,832 IntelligentCompletionExtension - Session was active for 1 seconds.
+INFO 2017-02-01 19:53:00,978 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:53:00,998 IntelligentCompletionExtension - [Task02.java] - There are 17 completion proposals for 'return start.until(end, new TemporalUnit().'.
+INFO 2017-02-01 19:53:08,731 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:53:08,732 IntelligentCompletionExtension - Session was active for 7 seconds.
+INFO 2017-02-01 19:53:13,938 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:53:13,981 IntelligentCompletionExtension - [Task02.java] - There are 87 completion proposals for 'return start.'.
+INFO 2017-02-01 19:53:31,034 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:53:31,034 IntelligentCompletionExtension - Session was active for 17 seconds.
+INFO 2017-02-01 19:53:31,066 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'minus(TemporalAmount amountToSubtract) : LocalDateTime - LocalDateTime' (located at index 36). 
+INFO 2017-02-01 19:53:36,002 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:53:36,084 IntelligentCompletionExtension - [Task02.java] - There are 87 completion proposals for 'return end.'.
+INFO 2017-02-01 19:53:37,615 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:53:37,615 IntelligentCompletionExtension - Session was active for 1 seconds.
+INFO 2017-02-01 19:53:37,642 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'minus(TemporalAmount amountToSubtract) : LocalDateTime - LocalDateTime' (located at index 21). 
+INFO 2017-02-01 19:53:40,045 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:53:40,142 IntelligentCompletionExtension - [Task02.java] - There are 11 completion proposals for 'return end.minus(st'.
+INFO 2017-02-01 19:53:40,688 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:53:40,689 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:53:40,693 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'start : LocalDateTime' (located at index 3). 
+INFO 2017-02-01 19:53:43,146 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:53:43,157 IntelligentCompletionExtension - [Task02.java] - There are 0 completion proposals for 'return end.minus(start).'.
+INFO 2017-02-01 19:53:43,159 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:53:43,159 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:53:54,371 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:53:54,409 IntelligentCompletionExtension - [Task02.java] - There are 87 completion proposals for 'return end.minus(start.'.
+INFO 2017-02-01 19:53:57,115 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:53:57,116 IntelligentCompletionExtension - Session was active for 2 seconds.
+INFO 2017-02-01 19:53:57,143 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'getLong(TemporalField field) : long - LocalDateTime' (located at index 39). 
+INFO 2017-02-01 19:54:20,674 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:54:20,718 IntelligentCompletionExtension - [Task02.java] - There are 87 completion proposals for 'return end.'.
+INFO 2017-02-01 19:54:52,791 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:54:52,792 IntelligentCompletionExtension - Session was active for 32 seconds.
+INFO 2017-02-01 19:54:57,427 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:54:57,480 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return TemporalUnit.'.
+INFO 2017-02-01 19:54:58,590 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return TemporalUnit'.
+INFO 2017-02-01 19:54:59,675 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:54:59,676 IntelligentCompletionExtension - Session was active for 2 seconds.
+INFO 2017-02-01 19:54:59,678 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'TemporalUnit - java.time.temporal' (located at index 1). 
+INFO 2017-02-01 19:55:03,699 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:55:03,746 IntelligentCompletionExtension - [Task02.java] - There are 87 completion proposals for 'return start.'.
+INFO 2017-02-01 19:55:57,781 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:55:57,782 IntelligentCompletionExtension - Session was active for 54 seconds.
+INFO 2017-02-01 19:56:00,847 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:56:00,883 IntelligentCompletionExtension - [Task02.java] - There are 4 completion proposals for 'return start.un'.
+INFO 2017-02-01 19:56:02,364 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:56:02,365 IntelligentCompletionExtension - Session was active for 1 seconds.
+INFO 2017-02-01 19:56:02,397 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'until(Temporal endExclusive, TemporalUnit unit) : long - LocalDateTime' (located at index 3). 
+INFO 2017-02-01 19:56:11,135 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:56:11,236 IntelligentCompletionExtension - [Task02.java] - There are 0 completion proposals for 'return start.until(end, SECONDS'.
+INFO 2017-02-01 19:56:11,906 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:56:11,907 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:56:26,992 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:56:27,006 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return start.until(end,'.
+INFO 2017-02-01 19:56:27,007 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'until(Temporal endExclusive, TemporalUnit unit) : long - LocalDateTime' (located at index 1). 
+INFO 2017-02-01 19:56:27,027 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:56:27,028 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:56:31,332 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:56:31,398 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return start.until(end, TemporalUnit.'.
+INFO 2017-02-01 19:56:32,707 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return start.until(end, TemporalUnit'.
+INFO 2017-02-01 19:56:34,871 IntelligentCompletionExtension - [Task02.java] - There are 19 completion proposals for 'return start.until(end, n'.
+INFO 2017-02-01 19:56:35,169 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:56:35,170 IntelligentCompletionExtension - Session was active for 3 seconds.
+INFO 2017-02-01 19:56:39,269 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:56:39,292 IntelligentCompletionExtension - [Task02.java] - There are 17 completion proposals for 'return start.until(end, new TemporalUnit().'.
+INFO 2017-02-01 19:56:43,901 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:56:43,902 IntelligentCompletionExtension - Session was active for 4 seconds.
+INFO 2017-02-01 19:56:43,936 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'between(Temporal temporal1Inclusive, Temporal temporal2Exclusive) : long - TemporalUnit' (located at index 14). 
+INFO 2017-02-01 19:56:50,094 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:56:50,104 IntelligentCompletionExtension - [Task02.java] - There are 0 completion proposals for 'return start.until(end, new TemporalUnit().between(temporal1Inclusive, temporal2Exclusive).'.
+INFO 2017-02-01 19:56:50,106 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:56:50,107 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:56:51,456 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:56:51,469 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return start.until(end, new TemporalUnit().between(temporal1Inclusive, temporal2Exclusive)'.
+INFO 2017-02-01 19:56:51,470 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'until(Temporal endExclusive, TemporalUnit unit) : long - LocalDateTime' (located at index 1). 
+INFO 2017-02-01 19:56:51,491 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:56:51,492 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:56:52,455 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:56:52,463 IntelligentCompletionExtension - [Task02.java] - There are 0 completion proposals for 'return start.until(end, new TemporalUnit().between(temporal1Inclusive, temporal2Exclusive).'.
+INFO 2017-02-01 19:56:52,465 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:56:52,466 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:56:56,110 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:56:56,110 IntelligentCompletionExtension - Session was active for 3 seconds.
+INFO 2017-02-01 19:57:03,909 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:57:03,918 IntelligentCompletionExtension - [Task02.java] - There are 0 completion proposals for 'return new TemporalUnit.'.
+INFO 2017-02-01 19:57:03,920 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:57:03,920 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:57:05,216 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:57:05,224 IntelligentCompletionExtension - [Task02.java] - There are 0 completion proposals for 'return new TemporalUnit.'.
+INFO 2017-02-01 19:57:05,922 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return new TemporalUnit'.
+INFO 2017-02-01 19:57:07,059 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:57:07,060 IntelligentCompletionExtension - Session was active for 1 seconds.
+INFO 2017-02-01 19:57:07,872 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:57:07,887 IntelligentCompletionExtension - [Task02.java] - There are 17 completion proposals for 'return new TemporalUnit().'.
+INFO 2017-02-01 19:57:10,015 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:57:10,015 IntelligentCompletionExtension - Session was active for 2 seconds.
+INFO 2017-02-01 19:57:10,048 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'between(Temporal temporal1Inclusive, Temporal temporal2Exclusive) : long - TemporalUnit' (located at index 9). 
+INFO 2017-02-01 19:57:27,505 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:57:27,576 IntelligentCompletionExtension - [Task02.java] - There are 3 completion proposals for 'return Local'.
+INFO 2017-02-01 19:57:28,431 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:57:28,431 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:57:28,437 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'LocalDateTime - java.time' (located at index 2). 
+INFO 2017-02-01 19:57:28,725 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:57:28,749 IntelligentCompletionExtension - [Task02.java] - There are 18 completion proposals for 'return LocalDateTime.'.
+INFO 2017-02-01 19:57:40,791 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return LocalDateTime'.
+INFO 2017-02-01 19:57:41,165 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:57:41,165 IntelligentCompletionExtension - Session was active for 12 seconds.
+INFO 2017-02-01 19:57:43,957 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:57:44,001 IntelligentCompletionExtension - [Task02.java] - There are 87 completion proposals for 'return start.'.
+INFO 2017-02-01 19:57:52,329 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:57:52,329 IntelligentCompletionExtension - Session was active for 8 seconds.
+INFO 2017-02-01 19:57:57,825 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:57:57,873 IntelligentCompletionExtension - [Task02.java] - There are 9 completion proposals for 'return Temporal'.
+INFO 2017-02-01 19:57:59,582 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:57:59,582 IntelligentCompletionExtension - Session was active for 1 seconds.
+INFO 2017-02-01 19:57:59,606 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'TemporalField - java.time.temporal' (located at index 8). 
+INFO 2017-02-01 19:57:59,973 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:57:59,993 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return TemporalField.'.
+INFO 2017-02-01 19:58:00,919 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return TemporalField'.
+INFO 2017-02-01 19:58:07,141 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:58:07,142 IntelligentCompletionExtension - Session was active for 7 seconds.
+INFO 2017-02-01 19:58:12,496 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:58:12,546 IntelligentCompletionExtension - [Task02.java] - There are 9 completion proposals for 'return Tempo'.
+INFO 2017-02-01 19:58:19,997 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:58:19,997 IntelligentCompletionExtension - Session was active for 7 seconds.
+INFO 2017-02-01 19:58:20,012 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'TemporalAmount - java.time.temporal' (located at index 4). 
+INFO 2017-02-01 19:58:20,950 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:58:20,961 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return TemporalAmount.'.
+INFO 2017-02-01 19:58:21,845 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'return TemporalAmount'.
+INFO 2017-02-01 19:58:24,065 IntelligentCompletionExtension - [Task02.java] - There are 5 completion proposals for 'return'.
+INFO 2017-02-01 19:58:28,549 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:58:28,549 IntelligentCompletionExtension - Session was active for 7 seconds.
+INFO 2017-02-01 19:58:28,555 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'start : LocalDateTime' (located at index 4). 
+INFO 2017-02-01 19:58:28,839 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:58:28,907 IntelligentCompletionExtension - [Task02.java] - There are 87 completion proposals for 'return start.'.
+INFO 2017-02-01 19:58:55,721 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:58:55,721 IntelligentCompletionExtension - Session was active for 26 seconds.
+INFO 2017-02-01 19:58:57,665 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:58:57,705 IntelligentCompletionExtension - [Task02.java] - There are 2 completion proposals for 'return start.unt'.
+INFO 2017-02-01 19:58:58,494 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:58:58,494 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 19:58:58,530 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'until(Temporal endExclusive, TemporalUnit unit) : long - LocalDateTime' (located at index 1). 
+INFO 2017-02-01 19:59:03,714 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:59:03,787 IntelligentCompletionExtension - [Task02.java] - There are 10 completion proposals for 'return start.until(end, Chr'.
+INFO 2017-02-01 19:59:06,308 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:59:06,309 IntelligentCompletionExtension - Session was active for 2 seconds.
+INFO 2017-02-01 19:59:06,327 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'ChronoUnit - java.time.temporal' (located at index 9). 
+INFO 2017-02-01 19:59:06,775 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 19:59:06,797 IntelligentCompletionExtension - [Task02.java] - There are 20 completion proposals for 'return start.until(end, ChronoUnit.'.
+INFO 2017-02-01 19:59:08,335 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 19:59:08,336 IntelligentCompletionExtension - Session was active for 1 seconds.
+INFO 2017-02-01 19:59:08,344 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'SECONDS : ChronoUnit - ChronoUnit' (located at index 8). 
+INFO 2017-02-01 20:01:46,596 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:01:46,613 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'if (start.isAfter('.
+INFO 2017-02-01 20:01:46,614 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'isAfter(ChronoLocalDateTime<?> other) : boolean - LocalDateTime' (located at index 1). 
+INFO 2017-02-01 20:01:46,631 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:01:46,631 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 20:01:49,444 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:01:49,460 IntelligentCompletionExtension - [Task02.java] - There are 1 completion proposals for 'if (start.isAfter('.
+INFO 2017-02-01 20:01:49,460 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'isAfter(ChronoLocalDateTime<?> other) : boolean - LocalDateTime' (located at index 1). 
+INFO 2017-02-01 20:01:49,466 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:01:49,466 IntelligentCompletionExtension - Session was active for 0 seconds.
+INFO 2017-02-01 20:01:52,782 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:01:52,783 IntelligentCompletionExtension - Session was active for 3 seconds.
+INFO 2017-02-01 20:01:55,188 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:01:55,305 IntelligentCompletionExtension - [Task02.java] - There are 3 completion proposals for 'if (start.isAfter(Loca'.
+INFO 2017-02-01 20:01:57,154 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:01:57,155 IntelligentCompletionExtension - Session was active for 1 seconds.
+INFO 2017-02-01 20:01:57,163 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'LocalDateTime - java.time' (located at index 3). 
+INFO 2017-02-01 20:01:57,481 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:01:57,515 IntelligentCompletionExtension - [Task02.java] - There are 18 completion proposals for 'if (start.isAfter(LocalDateTime.'.
+INFO 2017-02-01 20:01:58,948 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:01:58,948 IntelligentCompletionExtension - Session was active for 1 seconds.
+INFO 2017-02-01 20:01:58,955 IntelligentCompletionExtension - [Task02.java] - Applied proposal 'now() : LocalDateTime - LocalDateTime' (located at index 14). 
+INFO 2017-02-01 20:03:17,085 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:03:17,085 IntelligentCompletionExtension - Session was active for 79 seconds.
+INFO 2017-02-01 20:03:18,610 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:03:18,610 IntelligentCompletionExtension - Session was active for 81 seconds.
+INFO 2017-02-01 20:03:19,525 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:03:19,526 IntelligentCompletionExtension - Session was active for 82 seconds.
+
+INFO 2017-02-01 20:04:10,794 StandardCompletionExtension - Session started.
+INFO 2017-02-01 20:04:10,813 StandardCompletionExtension - [Task03.java] - There are 39 completion proposals for 'stream = list.'.
+INFO 2017-02-01 20:05:04,899 StandardCompletionExtension - Session was active for 54 seconds.
+INFO 2017-02-01 20:04:10,794 StandardCompletionExtension - Session started.
+INFO 2017-02-01 20:04:10,813 StandardCompletionExtension - [Task03.java] - There are 39 completion proposals for 'stream = list.'.
+INFO 2017-02-01 20:05:04,899 StandardCompletionExtension - Session was active for 54 seconds.
+INFO 2017-02-01 20:04:10,794 StandardCompletionExtension - Session started.
+INFO 2017-02-01 20:04:10,813 StandardCompletionExtension - [Task03.java] - There are 39 completion proposals for 'stream = list.'.
+INFO 2017-02-01 20:05:04,899 StandardCompletionExtension - Session was active for 54 seconds.
+
+INFO 2017-02-01 20:04:10,794 StandardCompletionExtension - Session started.
+INFO 2017-02-01 20:04:10,813 StandardCompletionExtension - [Task03.java] - There are 39 completion proposals for 'stream = list.'.
+INFO 2017-02-01 20:05:04,899 StandardCompletionExtension - Session was active for 54 seconds.
+INFO 2017-02-01 20:05:04,908 StandardCompletionExtension - [Task03.java] - Applied proposal 'stream() : Stream<String> - Collection' (located at index 2). 
+INFO 2017-02-01 20:05:06,460 StandardCompletionExtension - Session started.
+INFO 2017-02-01 20:05:06,487 StandardCompletionExtension - [Task03.java] - There are 50 completion proposals for 'stream = list.stream().'.
+INFO 2017-02-01 20:05:15,953 StandardCompletionExtension - Session was active for 9 seconds.
+INFO 2017-02-01 20:05:15,983 StandardCompletionExtension - [Task03.java] - Applied proposal 'filter(Predicate<? super String> arg0) : Stream<String> - Stream' (located at index 2). 
+INFO 2017-02-01 20:05:24,571 StandardCompletionExtension - Session started.
+INFO 2017-02-01 20:05:24,588 StandardCompletionExtension - [Task03.java] - There are 49 completion proposals for 'return stream.'.
+INFO 2017-02-01 20:06:07,250 StandardCompletionExtension - Session was active for 42 seconds.
+INFO 2017-02-01 20:06:07,278 StandardCompletionExtension - [Task03.java] - Applied proposal 'flatMap(Function<? super String,? extends Stream<? extends R>> mapper) : Stream<R> - Stream' (located at index 20). 
+INFO 2017-02-01 20:06:20,918 StandardCompletionExtension - Session started.
+INFO 2017-02-01 20:06:20,934 StandardCompletionExtension - [Task03.java] - There are 49 completion proposals for 'return stream.'.
+INFO 2017-02-01 20:07:31,764 StandardCompletionExtension - Session was active for 70 seconds.
+INFO 2017-02-01 20:07:31,793 StandardCompletionExtension - [Task03.java] - Applied proposal 'map(Function<? super String,? extends R> mapper) : Stream<R> - Stream' (located at index 28). 
+INFO 2017-02-01 20:07:37,306 StandardCompletionExtension - Session started.
+INFO 2017-02-01 20:07:37,323 StandardCompletionExtension - [Task03.java] - There are 50 completion proposals for 'return stream.map(function).'.
+INFO 2017-02-01 20:07:47,137 StandardCompletionExtension - Session was active for 9 seconds.
+INFO 2017-02-01 20:07:47,143 StandardCompletionExtension - [Task03.java] - Applied proposal 'sorted() : Stream<String> - Stream' (located at index 9). 
+INFO 2017-02-01 20:08:33,337 StandardCompletionExtension - Session was active for 56 seconds.
+INFO 2017-02-01 20:08:40,509 StandardCompletionExtension - Session was active for 63 seconds.
+INFO 2017-02-01 20:10:26,142 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:10:26,308 IntelligentCompletionExtension - [Task01.java] - There are 37 completion proposals for 'if (!from.'.
+INFO 2017-02-01 20:12:40,375 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:12:40,376 IntelligentCompletionExtension - Session was active for 134 seconds.
+INFO 2017-02-01 20:12:40,386 IntelligentCompletionExtension - [Task01.java] - Applied proposal 'toFile() : File - Path - 5%' (located at index 10). 
+INFO 2017-02-01 20:12:42,112 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:12:42,237 IntelligentCompletionExtension - [Task01.java] - There are 61 completion proposals for 'if (!from.toFile().'.
+INFO 2017-02-01 20:13:01,064 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:13:01,064 IntelligentCompletionExtension - Session was active for 18 seconds.
+INFO 2017-02-01 20:13:01,072 IntelligentCompletionExtension - [Task01.java] - Applied proposal 'isDirectory() : boolean - File' (located at index 55). 
+INFO 2017-02-01 20:13:05,968 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:13:06,010 IntelligentCompletionExtension - [Task01.java] - There are 37 completion proposals for 'if (!from.toFile().isDirectory() || !to.'.
+INFO 2017-02-01 20:13:09,078 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:13:09,079 IntelligentCompletionExtension - Session was active for 3 seconds.
+INFO 2017-02-01 20:13:09,087 IntelligentCompletionExtension - [Task01.java] - Applied proposal 'toFile() : File - Path - 5%' (located at index 35). 
+INFO 2017-02-01 20:13:09,377 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:13:09,423 IntelligentCompletionExtension - [Task01.java] - There are 61 completion proposals for 'if (!from.toFile().isDirectory() || !to.toFile().'.
+INFO 2017-02-01 20:13:13,622 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:13:13,623 IntelligentCompletionExtension - Session was active for 4 seconds.
+INFO 2017-02-01 20:13:13,629 IntelligentCompletionExtension - [Task01.java] - Applied proposal 'isDirectory() : boolean - File' (located at index 34). 
+INFO 2017-02-01 20:13:34,800 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:13:34,844 IntelligentCompletionExtension - [Task01.java] - There are 37 completion proposals for 'return from.'.
+INFO 2017-02-01 20:14:06,743 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:14:06,744 IntelligentCompletionExtension - Session was active for 31 seconds.
+INFO 2017-02-01 20:14:06,784 IntelligentCompletionExtension - [Task01.java] - Applied proposal 'forEach(Consumer<? super Path> action) : void - Iterable' (located at index 26). 
+INFO 2017-02-01 20:14:07,709 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:14:07,710 IntelligentCompletionExtension - Session was active for 32 seconds.
+INFO 2017-02-01 20:14:47,586 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:14:47,683 IntelligentCompletionExtension - [Task01.java] - There are 13 completion proposals for 'return visitor.'.
+INFO 2017-02-01 20:15:09,547 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:15:09,547 IntelligentCompletionExtension - Session was active for 21 seconds.
+INFO 2017-02-01 20:15:24,238 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:15:24,267 IntelligentCompletionExtension - [Task01.java] - There are 4 completion proposals for 'return visitor.vi'.
+INFO 2017-02-01 20:15:25,751 IntelligentCompletionExtension - [Task01.java] - There are 4 completion proposals for 'return visitor.v'.
+INFO 2017-02-01 20:15:25,938 IntelligentCompletionExtension - [Task01.java] - There are 13 completion proposals for 'return visitor.'.
+INFO 2017-02-01 20:15:29,910 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:15:29,911 IntelligentCompletionExtension - Session was active for 5 seconds.
+INFO 2017-02-01 20:15:31,997 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:15:32,017 IntelligentCompletionExtension - [Task01.java] - There are 13 completion proposals for 'return visitor.'.
+INFO 2017-02-01 20:15:41,110 IntelligentCompletionExtension - [Task01.java] - There are 1 completion proposals for 'return visitor'.
+INFO 2017-02-01 20:15:41,235 IntelligentCompletionExtension - [Task01.java] - There are 1 completion proposals for 'return visito'.
+INFO 2017-02-01 20:15:41,378 IntelligentCompletionExtension - [Task01.java] - There are 5 completion proposals for 'return visit'.
+INFO 2017-02-01 20:15:41,570 IntelligentCompletionExtension - [Task01.java] - There are 5 completion proposals for 'return visi'.
+INFO 2017-02-01 20:15:41,729 IntelligentCompletionExtension - [Task01.java] - There are 6 completion proposals for 'return vis'.
+INFO 2017-02-01 20:15:41,889 IntelligentCompletionExtension - [Task01.java] - There are 12 completion proposals for 'return vi'.
+INFO 2017-02-01 20:15:42,105 IntelligentCompletionExtension - [Task01.java] - There are 55 completion proposals for 'return v'.
+INFO 2017-02-01 20:15:42,412 IntelligentCompletionExtension - [Task01.java] - There are 8 completion proposals for 'return'.
+INFO 2017-02-01 20:15:43,912 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:15:43,913 IntelligentCompletionExtension - Session was active for 11 seconds.
+INFO 2017-02-01 20:15:43,920 IntelligentCompletionExtension - [Task01.java] - Applied proposal 'from : Path' (located at index 3). 
+INFO 2017-02-01 20:15:43,931 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:15:43,970 IntelligentCompletionExtension - [Task01.java] - There are 37 completion proposals for 'return from.'.
+INFO 2017-02-01 20:16:27,879 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:16:27,880 IntelligentCompletionExtension - Session was active for 43 seconds.
+INFO 2017-02-01 20:16:33,022 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:16:33,064 IntelligentCompletionExtension - [Task01.java] - There are 37 completion proposals for 'return from.'.
+INFO 2017-02-01 20:16:51,881 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:16:51,882 IntelligentCompletionExtension - Session was active for 18 seconds.
+INFO 2017-02-01 20:16:51,889 IntelligentCompletionExtension - [Task01.java] - Applied proposal 'spliterator() : Spliterator<Path> - Iterable' (located at index 7). 
+INFO 2017-02-01 20:16:57,896 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:16:57,942 IntelligentCompletionExtension - [Task01.java] - There are 37 completion proposals for 'return from.'.
+INFO 2017-02-01 20:17:01,607 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:17:01,608 IntelligentCompletionExtension - Session was active for 3 seconds.
+INFO 2017-02-01 20:17:01,617 IntelligentCompletionExtension - [Task01.java] - Applied proposal 'toFile() : File - Path - used' (located at index 17). 
+INFO 2017-02-01 20:17:02,741 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:17:02,826 IntelligentCompletionExtension - [Task01.java] - There are 61 completion proposals for 'return from.toFile().'.
+INFO 2017-02-01 20:17:12,346 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:17:12,346 IntelligentCompletionExtension - Session was active for 9 seconds.
+INFO 2017-02-01 20:17:17,663 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:17:17,739 IntelligentCompletionExtension - [Task01.java] - There are 73 completion proposals for 'return File'.
+INFO 2017-02-01 20:17:21,992 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:17:21,992 IntelligentCompletionExtension - Session was active for 4 seconds.
+INFO 2017-02-01 20:17:22,016 IntelligentCompletionExtension - [Task01.java] - Applied proposal 'FileVisitor - java.nio.file' (located at index 34). 
+INFO 2017-02-01 20:17:26,862 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:17:26,934 IntelligentCompletionExtension - [Task01.java] - There are 73 completion proposals for 'return File'.
+INFO 2017-02-01 20:18:24,113 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:18:24,114 IntelligentCompletionExtension - Session was active for 57 seconds.
+INFO 2017-02-01 20:18:26,451 IntelligentCompletionExtension - Session started.
+INFO 2017-02-01 20:18:26,552 IntelligentCompletionExtension - [Task01.java] - There are 66 completion proposals for 'return Files.'.
+INFO 2017-02-01 20:18:31,033 IntelligentCompletionExtension - Session ended.
+INFO 2017-02-01 20:18:31,034 IntelligentCompletionExtension - Session was active for 4 seconds.
+INFO 2017-02-01 20:18:31,073 IntelligentCompletionExtension - [Task01.java] - Applied proposal 'walkFileTree(Path start, FileVisitor<? super Path> visitor) : Path - Files' (located at index 46). 
