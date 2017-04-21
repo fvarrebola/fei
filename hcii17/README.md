@@ -124,4 +124,3 @@ ID 	Exp	Tsk	Dur	Ast	Act	DT	AvgDT	P	AvgP	AP	CP	APR 	CPR
 ```
 
 Columns (1) and (2) display the participant's index and the reported programming expertise (U stands for unexperienced, I for intermediate and E for experienced). Columns (3) and (4) display the taks and overall duration in seconds. Columns (5) and (6) display the code assistants (STD stands for standard and INT for intelligent) and how manby times it was activated. Columns (7) refers to the average display time of each code assistants. Column (8) displays the average number of actviations. Finally, column (1) displays the ratio of applied proposals that actually contribute to task completion.
-Column (2) 'Exp' stands for experience. 
