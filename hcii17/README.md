@@ -81,9 +81,9 @@ Select the programming tasks that are more suitable to your target audience and 
 ### Deactivating other code assistants
 The last step before completing a task is to make sure that other code assistants available in Eclipse are disabled. Go to `Window > Preferences` menu and navigate to the `Java > Editor > Code Assist > Advanced` option.
 Make sure that the HCII17 code assistant is the only option selected both in the _default_ section.
-![Java > Editor > Code Assist > Advanced > Default section](/_images/cfg-default-section.png)
+![Java > Editor > Code Assist > Advanced > Default section](_images/cfg-default-section.png)
 and in the _content assist cycling_ section
-![Java > Editor > Code Assist > Advanced > Default section](/_images/cfg-content-assist-cycling-section.png)
+![Java > Editor > Code Assist > Advanced > Default section](_images/cfg-content-assist-cycling-section.png)
 
 ## Parsing log files
 You can use the `log-parser` tool to interpret the results of your experiment. Take a look at the `MainApp` class and do the proper modifications.
