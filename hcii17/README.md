@@ -126,17 +126,19 @@ ID 	Exp	Tsk	Dur	Ast	Act	DT	AvgDT	P	AvgP	AP	CP	APR 	CPR
 Columns (1) and (2) display the participant's index and the reported programming expertise (U stands for unexperienced, I for intermediate and E for experienced). Columns (3) and (4) display the taks and overall duration in seconds. Columns (5) and (6) display the code assistants (STD stands for standard and INT for intelligent) and how manby times it was activated. Columns (7) refers to the average display time of each code assistants. Column (8) displays the average number of actviations. Finally, column (1) displays the ratio of applied proposals that actually contribute to task completion.
 
 Log parsing can also give you a lot of interesting data, like the top 10 suggestions per task. See below the `Task01` example.
-|-----|-----|--------------------------------------------------------------------------------|
-| Cnt |  %  |Suggestion                                                                      |
-|-----|-----|--------------------------------------------------------------------------------|
-|  35 | 8.08|from : Path                                                                     |
-|  21 | 4.85|visitor : FileVisitor<java.nio.file.Path>                                       |
-|  20 | 4.62|Path - java.nio.file                                                            |
-|  19 | 4.39|isDirectory() : boolean - File                                                  |
-|  15 | 3.46|walkFileTree(Path start, FileVisitor<? super Path> visitor) : Path - Files      |
-|  13 | 3.00|visitFile(Path file, BasicFileAttributes attrs) : FileVisitResult - FileVisitor |
-|  13 | 3.00|copy(Path source, Path target, CopyOption... options) : Path - Files            |
-|  12 | 2.77|toFile() : File - Path - 5%                                                     |
-|  11 | 2.54|toAbsolutePath() : Path - Path                                                  |
-|  10 | 2.31|isAbsolute() : boolean - Path                                                   |
-|-----|-----|--------------------------------------------------------------------------------|
+```
+--------------------------------------------------------------------------------------------
+Cnt	%	Suggestion                                                                      
+--------------------------------------------------------------------------------------------
+35	8.08	from : Path                                                                     
+21	4.85	visitor : FileVisitor<java.nio.file.Path>                                       
+20	4.62	Path - java.nio.file                                                            
+19	4.39	isDirectory() : boolean - File                                                  
+15	3.46	walkFileTree(Path start, FileVisitor<? super Path> visitor) : Path - Files      
+13	3.00	visitFile(Path file, BasicFileAttributes attrs) : FileVisitResult - FileVisitor 
+13	3.00	copy(Path source, Path target, CopyOption... options) : Path - Files            
+12	2.77	toFile() : File - Path - 5%                                                     
+11	2.54	toAbsolutePath() : Path - Path                                                  
+10	2.31	isAbsolute() : boolean - Path                                                   
+---------------------------------------------------------------------------------------------
+```
