@@ -10,7 +10,7 @@ import org.eclipse.osgi.util.NLS;
  */
 public class Messages extends NLS {
 
-    private static final String BUNDLE_NAME = "br.edu.fei.hcii17.codeassist.messages";
+    private static final String BUNDLE_NAME = "messages";
 
     public static String header;
     public static String unknownValue;
