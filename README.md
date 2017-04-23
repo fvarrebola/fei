@@ -1,8 +1,8 @@
 # FEI
-Here you will find FEI related source code, which now includes:
+Here you will find FEI related source code, which right now includes:
 
 ## Class assignments
-Class assignments were mostly build using C/C++ so a VS compiler will probably do the job.
+Class assignments were mostly built using C/C++ so a VS compiler will probably do the job.
 
 ## API Documentation Search (ADS) prototype
 The API Documentation Search prototype combines dependency information from Maven artifacts (the information you get from `pom.xml` files) to javadoc documentation artifacts to provide a NLP-based search tool.
