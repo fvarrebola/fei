@@ -1,0 +1,481 @@
+[
+  {
+    id:"01",
+    input:"copy file fname to bname",
+    output:"FileUtils.copyFile(new File(fname), new File(bname))",
+    library:"",
+    object:"org.apache.commons.io.FileUtils",
+    method:"copyFile"
+  },
+  {
+    id:"02",
+    input:"does x begin with y",
+    output:"x.startsWith(y)",
+    library:"",
+    object:"java.lang.String",
+    method:"startsWith"
+  },
+  {
+    id:"03",
+    input:"load class \"MyClass.class\"",
+    output:"Thread.currentThread().getContextClassLoader().loadClass(\"MyClass.class\")",
+    library:"",
+    object:"java.lang.ClassLoader",
+    method:"loadClass"
+  },
+  {
+    id:"04",
+    input:"make file",
+    output:"new File(<arg>).createNewFile()",
+    library:"",
+    object:"java.io.File",
+    method:"createNewFile"
+  },
+  {
+    id:"05",
+    input:"write \"hello\" to file \"text.txt\"",
+    output:"FileUtils.writeStringToFile(new File(\"text.txt\"), \"hello\")",
+    library:"",
+    object:"org.apache.commons.io.FileUtils",
+    method:"writeStringToFile"
+  },
+  {
+    id:"06",
+    input:"readFile(\"text.txt\",\"UTF-8\")",
+    output:"FileUtils.readFileToString(new File(\"text.txt\"), \"UTF-8\")",
+    library:"",
+    object:"org.apache.commons.io.FileUtils",
+    method:"readFileToString"
+  },
+  {
+    id:"07",
+    input:"parse \"2015\"",
+    output:"Integer.parseInt(\"2015\")",
+    library:"",
+    object:"java.lang.Integer",
+    method:"parseInt"
+  },
+  {
+    id:"08",
+    input:"substring \"EPFL2015\" 4",
+    output:"\"EPFL2015\".substring(4)",
+    library:"",
+    object:"java.lang.String",
+    method:"substring"
+  },
+  {
+    id:"09",
+    input:"new buffered stream \"text.txt\"",
+    output:"new BufferedReader(new InputStreamReader(new BufferedInputStream(new FileInputStream(\"text.txt\"))))",
+    library:"",
+    object:"java.io.BufferedReader",
+    method:""
+  },
+  {
+    id:"10",
+    input:"get the current year",
+    output:"new Date().getYear()",
+    library:"",
+    object:"java.util.Date",
+    method:"getYear"
+  },
+  {
+    id:"11",
+    input:"current time",
+    output:"System.currentTimeMillis()",
+    library:"",
+    object:"java.lang.System",
+    method:"currentTimeMillis"
+  },
+  {
+    id:"12",
+    input:"open connection \"http://www.oracle.com/\"",
+    output:"new URL(\"http://www.oracle.com/\").openConnection()",
+    library:"",
+    object:"java.net.URL",
+    method:"openConnection"
+  },
+  {
+    id:"13",
+    input:"create socket \"http://www.oracle.com/\" 8080",
+    output:"new Socket(\"http://www.oracle.com/\", 8080)",
+    library:"",
+    object:"java.net.Socket",
+    method:""
+  },
+  {
+    id:"14",
+    input:"put a pair (\"Mike\",\"+007-345-89-23\") into a map",
+    output:"new HashMap().put(\"Mike\", \"+007-345-89-23\")",
+    library:"",
+    object:"java.util.HashMap",
+    method:"put"
+  },
+  {
+    id:"15",
+    input:"set thread max priority",
+    output:"Thread.currentThread().setPriority(Thread.MAX_PRIORITY)",
+    library:"",
+    object:"java.lang.Thread",
+    method:"setPriority"
+  },
+  {
+    id:"16",
+    input:"set property \"gate.home\" to value \"http://gate.ac.uk/\"",
+    output:"new Properties().setProperty(\"gate.home\", \"http://gate.ac.uk/\")",
+    library:"",
+    object:"java.util.Properties",
+    method:"setProperty"
+  },
+  {
+    id:"17",
+    input:"does the file \"text.txt\" exist",
+    output:"new File(\"text.txt\").exists()",
+    library:"",
+    object:"java.io.File",
+    method:"exists"
+  },
+  {
+    id:"18",
+    input:"min 1 3",
+    output:"Math.min(1, 3)",
+    library:"",
+    object:"java.lang.Math",
+    method:"min"
+  },
+  {
+    id:"19",
+    input:"get thread id",
+    output:"Thread.currentThread().getId()",
+    library:"",
+    object:"java.lang.Thread",
+    method:"getId"
+  },
+  {
+    id:"20",
+    input:"join threads",
+    output:"Thread.currentThread().join()",
+    library:"",
+    object:"java.lang.Thread",
+    method:"join"
+  },
+  {
+    id:"21",
+    input:"delete file \"text.txt\"",
+    output:"new File(\"text.txt\").delete()",
+    library:"",
+    object:"java.io.File",
+    method:"delete"
+  },
+  {
+    id:"22",
+    input:"print exception ex stack trace",
+    output:"ex.printStackTrace()",
+    library:"",
+    object:"java.lang.Exception",
+    method:"printStackTrace"
+  },
+  {
+    id:"23",
+    input:"is file \"text.txt\" directory",
+    output:"new File(\"text.txt\").isDirectory()",
+    library:"",
+    object:"java.io.File",
+    method:"isDirectory"
+  },
+  {
+    id:"24",
+    input:"get thread stack trace",
+    output:"Thread.currentThread().getStackTrace()",
+    library:"",
+    object:"java.lang.Thread",
+    method:"getStackTrace"
+  },
+  {
+    id:"25",
+    input:"read line by line file \"text.txt\"",
+    output:"FileUtils.readLines(new File(\"text.txt\"))",
+    library:"",
+    object:"org.apache.commons.io.FileUtils",
+    method:"readLines"
+  },
+  {
+    id:"26",
+    input:"set time zone to \"GMT\"",
+    output:"Calendar.getInstance().setTimeZone(TimeZone.getTimeZone(\"GMT\"))",
+    library:"",
+    object:"java.util.Calendar",
+    method:"setTimeZone"
+  },
+  {
+    id:"27",
+    input:"pi",
+    output:"Math.PI",
+    library:"",
+    object:"lava.lang.Math",
+    method:"PI"
+  },
+  {
+    id:"28",
+    input:"split \"EPFL-2015\" with \"-\"",
+    output:"\"EPFL-2015\".split(\"-\")",
+    library:"",
+    object:"java.lang.String",
+    method:"split"
+  },
+  {
+    id:"29",
+    input:"memory",
+    output:"Runtime.getRuntime().freeMemory()",
+    library:"",
+    object:"java.lang.Runtime",
+    method:"freeMemory"
+  },
+  {
+    id:"30",
+    input:"free memory",
+    output:"Runtime.getRuntime().freeMemory()",
+    library:"",
+    object:"java.lang.Runtime",
+    method:"freeMemory"
+  },
+  {
+    id:"31",
+    input:"total memory",
+    output:"Runtime.getRuntime().totalMemory()",
+    library:"",
+    object:"java.lang.Runtime",
+    method:"totalMemory"
+  },
+  {
+    id:"32",
+    input:"exec \"javac.exe MyClass.java\"",
+    output:"Runtime.getRuntime().exec(\"javac.exe MyClass.java\")",
+    library:"",
+    object:"java.lang.Runtime",
+    method:"exec"
+  },
+  {
+    id:"33",
+    input:"new data stream \"text.txt\"",
+    output:"new DataInputStream(new FileInputStream(\"text.txt\"))",
+    library:"",
+    object:"java.io.DataInputStream",
+    method:""
+  },
+  {
+    id:"34",
+    input:"rename file fname1 to fname2",
+    output:"new File(fname1).renameTo(new File(fname2))",
+    library:"",
+    object:"java.io.File",
+    method:"renameTo"
+  },
+  {
+    id:"35",
+    input:"move file fname1 to fname2",
+    output:"FileUtils.moveFile(new File(fname1), new File(fname2))",
+    library:"",
+    object:"org.apache.commons.io.FileUtils",
+    method:"moveFile"
+  },
+  {
+    id:"36",
+    input:"concat \"EPFL\" \"2015\"",
+    output:"\"EPFL\".concat(\"2015\")",
+    library:"",
+    object:"java.lang.String",
+    method:"concat"
+  },
+  {
+    id:"37",
+    input:"read utf from the file \"text.txt\"",
+    output:"new DataInputStream(new FileInputStream(\"text.txt\")).readUTF()",
+    library:"",
+    object:"java.io.DataInputStream",
+    method:""
+  },
+  {
+    id:"38",
+    input:"java home",
+    output:"SystemUtils.getJavaHome()",
+    library:"",
+    object:"org.apache.commons.lang.SystemUtils",
+    method:"getJavaHome"
+  },
+  {
+    id:"39",
+    input:"upper(text)",
+    output:"text.toUpperCase()",
+    library:"",
+    object:"java.lang.String",
+    method:"toUpperCase"
+  },
+  {
+    id:"40",
+    input:"compare x y",
+    output:"x.compareTo(y)",
+    library:"",
+    object:"java.lang.Object",
+    method:"compareTo"
+  },
+  {
+    id:"41",
+    input:"BufferedInput \"text.txt\"",
+    output:"new BufferedInputStream(new FileInputStream(\"text.txt\"))",
+    library:"",
+    object:"BufferedInputStream",
+    method:""
+  },
+  {
+    id:"42",
+    input:"set thread min priority",
+    output:"Thread.currentThread().setPriority(Thread.MIN_PRIORITY)",
+    library:"",
+    object:"java.lang.Thread",
+    method:"setPriority"
+  },
+  {
+    id:"43",
+    input:"create panel and set layout to border",
+    output:"new Panel().setLayout(new BorderLayout())",
+    library:"",
+    object:"java.awt.Panel",
+    method:""
+  },
+  {
+    id:"44",
+    input:"sort array Arrays.sort(array)",
+    library:"",
+    object:"java.util.Arrays",
+    method:"sort"
+  },
+  {
+    id:"45",
+    input:"add label \"names\" to panel",
+    output:"new Panel().add(new Label(\"names\"))",
+    library:"",
+    object:"java.awt.Panel",
+    method:"add"
+  },
+  {
+    id:"46",
+    input:"write 2015 to data ouput stream \"t\"",
+    output:"new DataOutputStream(new FileOutputStream(\"t\")).write(2015)",
+    library:"",
+    object:"java.io.DataOutputStream",
+    method:""
+  },
+  {
+    id:"47",
+    input:"get date when file \"t\" was last time modified",
+    output:"new Date(new File(\"t\").lastModified()).getTime()",
+    library:"",
+    object:"java.io.File",
+    method:"lastModified"
+  },
+  {
+    id:"48",
+    input:"check file \"t1\" \"t2\" permission",
+    output:"AccessController.checkPermission(new FilePermission(\"t1\", \"t2\"))",
+    library:"",
+    object:"java.security.AccessController",
+    method:"checkPermission"
+  },
+  {
+    id:"49",
+    input:"read lines with numbers from file \"t\"",
+    output:"new LineNumberReader(new InputStreamReader(new FileInputStream(\"t\"))).readLine()",
+    library:"",
+    object:"java.io.LineNumberReader",
+    method:"readLine"
+  },
+  {
+    id:"50",
+    input:"StreamTokenizer(\"t\")",
+    output:"new StreamTokenizer(new BufferedReader(new FileReader(\"t\")))",
+    library:"",
+    object:"java.io.StreamTokenizer",
+    method:""
+  },
+  {
+    id:"51",
+    input:"read from console",
+    output:"new BufferedReader(new InputStreamReader(System.in)).readLine()",
+    library:"",
+    object:"java.io.BufferedReader",
+    method:"readLine"
+  },
+  {
+    id:"52",
+    input:"is file \"t\" data available",
+    output:"new DataInputStream(new FileInputStream(\"t\")).available()",
+    library:"",
+    object:"java.io.DataInputStream",
+    method:"available"
+  },
+  {
+    id:"53",
+    input:"SequenceInputStream(\"t1\", \"t2\")",
+    output:"new SequenceInputStream(new FileInputStream(\"t1\"),new FileInputStream(\"t2\")",
+    library:"",
+    object:"java.io.SequenceInputStream",
+    method:""
+  },
+  {
+    id:"54",
+    input:"get double value x",
+    output:"Double.valueOf(x).doubleValue()",
+    library:"",
+    object:"java.lang.Double",
+    method:"doubleValue"
+  },
+  {
+    id:"55",
+    input:"write object x to file \"t\"",
+    output:"new ObjectOutputStream(new ByteArrayOutputStream()).writeObject(\"t\")",
+    library:"",
+    object:"java.io.ObjectOutputStream",
+    method:"writeObject"
+  },
+  {
+    id:"56",
+    input:"1 xor 5",
+    output:"new BitSet(1).xor(new BitSet(5)",
+    library:"",
+    object:"java.util.BitSet",
+    method:"xor"
+  },
+  {
+    id:"57",
+    input:"create bit set and set its 5th element to true",
+    output:"new BitSet(5)",
+    library:"",
+    object:"java.util.BitSet",
+    method:""
+  },
+  {
+    id:"58",
+    input:"accept request on port 80",
+    output:"new ServerSocket(80).accept()",
+    library:"",
+    object:"java.net.ServerSocket",
+    method:"accept"
+  },
+  {
+    id:"59",
+    input:"ResourceStream(\"t\")",
+    output:"ClassLoader.getSystemResourceAsStream(\"t\")",
+    library:"",
+    object:"java.lang.ClassLoader",
+    method:"getSystemResourceAsStream"
+  },
+  {
+    id:"60",
+    input:"gaussian",
+    output:"new Random(System.currentTimeMillis()).nextGaussian()",
+    library:"",
+    object:"java.util.Random",
+    method:"nextGaussian"
+  }
+]
