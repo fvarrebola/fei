@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+  type="text/css">
+<script src="js/lib/angular.min.js"></script>
+<script src="js/app.js"></script>
+<link href="style/style.css" rel="stylesheet" type="text/css">
+</head>
+<body ng-controller="MethodController as controller">
+  <div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <div class="row">
+          <div class="col-md-12">
+            <img src="img/fei.png" class="img-responsive">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="container">
+      <!--<div class="row">
+        <ul class="nav nav-pills">
+          <li class="active"><a href="#">Libraries</a></li>
+          <li><a href="#">Objects</a></li>
+          <li><a href="#">Methods</a></li>
+        </ul>
+      </div> -->
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">API Documentation Search Prototype</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <form role="form" name="mainForm" ng-submit="controller.search();" novalidate>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="I want a method that..." required
+                  ng-model="controller.formData.query" />
+                <span class="input-group-btn">
+                  <input type="submit" class="btn btn-success" value="OK" alt="Press OK to submit your query." />
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <a ng-click="controller.loadOptions()" ng-hide="controller.loading">Configure search options</a>
+              <a ng-click="controller.loading = false;" ng-show="controller.loading">Hide search options</a>
+            </div>
+            <div id="options" class="form-group" ng-show="controller.loading">
+              <label for="nlp_scenario" class="control-label">NLP:</label>
+              <select id="nlp_scenario" class="form-control" ng-model="controller.formData.nlp" required>
+                <option ng-repeat="option in controller.nlpOptions" value="{{option.id}}">{{option.id}}: {{option.description}}</option>
+              </select>
+              <label for="search_scenario" class="control-label">Search:</label>
+              <select id="search_scenario" class="form-control" ng-model="controller.formData.options" required>
+                <option ng-repeat="option in controller.searchOptions" value="{{option.id}}">{{option.id}}: {{option.description}}</option>
+              </select>
+            </div>
+          </form>
+        </div>
+      </div>
+      <br>
+      <div class="row" ng-hide="controller.status === 0 || controller.status === 200">
+        <div class="alert alert-danger">
+          <a class="close" data-dismiss="alert">×</a>
+          <strong>Oops!</strong>
+          <br>
+          Your search failed with status code {{controller.status}}.
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-muted">Search Results ({{controller.hits}} hits)</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-bordered table-condensed table-hover table-striped">
+            <thead>
+              <tr>
+                <th class="col-lg-1">#</th>
+                <th class="col-md-2">Library</th>
+                <th class="col-md-2">Object</th>
+                <th class="col-md-2">Method</th>
+                <th class="col-md-2">Signature</th>
+                <th class="col-md-3">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="method in controller.methods">
+                <td>{{$index + 1}}</td>
+                <td>{{method.library}}</td>
+                <td>{{method.object}}</td>
+                <td>{{method.name}}</td>
+                <td>{{method.signature}}</td>
+                <td>{{method.description}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="hidden-md section section-primary">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 hidden-xs text-right">
+          <a href="https://github.com/fvarrebola">
+            <i class="fa fa-3x fa-fw fa-github text-inverse"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

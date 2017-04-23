@@ -1,0 +1,87 @@
+[
+  {
+    id: "remoteV17Class",
+    description: "remote 1.7 HTML javadoc",
+    data: [
+      {
+        id: "01",
+        input: "http://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html",
+        output: "java.nio.file.Files, 0, 55"
+      },
+      {
+        id: "02",
+        input: "http://docs.oracle.com/javase/7/docs/api/java/nio/file/attribute/PosixFilePermission.html",
+        output: "java.nio.file.attribute.PosixFilePermission, 0, 2"
+      },
+      {
+        id: "03",
+        input: "http://docs.oracle.com/javase/7/docs/api/java/awt/GraphicsDevice.WindowTranslucency.html",
+        output: "java.awt.GraphicsDevice.WindowTranslucency, 0, 2"
+      },
+      {
+        id: "04",
+        input: "http://docs.oracle.com/javase/7/docs/api/java/io/SerializablePermission.html",
+        output: "java.io.SerializablePermission, 0, 2"
+      },
+      {
+        id: "05",
+        input: "http://docs.oracle.com/javase/7/docs/api/java/security/cert/X509Certificate.html",
+        output: "java.security.cert.X509Certificate, 0, 23"
+      }
+    ]
+  },
+  {
+    id: "remoteV18Class",
+    description: "remote 1.8 HTML javadoc",
+    data: [
+      {
+        id: "01",
+        input: "http://docs.oracle.com/javase/8/docs/api/javax/xml/validation/SchemaFactory.html",
+        output: "javax.xml.validation.SchemaFactory, 0, 17"
+      },
+      {
+        id: "02",
+        input: "http://docs.oracle.com/javase/8/docs/api/java/nio/CharBuffer.html",
+        output: "java.nio.CharBuffer, 0, 37"
+      },
+      {
+        id: "03",
+        input: "http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/ReentrantLock.html",
+        output: "java.util.concurrent.locks.ReentrantLock, 0, 21"
+      },
+      {
+        id: "04",
+        input: "http://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html",
+        output: "java.util.Scanner, 0, 65"
+      },
+      {
+        id: "05",
+        input: "http://docs.oracle.com/javase/8/docs/api/javax/print/DocFlavor.html",
+        output: "javax.print.DocFlavor, 1, 9"
+      }
+    ]
+  },
+  {
+    id: "remoteV17Interface",
+    description: "remote 1.7 HTML javadoc",
+    data: [
+      {
+        id: "01",
+        input: "http://docs.oracle.com/javase/7/docs/api/java/io/Serializable.html",
+        output: ""
+      }
+    ]
+  },
+  {
+    id: "remoteV18Interface",
+    description: "remote 1.8 HTML javadoc",
+    data: [
+      {
+        id: "01",
+        input: "http://docs.oracle.com/javase/8/docs/api/java/util/stream/IntStream.html",
+        output: ""
+      }
+    ]
+  }  
+  
+]

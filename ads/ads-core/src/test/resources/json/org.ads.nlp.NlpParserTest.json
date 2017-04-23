@@ -1,0 +1,197 @@
+[
+  {
+    id:"default",
+    description: "quotes removal data set",
+    data: [
+      {
+        id: "01",
+        input: "load class \"MyClass.class\"",
+        output: "load class \"MyClass.class\""
+      },
+      {
+        id: "02",
+        input: "readFile(\"text.txt\", \"UTF-8\")",
+        output: "readFile(\"text.txt\", \"UTF-8\")"
+      }
+    ]
+  },
+  {
+    id:"quotes-removal",
+    description: "quotes removal data set",
+    data: [
+      {
+        id: "01",
+        input: "load class \"MyClass.class\"",
+        output: "load class MyClass.class"
+      },
+      {
+        id: "02",
+        input: "readFile(\"text.txt\", \"UTF-8\")",
+        output: "readFile text.txt UTF8"
+      }
+    ]
+  },
+  {
+    id: "pos-tagging",
+    description: "pos tagging data set",
+    data: [
+      {
+        id: "01",
+        input: "copy file fname to bname", 
+        output: "NN NN NN TO VB"
+      },
+      {
+        id: "02",
+        input: "copy file", 
+        output: "NN NN"
+      },
+      {
+        id: "03",
+        input: "copy a file", 
+        output: "NN DT NN"
+      },
+      {
+        id: "04",
+        input: "to copy a file", 
+        output: "TO VB DT NN"
+      },
+      {
+        id: "05",
+        input: "to copy file", 
+        output: "TO NN NN"
+      }
+    ]
+  },
+  {
+    id: "1st-VB-and-NN",
+    description: "1st VB and NN",
+    data: [
+      {
+        id: "01",
+        input: "copy file fname to bname", 
+        output: ""
+      },
+      {
+        id: "02",
+        input: "copy file", 
+        output: ""
+      },
+      {
+        id: "03",
+        input: "copy a file", 
+        output: ""
+      },
+      {
+        id: "04",
+        input: "to copy a file", 
+        output: "copy file"
+      },
+      {
+        id: "05",
+        input: "to copy file", 
+        output: ""
+      }
+    ]
+  },
+  {
+    id: "synsets",
+    description: "use synsets",
+    data: [
+      {
+        id: "01",
+        input: "copy file", 
+        output: "copy Indian_file, copy data_file, copy file, copy single_file, transcript file"
+      },
+      {
+        id: "02",
+        input: "read file", 
+        output: "read Indian_file, read data_file, read file, read single_file, say file"
+      },
+      {
+        id: "03",
+        input: "load class", 
+        output: "burden class, load category, load class, load course, load family, load form, load grade, loading class"
+      }
+    ]
+  },
+  {
+    id: "vb-synsets",
+    description: "use vb synsets",
+    data: [
+      {
+        id: "01",
+        input: "copy file", 
+        output: "copy file"
+      },
+      {
+        id: "02",
+        input: "read file", 
+        output: "read file, say file"
+      },
+      {
+        id: "03",
+        input: "load class", 
+        output: "load class"
+      },
+      {
+        id: "04",
+        input: "to copy a file", 
+        output: "to copy a file, to imitate a file, to simulate a file"
+      },
+      {
+        id: "05",
+        input: "to read a file", 
+        output: "to read a file, to say a file"
+      },
+      {
+        id: "06",
+        input: "to load a class", 
+        output: "to charge a class, to lade a class, to laden a class, to load a class, to load_up a class"
+      }
+    ]
+  },
+  {
+    id: "lemma",
+    description: "lemmatize",
+    data: [
+      {
+        id: "01",
+        input: "copies a file", 
+        output: "copy a file"
+      },
+      {
+        id: "02",
+        input: "reads file", 
+        output: "read file"
+      },
+      {
+        id: "03",
+        input: "loading a class", 
+        output: "load a class"
+      }
+    ]
+  },
+  {
+    id: "join",
+    description: "join",
+    data: [
+      {
+        id: "01",
+        input: "copies a file", 
+        output: "copiesafile"
+      },
+      {
+        id: "02",
+        input: "copy file", 
+        output: "copyfile"
+      },
+      {
+        id: "03",
+        input: "load class", 
+        output: "loadclass"
+      }
+    ]
+  }
+ 
+  
+]
