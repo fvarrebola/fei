@@ -78,9 +78,10 @@ Prepare a custom [Eclipse Neon 4.6.1](https://eclipse.org/neon/) distribution by
 ### Choosing the programming tasks
 Select the programming tasks that are more suitable to your target audience and create a workspace. Assign to each participant a set pair of programming task and code assistant, and be sure that the contents of the `dropins` folder match this configuration. That is, if you should complete `Task01` with the `standard` code assistant then make sure that the `standard_hcii17-code-assistants_1.0.0.jar` is the only JAR file in `dropins` folder. On the other hand, if you should complete `Task02` with the `intelligent` code assistant then make sure that `intelligent_hcii17-code-assistants_1.0.0.jar` is the only file out there.
 
-### Deactivating other code assistants
-The last step before completing a task is to make sure that other code assistants available in Eclipse are disabled. Go to `Window > Preferences` menu and navigate to the `Java > Editor > Code Assist > Advanced` option.
-Make sure that the HCII17 code assistant is the only option selected both in the _default_ section.
+### Deactivating code assistants
+The last step before completing a task is to make sure that all default code assistants available in Eclipse are disabled. 
+To do so, go to `Window > Preferences` menu and navigate to the `Java > Editor > Code Assist > Advanced` option.
+Make sure that the HCII17 code assistant is the only option selected both in the _default_ section
 ![Java > Editor > Code Assist > Advanced > Default section](_images/cfg-default-section.png)
 
 and in the _content assist cycling_ section
