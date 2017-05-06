@@ -8,7 +8,7 @@ Aqui você encontra código-fonte para as seguintes disciplinas:
 
 # PEL216 - Computação Científica
 Para esta disciplina, os projetos são os seguintes:
-* [commons](https://github.com/fvarrebola/fei/tree/master/pel216/commons): funcionalidades comuns
+* [commons](pel216/commons): funcionalidades comuns
 * [semana-01](https://github.com/fvarrebola/fei/tree/master/pel216/week1): pilhas e filas
 * [semana-02](https://github.com/fvarrebola/fei/tree/master/pel216/week2): figuras geométricas
 * [semana-03](https://github.com/fvarrebola/fei/tree/master/pel216/week3): buscas (Breadth First, Depth First)
